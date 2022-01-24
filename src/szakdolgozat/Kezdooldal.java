@@ -1,30 +1,85 @@
 package szakdolgozat;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
- * @author User
+ * @author Juhász Levente
  */
 public class Kezdooldal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Kezdooldal
-     */
+    //valtozok
+    private Kezdooldal k;
+    
     public Kezdooldal() {
         initComponents();
+        
+    }
+    
+    public void Futtat() {
+        k = new Kezdooldal();
+        k.setVisible(true);
+        k.setResizable(false);
+        dontShowRegistrationPanel();
+        k.Regiszracio();
+        k.setLocationRelativeTo(null);
+    }
+    
+    public void dontShowRegistrationPanel() {
+        
+        this.RegistrationPanel.setVisible(false);
+        
+    }
+    
+    public void dontShowLoginPanel() {
+        this.loginPanel.setVisible(false);
+        
     }
 
-    
-    public void Regiszracio(){
-        
-   String text = "<html><u> Regisztráció</u> </html>";
-        this.jLabel7.setText(text);
+    public void showRegistrationPanel() {
+        this.RegistrationPanel.setVisible(true);
     }
+    
+    public void setCenterJframeAlways(Kezdooldal k) {
+
+        // make the frame half the height and width
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        
+        k.setSize(width / 2, height / 2);
+
+        // center the jframe on screen
+    }
+    
+    public void Regiszracio() {
+        
+        String text = "<html><u> Regisztráció</u> </html>";
+        this.registrationLabel.setText(text);
+        
+        this.registrationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        this.registrationLabel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // you can open a new frame here as
+                // i have assumed you have declared "frame" as instance variable
+                System.out.println("help");
+                dontShowLoginPanel();
+                showRegistrationPanel();
+                
+            }
+        });
+        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,94 +89,265 @@ public class Kezdooldal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jTextField8 = new javax.swing.JTextField();
+        loginPanel = new javax.swing.JPanel();
+        passwordLabel = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
+        FlywithusJlabel = new javax.swing.JLabel();
+        ComeJlabel = new javax.swing.JLabel();
+        felhasznalonevTextField = new javax.swing.JTextField();
+        passwordTextField = new javax.swing.JPasswordField();
+        logginButton = new javax.swing.JButton();
+        leftBackgroundLabel = new javax.swing.JLabel();
+        registrationLabel = new javax.swing.JLabel();
+        bluebackgroundLabel = new javax.swing.JLabel();
+        RegistrationPanel = new javax.swing.JPanel();
+        AdressTextfield = new javax.swing.JTextField();
+        emailTextfield = new javax.swing.JTextField();
+        cityTextfield = new javax.swing.JTextField();
+        contactNumberTextfield = new javax.swing.JTextField();
+        lastNameTextfield = new javax.swing.JTextField();
+        firstNameTextfield = new javax.swing.JTextField();
+        countryTextfield = new javax.swing.JTextField();
+        phoneNumberTextfield = new javax.swing.JTextField();
+        lastNameLabel = new javax.swing.JLabel();
+        adressLabel = new javax.swing.JLabel();
+        contactNumberLabel = new javax.swing.JLabel();
+        cityLabel = new javax.swing.JLabel();
+        countryLabel = new javax.swing.JLabel();
+        phoneNumberLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        firstNameLabel = new javax.swing.JLabel();
+        manRadioButton = new javax.swing.JRadioButton();
+        womanRadioButton = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
+        leftBackgroundLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+
+        jTextField8.setBackground(new java.awt.Color(51, 51, 51));
+        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField8.setText("Phone Number");
+        jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTextField8.setCaretColor(new java.awt.Color(255, 255, 255));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        loginPanel.setBackground(new java.awt.Color(255, 255, 255));
+        loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Jelszó:");
-        jLabel1.setToolTipText("");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 190, 30));
+        passwordLabel.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        passwordLabel.setText("Jelszó:");
+        passwordLabel.setToolTipText("");
+        loginPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 190, 30));
 
-        jLabel4.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Felhasználónév:");
-        jLabel4.setToolTipText("");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 190, 30));
+        usernameLabel.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        usernameLabel.setText("Felhasználónév:");
+        usernameLabel.setToolTipText("");
+        loginPanel.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 190, 30));
 
-        jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 1, 48)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel5.setText("FLY WITH US");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 600, 320, 80));
+        FlywithusJlabel.setFont(new java.awt.Font("Berlin Sans FB", 1, 48)); // NOI18N
+        FlywithusJlabel.setForeground(new java.awt.Color(0, 51, 102));
+        FlywithusJlabel.setText("FLY WITH US");
+        loginPanel.add(FlywithusJlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 320, 80));
 
-        jLabel6.setFont(new java.awt.Font("Berlin Sans FB", 1, 48)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel6.setText("COME ");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 170, 50));
+        ComeJlabel.setFont(new java.awt.Font("Berlin Sans FB", 1, 48)); // NOI18N
+        ComeJlabel.setForeground(new java.awt.Color(0, 51, 102));
+        ComeJlabel.setText("COME ");
+        loginPanel.add(ComeJlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 170, 50));
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField2.setText("Felhasználónév");
-        jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        felhasznalonevTextField.setBackground(new java.awt.Color(255, 255, 255));
+        felhasznalonevTextField.setForeground(new java.awt.Color(0, 0, 0));
+        felhasznalonevTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        felhasznalonevTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                felhasznalonevTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 320, 30));
+        loginPanel.add(felhasznalonevTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 320, 30));
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Regisztráció");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 740, 110, 50));
+        passwordTextField.setBackground(new java.awt.Color(255, 255, 255));
+        passwordTextField.setForeground(new java.awt.Color(0, 0, 0));
+        passwordTextField.setText("jPasswordField1");
+        passwordTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        loginPanel.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 320, 30));
 
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
-        jPasswordField1.setText("jPasswordField1");
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 330, 40));
+        logginButton.setBackground(new java.awt.Color(0, 0, 0));
+        logginButton.setForeground(new java.awt.Color(255, 255, 255));
+        logginButton.setText("Belépés");
+        loginPanel.add(logginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 90, 40));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Belépés");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 90, 40));
+        leftBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        leftBackgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\LeftPanelBackGround.jpg")); // NOI18N
+        leftBackgroundLabel.setText("jLabel1");
+        loginPanel.add(leftBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 700));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\LeftPanelBackGround.jpg")); // NOI18N
-        jLabel2.setText("jLabel1");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 810));
+        registrationLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        registrationLabel.setForeground(new java.awt.Color(255, 255, 255));
+        registrationLabel.setText("Regisztráció");
+        loginPanel.add(registrationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 650, -1, -1));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/asd.jpg"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, 720, 810));
+        bluebackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bluebackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/asd.jpg"))); // NOI18N
+        loginPanel.add(bluebackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, -10, 710, 710));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 810));
+        getContentPane().add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
+
+        RegistrationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        AdressTextfield.setBackground(new java.awt.Color(51, 51, 51));
+        AdressTextfield.setForeground(new java.awt.Color(255, 255, 255));
+        AdressTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        AdressTextfield.setText("Adress");
+        AdressTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        AdressTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
+        RegistrationPanel.add(AdressTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 240, 30));
+
+        emailTextfield.setBackground(new java.awt.Color(51, 51, 51));
+        emailTextfield.setForeground(new java.awt.Color(255, 255, 255));
+        emailTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        emailTextfield.setText("Email");
+        emailTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        emailTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
+        RegistrationPanel.add(emailTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, 240, 30));
+
+        cityTextfield.setBackground(new java.awt.Color(51, 51, 51));
+        cityTextfield.setForeground(new java.awt.Color(255, 255, 255));
+        cityTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        cityTextfield.setText("City");
+        cityTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cityTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
+        RegistrationPanel.add(cityTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 240, 30));
+
+        contactNumberTextfield.setBackground(new java.awt.Color(51, 51, 51));
+        contactNumberTextfield.setForeground(new java.awt.Color(255, 255, 255));
+        contactNumberTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        contactNumberTextfield.setText("Contact Number");
+        contactNumberTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        contactNumberTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
+        contactNumberTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contactNumberTextfieldActionPerformed(evt);
+            }
+        });
+        RegistrationPanel.add(contactNumberTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, 240, 30));
+
+        lastNameTextfield.setBackground(new java.awt.Color(51, 51, 51));
+        lastNameTextfield.setForeground(new java.awt.Color(255, 255, 255));
+        lastNameTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        lastNameTextfield.setText("Last Name");
+        lastNameTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lastNameTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
+        RegistrationPanel.add(lastNameTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 240, 30));
+
+        firstNameTextfield.setBackground(new java.awt.Color(51, 51, 51));
+        firstNameTextfield.setForeground(new java.awt.Color(255, 255, 255));
+        firstNameTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        firstNameTextfield.setText("FIrst Name");
+        firstNameTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        firstNameTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
+        RegistrationPanel.add(firstNameTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 240, 30));
+
+        countryTextfield.setBackground(new java.awt.Color(51, 51, 51));
+        countryTextfield.setForeground(new java.awt.Color(255, 255, 255));
+        countryTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        countryTextfield.setText("Country");
+        countryTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        countryTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
+        RegistrationPanel.add(countryTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 240, 30));
+
+        phoneNumberTextfield.setBackground(new java.awt.Color(51, 51, 51));
+        phoneNumberTextfield.setForeground(new java.awt.Color(255, 255, 255));
+        phoneNumberTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        phoneNumberTextfield.setText("Phone Number");
+        phoneNumberTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        phoneNumberTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
+        RegistrationPanel.add(phoneNumberTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, 240, 30));
+
+        lastNameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        lastNameLabel.setText("Last Name: ");
+        RegistrationPanel.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, -1, -1));
+
+        adressLabel.setForeground(new java.awt.Color(0, 0, 0));
+        adressLabel.setText("Adress: ");
+        RegistrationPanel.add(adressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, -1, -1));
+
+        contactNumberLabel.setForeground(new java.awt.Color(0, 0, 0));
+        contactNumberLabel.setText("Contact Nmber: ");
+        RegistrationPanel.add(contactNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, -1, -1));
+
+        cityLabel.setForeground(new java.awt.Color(0, 0, 0));
+        cityLabel.setText("City: ");
+        RegistrationPanel.add(cityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, -1, -1));
+
+        countryLabel.setForeground(new java.awt.Color(0, 0, 0));
+        countryLabel.setText("Country: ");
+        RegistrationPanel.add(countryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
+
+        phoneNumberLabel.setForeground(new java.awt.Color(0, 0, 0));
+        phoneNumberLabel.setText("Phone Number: ");
+        RegistrationPanel.add(phoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, -1, -1));
+
+        emailLabel.setForeground(new java.awt.Color(0, 0, 0));
+        emailLabel.setText("Email: ");
+        RegistrationPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 450, -1, -1));
+
+        firstNameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        firstNameLabel.setText("First Name: ");
+        RegistrationPanel.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, -1, -1));
+
+        manRadioButton.setText("Man");
+        RegistrationPanel.add(manRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 500, -1, -1));
+
+        womanRadioButton.setText("Woman");
+        womanRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                womanRadioButtonActionPerformed(evt);
+            }
+        });
+        RegistrationPanel.add(womanRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Regisztráció");
+        RegistrationPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, -1, -1));
+
+        backButton.setBackground(new java.awt.Color(255, 255, 255));
+        backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
+        backButton.setText("Back");
+        RegistrationPanel.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 50));
+
+        leftBackgroundLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        leftBackgroundLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\LeftPanelBackGround.jpg")); // NOI18N
+        RegistrationPanel.add(leftBackgroundLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 700));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/a4-size-background-free-download-photo.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        RegistrationPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 1900, 1870));
+
+        getContentPane().add(RegistrationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void felhasznalonevTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_felhasznalonevTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_felhasznalonevTextFieldActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void womanRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_womanRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_womanRadioButtonActionPerformed
+
+    private void contactNumberTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactNumberTextfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contactNumberTextfieldActionPerformed
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -149,23 +375,50 @@ public class Kezdooldal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
+                
                 new Kezdooldal().setVisible(true);
+                
             }
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField AdressTextfield;
+    private javax.swing.JLabel ComeJlabel;
+    private javax.swing.JLabel FlywithusJlabel;
+    private javax.swing.JPanel RegistrationPanel;
+    private javax.swing.JLabel adressLabel;
+    private javax.swing.JButton backButton;
+    private javax.swing.JLabel bluebackgroundLabel;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel cityLabel;
+    private javax.swing.JTextField cityTextfield;
+    private javax.swing.JLabel contactNumberLabel;
+    private javax.swing.JTextField contactNumberTextfield;
+    private javax.swing.JLabel countryLabel;
+    private javax.swing.JTextField countryTextfield;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailTextfield;
+    private javax.swing.JTextField felhasznalonevTextField;
+    private javax.swing.JLabel firstNameLabel;
+    private javax.swing.JTextField firstNameTextfield;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel lastNameLabel;
+    private javax.swing.JTextField lastNameTextfield;
+    private javax.swing.JLabel leftBackgroundLabel;
+    private javax.swing.JLabel leftBackgroundLabel1;
+    private javax.swing.JButton logginButton;
+    private javax.swing.JPanel loginPanel;
+    private javax.swing.JRadioButton manRadioButton;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JPasswordField passwordTextField;
+    private javax.swing.JLabel phoneNumberLabel;
+    private javax.swing.JTextField phoneNumberTextfield;
+    private javax.swing.JLabel registrationLabel;
+    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JRadioButton womanRadioButton;
     // End of variables declaration//GEN-END:variables
 }
