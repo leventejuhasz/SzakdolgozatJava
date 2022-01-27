@@ -403,6 +403,10 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void registrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationButtonActionPerformed
 
         String firstName = firstNameTextfield.getText();
+        
+        if (firstName.matches(".*\\d.*")){
+            System.out.println("Hiba");
+        }
         String lastName = lastNameTextfield.getText();
         String adress = adressTextfield.getText();
         int contactNumber = Integer.parseInt(contactNumberTextfield.getText());
