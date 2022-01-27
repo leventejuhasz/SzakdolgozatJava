@@ -1,5 +1,6 @@
 package szakdolgozat;
 
+import java.sql.Connection;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -11,10 +12,14 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.DriverManager;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.Color;
+import java.sql.*;
+import javax.swing.*;
 
 /**
  *
@@ -59,8 +64,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         this.RegistrationPanel.setVisible(true);
     }
 
-   
-
     public void Regiszracio() {
 
         String text = "<html><u> Regisztráció</u> </html>";
@@ -104,7 +107,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         registrationLabel = new javax.swing.JLabel();
         bluebackgroundLabel = new javax.swing.JLabel();
         RegistrationPanel = new javax.swing.JPanel();
-        AdressTextfield = new javax.swing.JTextField();
+        adressTextfield = new javax.swing.JTextField();
         emailTextfield = new javax.swing.JTextField();
         cityTextfield = new javax.swing.JTextField();
         contactNumberTextfield = new javax.swing.JTextField();
@@ -185,8 +188,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         loginPanel.add(logginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 90, 40));
 
         leftBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        leftBackgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\LeftPanelBackGround.jpg")); // NOI18N
-        leftBackgroundLabel.setText("jLabel1");
         loginPanel.add(leftBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 700));
 
         registrationLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -202,13 +203,13 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         RegistrationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        AdressTextfield.setBackground(new java.awt.Color(51, 51, 51));
-        AdressTextfield.setForeground(new java.awt.Color(255, 255, 255));
-        AdressTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        AdressTextfield.setText("Adress");
-        AdressTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        AdressTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
-        RegistrationPanel.add(AdressTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 240, 30));
+        adressTextfield.setBackground(new java.awt.Color(51, 51, 51));
+        adressTextfield.setForeground(new java.awt.Color(255, 255, 255));
+        adressTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        adressTextfield.setText("Adress");
+        adressTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        adressTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
+        RegistrationPanel.add(adressTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 240, 30));
 
         emailTextfield.setBackground(new java.awt.Color(51, 51, 51));
         emailTextfield.setForeground(new java.awt.Color(255, 255, 255));
@@ -401,6 +402,33 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     private void registrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationButtonActionPerformed
 
+        String firstName = firstNameTextfield.getText();
+        String lastName = lastNameTextfield.getText();
+        String adress = adressTextfield.getText();
+        int contactNumber = Integer.parseInt(contactNumberTextfield.getText());
+        String city = cityTextfield.getText();
+        String country = countryTextfield.getText();
+        String phoneNumber = phoneNumberTextfield.getText();
+        String email = emailTextfield.getText();
+        String gender = "";
+        if (this.womanRadioButton.isSelected()) {
+            gender = this.womanRadioButton.getText();
+        } else {
+            gender = this.manRadioButton.getText();
+        }
+
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "cmT76p!FL");
+            Statement smt = con.createStatement();
+            smt.executeUpdate("INSERT INTO Registration_info(FirstName,	LastName,Adress,ContactNo,City,Country,Gender,Email_Id, Customer_id, Customer_Password ) VALUES ('" + firstName + "' , '" + lastName + "' , '" + adress + "' , '" + contactNumber + "' , '" + city + "' , '" + country + "' , '" + phoneNumber + "' , '" + email + "' , '" + gender + "' ,");
+            con.close();
+        } catch (Exception e) {
+
+            System.out.println("Hiba: " + e);
+        }
+
         dontShowRegistrationPanel();
         ShowLoginPanel();
     }//GEN-LAST:event_registrationButtonActionPerformed
@@ -452,18 +480,18 @@ public class Kezdooldal extends javax.swing.JFrame {
                 Image.SCALE_SMOOTH);
 
         ImageIcon imageIcon = new ImageIcon(dimg);
-        
+
         luggagePic.setIcon(imageIcon);
 
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField AdressTextfield;
     private javax.swing.JLabel ComeJlabel;
     private javax.swing.JLabel FlywithusJlabel;
     private javax.swing.JPanel RegistrationPanel;
     private javax.swing.JLabel adressLabel;
+    private javax.swing.JTextField adressTextfield;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel bluebackgroundLabel;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -497,4 +525,5 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JRadioButton womanRadioButton;
     // End of variables declaration//GEN-END:variables
+
 }
