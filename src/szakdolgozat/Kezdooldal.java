@@ -188,6 +188,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         loginPanel.add(logginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 90, 40));
 
         leftBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        leftBackgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\LeftPanelBackGround.jpg")); // NOI18N
         loginPanel.add(leftBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 700));
 
         registrationLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -424,9 +425,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "cmT76p!FL");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
-            smt.executeUpdate("INSERT INTO Registration_info(FirstName,	LastName,Adress,ContactNo,City,Country,Gender,Email_Id, Customer_id, Customer_Password ) VALUES ('" + firstName + "' , '" + lastName + "' , '" + adress + "' , '" + contactNumber + "' , '" + city + "' , '" + country + "' , '" + phoneNumber + "' , '" + email + "' , '" + gender + "' ,");
+            smt.executeUpdate("INSERT INTO registration_info(FirstName,	LastName,Adress,ContactNo,City,Country,Gender,Email_Id, Customer_id, Customer_Password ) VALUES ('" + firstName + "' , '" + lastName + "' , '" + adress + "' , '" + contactNumber + "' , '" + city + "' , '" + country + "' , '" + phoneNumber + "' , '" + email + "' , '" + gender + "' ,");
             con.close();
         } catch (Exception e) {
 
