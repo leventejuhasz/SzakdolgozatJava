@@ -44,6 +44,14 @@ public class Kezdooldal extends javax.swing.JFrame {
         k.setLocationRelativeTo(null);
     }
 
+    public void showAdminPanel() {
+        this.AdminPanel.setVisible(true);
+    }
+
+    public void dontShowAdminPanel() {
+        this.AdminPanel.setVisible(false);
+    }
+
     public void dontShowRegistrationPanel() {
 
         this.RegistrationPanel.setVisible(false);
@@ -93,14 +101,12 @@ public class Kezdooldal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jTextField8 = new javax.swing.JTextField();
         loginPanel = new javax.swing.JPanel();
         passwordLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         FlywithusJlabel = new javax.swing.JLabel();
         ComeJlabel = new javax.swing.JLabel();
-        felhasznalonevTextField = new javax.swing.JTextField();
+        userNameTextField = new javax.swing.JTextField();
         passwordTextField = new javax.swing.JPasswordField();
         logginButton = new javax.swing.JButton();
         leftBackgroundLabel = new javax.swing.JLabel();
@@ -130,13 +136,28 @@ public class Kezdooldal extends javax.swing.JFrame {
         registrationButton = new javax.swing.JButton();
         genderLabel = new javax.swing.JLabel();
         luggagePic = new javax.swing.JLabel();
-
-        jTextField8.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField8.setText("Phone Number");
-        jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField8.setCaretColor(new java.awt.Color(255, 255, 255));
+        AdminPanel = new javax.swing.JPanel();
+        repulogepjaratAdminLabel = new javax.swing.JLabel();
+        flightManagementLabel = new javax.swing.JLabel();
+        flightRegistrationLabel = new javax.swing.JLabel();
+        flightRegistrationPanel = new javax.swing.JPanel();
+        flightNumLabel1 = new javax.swing.JLabel();
+        departureTimeLabel = new javax.swing.JLabel();
+        arrivalTimeLabel = new javax.swing.JLabel();
+        originPlaceLabel = new javax.swing.JLabel();
+        destinationPlaceLabel = new javax.swing.JLabel();
+        numberOfSeats = new javax.swing.JLabel();
+        flightNumTextField = new javax.swing.JTextField();
+        departureTimeTextField = new javax.swing.JTextField();
+        arrivalTimeTextField = new javax.swing.JTextField();
+        originPlaceTextField = new javax.swing.JTextField();
+        destinationPlaceTextfield = new javax.swing.JTextField();
+        numberOfSeatsTextField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        whiteBackgroundLabel = new javax.swing.JLabel();
+        flightsManagementPanel = new javax.swing.JPanel();
+        adminBackButton = new javax.swing.JButton();
+        adminBackgrooundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -166,25 +187,29 @@ public class Kezdooldal extends javax.swing.JFrame {
         ComeJlabel.setText("COME ");
         loginPanel.add(ComeJlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 170, 50));
 
-        felhasznalonevTextField.setBackground(new java.awt.Color(255, 255, 255));
-        felhasznalonevTextField.setForeground(new java.awt.Color(0, 0, 0));
-        felhasznalonevTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        felhasznalonevTextField.addActionListener(new java.awt.event.ActionListener() {
+        userNameTextField.setBackground(new java.awt.Color(255, 255, 255));
+        userNameTextField.setForeground(new java.awt.Color(0, 0, 0));
+        userNameTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        userNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                felhasznalonevTextFieldActionPerformed(evt);
+                userNameTextFieldActionPerformed(evt);
             }
         });
-        loginPanel.add(felhasznalonevTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 320, 30));
+        loginPanel.add(userNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 320, 30));
 
         passwordTextField.setBackground(new java.awt.Color(255, 255, 255));
         passwordTextField.setForeground(new java.awt.Color(0, 0, 0));
-        passwordTextField.setText("jPasswordField1");
         passwordTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         loginPanel.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 320, 30));
 
         logginButton.setBackground(new java.awt.Color(0, 0, 0));
         logginButton.setForeground(new java.awt.Color(255, 255, 255));
         logginButton.setText("Belépés");
+        logginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logginButtonActionPerformed(evt);
+            }
+        });
         loginPanel.add(logginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 90, 40));
 
         leftBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -369,12 +394,114 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         getContentPane().add(RegistrationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
+        AdminPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        repulogepjaratAdminLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        repulogepjaratAdminLabel.setForeground(new java.awt.Color(255, 255, 255));
+        repulogepjaratAdminLabel.setText("Repülőgépjárat Admin felület");
+        AdminPanel.add(repulogepjaratAdminLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 360, 30));
+
+        flightManagementLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        flightManagementLabel.setForeground(new java.awt.Color(255, 255, 255));
+        flightManagementLabel.setText("Flights management");
+        AdminPanel.add(flightManagementLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        flightRegistrationLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        flightRegistrationLabel.setForeground(new java.awt.Color(255, 255, 255));
+        flightRegistrationLabel.setText("Flight Registration");
+        AdminPanel.add(flightRegistrationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        flightRegistrationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        flightNumLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        flightNumLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        flightNumLabel1.setText("Flight Number: ");
+        flightRegistrationPanel.add(flightNumLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 120, 40));
+
+        departureTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        departureTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        departureTimeLabel.setText("Departure Time: ");
+        flightRegistrationPanel.add(departureTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 30));
+
+        arrivalTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        arrivalTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        arrivalTimeLabel.setText("Arrival Time: ");
+        flightRegistrationPanel.add(arrivalTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, 30));
+
+        originPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        originPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
+        originPlaceLabel.setText("Origin Place: ");
+        flightRegistrationPanel.add(originPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, 30));
+
+        destinationPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        destinationPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
+        destinationPlaceLabel.setText("Destination Place: ");
+        flightRegistrationPanel.add(destinationPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 30));
+
+        numberOfSeats.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        numberOfSeats.setForeground(new java.awt.Color(0, 0, 0));
+        numberOfSeats.setText("Number of Seats: ");
+        flightRegistrationPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, 30));
+
+        flightNumTextField.setText("13424");
+        flightRegistrationPanel.add(flightNumTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 200, 30));
+
+        departureTimeTextField.setText("2022.11.01 12:50");
+        flightRegistrationPanel.add(departureTimeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 200, 30));
+
+        arrivalTimeTextField.setText("2022.11.03 13:40");
+        flightRegistrationPanel.add(arrivalTimeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 200, 30));
+
+        originPlaceTextField.setText("Hungary");
+        flightRegistrationPanel.add(originPlaceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 200, 30));
+
+        destinationPlaceTextfield.setText("Flo Rida");
+        flightRegistrationPanel.add(destinationPlaceTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 210, -1));
+
+        numberOfSeatsTextField.setText("100");
+        numberOfSeatsTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numberOfSeatsTextFieldActionPerformed(evt);
+            }
+        });
+        flightRegistrationPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 50, -1));
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Register");
+        flightRegistrationPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 110, 50));
+
+        whiteBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/305614_2.jpg"))); // NOI18N
+        whiteBackgroundLabel.setText("jLabel2");
+        flightRegistrationPanel.add(whiteBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 560));
+        flightRegistrationPanel.add(flightsManagementPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 800, 590));
+
+        AdminPanel.add(flightRegistrationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 780, 560));
+
+        adminBackButton.setBackground(new java.awt.Color(0, 0, 0));
+        adminBackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        adminBackButton.setForeground(new java.awt.Color(255, 255, 255));
+        adminBackButton.setText("Back");
+        adminBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminBackButtonActionPerformed(evt);
+            }
+        });
+        AdminPanel.add(adminBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, 100, 40));
+
+        adminBackgrooundLabel.setBackground(new java.awt.Color(255, 255, 255));
+        adminBackgrooundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/a4-size-background-free-download-photo.jpg"))); // NOI18N
+        AdminPanel.add(adminBackgrooundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        getContentPane().add(AdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void felhasznalonevTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_felhasznalonevTextFieldActionPerformed
+    private void userNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_felhasznalonevTextFieldActionPerformed
+    }//GEN-LAST:event_userNameTextFieldActionPerformed
 
     private void womanRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_womanRadioButtonActionPerformed
         if (this.womanRadioButton.isSelected()) {
@@ -404,8 +531,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void registrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationButtonActionPerformed
 
         String firstName = firstNameTextfield.getText();
-        
-        if (firstName.matches(".*\\d.*")){
+
+        if (firstName.matches(".*\\d.*")) {
             System.out.println("Hiba");
         }
         String lastName = lastNameTextfield.getText();
@@ -437,6 +564,45 @@ public class Kezdooldal extends javax.swing.JFrame {
         dontShowRegistrationPanel();
         ShowLoginPanel();
     }//GEN-LAST:event_registrationButtonActionPerformed
+
+    private void numberOfSeatsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberOfSeatsTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numberOfSeatsTextFieldActionPerformed
+
+    private void logginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logginButtonActionPerformed
+
+        if (userNameTextField.getText().matches("admin") && passwordTextField.getText().matches("kutya")) {
+            dontShowLoginPanel();
+            dontShowRegistrationPanel();
+            showAdminPanel();
+
+            String flightsManagement = "<html><u> Flights Management</u> </html>";
+            this.flightManagementLabel.setText(flightsManagement);
+            String flightReg = "<html><u> Flights Registration</u> </html>";
+            this.flightRegistrationLabel.setText(flightReg);
+
+            this.flightRegistrationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+            this.flightRegistrationLabel.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+
+                   flightRegistrationPanel.setVisible(true);
+
+                   flightsManagementPanel.setVisible(false);
+                   
+                }
+            });
+
+        }
+    }//GEN-LAST:event_logginButtonActionPerformed
+
+    private void adminBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBackButtonActionPerformed
+        dontShowAdminPanel();
+        ShowLoginPanel();
+        this.userNameTextField.setText("");
+        this.passwordTextField.setText("");
+
+    }//GEN-LAST:event_adminBackButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -492,28 +658,41 @@ public class Kezdooldal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AdminPanel;
     private javax.swing.JLabel ComeJlabel;
     private javax.swing.JLabel FlywithusJlabel;
     private javax.swing.JPanel RegistrationPanel;
+    private javax.swing.JButton adminBackButton;
+    private javax.swing.JLabel adminBackgrooundLabel;
     private javax.swing.JLabel adressLabel;
     private javax.swing.JTextField adressTextfield;
+    private javax.swing.JLabel arrivalTimeLabel;
+    private javax.swing.JTextField arrivalTimeTextField;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel bluebackgroundLabel;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel cityLabel;
     private javax.swing.JTextField cityTextfield;
     private javax.swing.JLabel contactNumberLabel;
     private javax.swing.JTextField contactNumberTextfield;
     private javax.swing.JLabel countryLabel;
     private javax.swing.JTextField countryTextfield;
+    private javax.swing.JLabel departureTimeLabel;
+    private javax.swing.JTextField departureTimeTextField;
+    private javax.swing.JLabel destinationPlaceLabel;
+    private javax.swing.JTextField destinationPlaceTextfield;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextfield;
-    private javax.swing.JTextField felhasznalonevTextField;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField firstNameTextfield;
+    private javax.swing.JLabel flightManagementLabel;
+    private javax.swing.JLabel flightNumLabel1;
+    private javax.swing.JTextField flightNumTextField;
+    private javax.swing.JLabel flightRegistrationLabel;
+    private javax.swing.JPanel flightRegistrationPanel;
+    private javax.swing.JPanel flightsManagementPanel;
     private javax.swing.JLabel genderLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextfield;
     private javax.swing.JLabel leftBackgroundLabel;
@@ -521,13 +700,20 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
+    private javax.swing.JLabel numberOfSeats;
+    private javax.swing.JTextField numberOfSeatsTextField;
+    private javax.swing.JLabel originPlaceLabel;
+    private javax.swing.JTextField originPlaceTextField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPasswordField passwordTextField;
     private javax.swing.JLabel phoneNumberLabel;
     private javax.swing.JTextField phoneNumberTextfield;
     private javax.swing.JButton registrationButton;
     private javax.swing.JLabel registrationLabel;
+    private javax.swing.JLabel repulogepjaratAdminLabel;
+    private javax.swing.JTextField userNameTextField;
     private javax.swing.JLabel usernameLabel;
+    private javax.swing.JLabel whiteBackgroundLabel;
     private javax.swing.JRadioButton womanRadioButton;
     // End of variables declaration//GEN-END:variables
 
