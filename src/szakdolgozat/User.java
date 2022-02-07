@@ -1,12 +1,12 @@
 package szakdolgozat;
 
-public class registrationInfo {
+public class User{
     
     private String firstName, lastName, adress;
     private int contactNum;
     private String city, country, gender, emailId, customerId, customerPassword;
     
-    public registrationInfo(String firstName, String lastName, String adress, int contactNum, String city, String country, String gender, String emailId, String customerId, String customerPassword) {
+    public User(String firstName, String lastName, String adress, int contactNum, String city, String country, String gender, String emailId, String customerId, String customerPassword) {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setAdress(adress);
