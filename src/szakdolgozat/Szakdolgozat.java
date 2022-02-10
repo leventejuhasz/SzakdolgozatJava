@@ -7,13 +7,16 @@ package szakdolgozat;
 public class Szakdolgozat {
 
     public static void main(String[] args) {
-        
+
         Kezdooldal k = new Kezdooldal();
-      /*  Kezdooldal k = new Kezdooldal();
+
         k.setVisible(true);
         k.setResizable(false);
-        k.setLocationRelativeTo(null);*/
-        
+        k.setLocationRelativeTo(null);
+
+        k.ShowLoginPanel();
+        k.dontShowRegistrationPanel();
+        k.dontShowAdminPanel();
 //     k.setCenterJframeAlways(k);
 //     k.setAlwaysOnTop(true);
     }

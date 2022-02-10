@@ -29,90 +29,48 @@ import java.util.regex.Pattern;
  */
 public class Kezdooldal extends javax.swing.JFrame {
 
-    //valtozok
-
-
     public Kezdooldal() {
         initComponents();
 
     }
 
-    
-
     public void showAdminPanel() {
 
-        Component[] components = AdminPanel.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            components[i].setVisible(true);
-            components[i].setEnabled(true);
-        }
+        AdminPanel.show();
         System.out.println("admin panel be");
     }
 
     public void dontShowAdminPanel() {
 
-        Component[] components = AdminPanel.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            components[i].setVisible(false);
-            components[i].setEnabled(false);
-        }
+        AdminPanel.hide();
         System.out.println("admin panel ki");
     }
 
     public void dontShowRegistrationPanel() {
-        Component[] components = RegistrationPanel.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            components[i].setVisible(false);
-            components[i].setEnabled(false);
-            System.out.println(components[i]);
-        }
-this.RegistrationPanel.setVisible(false);
-        
-        if (registrationButton.isVisible()) {
-            System.out.println("HOGY a faszba");
-        }
 
+        RegistrationPanel.hide();
         System.out.println("registration panel ki");
-        
     }
 
     public void showRegistrationPanel() {
-
-        Component[] components = RegistrationPanel.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            components[i].setEnabled(true);
-            components[i].setEnabled(true);
-        }
-
+        RegistrationPanel.show();
         System.out.println("registration panel be");
     }
 
     public void dontShowLoginPanel() {
-       
-         Component[] components = loginPanel.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            components[i].setEnabled(false);
-            components[i].setEnabled(false);
-        }
+        this.loginPanel.hide();
+        System.out.println("login panel ki");
+
     }
 
     public void ShowLoginPanel() {
-    
-         Component[] components = loginPanel.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            components[i].setEnabled(true);
-            components[i].setEnabled(true);
-        }
-        
-    }
 
-    public void Regiszracio() {
-
-        String text = "<html><u> Regisztráció</u> </html>";
+        this.loginPanel.show();
+        String text = "<html><u> Regisztráció </u></html>";
         this.registrationLabel.setText(text);
 
         this.registrationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
+        System.out.println("login panel be");
     }
 
     @SuppressWarnings("unchecked")
@@ -632,9 +590,9 @@ this.RegistrationPanel.setVisible(false);
     }//GEN-LAST:event_contactNumberTextfieldActionPerformed
 
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
-
-      
+        dontShowRegistrationPanel();
         ShowLoginPanel();
+
 
     }//GEN-LAST:event_backButtonMouseClicked
 
@@ -719,7 +677,6 @@ this.RegistrationPanel.setVisible(false);
             smt.executeUpdate("INSERT INTO registration_info(First Name,	LastName,Adress,ContactNo,City,Country,phone_number,Gender,Email, Customer_Password ) VALUES ('" + firstName + "' , '" + lastName + "' , '" + adress + "' , '" + contactNumber + "' , '" + city + "' , '" + country + "' , '" + phoneNumber + "' , '" + gender + "' , '" + email + "', '" + password + "' );");
 
             con.close();
-            
 
         } catch (Exception e) {
 
@@ -779,8 +736,6 @@ this.RegistrationPanel.setVisible(false);
 
     private void registrationLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationLabelMouseClicked
 
-        
-        
         dontShowLoginPanel();
         showRegistrationPanel();
         luggagePic();
@@ -815,8 +770,6 @@ this.RegistrationPanel.setVisible(false);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-             
 
             }
         });
@@ -916,7 +869,5 @@ this.RegistrationPanel.setVisible(false);
     private javax.swing.JLabel whiteBackgroundLabel;
     private javax.swing.JRadioButton womanRadioButton;
     // End of variables declaration//GEN-END:variables
-
-    
 
 }
