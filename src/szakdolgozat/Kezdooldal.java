@@ -20,14 +20,18 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import java.util.regex.Pattern;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Juhász Levente
  */
 public class Kezdooldal extends javax.swing.JFrame {
+
+    private ArrayList<User> users;
 
     public Kezdooldal() {
         initComponents();
@@ -77,6 +81,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        whiteBackgroundLabel = new javax.swing.JLabel();
+        flightsManagementPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         passwordLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
@@ -129,10 +135,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         registrationPasswordErrorHandlingLabel = new javax.swing.JLabel();
         luggagePic = new javax.swing.JLabel();
         AdminPanel = new javax.swing.JPanel();
-        repulogepjaratAdminLabel = new javax.swing.JLabel();
-        flightManagementLabel = new javax.swing.JLabel();
-        flightRegistrationLabel = new javax.swing.JLabel();
-        flightRegistrationPanel = new javax.swing.JPanel();
         flightNumLabel1 = new javax.swing.JLabel();
         departureTimeLabel = new javax.swing.JLabel();
         arrivalTimeLabel = new javax.swing.JLabel();
@@ -146,10 +148,17 @@ public class Kezdooldal extends javax.swing.JFrame {
         destinationPlaceTextfield = new javax.swing.JTextField();
         numberOfSeatsTextField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        whiteBackgroundLabel = new javax.swing.JLabel();
-        flightsManagementPanel = new javax.swing.JPanel();
         adminBackButton = new javax.swing.JButton();
-        adminBackgrooundLabel = new javax.swing.JLabel();
+        addRowButton = new javax.swing.JButton();
+        deleteButon = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        addFlightTable = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+
+        whiteBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/305614_2.jpg"))); // NOI18N
+        whiteBackgroundLabel.setText("jLabel2");
+
+        flightsManagementPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -471,67 +480,50 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         AdminPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        repulogepjaratAdminLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        repulogepjaratAdminLabel.setForeground(new java.awt.Color(255, 255, 255));
-        repulogepjaratAdminLabel.setText("Repülőgépjárat Admin felület");
-        AdminPanel.add(repulogepjaratAdminLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 360, 30));
-
-        flightManagementLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        flightManagementLabel.setForeground(new java.awt.Color(255, 255, 255));
-        flightManagementLabel.setText("Flights management");
-        AdminPanel.add(flightManagementLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
-        flightRegistrationLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        flightRegistrationLabel.setForeground(new java.awt.Color(255, 255, 255));
-        flightRegistrationLabel.setText("Flight Registration");
-        AdminPanel.add(flightRegistrationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
-
-        flightRegistrationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         flightNumLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         flightNumLabel1.setForeground(new java.awt.Color(0, 0, 0));
         flightNumLabel1.setText("Flight Number: ");
-        flightRegistrationPanel.add(flightNumLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 120, 40));
+        AdminPanel.add(flightNumLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 120, 40));
 
         departureTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         departureTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
         departureTimeLabel.setText("Departure Time: ");
-        flightRegistrationPanel.add(departureTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 30));
+        AdminPanel.add(departureTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 30));
 
         arrivalTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         arrivalTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
         arrivalTimeLabel.setText("Arrival Time: ");
-        flightRegistrationPanel.add(arrivalTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, 30));
+        AdminPanel.add(arrivalTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 30));
 
         originPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         originPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
         originPlaceLabel.setText("Origin Place: ");
-        flightRegistrationPanel.add(originPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, 30));
+        AdminPanel.add(originPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
 
         destinationPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         destinationPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
         destinationPlaceLabel.setText("Destination Place: ");
-        flightRegistrationPanel.add(destinationPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 30));
+        AdminPanel.add(destinationPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, 30));
 
         numberOfSeats.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         numberOfSeats.setForeground(new java.awt.Color(0, 0, 0));
         numberOfSeats.setText("Number of Seats: ");
-        flightRegistrationPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, 30));
+        AdminPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 30));
 
         flightNumTextField.setText("13424");
-        flightRegistrationPanel.add(flightNumTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 200, 30));
+        AdminPanel.add(flightNumTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 200, 30));
 
         departureTimeTextField.setText("2022.11.01 12:50");
-        flightRegistrationPanel.add(departureTimeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 200, 30));
+        AdminPanel.add(departureTimeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 200, 30));
 
         arrivalTimeTextField.setText("2022.11.03 13:40");
-        flightRegistrationPanel.add(arrivalTimeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 200, 30));
+        AdminPanel.add(arrivalTimeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 200, 30));
 
         originPlaceTextField.setText("Hungary");
-        flightRegistrationPanel.add(originPlaceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 200, 30));
+        AdminPanel.add(originPlaceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 200, 30));
 
         destinationPlaceTextfield.setText("Flo Rida");
-        flightRegistrationPanel.add(destinationPlaceTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 210, -1));
+        AdminPanel.add(destinationPlaceTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 200, 30));
 
         numberOfSeatsTextField.setText("100");
         numberOfSeatsTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -539,20 +531,13 @@ public class Kezdooldal extends javax.swing.JFrame {
                 numberOfSeatsTextFieldActionPerformed(evt);
             }
         });
-        flightRegistrationPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 50, -1));
+        AdminPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 50, -1));
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Register");
-        flightRegistrationPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 110, 50));
-
-        whiteBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/305614_2.jpg"))); // NOI18N
-        whiteBackgroundLabel.setText("jLabel2");
-        flightRegistrationPanel.add(whiteBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 560));
-        flightRegistrationPanel.add(flightsManagementPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 800, 590));
-
-        AdminPanel.add(flightRegistrationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 780, 560));
+        AdminPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 110, 50));
 
         adminBackButton.setBackground(new java.awt.Color(0, 0, 0));
         adminBackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -563,11 +548,154 @@ public class Kezdooldal extends javax.swing.JFrame {
                 adminBackButtonActionPerformed(evt);
             }
         });
-        AdminPanel.add(adminBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, 100, 40));
+        AdminPanel.add(adminBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 10, 100, 40));
 
-        adminBackgrooundLabel.setBackground(new java.awt.Color(255, 255, 255));
-        adminBackgrooundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/a4-size-background-free-download-photo.jpg"))); // NOI18N
-        AdminPanel.add(adminBackgrooundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        addRowButton.setBackground(new java.awt.Color(0, 0, 0));
+        addRowButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        addRowButton.setForeground(new java.awt.Color(255, 255, 255));
+        addRowButton.setText("Add row");
+        addRowButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRowButtonActionPerformed(evt);
+            }
+        });
+        AdminPanel.add(addRowButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 540, -1, 40));
+
+        deleteButon.setBackground(new java.awt.Color(0, 0, 0));
+        deleteButon.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        deleteButon.setForeground(new java.awt.Color(255, 255, 255));
+        deleteButon.setText("Delete Flight");
+        AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 540, 140, 40));
+
+        addFlightTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Flight Number", "Departure Time", "Arrival Time", "Origin Place", "Destination Place", "Number of Seats"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(addFlightTable);
+
+        AdminPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 700, 440));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/white-color-solid-background-1920x1080.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        AdminPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, -20, -1, -1));
 
         getContentPane().add(AdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
@@ -647,6 +775,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         if (isRegistrationErrorHandling() == true) {
 
             succesfullRegistrationLabel.setText("Sikeres Regisztráció!");
+            JFrame jFrame = new JFrame();
+            JOptionPane.showMessageDialog(jFrame, "Sikeres Regisztráció!");
+            jFrame.setLocationRelativeTo(RegistrationPanel);
 
         } else {
 
@@ -671,7 +802,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
             Statement smt = con.createStatement();
             smt.executeUpdate("INSERT INTO registration_info(First Name,	LastName,Adress,ContactNo,City,Country,phone_number,Gender,Email, Customer_Password ) VALUES ('" + firstName + "' , '" + lastName + "' , '" + adress + "' , '" + contactNumber + "' , '" + city + "' , '" + country + "' , '" + phoneNumber + "' , '" + gender + "' , '" + email + "', '" + password + "' );");
@@ -697,23 +828,6 @@ public class Kezdooldal extends javax.swing.JFrame {
             dontShowLoginPanel();
             dontShowRegistrationPanel();
             showAdminPanel();
-
-            String flightsManagement = "<html><u> Flights Management</u> </html>";
-            this.flightManagementLabel.setText(flightsManagement);
-            String flightReg = "<html><u> Flights Registration</u> </html>";
-            this.flightRegistrationLabel.setText(flightReg);
-
-            this.flightRegistrationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-            this.flightRegistrationLabel.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-
-                    flightRegistrationPanel.setVisible(true);
-
-                    flightsManagementPanel.setVisible(false);
-
-                }
-            });
 
         }
     }//GEN-LAST:event_logginButtonActionPerformed
@@ -742,6 +856,14 @@ public class Kezdooldal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_registrationLabelMouseClicked
+
+    private void addRowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRowButtonActionPerformed
+
+        DefaultTableModel tableModel = new DefaultTableModel();
+        addFlightTable   = new JTable(tableModel);
+
+
+    }//GEN-LAST:event_addRowButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -799,8 +921,9 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel ComeJlabel;
     private javax.swing.JLabel FlywithusJlabel;
     private javax.swing.JPanel RegistrationPanel;
+    private javax.swing.JTable addFlightTable;
+    private javax.swing.JButton addRowButton;
     private javax.swing.JButton adminBackButton;
-    private javax.swing.JLabel adminBackgrooundLabel;
     private javax.swing.JLabel adressErrorLabel;
     private javax.swing.JLabel adressLabel;
     private javax.swing.JTextField adressTextfield;
@@ -817,6 +940,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel countryErrorLabel;
     private javax.swing.JLabel countryLabel;
     private javax.swing.JTextField countryTextfield;
+    private javax.swing.JButton deleteButon;
     private javax.swing.JLabel departureTimeLabel;
     private javax.swing.JTextField departureTimeTextField;
     private javax.swing.JLabel destinationPlaceLabel;
@@ -827,14 +951,13 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel firstNameErrorLabel;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField firstNameTextfield;
-    private javax.swing.JLabel flightManagementLabel;
     private javax.swing.JLabel flightNumLabel1;
     private javax.swing.JTextField flightNumTextField;
-    private javax.swing.JLabel flightRegistrationLabel;
-    private javax.swing.JPanel flightRegistrationPanel;
     private javax.swing.JPanel flightsManagementPanel;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameErrorLabel;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextfield;
@@ -861,7 +984,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JPasswordField registrationPasswordAgain;
     private javax.swing.JLabel registrationPasswordErrorHandlingLabel;
     private javax.swing.JLabel registrationPasswordLabel;
-    private javax.swing.JLabel repulogepjaratAdminLabel;
     private javax.swing.JLabel succesfullRegistrationLabel;
     private javax.swing.JTextField userNameTextField;
     private javax.swing.JLabel usernameErrorLabel;
