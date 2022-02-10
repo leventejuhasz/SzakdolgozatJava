@@ -859,10 +859,12 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     private void addRowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRowButtonActionPerformed
 
-        DefaultTableModel tableModel = new DefaultTableModel();
-        addFlightTable   = new JTable(tableModel);
+      
+       addFlightTable.addRowSelectionInterval(WIDTH, WIDTH);
+add
+        (addFlightTable.getRowCount(), new Object[]{12,null, null, null, null, null});
 
-
+        System.out.println("asdasd");
     }//GEN-LAST:event_addRowButtonActionPerformed
 
     public static void main(String args[]) {
