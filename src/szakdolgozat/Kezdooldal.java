@@ -26,6 +26,12 @@ import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.bind.DatatypeConverter;
+
 /**
  *
  * @author Juhász Levente
@@ -131,7 +137,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         emailTextfield = new javax.swing.JTextField();
         registrationPasswordAgain = new javax.swing.JPasswordField();
         emailLabel = new javax.swing.JLabel();
-        registrationPassword = new javax.swing.JPasswordField();
+        registrationPasswordTextField = new javax.swing.JPasswordField();
         registrationPasswordLabel = new javax.swing.JLabel();
         registrationPasswordErrorHandlingLabel = new javax.swing.JLabel();
         luggagePic = new javax.swing.JLabel();
@@ -462,11 +468,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         emailLabel.setText("Email: ");
         RegistrationPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, -1, -1));
 
-        registrationPassword.setBackground(new java.awt.Color(51, 51, 51));
-        registrationPassword.setForeground(new java.awt.Color(255, 255, 255));
-        registrationPassword.setText("232213231");
-        registrationPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        RegistrationPanel.add(registrationPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 240, 30));
+        registrationPasswordTextField.setBackground(new java.awt.Color(51, 51, 51));
+        registrationPasswordTextField.setForeground(new java.awt.Color(255, 255, 255));
+        registrationPasswordTextField.setText("232213231");
+        registrationPasswordTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        RegistrationPanel.add(registrationPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 240, 30));
 
         registrationPasswordLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         registrationPasswordLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -698,7 +704,18 @@ public class Kezdooldal extends javax.swing.JFrame {
         String country = countryTextfield.getText();
         String phoneNumber = phoneNumberTextfield.getText();
         String email = emailTextfield.getText();
-        String password = passwordTextField.getText();
+
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        md.update(registrationPasswordTextField.getText().getBytes());
+        byte[] digest = md.digest();
+        String password = DatatypeConverter
+                .printHexBinary(digest).toUpperCase();
+
         String gender = "";
         if (this.womanRadioButton.isSelected()) {
             gender = this.womanRadioButton.getText();
@@ -770,11 +787,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     }//GEN-LAST:event_addRowButtonActionPerformed
 
     private void adminRegisterFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRegisterFlightButtonActionPerformed
-    
-        
 
         DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
-       
 
         model.addRow(
                 new Object[]{
@@ -785,8 +799,6 @@ public class Kezdooldal extends javax.swing.JFrame {
                     arrivalTimeTextField.getText(),
                     numberOfSeatsTextField.getText()}
         );
-        
-       
 
 //        addFlightTable.setModel(model);
         System.out.println("sadasdasdas");
@@ -909,10 +921,10 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel registartionLabel;
     private javax.swing.JButton registrationButton;
     private javax.swing.JLabel registrationLabel;
-    private javax.swing.JPasswordField registrationPassword;
     private javax.swing.JPasswordField registrationPasswordAgain;
     private javax.swing.JLabel registrationPasswordErrorHandlingLabel;
     private javax.swing.JLabel registrationPasswordLabel;
+    private javax.swing.JPasswordField registrationPasswordTextField;
     private javax.swing.JLabel succesfullRegistrationLabel;
     private javax.swing.JTextField userNameTextField;
     private javax.swing.JLabel usernameErrorLabel;
