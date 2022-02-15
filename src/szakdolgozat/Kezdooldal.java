@@ -37,53 +37,53 @@ import javax.xml.bind.DatatypeConverter;
  * @author Juhász Levente
  */
 public class Kezdooldal extends javax.swing.JFrame {
-    
+
     private ArrayList<User> users;
-    
+
     public Kezdooldal() {
         initComponents();
-        
+
     }
-    
+
     public void showAdminPanel() {
-        
+
         AdminPanel.show();
         System.out.println("admin panel be");
     }
-    
+
     public void dontShowAdminPanel() {
-        
+
         AdminPanel.hide();
         System.out.println("admin panel ki");
     }
-    
+
     public void dontShowRegistrationPanel() {
-        
+
         RegistrationPanel.hide();
         System.out.println("registration panel ki");
     }
-    
+
     public void showRegistrationPanel() {
         RegistrationPanel.show();
         System.out.println("registration panel be");
     }
-    
+
     public void dontShowLoginPanel() {
         this.loginPanel.hide();
         System.out.println("login panel ki");
-        
+
     }
-    
+
     public void ShowLoginPanel() {
-        
+
         this.loginPanel.show();
         String text = "<html><u> Regisztráció </u></html>";
         this.registrationLabel.setText(text);
-        
+
         this.registrationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         System.out.println("login panel be");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -92,16 +92,15 @@ public class Kezdooldal extends javax.swing.JFrame {
         flightsManagementPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         passwordLabel = new javax.swing.JLabel();
-        usernameLabel = new javax.swing.JLabel();
+        loginEmailLabel = new javax.swing.JLabel();
         FlywithusJlabel = new javax.swing.JLabel();
         ComeJlabel = new javax.swing.JLabel();
-        userNameTextField = new javax.swing.JTextField();
+        loginEmailTextField = new javax.swing.JTextField();
         passwordTextField = new javax.swing.JPasswordField();
         logginButton = new javax.swing.JButton();
         leftBackgroundLabel = new javax.swing.JLabel();
         registrationLabel = new javax.swing.JLabel();
-        usernameErrorLabel = new javax.swing.JLabel();
-        passwordErrorLabel = new javax.swing.JLabel();
+        loginErrorLabel = new javax.swing.JLabel();
         bluebackgroundLabel = new javax.swing.JLabel();
         RegistrationPanel = new javax.swing.JPanel();
         adressTextfield = new javax.swing.JTextField();
@@ -158,6 +157,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminBackButton = new javax.swing.JButton();
         addRowButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -179,11 +179,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         passwordLabel.setToolTipText("");
         loginPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 190, 30));
 
-        usernameLabel.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
-        usernameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        usernameLabel.setText("Felhasználónév:");
-        usernameLabel.setToolTipText("");
-        loginPanel.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 190, 30));
+        loginEmailLabel.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
+        loginEmailLabel.setForeground(new java.awt.Color(255, 255, 255));
+        loginEmailLabel.setText("Felhasználónév:");
+        loginEmailLabel.setToolTipText("");
+        loginPanel.add(loginEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 190, 30));
 
         FlywithusJlabel.setFont(new java.awt.Font("Berlin Sans FB", 1, 48)); // NOI18N
         FlywithusJlabel.setForeground(new java.awt.Color(0, 51, 102));
@@ -195,15 +195,15 @@ public class Kezdooldal extends javax.swing.JFrame {
         ComeJlabel.setText("COME ");
         loginPanel.add(ComeJlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 170, 50));
 
-        userNameTextField.setBackground(new java.awt.Color(255, 255, 255));
-        userNameTextField.setForeground(new java.awt.Color(0, 0, 0));
-        userNameTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        userNameTextField.addActionListener(new java.awt.event.ActionListener() {
+        loginEmailTextField.setBackground(new java.awt.Color(255, 255, 255));
+        loginEmailTextField.setForeground(new java.awt.Color(0, 0, 0));
+        loginEmailTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        loginEmailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameTextFieldActionPerformed(evt);
+                loginEmailTextFieldActionPerformed(evt);
             }
         });
-        loginPanel.add(userNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 320, 30));
+        loginPanel.add(loginEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 320, 30));
 
         passwordTextField.setBackground(new java.awt.Color(255, 255, 255));
         passwordTextField.setForeground(new java.awt.Color(0, 0, 0));
@@ -233,13 +233,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         loginPanel.add(registrationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 650, -1, -1));
 
-        usernameErrorLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        usernameErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        loginPanel.add(usernameErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 320, -1, -1));
-
-        passwordErrorLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        passwordErrorLabel.setForeground(new java.awt.Color(255, 0, 51));
-        loginPanel.add(passwordErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 230, -1, -1));
+        loginErrorLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        loginErrorLabel.setForeground(new java.awt.Color(255, 0, 51));
+        loginPanel.add(loginErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 430, -1, -1));
 
         bluebackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bluebackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/asd.jpg"))); // NOI18N
@@ -574,6 +570,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         deleteButon.setText("Delete Flight");
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 540, 140, 40));
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        AdminPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 70, 30));
+
         addFlightTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -610,21 +609,21 @@ public class Kezdooldal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void userNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextFieldActionPerformed
+    private void loginEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginEmailTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_userNameTextFieldActionPerformed
+    }//GEN-LAST:event_loginEmailTextFieldActionPerformed
 
     private void womanRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_womanRadioButtonActionPerformed
         if (this.womanRadioButton.isSelected()) {
             this.manRadioButton.setSelected(false);
         }
     }//GEN-LAST:event_womanRadioButtonActionPerformed
-    
+
 
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
         dontShowRegistrationPanel();
         ShowLoginPanel();
-        
+
 
     }//GEN-LAST:event_backButtonMouseClicked
 
@@ -633,32 +632,30 @@ public class Kezdooldal extends javax.swing.JFrame {
             this.womanRadioButton.setSelected(false);
         }
     }//GEN-LAST:event_manRadioButtonActionPerformed
-    
+
     public void loginErrorHandling() {
-        
+
     }
-    
+
     public String stringErrorHandling(String text) {
-        
+
         if (text.length() > 20) {
-            
+
             return "Túl hosszú a " + text;
         }
-        
+
         if (!Pattern.matches("[a-zA-Z]+", text)) {
             // Do something
             return "Nem tartalmazhat számot!";
         }
         return "";
     }
-    
+
     public boolean isRegistrationErrorHandling() {
-        
+
         firstNameErrorLabel.setText(stringErrorHandling(firstNameTextfield.getText()));
         lastNameErrorLabel.setText(stringErrorHandling(lastNameTextfield.getText()));
-        
-        
-        
+
         if (firstNameErrorLabel.getText() == ""
                 && lastNameErrorLabel.getText() == ""
                 && adressErrorLabel.getText() == ""
@@ -672,21 +669,21 @@ public class Kezdooldal extends javax.swing.JFrame {
         } else {
             return false;
         }
-        
+
     }
-    
+
 
     private void registrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationButtonActionPerformed
-        
+
         if (isRegistrationErrorHandling() == true) {
-            
+
             succesfullRegistrationLabel.setText("Sikeres Regisztráció!");
             JFrame jFrame = new JFrame();
             JOptionPane.showMessageDialog(jFrame, "Sikeres Regisztráció!");
             jFrame.setLocationRelativeTo(RegistrationPanel);
-            
+
         } else {
-            
+
             succesfullRegistrationLabel.setText("Sikertelen Regisztráció!");
         }
         String firstName = firstNameTextfield.getText();
@@ -697,14 +694,14 @@ public class Kezdooldal extends javax.swing.JFrame {
         String country = countryTextfield.getText();
         String phoneNumber = phoneNumberTextfield.getText();
         String email = emailTextfield.getText();
-        
+
         String gender = "";
         if (this.womanRadioButton.isSelected()) {
             gender = this.womanRadioButton.getText();
         } else {
             gender = this.manRadioButton.getText();
         }
-        
+
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("MD5");
@@ -713,31 +710,32 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
         md.update(registrationPasswordTextField.getText().getBytes());
         byte[] digest = md.digest();
-        
-        String passordagain = registrationPasswordAgainTextField.getText();
+
+        String passwordagain = registrationPasswordAgainTextField.getText();
         String password = "";
         if (registrationPasswordAgainTextField.getText().matches(registrationPasswordTextField.getText())) {
             password = DatatypeConverter.printHexBinary(digest).toUpperCase();
         } else {
             registrationPasswordErrorHandlingLabel.setText("A megadott jelszók nem egyeznek meg!");
         }
-        
+
         try {
-            
+
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-            
+
             Statement smt = con.createStatement();
-            smt.executeUpdate("INSERT INTO registration_info(FirstName,LastName,Address,ContactNo,City,Country,phoneNumber,Gender,Email, CustomerPassword ) VALUES ('" + firstName + "' , '" + lastName + "' , '" + adress + "' , '" + contactNumber + "' , '" + city + "' , '" + country + "' , '" + phoneNumber + "' , '" + gender + "' , '" + email + "', '" + password + "' );");
-            
+
+            smt.executeUpdate("INSERT INTO registration_info(FirstName,LastName,Address,zipCode,City,Country,phoneNumber,Gender,Email, CustomerPassword ) VALUES ('" + firstName + "' , '" + lastName + "' , '" + adress + "' , '" + contactNumber + "' , '" + city + "' , '" + country + "' , '" + phoneNumber + "' , '" + gender + "' , '" + email + "', '" + password + "' );");
+
             con.close();
-            
+
         } catch (Exception e) {
-            
+
             System.out.println();
             System.out.println("Hiba: " + e);
         }
-        
+
 
     }//GEN-LAST:event_registrationButtonActionPerformed
 
@@ -745,20 +743,101 @@ public class Kezdooldal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_numberOfSeatsTextFieldActionPerformed
 
+    public boolean checkAdmin() {
+        Connection con;
+        PreparedStatement ps;
+        try {
+
+            MessageDigest md = null;
+            try {
+                md = MessageDigest.getInstance("MD5");
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            md.update(passwordTextField.getText().getBytes());
+            byte[] digest = md.digest();
+            String password = DatatypeConverter.printHexBinary(digest).toUpperCase();
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+
+            Statement smt = con.createStatement();
+            if (!isEmailValid()) {
+                loginErrorLabel.setText("Hibás felhasználónév vagy jelszó!");
+            } else {
+                ps = con.prepareStatement("Select Email, Password From admins where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + password + "'");
+                ResultSet result = ps.executeQuery();
+                if (result.next()) {
+                    return true;
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     private void logginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logginButtonActionPerformed
-        
-        if (userNameTextField.getText().matches("admin") && passwordTextField.getText().matches("kutya")) {
+
+        if (checkAdmin()) {
             dontShowLoginPanel();
             dontShowRegistrationPanel();
             showAdminPanel();
-            
+
         }
+
+        Connection con;
+        PreparedStatement ps;
+        try {
+
+            MessageDigest md = null;
+            try {
+                md = MessageDigest.getInstance("MD5");
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            md.update(passwordTextField.getText().getBytes());
+            byte[] digest = md.digest();
+            String password = DatatypeConverter.printHexBinary(digest).toUpperCase();
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+
+            Statement smt = con.createStatement();
+            if (!isEmailValid()) {
+                loginErrorLabel.setText("Hibás felhasználónév vagy jelszó!");
+            } else {
+                ps = con.prepareStatement("Select Email, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + password + "'");
+                ResultSet result = ps.executeQuery();
+                if (result.next()) {
+
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_logginButtonActionPerformed
+
+    public static boolean patternMatches(String emailAddress, String regexPattern) {
+        return Pattern.compile(regexPattern)
+                .matcher(emailAddress)
+                .matches();
+    }
+
+    public boolean isEmailValid() {
+        String emailAddress = loginEmailTextField.getText();
+        String regexPattern = "^(.+)@(\\S+)$";
+        if (patternMatches(emailAddress, regexPattern)) {
+            return true;
+        }
+
+        return false;
+    }
 
     private void adminBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBackButtonActionPerformed
         dontShowAdminPanel();
         ShowLoginPanel();
-        this.userNameTextField.setText("");
+        this.loginEmailTextField.setText("");
         this.passwordTextField.setText("");
 
     }//GEN-LAST:event_adminBackButtonActionPerformed
@@ -772,23 +851,23 @@ public class Kezdooldal extends javax.swing.JFrame {
     }//GEN-LAST:event_registrationPasswordAgainTextFieldActionPerformed
 
     private void registrationLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationLabelMouseClicked
-        
+
         dontShowLoginPanel();
         showRegistrationPanel();
         luggagePic();
-        
+
 
     }//GEN-LAST:event_registrationLabelMouseClicked
 
     private void addRowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRowButtonActionPerformed
-        
+
         System.out.println("asdasd");
     }//GEN-LAST:event_addRowButtonActionPerformed
 
     private void adminRegisterFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRegisterFlightButtonActionPerformed
-        
+
         DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
-        
+
         model.addRow(
                 new Object[]{
                     flightNumTextField.getText(),
@@ -801,10 +880,10 @@ public class Kezdooldal extends javax.swing.JFrame {
 
 //        addFlightTable.setModel(model);
         System.out.println("sadasdasdas");
-        
+
 
     }//GEN-LAST:event_adminRegisterFlightButtonActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -832,27 +911,27 @@ public class Kezdooldal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
             }
         });
     }
-    
+
     public void luggagePic() {
-        
+
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File("person_at_airport_holding_coffee_and_luggage.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         Image dimg = img.getScaledInstance(luggagePic.getWidth(), luggagePic.getHeight(),
                 Image.SCALE_SMOOTH);
-        
+
         ImageIcon imageIcon = new ImageIcon(dimg);
-        
+
         luggagePic.setIcon(imageIcon);
-        
+
     }
 
 
@@ -894,6 +973,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JTextField flightNumTextField;
     private javax.swing.JPanel flightsManagementPanel;
     private javax.swing.JLabel genderLabel;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameErrorLabel;
@@ -901,6 +981,9 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JTextField lastNameTextfield;
     private javax.swing.JLabel leftBackgroundLabel;
     private javax.swing.JButton logginButton;
+    private javax.swing.JLabel loginEmailLabel;
+    private javax.swing.JTextField loginEmailTextField;
+    private javax.swing.JLabel loginErrorLabel;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
@@ -909,7 +992,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel originPlaceLabel;
     private javax.swing.JTextField originPlaceTextField;
     private javax.swing.JLabel passwordAgainLabel;
-    private javax.swing.JLabel passwordErrorLabel;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPasswordField passwordTextField;
     private javax.swing.JLabel phoneNumberErrorLabel;
@@ -923,9 +1005,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel registrationPasswordLabel;
     private javax.swing.JPasswordField registrationPasswordTextField;
     private javax.swing.JLabel succesfullRegistrationLabel;
-    private javax.swing.JTextField userNameTextField;
-    private javax.swing.JLabel usernameErrorLabel;
-    private javax.swing.JLabel usernameLabel;
     private javax.swing.JLabel whiteBackgroundLabel;
     private javax.swing.JRadioButton womanRadioButton;
     private javax.swing.JLabel zipCodeErrorLabel;
