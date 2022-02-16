@@ -167,12 +167,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         numberOfSeatsTextField = new javax.swing.JTextField();
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
-        addRowButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         whiteBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/305614_2.jpg"))); // NOI18N
         whiteBackgroundLabel.setText("jLabel2");
@@ -297,7 +296,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         firstNameTextfield.setBackground(new java.awt.Color(51, 51, 51));
         firstNameTextfield.setForeground(new java.awt.Color(255, 255, 255));
         firstNameTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        firstNameTextfield.setText("Juhász");
+        firstNameTextfield.setText("Juhasz");
         firstNameTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         firstNameTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
         RegistrationPanel.add(firstNameTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 240, 30));
@@ -487,7 +486,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         genderErrorLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         genderErrorLabel.setForeground(new java.awt.Color(255, 0, 51));
-        RegistrationPanel.add(genderErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, -1, -1));
+        RegistrationPanel.add(genderErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, -1, -1));
         RegistrationPanel.add(luggagePic, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
         getContentPane().add(RegistrationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
@@ -556,7 +555,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 adminRegisterFlightButtonActionPerformed(evt);
             }
         });
-        AdminPanel.add(adminRegisterFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 110, 50));
+        AdminPanel.add(adminRegisterFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 110, 50));
 
         adminBackButton.setBackground(new java.awt.Color(0, 0, 0));
         adminBackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -569,25 +568,19 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(adminBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 10, 100, 40));
 
-        addRowButton.setBackground(new java.awt.Color(0, 0, 0));
-        addRowButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        addRowButton.setForeground(new java.awt.Color(255, 255, 255));
-        addRowButton.setText("Add row");
-        addRowButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addRowButtonActionPerformed(evt);
-            }
-        });
-        AdminPanel.add(addRowButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 540, -1, 40));
-
         deleteButon.setBackground(new java.awt.Color(0, 0, 0));
         deleteButon.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         deleteButon.setForeground(new java.awt.Color(255, 255, 255));
         deleteButon.setText("Delete Flight");
-        AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 540, 140, 40));
+        deleteButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteFlightButonActionPerformed(evt);
+            }
+        });
+        AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 330, 140, 40));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        AdminPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 70, 30));
+        AdminPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 210, 30));
 
         addFlightTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -616,9 +609,9 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         AdminPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 690, 180));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/white-color-solid-background-1920x1080.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        AdminPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, -20, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/2560px-F1_light_blue_flag.svg.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        AdminPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(AdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
@@ -696,7 +689,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             genderErrorLabel.setText("Hiba!");
             return false;
         }
-        
+
         return true;
 
     }
@@ -755,7 +748,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             jFrame.setLocationRelativeTo(RegistrationPanel);
 
         } else {
-         
+
             succesfullRegistrationLabel.setText("Sikertelen Regisztráció!");
         }
 
@@ -790,6 +783,8 @@ public class Kezdooldal extends javax.swing.JFrame {
             if (result.next()) {
                 return true;
 
+            } else {
+                loginErrorLabel.setText("Hibás felhasználónév vagy jelszó!");
             }
 
         } catch (SQLException ex) {
@@ -876,12 +871,27 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_registrationLabelMouseClicked
 
-    private void addRowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRowButtonActionPerformed
-
-        System.out.println("asdasd");
-    }//GEN-LAST:event_addRowButtonActionPerformed
-
     private void adminRegisterFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRegisterFlightButtonActionPerformed
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); 
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");  
+             
+            Statement smt = con.createStatement();
+            smt.executeUpdate("Insert Into flight_info(Flight_num,Departure_time, Arrival_time, Origin_place, Destination_place, Num_of_seats)  VALUES ('" + flightNumTextField.getText() + "' , '" + departureTimeTextField.getText() + "' , '" + arrivalTimeTextField.getText() + "' , '" + originPlaceTextField.getText() + "' , '" + destinationPlaceTextfield.getText() + "' , '" + numberOfSeatsTextField.getText() + "')");
+
+            
+            
+            
+            con.close();
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+      
+
+      
 
         DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
 
@@ -895,11 +905,25 @@ public class Kezdooldal extends javax.swing.JFrame {
                     numberOfSeatsTextField.getText()}
         );
 
-//        addFlightTable.setModel(model);
-        System.out.println("sadasdasdas");
-
 
     }//GEN-LAST:event_adminRegisterFlightButtonActionPerformed
+
+    private void deleteFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFlightButonActionPerformed
+
+        JFrame popup = new JFrame();
+        int result = JOptionPane.showConfirmDialog(popup, "Are you sure you want to cancel the flight?");
+
+        if (result == 0) {
+            System.out.println("Yes");
+            ((DefaultTableModel) addFlightTable.getModel()).removeRow(addFlightTable.getSelectedRow());
+        } else if (result == 1) {
+            System.out.println("No");
+            popup.dispose();
+
+        }
+
+
+    }//GEN-LAST:event_deleteFlightButonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -958,7 +982,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel FlywithusJlabel;
     private javax.swing.JPanel RegistrationPanel;
     private javax.swing.JTable addFlightTable;
-    private javax.swing.JButton addRowButton;
     private javax.swing.JButton adminBackButton;
     private javax.swing.JButton adminRegisterFlightButton;
     private javax.swing.JLabel arrivalTimeLabel;
@@ -989,7 +1012,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameErrorLabel;
     private javax.swing.JLabel lastNameLabel;
