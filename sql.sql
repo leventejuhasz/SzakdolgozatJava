@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 16, 2022 at 10:08 AM
+-- Generation Time: Feb 16, 2022 at 02:04 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -8047,13 +8047,19 @@ CREATE TABLE `flight_cancellation` (
 
 CREATE TABLE `flight_info` (
   `Flight_num` varchar(12) NOT NULL,
-  `Flight_name` varchar(12) NOT NULL,
-  `Departure_time` time NOT NULL,
-  `Arrival_time` time NOT NULL,
+  `Departure_time` varchar(60) NOT NULL,
+  `Arrival_time` varchar(60) NOT NULL,
   `Origin_place` varchar(16) NOT NULL,
   `Destination_place` varchar(16) NOT NULL,
   `Num_of_seats` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `flight_info`
+--
+
+INSERT INTO `flight_info` (`Flight_num`, `Departure_time`, `Arrival_time`, `Origin_place`, `Destination_place`, `Num_of_seats`) VALUES
+('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100);
 
 -- --------------------------------------------------------
 
@@ -8062,11 +8068,10 @@ CREATE TABLE `flight_info` (
 --
 
 CREATE TABLE `price_info` (
-  `Class` varchar(12) NOT NULL,
-  `Customer_name` varchar(14) NOT NULL,
+  `Customer_name` int(14) NOT NULL,
   `Seat_num` int(4) NOT NULL,
   `Price` int(4) NOT NULL,
-  `Flight_num` varchar(12) NOT NULL
+  `Flight_num` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -8099,7 +8104,40 @@ INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address
 (3, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'leventejuhasz2002@gmail.com', 'Luna0'),
 (4, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'leventejuhasz2002@gmail.com', '98E89BBBB4878EC0CC7833F0F91276C2'),
 (5, 'Juhász', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'ciga@ciga.hu', 'B9ABDD7E4F97F9CD3C43C72F0D45E10E'),
-(10, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'k@h.hu', '4B42D1F541216E6336799F1D9E95EE1B');
+(10, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'k@h.hu', '4B42D1F541216E6336799F1D9E95EE1B'),
+(11, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'laca@gmail.hu', '0775B8E55054F7A664796DFDF6373C16'),
+(33, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025jbijhgbiub', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(34, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(35, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '202386025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(36, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(37, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(38, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(39, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(40, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(41, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(42, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(43, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(44, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(45, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860231', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(46, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860231', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(47, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(48, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025 2321 3123123123123 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(49, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(50, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(51, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(52, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(53, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '202386025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(54, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(55, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '++36 20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(56, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+4 20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(57, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', ''),
+(58, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', 'EAC93FC0E5BFBE34E7EC3AB68738F26E'),
+(59, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', 'EAC93FC0E5BFBE34E7EC3AB68738F26E'),
+(60, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', 'EAC93FC0E5BFBE34E7EC3AB68738F26E'),
+(61, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(62, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(63, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(64, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33');
 
 --
 -- Indexes for dumped tables
@@ -8124,12 +8162,6 @@ ALTER TABLE `flight_info`
   ADD PRIMARY KEY (`Flight_num`),
   ADD KEY `Destination_place` (`Destination_place`),
   ADD KEY `Origin_place` (`Origin_place`);
-
---
--- Indexes for table `price_info`
---
-ALTER TABLE `price_info`
-  ADD KEY `Flight_num` (`Flight_num`);
 
 --
 -- Indexes for table `registration_info`
@@ -8158,19 +8190,7 @@ ALTER TABLE `airport_info`
 -- AUTO_INCREMENT for table `registration_info`
 --
 ALTER TABLE `registration_info`
-  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `flight_info`
---
-ALTER TABLE `flight_info`
-  ADD CONSTRAINT `Flight_info_ibfk_1` FOREIGN KEY (`Origin_place`) REFERENCES `airport_info` (`Airport_Name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Flight_info_ibfk_2` FOREIGN KEY (`Flight_num`) REFERENCES `price_info` (`Flight_num`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `flight_airport` FOREIGN KEY (`Destination_place`) REFERENCES `airport_info` (`Airport_Name`);
+  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
