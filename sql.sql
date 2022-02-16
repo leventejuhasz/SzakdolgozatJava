@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Feb 14. 13:43
--- Kiszolgáló verziója: 10.4.22-MariaDB
--- PHP verzió: 7.4.27
+-- Host: 127.0.0.1:3307
+-- Generation Time: Feb 16, 2022 at 10:08 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,32 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `c31g202121`
+-- Database: `c31g202121`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `airport_info`
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `AdminId` int(11) NOT NULL,
+  `Email` varchar(69) NOT NULL,
+  `Password` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`AdminId`, `Email`, `Password`) VALUES
+(1, 'admin@gmail.hu', '0638176a683493df8e7265b4a1291301');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `airport_info`
 --
 
 CREATE TABLE `airport_info` (
@@ -36,7 +55,7 @@ CREATE TABLE `airport_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- A tábla adatainak kiíratása `airport_info`
+-- Dumping data for table `airport_info`
 --
 
 INSERT INTO `airport_info` (`Airport_Id`, `iata_Code`, `Airport_Name`, `Location`, `Country`) VALUES
@@ -8006,7 +8025,7 @@ INSERT INTO `airport_info` (`Airport_Id`, `iata_Code`, `Airport_Name`, `Location
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `flight_cancellation`
+-- Table structure for table `flight_cancellation`
 --
 
 CREATE TABLE `flight_cancellation` (
@@ -8023,7 +8042,7 @@ CREATE TABLE `flight_cancellation` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `flight_info`
+-- Table structure for table `flight_info`
 --
 
 CREATE TABLE `flight_info` (
@@ -8039,7 +8058,7 @@ CREATE TABLE `flight_info` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `price_info`
+-- Table structure for table `price_info`
 --
 
 CREATE TABLE `price_info` (
@@ -8053,7 +8072,7 @@ CREATE TABLE `price_info` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `registration_info`
+-- Table structure for table `registration_info`
 --
 
 CREATE TABLE `registration_info` (
@@ -8071,27 +8090,35 @@ CREATE TABLE `registration_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- A tábla adatainak kiíratása `registration_info`
+-- Dumping data for table `registration_info`
 --
 
 INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address`, `zipCode`, `City`, `Country`, `phoneNumber`, `Gender`, `Email`, `CustomerPassword`) VALUES
 (1, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'leventejuhasz2002@gmail.com', ''),
 (2, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'leventejuhasz2002@gmail.com', ''),
 (3, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'leventejuhasz2002@gmail.com', 'Luna0'),
-(4, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'leventejuhasz2002@gmail.com', '98E89BBBB4878EC0CC7833F0F91276C2');
+(4, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'leventejuhasz2002@gmail.com', '98E89BBBB4878EC0CC7833F0F91276C2'),
+(5, 'Juhász', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'ciga@ciga.hu', 'B9ABDD7E4F97F9CD3C43C72F0D45E10E'),
+(10, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'k@h.hu', '4B42D1F541216E6336799F1D9E95EE1B');
 
 --
--- Indexek a kiírt táblákhoz
+-- Indexes for dumped tables
 --
 
 --
--- A tábla indexei `airport_info`
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`AdminId`);
+
+--
+-- Indexes for table `airport_info`
 --
 ALTER TABLE `airport_info`
   ADD PRIMARY KEY (`Airport_Id`);
 
 --
--- A tábla indexei `flight_info`
+-- Indexes for table `flight_info`
 --
 ALTER TABLE `flight_info`
   ADD PRIMARY KEY (`Flight_num`),
@@ -8099,40 +8126,46 @@ ALTER TABLE `flight_info`
   ADD KEY `Origin_place` (`Origin_place`);
 
 --
--- A tábla indexei `price_info`
+-- Indexes for table `price_info`
 --
 ALTER TABLE `price_info`
   ADD KEY `Flight_num` (`Flight_num`);
 
 --
--- A tábla indexei `registration_info`
+-- Indexes for table `registration_info`
 --
 ALTER TABLE `registration_info`
   ADD PRIMARY KEY (`CustomerId`),
   ADD KEY `Customer_Password` (`CustomerPassword`);
 
 --
--- A kiírt táblák AUTO_INCREMENT értéke
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT a táblához `airport_info`
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `AdminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `airport_info`
 --
 ALTER TABLE `airport_info`
   MODIFY `Airport_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7954;
 
 --
--- AUTO_INCREMENT a táblához `registration_info`
+-- AUTO_INCREMENT for table `registration_info`
 --
 ALTER TABLE `registration_info`
-  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Megkötések a kiírt táblákhoz
+-- Constraints for dumped tables
 --
 
 --
--- Megkötések a táblához `flight_info`
+-- Constraints for table `flight_info`
 --
 ALTER TABLE `flight_info`
   ADD CONSTRAINT `Flight_info_ibfk_1` FOREIGN KEY (`Origin_place`) REFERENCES `airport_info` (`Airport_Name`) ON DELETE CASCADE ON UPDATE CASCADE,
