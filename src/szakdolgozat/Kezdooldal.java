@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.List;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -28,7 +29,12 @@ import javax.swing.table.TableModel;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.LinkedHashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -39,6 +45,10 @@ import javax.xml.bind.DatatypeConverter;
  * @author Juhász Levente
  */
 public class Kezdooldal extends javax.swing.JFrame {
+
+    private ArrayList<String> countries;
+    private ArrayList<String> Locations;
+    private ArrayList<String> AirportNames;
 
     private ArrayList<User> users;
 
@@ -101,7 +111,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void initComponents() {
 
         whiteBackgroundLabel = new javax.swing.JLabel();
-        flightsManagementPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         passwordLabel = new javax.swing.JLabel();
         loginEmailLabel = new javax.swing.JLabel();
@@ -161,23 +170,24 @@ public class Kezdooldal extends javax.swing.JFrame {
         destinationPlaceLabel = new javax.swing.JLabel();
         numberOfSeats = new javax.swing.JLabel();
         flightNumTextField = new javax.swing.JTextField();
-        departureTimeTextField = new javax.swing.JTextField();
-        arrivalTimeTextField = new javax.swing.JTextField();
-        originPlaceTextField = new javax.swing.JTextField();
-        destinationPlaceTextfield = new javax.swing.JTextField();
         numberOfSeatsTextField = new javax.swing.JTextField();
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        countryComboBox = new javax.swing.JComboBox<>();
+        destinationCountryComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
+        originCountryComboBox = new javax.swing.JComboBox();
+        departureTimejDateChooser = new com.toedter.calendar.JDateChooser();
+        arrivalTImejDateChooser = new com.toedter.calendar.JDateChooser();
+        departureTimeHourComboBox = new javax.swing.JComboBox();
+        departureTimeMinuteComboBox = new javax.swing.JComboBox();
+        ArrivalTimeHourComboBox = new javax.swing.JComboBox();
+        ArrivalTimeHoursComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
 
         whiteBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/305614_2.jpg"))); // NOI18N
         whiteBackgroundLabel.setText("jLabel2");
-
-        flightsManagementPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -497,47 +507,35 @@ public class Kezdooldal extends javax.swing.JFrame {
         flightNumLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         flightNumLabel1.setForeground(new java.awt.Color(0, 0, 0));
         flightNumLabel1.setText("Flight Number: ");
-        AdminPanel.add(flightNumLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 120, 40));
+        AdminPanel.add(flightNumLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, 40));
 
         departureTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         departureTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
         departureTimeLabel.setText("Departure Time: ");
-        AdminPanel.add(departureTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 30));
+        AdminPanel.add(departureTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 30));
 
         arrivalTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         arrivalTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
         arrivalTimeLabel.setText("Arrival Time: ");
-        AdminPanel.add(arrivalTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 30));
+        AdminPanel.add(arrivalTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 30));
 
         originPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         originPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
         originPlaceLabel.setText("Origin Place: ");
-        AdminPanel.add(originPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
+        AdminPanel.add(originPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 30));
 
         destinationPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         destinationPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
         destinationPlaceLabel.setText("Destination Place: ");
-        AdminPanel.add(destinationPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, 30));
+        AdminPanel.add(destinationPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 30));
 
         numberOfSeats.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         numberOfSeats.setForeground(new java.awt.Color(0, 0, 0));
         numberOfSeats.setText("Number of Seats: ");
-        AdminPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 30));
+        AdminPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, 30));
 
         flightNumTextField.setText("13424");
         AdminPanel.add(flightNumTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 200, 30));
-
-        departureTimeTextField.setText("2022.11.01 12:50");
-        AdminPanel.add(departureTimeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 200, 30));
-
-        arrivalTimeTextField.setText("2022.11.03 13:40");
-        AdminPanel.add(arrivalTimeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 200, 30));
-
-        originPlaceTextField.setText("Hungary");
-        AdminPanel.add(originPlaceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 200, 30));
-
-        destinationPlaceTextfield.setText("Flo Rida");
-        AdminPanel.add(destinationPlaceTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 200, 30));
 
         numberOfSeatsTextField.setText("100");
         numberOfSeatsTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -545,7 +543,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 numberOfSeatsTextFieldActionPerformed(evt);
             }
         });
-        AdminPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 50, -1));
+        AdminPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 50, -1));
 
         adminRegisterFlightButton.setBackground(new java.awt.Color(0, 0, 0));
         adminRegisterFlightButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -556,7 +554,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 adminRegisterFlightButtonActionPerformed(evt);
             }
         });
-        AdminPanel.add(adminRegisterFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 110, 50));
+        AdminPanel.add(adminRegisterFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 530, 110, 50));
 
         adminBackButton.setBackground(new java.awt.Color(0, 0, 0));
         adminBackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -580,8 +578,8 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 330, 140, 40));
 
-        countryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        AdminPanel.add(countryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 210, 30));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        AdminPanel.add(destinationCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 210, 30));
 
         addFlightTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -609,6 +607,25 @@ public class Kezdooldal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(addFlightTable);
 
         AdminPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 690, 180));
+
+        originCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        AdminPanel.add(originCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 210, 30));
+        AdminPanel.add(departureTimejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 80, 140, -1));
+        AdminPanel.add(arrivalTImejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 160, -1));
+
+        departureTimeHourComboBox.setMaximumRowCount(24);
+        departureTimeHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
+        AdminPanel.add(departureTimeHourComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 40, -1));
+
+        departureTimeMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
+        AdminPanel.add(departureTimeMinuteComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, -1, -1));
+
+        ArrivalTimeHourComboBox.setMaximumRowCount(24);
+        ArrivalTimeHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
+        AdminPanel.add(ArrivalTimeHourComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 40, -1));
+
+        ArrivalTimeHoursComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
+        AdminPanel.add(ArrivalTimeHoursComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/2560px-F1_light_blue_flag.svg.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -801,7 +818,8 @@ public class Kezdooldal extends javax.swing.JFrame {
             dontShowRegistrationPanel();
             showAdminPanel();
             System.out.println("admin");
-           JComboBox box = new JComboBox(getAllCountries());
+            countries();
+
         }
 
         Connection con;
@@ -832,19 +850,8 @@ public class Kezdooldal extends javax.swing.JFrame {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-      
-
 
     }//GEN-LAST:event_logginButtonActionPerformed
-    public String[] getAllCountries() {
-        String[] countries = new String[Locale.getISOCountries().length];
-        String[] countryCodes = Locale.getISOCountries();
-        for (int i = 0; i < countryCodes.length; i++) {
-            Locale obj = new Locale("", countryCodes[i]);
-            countries[i] = obj.getDisplayCountry();
-        }
-        return countries;
-    }
 
     public static boolean patternMatches(String emailAddress, String regexPattern) {
         return Pattern.compile(regexPattern)
@@ -885,13 +892,17 @@ public class Kezdooldal extends javax.swing.JFrame {
     }//GEN-LAST:event_registrationLabelMouseClicked
 
     private void adminRegisterFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRegisterFlightButtonActionPerformed
+    
+        SimpleDateFormat d = new SimpleDateFormat((departureTimejDateChooser.getDate().getYear() + 1900) + "." + (departureTimejDateChooser.getDate().getMonth() - 1) + "." + departureTimejDateChooser.getDate(). +"."+ departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem());
+
+        d.format(arrivalTImejDateChooser.getDate());
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
             Statement smt = con.createStatement();
-            smt.executeUpdate("Insert Into flight_info(Flight_num,Departure_time, Arrival_time, Origin_place, Destination_place, Num_of_seats)  VALUES ('" + flightNumTextField.getText() + "' , '" + departureTimeTextField.getText() + "' , '" + arrivalTimeTextField.getText() + "' , '" + originPlaceTextField.getText() + "' , '" + destinationPlaceTextfield.getText() + "' , '" + numberOfSeatsTextField.getText() + "')");
+            smt.executeUpdate("Insert Into flight_info(Flight_num,Departure_time, Arrival_time, Origin_place, Destination_place, Num_of_seats)  VALUES ('" + flightNumTextField.getText() + "' , '" + d.toPattern() + "' , '" + "" + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + numberOfSeatsTextField.getText() + "')");
 
             con.close();
         } catch (ClassNotFoundException ex) {
@@ -905,15 +916,62 @@ public class Kezdooldal extends javax.swing.JFrame {
         model.addRow(
                 new Object[]{
                     flightNumTextField.getText(),
-                    departureTimeTextField.getText(),
-                    arrivalTimeTextField.getText(),
-                    originPlaceTextField.getText(),
-                    arrivalTimeTextField.getText(),
+                    d.toPattern(),
+                    "",
+                    originCountryComboBox.getSelectedItem(),
+                    destinationCountryComboBox.getSelectedItem(),
                     numberOfSeatsTextField.getText()}
         );
 
 
     }//GEN-LAST:event_adminRegisterFlightButtonActionPerformed
+
+    public void countries() {
+
+        LinkedHashSet<String> countrySet = new LinkedHashSet<>();
+        LinkedHashSet<String> airportNameSet = new LinkedHashSet<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            Statement smt = con.createStatement();
+
+            ResultSet rs = smt.executeQuery(
+                    "SELECT Country FROM airport_info order by Country ASC");
+
+            while (rs.next()) {
+                String orszag = "Country";
+
+                if (!rs.getString(orszag).contains(" ") || rs.getString(orszag).matches("") || rs.getString(orszag) == null) {
+                    countrySet.add(rs.getString(orszag));
+
+                }
+
+            }
+
+            ResultSet rs2 = smt.executeQuery("SELECT AirportName FROM airport_info order by AirportName ASC");
+
+            while (rs2.next()) {
+                String airportName = "AirportName";
+
+                airportNameSet.add(rs2.getString(airportName));
+
+            }
+
+            countries = new ArrayList<String>(countrySet);
+            countries.remove(0);
+
+            AirportNames = new ArrayList<>(airportNameSet);
+            System.out.println(airportNameSet);
+
+            destinationCountryComboBox.setModel(new DefaultComboBoxModel(countries.toArray()));
+            originCountryComboBox.setModel(new DefaultComboBoxModel(AirportNames.toArray()));
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+    }
 
 
     private void deleteFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFlightButonActionPerformed
@@ -924,6 +982,26 @@ public class Kezdooldal extends javax.swing.JFrame {
         if (result == 0) {
             System.out.println("Yes");
             ((DefaultTableModel) addFlightTable.getModel()).removeRow(addFlightTable.getSelectedRow());
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+                Statement smt = con.createStatement();
+
+                String departureTime = departureTimejDateChooser.getDateFormatString();
+                String arrivalTime = arrivalTImejDateChooser.getDateFormatString();
+
+                smt.executeUpdate("DELETE FROM flight_info WHERE Flight_num LIKE '" + flightNumTextField.getText() + "' AND "
+                        + "Departure_time LIKE '" + departureTime + "' AND "
+                        + "Arrival_time LIKE '" + arrivalTime + "' AND "
+                        + "Origin_place	LIKE '" + originCountryComboBox.getSelectedItem() + "' AND "
+                        + "Destination_place LIKE '" + destinationCountryComboBox.getSelectedItem() + "' AND "
+                        + "Num_of_seats LIKE '" + numberOfSeatsTextField.getText() + "' ");
+
+            } catch (ClassNotFoundException ex) {
+                System.out.println(ex);
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
 
             JFrame email = new JFrame();
             JOptionPane.showMessageDialog(email, "Az emailt kiküldtük az érintett személyeknek!");
@@ -991,29 +1069,32 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AdminPanel;
+    private javax.swing.JComboBox ArrivalTimeHourComboBox;
+    private javax.swing.JComboBox ArrivalTimeHoursComboBox;
     private javax.swing.JLabel ComeJlabel;
     private javax.swing.JLabel FlywithusJlabel;
     private javax.swing.JPanel RegistrationPanel;
     private javax.swing.JTable addFlightTable;
     private javax.swing.JButton adminBackButton;
     private javax.swing.JButton adminRegisterFlightButton;
+    private com.toedter.calendar.JDateChooser arrivalTImejDateChooser;
     private javax.swing.JLabel arrivalTimeLabel;
-    private javax.swing.JTextField arrivalTimeTextField;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel bluebackgroundLabel;
     private javax.swing.JLabel cityErrorLabel;
     private javax.swing.JLabel cityLabel;
     private javax.swing.JTextField cityTextfield;
     private javax.swing.JLabel contactNumberLabel;
-    private javax.swing.JComboBox<String> countryComboBox;
     private javax.swing.JLabel countryErrorLabel;
     private javax.swing.JLabel countryLabel;
     private javax.swing.JTextField countryTextfield;
     private javax.swing.JButton deleteButon;
+    private javax.swing.JComboBox departureTimeHourComboBox;
     private javax.swing.JLabel departureTimeLabel;
-    private javax.swing.JTextField departureTimeTextField;
+    private javax.swing.JComboBox departureTimeMinuteComboBox;
+    private com.toedter.calendar.JDateChooser departureTimejDateChooser;
+    private javax.swing.JComboBox<String> destinationCountryComboBox;
     private javax.swing.JLabel destinationPlaceLabel;
-    private javax.swing.JTextField destinationPlaceTextfield;
     private javax.swing.JLabel emailErrorLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextfield;
@@ -1022,7 +1103,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameTextfield;
     private javax.swing.JLabel flightNumLabel1;
     private javax.swing.JTextField flightNumTextField;
-    private javax.swing.JPanel flightsManagementPanel;
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JLabel jLabel1;
@@ -1040,8 +1120,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JRadioButton manRadioButton;
     private javax.swing.JLabel numberOfSeats;
     private javax.swing.JTextField numberOfSeatsTextField;
+    private javax.swing.JComboBox originCountryComboBox;
     private javax.swing.JLabel originPlaceLabel;
-    private javax.swing.JTextField originPlaceTextField;
     private javax.swing.JLabel passwordAgainLabel;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPasswordField passwordTextField;
