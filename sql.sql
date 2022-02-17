@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 16, 2022 at 02:04 PM
+-- Generation Time: Feb 17, 2022 at 10:57 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -8059,6 +8059,14 @@ CREATE TABLE `flight_info` (
 --
 
 INSERT INTO `flight_info` (`Flight_num`, `Departure_time`, `Arrival_time`, `Origin_place`, `Destination_place`, `Num_of_seats`) VALUES
+('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100),
+('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100),
+('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100),
+('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100),
+('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100),
+('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100),
+('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100),
+('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100),
 ('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Hungary', 'Flo Rida', 100);
 
 -- --------------------------------------------------------
@@ -8159,7 +8167,6 @@ ALTER TABLE `airport_info`
 -- Indexes for table `flight_info`
 --
 ALTER TABLE `flight_info`
-  ADD PRIMARY KEY (`Flight_num`),
   ADD KEY `Destination_place` (`Destination_place`),
   ADD KEY `Origin_place` (`Origin_place`);
 

@@ -28,6 +28,7 @@ import javax.swing.table.TableModel;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -168,7 +169,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        countryComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -555,7 +556,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 adminRegisterFlightButtonActionPerformed(evt);
             }
         });
-        AdminPanel.add(adminRegisterFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 110, 50));
+        AdminPanel.add(adminRegisterFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 110, 50));
 
         adminBackButton.setBackground(new java.awt.Color(0, 0, 0));
         adminBackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -579,8 +580,8 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 330, 140, 40));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        AdminPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 210, 30));
+        countryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        AdminPanel.add(countryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 210, 30));
 
         addFlightTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -800,6 +801,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             dontShowRegistrationPanel();
             showAdminPanel();
             System.out.println("admin");
+           JComboBox box = new JComboBox(getAllCountries());
         }
 
         Connection con;
@@ -830,8 +832,19 @@ public class Kezdooldal extends javax.swing.JFrame {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+      
+
 
     }//GEN-LAST:event_logginButtonActionPerformed
+    public String[] getAllCountries() {
+        String[] countries = new String[Locale.getISOCountries().length];
+        String[] countryCodes = Locale.getISOCountries();
+        for (int i = 0; i < countryCodes.length; i++) {
+            Locale obj = new Locale("", countryCodes[i]);
+            countries[i] = obj.getDisplayCountry();
+        }
+        return countries;
+    }
 
     public static boolean patternMatches(String emailAddress, String regexPattern) {
         return Pattern.compile(regexPattern)
@@ -874,24 +887,18 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void adminRegisterFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRegisterFlightButtonActionPerformed
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");  
-             
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+
             Statement smt = con.createStatement();
             smt.executeUpdate("Insert Into flight_info(Flight_num,Departure_time, Arrival_time, Origin_place, Destination_place, Num_of_seats)  VALUES ('" + flightNumTextField.getText() + "' , '" + departureTimeTextField.getText() + "' , '" + arrivalTimeTextField.getText() + "' , '" + originPlaceTextField.getText() + "' , '" + destinationPlaceTextfield.getText() + "' , '" + numberOfSeatsTextField.getText() + "')");
 
-            
-            
-            
             con.close();
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-      
-
-      
 
         DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
 
@@ -908,17 +915,23 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_adminRegisterFlightButtonActionPerformed
 
+
     private void deleteFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFlightButonActionPerformed
 
-        JFrame popup = new JFrame();
-        int result = JOptionPane.showConfirmDialog(popup, "Are you sure you want to cancel the flight?");
+        JFrame qurstionPopUp = new JFrame();
+        int result = JOptionPane.showConfirmDialog(qurstionPopUp, "Are you sure you want to cancel the flight?");
 
         if (result == 0) {
             System.out.println("Yes");
             ((DefaultTableModel) addFlightTable.getModel()).removeRow(addFlightTable.getSelectedRow());
+
+            JFrame email = new JFrame();
+            JOptionPane.showMessageDialog(email, "Az emailt kiküldtük az érintett személyeknek!");
+            email.setLocationRelativeTo(AdminPanel);
+
         } else if (result == 1) {
             System.out.println("No");
-            popup.dispose();
+            qurstionPopUp.dispatchEvent(new WindowEvent(qurstionPopUp, WindowEvent.WINDOW_CLOSING));
 
         }
 
@@ -992,6 +1005,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel cityLabel;
     private javax.swing.JTextField cityTextfield;
     private javax.swing.JLabel contactNumberLabel;
+    private javax.swing.JComboBox<String> countryComboBox;
     private javax.swing.JLabel countryErrorLabel;
     private javax.swing.JLabel countryLabel;
     private javax.swing.JTextField countryTextfield;
@@ -1011,7 +1025,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JPanel flightsManagementPanel;
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderLabel;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameErrorLabel;
