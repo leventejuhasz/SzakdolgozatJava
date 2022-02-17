@@ -183,7 +183,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         departureTimeHourComboBox = new javax.swing.JComboBox();
         departureTimeMinuteComboBox = new javax.swing.JComboBox();
         ArrivalTimeHourComboBox = new javax.swing.JComboBox();
-        ArrivalTimeHoursComboBox = new javax.swing.JComboBox();
+        ArrivalTimeMinComboBox = new javax.swing.JComboBox();
+        depHourLabel = new javax.swing.JLabel();
+        depMinLabel = new javax.swing.JLabel();
+        arrHourLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         whiteBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/305614_2.jpg"))); // NOI18N
@@ -517,25 +521,25 @@ public class Kezdooldal extends javax.swing.JFrame {
         arrivalTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         arrivalTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
         arrivalTimeLabel.setText("Arrival Time: ");
-        AdminPanel.add(arrivalTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 30));
+        AdminPanel.add(arrivalTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, 30));
 
         originPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         originPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
         originPlaceLabel.setText("Origin Place: ");
-        AdminPanel.add(originPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 30));
+        AdminPanel.add(originPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, 30));
 
         destinationPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         destinationPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
         destinationPlaceLabel.setText("Destination Place: ");
-        AdminPanel.add(destinationPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 30));
+        AdminPanel.add(destinationPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, -1, 30));
 
         numberOfSeats.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         numberOfSeats.setForeground(new java.awt.Color(0, 0, 0));
         numberOfSeats.setText("Number of Seats: ");
-        AdminPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, 30));
+        AdminPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, 30));
 
         flightNumTextField.setText("13424");
-        AdminPanel.add(flightNumTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 200, 30));
+        AdminPanel.add(flightNumTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 210, 30));
 
         numberOfSeatsTextField.setText("100");
         numberOfSeatsTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -543,7 +547,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 numberOfSeatsTextFieldActionPerformed(evt);
             }
         });
-        AdminPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 50, -1));
+        AdminPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 50, -1));
 
         adminRegisterFlightButton.setBackground(new java.awt.Color(0, 0, 0));
         adminRegisterFlightButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -554,7 +558,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 adminRegisterFlightButtonActionPerformed(evt);
             }
         });
-        AdminPanel.add(adminRegisterFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 530, 110, 50));
+        AdminPanel.add(adminRegisterFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 110, 50));
 
         adminBackButton.setBackground(new java.awt.Color(0, 0, 0));
         adminBackButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -579,7 +583,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 330, 140, 40));
 
         destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        AdminPanel.add(destinationCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 210, 30));
+        AdminPanel.add(destinationCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 210, 30));
 
         addFlightTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -609,27 +613,47 @@ public class Kezdooldal extends javax.swing.JFrame {
         AdminPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 690, 180));
 
         originCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        AdminPanel.add(originCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 210, 30));
-        AdminPanel.add(departureTimejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 80, 140, -1));
-        AdminPanel.add(arrivalTImejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 160, -1));
+        AdminPanel.add(originCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 210, 30));
+        AdminPanel.add(departureTimejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 80, 210, -1));
+        AdminPanel.add(arrivalTImejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 210, -1));
 
         departureTimeHourComboBox.setMaximumRowCount(24);
-        departureTimeHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
-        AdminPanel.add(departureTimeHourComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 40, -1));
+        departureTimeHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        AdminPanel.add(departureTimeHourComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 60, 30));
 
-        departureTimeMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
-        AdminPanel.add(departureTimeMinuteComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, -1, -1));
+        departureTimeMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        AdminPanel.add(departureTimeMinuteComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 60, 30));
 
         ArrivalTimeHourComboBox.setMaximumRowCount(24);
-        ArrivalTimeHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
-        AdminPanel.add(ArrivalTimeHourComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 40, -1));
+        ArrivalTimeHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        AdminPanel.add(ArrivalTimeHourComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 60, 30));
 
-        ArrivalTimeHoursComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
-        AdminPanel.add(ArrivalTimeHoursComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, -1));
+        ArrivalTimeMinComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        AdminPanel.add(ArrivalTimeMinComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 60, 30));
+
+        depHourLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        depHourLabel.setForeground(new java.awt.Color(0, 0, 0));
+        depHourLabel.setText("Hour:");
+        AdminPanel.add(depHourLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, 30));
+
+        depMinLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        depMinLabel.setForeground(new java.awt.Color(0, 0, 0));
+        depMinLabel.setText("Minute:");
+        AdminPanel.add(depMinLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, 30));
+
+        arrHourLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        arrHourLabel.setForeground(new java.awt.Color(0, 0, 0));
+        arrHourLabel.setText("Hour:");
+        AdminPanel.add(arrHourLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 199, -1, 30));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Minute: ");
+        AdminPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/2560px-F1_light_blue_flag.svg.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        AdminPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        AdminPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, -10, -1, -1));
 
         getContentPane().add(AdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
@@ -892,17 +916,17 @@ public class Kezdooldal extends javax.swing.JFrame {
     }//GEN-LAST:event_registrationLabelMouseClicked
 
     private void adminRegisterFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRegisterFlightButtonActionPerformed
-    
-        SimpleDateFormat d = new SimpleDateFormat((departureTimejDateChooser.getDate().getYear() + 1900) + "." + (departureTimejDateChooser.getDate().getMonth() - 1) + "." + departureTimejDateChooser.getDate(). +"."+ departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem());
 
-        d.format(arrivalTImejDateChooser.getDate());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
+        String depdate = dateFormat.format(departureTimejDateChooser.getDate()) + " " + departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem();
+        String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
             Statement smt = con.createStatement();
-            smt.executeUpdate("Insert Into flight_info(Flight_num,Departure_time, Arrival_time, Origin_place, Destination_place, Num_of_seats)  VALUES ('" + flightNumTextField.getText() + "' , '" + d.toPattern() + "' , '" + "" + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + numberOfSeatsTextField.getText() + "')");
+            smt.executeUpdate("Insert Into flight_info(Flight_num,Departure_time, Arrival_time, Origin_place, Destination_place, Num_of_seats)  VALUES ('" + flightNumTextField.getText() + "' , '" + depdate + "' , '" + arrival + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + numberOfSeatsTextField.getText() + "')");
 
             con.close();
         } catch (ClassNotFoundException ex) {
@@ -916,8 +940,8 @@ public class Kezdooldal extends javax.swing.JFrame {
         model.addRow(
                 new Object[]{
                     flightNumTextField.getText(),
-                    d.toPattern(),
-                    "",
+                    depdate,
+                    arrival,
                     originCountryComboBox.getSelectedItem(),
                     destinationCountryComboBox.getSelectedItem(),
                     numberOfSeatsTextField.getText()}
@@ -1070,13 +1094,14 @@ public class Kezdooldal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AdminPanel;
     private javax.swing.JComboBox ArrivalTimeHourComboBox;
-    private javax.swing.JComboBox ArrivalTimeHoursComboBox;
+    private javax.swing.JComboBox ArrivalTimeMinComboBox;
     private javax.swing.JLabel ComeJlabel;
     private javax.swing.JLabel FlywithusJlabel;
     private javax.swing.JPanel RegistrationPanel;
     private javax.swing.JTable addFlightTable;
     private javax.swing.JButton adminBackButton;
     private javax.swing.JButton adminRegisterFlightButton;
+    private javax.swing.JLabel arrHourLabel;
     private com.toedter.calendar.JDateChooser arrivalTImejDateChooser;
     private javax.swing.JLabel arrivalTimeLabel;
     private javax.swing.JButton backButton;
@@ -1089,6 +1114,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel countryLabel;
     private javax.swing.JTextField countryTextfield;
     private javax.swing.JButton deleteButon;
+    private javax.swing.JLabel depHourLabel;
+    private javax.swing.JLabel depMinLabel;
     private javax.swing.JComboBox departureTimeHourComboBox;
     private javax.swing.JLabel departureTimeLabel;
     private javax.swing.JComboBox departureTimeMinuteComboBox;
@@ -1106,6 +1133,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameErrorLabel;
     private javax.swing.JLabel lastNameLabel;
