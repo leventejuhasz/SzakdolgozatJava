@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Feb 17. 18:23
+-- Létrehozás ideje: 2022. Feb 20. 17:27
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 8.1.2
 
@@ -3706,7 +3706,6 @@ INSERT INTO `airport_info` (`iataCode`, `AirportName`, `Location`, `Country`, `a
 ('PBF', 'Grider Field', 'Pine Bluff, Arkansas', 'United States', 3666),
 ('PUK', 'Pukarua Airport', 'Pukarua, Tuamotus', 'French Polynesia', 3667),
 ('RRS', 'Røros Airport', 'Røros', 'Norway', 3668),
-('SMI', 'Samos International Airport Aristarchos of Samos,Samos Island,Greece', '', '', 3669),
 ('TDL', 'Tandil Airport', 'Tandil', 'Argentina', 3670),
 ('UEL', 'Quelimane Airport', 'Quelimane', 'Mozambique', 3671),
 ('WHF', 'Wadi Halfa Airport', 'Wadi Halfa', 'Sudan', 3672),
@@ -4202,9 +4201,9 @@ INSERT INTO `airport_info` (`iataCode`, `AirportName`, `Location`, `Country`, `a
 ('SNE', 'Preguiça Airport', 'São Nicolau', 'Cape Verde', 4165),
 ('TEZ', 'Tezpur Airport', 'Tezpur, Assam', 'India', 4166),
 ('UIO', 'Mariscal Sucre International Airport', 'Quito', 'Ecuador', 4167),
-('WLG', 'Wellington International Airport', 'Wellington', 'New Zealand', 4168);
+('WLG', 'Wellington International Airport', 'Wellington', 'New Zealand', 4168),
+('YDN', 'Lt. Col W.G. (Billy) Barker VC Airport', 'Dauphin, Manitoba', 'Canada', 4169);
 INSERT INTO `airport_info` (`iataCode`, `AirportName`, `Location`, `Country`, `airport_id`) VALUES
-('YDN', 'Lt. Col W.G. (Billy) Barker VC Airport', 'Dauphin, Manitoba', 'Canada', 4169),
 ('YSK', 'Sanikiluaq Airport', 'Sanikiluaq, Nunavut', 'Canada', 4170),
 ('QDU', 'Düsseldorf Hauptbahnhof', 'Düsseldorf', 'Germany', 4171),
 ('AGL', 'Wanigela Airport', 'Wanigela', 'Papua New Guinea', 4172),
@@ -4892,9 +4891,9 @@ INSERT INTO `airport_info` (`iataCode`, `AirportName`, `Location`, `Country`, `a
 ('COB', 'Coolibah Airport', 'Coolibah, Northern Territory', 'Australia', 4859),
 ('DBS', 'Dubois Municipal Airport', 'Dubois, Idaho', 'United States', 4860),
 ('EAL', 'Elenak Airport', 'Elenak', 'Marshall Islands', 4861),
-('FAN', 'Lista Airport', 'Farsund', 'Norway', 4862);
+('FAN', 'Lista Airport', 'Farsund', 'Norway', 4862),
+('GDD', 'Gordon Downs Airport', 'Gordon Downs, Western Australia', 'Australia', 4863);
 INSERT INTO `airport_info` (`iataCode`, `AirportName`, `Location`, `Country`, `airport_id`) VALUES
-('GDD', 'Gordon Downs Airport', 'Gordon Downs, Western Australia', 'Australia', 4863),
 ('GVL', 'Lee Gilmer Memorial Airport', 'Gainesville, Georgia', 'United States', 4864),
 ('HRR', 'Herrera Airport', 'Herrera', 'Colombia', 4865),
 ('IQQ', 'Diego Aracena International Airport', 'Iquique', 'Chile', 4866),
@@ -6461,7 +6460,6 @@ INSERT INTO `airport_info` (`iataCode`, `AirportName`, `Location`, `Country`, `a
 ('WWY', 'West Wyalong Airport', 'West Wyalong, New South Wales', 'Australia', 6431),
 ('YHP', 'Poplar Hill Airport', 'Poplar Hill, Ontario', 'Canada', 6432),
 ('YWS', 'Whistler/Green Lake Water Aerodrome', 'Whistler, British Columbia', 'Canada', 6433),
-('XZI', 'Gare de Lorraine TGV', 'Metz–Nancy', ' France', 6434),
 ('AKM', 'Zakouma Airport', 'Zakouma', 'Chad', 6435),
 ('AWB', 'Awaba Airport', 'Awaba', 'Papua New Guinea', 6436),
 ('BIA', 'Bastia - Poretta Airport', 'Bastia, Corsica', 'France', 6437),
@@ -6959,9 +6957,9 @@ INSERT INTO `airport_info` (`iataCode`, `AirportName`, `Location`, `Country`, `a
 ('YXU', 'London International Airport', 'London, Ontario', 'Canada', 6929),
 ('ZDU', 'Dundee Railway Station', 'Dundee', 'Scotland', 6930),
 ('ALE', 'Alpine-Casparis Municipal Airport', 'Alpine, Texas', 'United States', 6931),
-('AXG', 'Algona Municipal Airport', 'Algona, Iowa', 'United States', 6932);
+('AXG', 'Algona Municipal Airport', 'Algona, Iowa', 'United States', 6932),
+('BIR', 'Biratnagar Airport', 'Biratnagar', 'Nepal', 6933);
 INSERT INTO `airport_info` (`iataCode`, `AirportName`, `Location`, `Country`, `airport_id`) VALUES
-('BIR', 'Biratnagar Airport', 'Biratnagar', 'Nepal', 6933),
 ('BTW', 'Batu Licin Airport', 'Batu Licin, Kalimantan', 'Indonesia', 6934),
 ('CFG', 'Jaime González Airport', 'Cienfuegos', 'Cuba', 6935),
 ('CRQ', 'Caravelas Airport', 'Caravelas, Bahia', 'Brazil', 6936),
@@ -8001,48 +7999,33 @@ CREATE TABLE `flight_cancellation` (
 --
 
 CREATE TABLE `flight_info` (
-  `Flight_num` varchar(12) NOT NULL,
   `Departure_time` varchar(60) NOT NULL,
   `Arrival_time` varchar(60) NOT NULL,
   `Origin_place` varchar(100) NOT NULL,
+  `OriginAirportName` varchar(100) NOT NULL,
   `Destination_place` varchar(100) NOT NULL,
-  `Num_of_seats` int(100) NOT NULL
+  `DestinationAirportName` varchar(100) NOT NULL,
+  `Num_of_seats` int(100) NOT NULL,
+  `Flight_num` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `flight_info`
 --
 
-INSERT INTO `flight_info` (`Flight_num`, `Departure_time`, `Arrival_time`, `Origin_place`, `Destination_place`, `Num_of_seats`) VALUES
-('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'Item 1', 'Afghanistan', 100),
-('13424', '2022.11.01 12:50', '2022.11.03 13:40', 'A Coruña Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', 'yyyy.MM.dd.', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd.', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', '26 Feb 2022 23:00:00 GMT', '26 Feb 2022 23:00:00 GMT', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', '19 Feb 2022 23:00:00 GMT', '19 Feb 2022 23:00:00 GMT', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd10:7', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd10:7', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd10:3', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', 'yyyy.MM.dd', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', '222.0.251:6', '', ' GRANT County Airport', 'Afghanistan', 100),
-('13424', '1122.0.19.1:5', '', ' GRANT County Airport', 'Afghanistan', 100);
+INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Flight_num`) VALUES
+('2022-02-27 9:4', '2022-02-28 4:6', 'Andorra', 'Andorra La Vella Airport', 'Angola', 'Albano Machado Airport', 100, 44),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 45),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 46),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 47),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 48),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 49),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 50),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 52),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 53),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 54),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 55),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 56);
 
 -- --------------------------------------------------------
 
@@ -8142,6 +8125,7 @@ ALTER TABLE `airport_info`
 -- A tábla indexei `flight_info`
 --
 ALTER TABLE `flight_info`
+  ADD PRIMARY KEY (`Flight_num`),
   ADD KEY `Destination_place` (`Destination_place`),
   ADD KEY `Origin_place` (`Origin_place`);
 
@@ -8167,6 +8151,12 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `airport_info`
   MODIFY `airport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7954;
+
+--
+-- AUTO_INCREMENT a táblához `flight_info`
+--
+ALTER TABLE `flight_info`
+  MODIFY `Flight_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
