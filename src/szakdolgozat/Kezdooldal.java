@@ -40,7 +40,12 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
+import javax.swing.table.TableRowSorter;
 import javax.xml.bind.DatatypeConverter;
+import java.awt.BorderLayout;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.table.*;
 
 /**
  *
@@ -108,7 +113,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        whiteBackgroundLabel = new javax.swing.JLabel();
         loginPanel = new javax.swing.JPanel();
         passwordLabel = new javax.swing.JLabel();
         loginEmailLabel = new javax.swing.JLabel();
@@ -170,7 +174,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<>();
+        destinationCountryComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         adminErrorLabel = new javax.swing.JLabel();
@@ -188,11 +192,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
+        ManageFlightButton = new javax.swing.JButton();
+        searchTextfield = new javax.swing.JTextField();
+        searchLabel = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
-
-        whiteBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/305614_2.jpg"))); // NOI18N
-        whiteBackgroundLabel.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -248,6 +252,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         loginPanel.add(logginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 90, 40));
 
         leftBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        leftBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/LeftPanelBackGround.jpg"))); // NOI18N
         loginPanel.add(leftBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 560, 700));
 
         registrationLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -573,9 +578,9 @@ public class Kezdooldal extends javax.swing.JFrame {
                 deleteFlightButonActionPerformed(evt);
             }
         });
-        AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 310, 140, 40));
+        AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -676,6 +681,29 @@ public class Kezdooldal extends javax.swing.JFrame {
         AdminPanel.add(destinationPlaceLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, -1, 30));
 
         AdminPanel.add(destinationAirportNameComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 570, 290, 30));
+
+        ManageFlightButton.setBackground(new java.awt.Color(0, 0, 0));
+        ManageFlightButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        ManageFlightButton.setForeground(new java.awt.Color(255, 255, 255));
+        ManageFlightButton.setText("Manage Flight");
+        ManageFlightButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManageFlightButonActionPerformed(evt);
+            }
+        });
+        AdminPanel.add(ManageFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 310, 160, 50));
+
+        searchTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTextfieldActionPerformed(evt);
+            }
+        });
+        AdminPanel.add(searchTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 390, 300, 50));
+
+        searchLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        searchLabel.setForeground(new java.awt.Color(0, 0, 0));
+        searchLabel.setText("Search Flight:");
+        AdminPanel.add(searchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 400, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/2560px-F1_light_blue_flag.svg.png"))); // NOI18N
         background.setText("jLabel1");
@@ -823,6 +851,15 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_registrationButtonActionPerformed
 
+    public JTable getAddFlightTable() {
+        return addFlightTable;
+    }
+
+    public void setAddFlightTable(JTable addFlightTable) {
+        this.addFlightTable = addFlightTable;
+    }
+
+
     private void numberOfSeatsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberOfSeatsTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numberOfSeatsTextFieldActionPerformed
@@ -919,7 +956,6 @@ public class Kezdooldal extends javax.swing.JFrame {
             System.out.println("admin");
             keepJtableData();
             countries();
-
         }
 
         Connection con;
@@ -1000,14 +1036,13 @@ public class Kezdooldal extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
-            Statement smt = con.createStatement();   
+            Statement smt = con.createStatement();
             adminErrorLabel.setText("");
             if (adminErrorHandling() == "") {
-            smt.executeUpdate("Insert Into flight_info(Departure_time, Arrival_time, Origin_place,OriginAirportName, Destination_place,DestinationAirportName, Num_of_seats)  VALUES ( '" + depdate + "' , '" + arrival + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + originAirportNameComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + destinationAirportNameComboBox.getSelectedItem() + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "')");
-     
-            con.close();
-            DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
-           
+                smt.executeUpdate("Insert Into flight_info(Departure_time, Arrival_time, Origin_place,OriginAirportName, Destination_place,DestinationAirportName, Num_of_seats)  VALUES ( '" + depdate + "' , '" + arrival + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + originAirportNameComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + destinationAirportNameComboBox.getSelectedItem() + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "')");
+
+                con.close();
+                DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
 
                 model.addRow(
                         new Object[]{
@@ -1119,7 +1154,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void deleteFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFlightButonActionPerformed
 
         JFrame qurstionPopUp = new JFrame();
-        int result = JOptionPane.showConfirmDialog(qurstionPopUp, "Are you sure you want to cancel the flight?");
+        int result = JOptionPane.showConfirmDialog(qurstionPopUp, "Biztos, hogy törli a teljes járatot?");
 
         if (result == 0) {
 
@@ -1170,7 +1205,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem();
 
         int usz = Integer.parseInt(numberOfSeatsTextField.getText());
-        
+
         System.out.println(usz);
         try {
             if (dateFormat.parse(depdate).before(dateFormat.parse(arrival)) == false) {
@@ -1213,63 +1248,81 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_destinationCountryComboBoxItemStateChanged
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+    private void ManageFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageFlightButonActionPerformed
+
+        ManageFlight m = new ManageFlight();
+        m.setLocationRelativeTo(null);
+        m.setVisible(true);
+        m.setResizable(false);
+        m.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        SearchInJtable s = new SearchInJtable();
+
+
+    }//GEN-LAST:event_ManageFlightButonActionPerformed
+
+   
+    private void searchTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextfieldActionPerformed
+
+    }//GEN-LAST:event_searchTextfieldActionPerformed
+
+       public static void main(String args[]) {
+           /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+            */
+           try {
+               for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                   if ("Nimbus".equals(info.getName())) {
+                       javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                       break;
 
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Kezdooldal.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                   }
+               }
+           } catch (ClassNotFoundException ex) {
+               java.util.logging.Logger.getLogger(Kezdooldal.class
+                       .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Kezdooldal.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+           } catch (InstantiationException ex) {
+               java.util.logging.Logger.getLogger(Kezdooldal.class
+                       .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Kezdooldal.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+           } catch (IllegalAccessException ex) {
+               java.util.logging.Logger.getLogger(Kezdooldal.class
+                       .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Kezdooldal.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+           } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+               java.util.logging.Logger.getLogger(Kezdooldal.class
+                       .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+           }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+           /* Create and display the form */
+           java.awt.EventQueue.invokeLater(new Runnable() {
+               public void run() {
 
-            }
-        });
-    }
+               }
+           });
+       }
 
-    public void luggagePic() {
+       public void luggagePic() {
 
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File("person_at_airport_holding_coffee_and_luggage.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+           BufferedImage img = null;
+           try {
+               img = ImageIO.read(new File("person_at_airport_holding_coffee_and_luggage.jpg"));
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
 
-        Image dimg = img.getScaledInstance(luggagePic.getWidth(), luggagePic.getHeight(),
-                Image.SCALE_SMOOTH);
+           Image dimg = img.getScaledInstance(luggagePic.getWidth(), luggagePic.getHeight(),
+                   Image.SCALE_SMOOTH);
 
-        ImageIcon imageIcon = new ImageIcon(dimg);
+           ImageIcon imageIcon = new ImageIcon(dimg);
 
-        luggagePic.setIcon(imageIcon);
+           luggagePic.setIcon(imageIcon);
 
-    }
+       }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1278,6 +1331,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JComboBox ArrivalTimeMinComboBox;
     private javax.swing.JLabel ComeJlabel;
     private javax.swing.JLabel FlywithusJlabel;
+    private javax.swing.JButton ManageFlightButton;
     private javax.swing.JPanel RegistrationPanel;
     private javax.swing.JTable addFlightTable;
     private javax.swing.JButton adminBackButton;
@@ -1347,14 +1401,15 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel registrationPasswordErrorHandlingLabel;
     private javax.swing.JLabel registrationPasswordLabel;
     private javax.swing.JPasswordField registrationPasswordTextField;
+    private javax.swing.JLabel searchLabel;
+    private javax.swing.JTextField searchTextfield;
     private javax.swing.JLabel streetErrorLabel;
     private javax.swing.JLabel streetLabel;
     private javax.swing.JTextField streetTextfield;
     private javax.swing.JLabel succesfullRegistrationLabel;
-    private javax.swing.JLabel whiteBackgroundLabel;
     private javax.swing.JRadioButton womanRadioButton;
     private javax.swing.JLabel zipCodeErrorLabel;
     private javax.swing.JTextField zipCodeTextfield;
     // End of variables declaration//GEN-END:variables
 
-}
+    }
