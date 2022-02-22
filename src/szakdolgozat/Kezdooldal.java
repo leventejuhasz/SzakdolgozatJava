@@ -30,6 +30,7 @@ import javax.swing.table.TableModel;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -247,7 +248,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         loginPanel.add(logginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 90, 40));
 
         leftBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loginPanel.add(leftBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 700));
+        loginPanel.add(leftBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 560, 700));
 
         registrationLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         registrationLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -611,7 +612,6 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         adminErrorLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         adminErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        adminErrorLabel.setText("asd");
         AdminPanel.add(adminErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 640, -1, -1));
 
         originAirportNameComboBox.addItemListener(new java.awt.event.ItemListener() {
@@ -833,12 +833,17 @@ public class Kezdooldal extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
-            String query = "Select Departure_time,Arrival_time,Origin_place, OriginAirportName, Destination_place, DestinationAirportName, Num_of_seats  from flight_info";
+            String query = "Select Departure_time,Arrival_time,Origin_place, OriginAirportName, Destination_place, DestinationAirportName, Num_of_seats from flight_info";
             Statement smt = con.createStatement();
             ResultSet res = smt.executeQuery(query);
+            Statement s = con.createStatement();
+            ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM flight_info");
+            r.next();
+            int count = r.getInt("rowcount");
+            r.close();
 
             String columns[] = {addFlightTable.getColumnName(0), addFlightTable.getColumnName(1), addFlightTable.getColumnName(2), addFlightTable.getColumnName(3), addFlightTable.getColumnName(4), addFlightTable.getColumnName(5), addFlightTable.getColumnName(6)};
-            String data[][] = new String[12][addFlightTable.getColumnCount()];
+            String data[][] = new String[count][addFlightTable.getColumnCount()];
 
             int i = 0;
             while (res.next()) {
@@ -995,22 +1000,29 @@ public class Kezdooldal extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
-            Statement smt = con.createStatement();
-            smt.executeUpdate("Insert Into flight_info(Departure_time, Arrival_time, Origin_place,OriginAirportName, Destination_place,DestinationAirportName, Num_of_seats)  VALUES ( '" + depdate + "' , '" + arrival + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + originAirportNameComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + destinationAirportNameComboBox.getSelectedItem() + "' , '" + numberOfSeatsTextField.getText() + "')");
-
+            Statement smt = con.createStatement();   
+            adminErrorLabel.setText("");
+            if (adminErrorHandling() == "") {
+            smt.executeUpdate("Insert Into flight_info(Departure_time, Arrival_time, Origin_place,OriginAirportName, Destination_place,DestinationAirportName, Num_of_seats)  VALUES ( '" + depdate + "' , '" + arrival + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + originAirportNameComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + destinationAirportNameComboBox.getSelectedItem() + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "')");
+     
             con.close();
             DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
+           
 
-            model.addRow(
-                    new Object[]{
-                        depdate,
-                        arrival,
-                        originCountryComboBox.getSelectedItem(),
-                        originAirportNameComboBox.getSelectedItem(),
-                        destinationCountryComboBox.getSelectedItem(),
-                        destinationAirportNameComboBox.getSelectedItem(),
-                        numberOfSeatsTextField.getText()}
-            );
+                model.addRow(
+                        new Object[]{
+                            depdate,
+                            arrival,
+                            originCountryComboBox.getSelectedItem(),
+                            originAirportNameComboBox.getSelectedItem(),
+                            destinationCountryComboBox.getSelectedItem(),
+                            destinationAirportNameComboBox.getSelectedItem(),
+                            Integer.parseInt(numberOfSeatsTextField.getText())}
+                );
+            } else {
+
+                adminErrorLabel.setText(adminErrorHandling());
+            }
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         } catch (SQLException ex) {
@@ -1116,7 +1128,6 @@ public class Kezdooldal extends javax.swing.JFrame {
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
                 Statement smt = con.createStatement();
 
-           
                 smt.executeUpdate("DELETE FROM flight_info WHERE "
                         + "Departure_time LIKE '" + addFlightTable.getModel().getValueAt(addFlightTable.getSelectedRow(), 0).toString() + "' AND "
                         + "Arrival_time LIKE '" + addFlightTable.getModel().getValueAt(addFlightTable.getSelectedRow(), 1).toString() + "' AND "
@@ -1147,16 +1158,38 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_deleteFlightButonActionPerformed
 
-//    private String adminErrorHandling(){
-//    
-////        if (originCountryComboBox.getSelectedItem() == destinationCountryComboBox.getSelectedItem()) {
-////           return ""
-////        }
-//    
-//    
-//    }
-    
-    
+    private String adminErrorHandling() {
+
+        if (originAirportNameComboBox.getSelectedItem().equals(destinationAirportNameComboBox.getSelectedItem())) {
+            System.out.println("Rossz dátumok.");
+            return "Kérem válasszon egy másik uticélt.";
+
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String depdate = dateFormat.format(departureTimejDateChooser.getDate()) + " " + departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem();
+        String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem();
+
+        int usz = Integer.parseInt(numberOfSeatsTextField.getText());
+        
+        System.out.println(usz);
+        try {
+            if (dateFormat.parse(depdate).before(dateFormat.parse(arrival)) == false) {
+                return "Rossz dátum";
+
+            } else if (usz < 0 || usz > 230) {
+
+                return "Hibás ülésszám!";
+            } else {
+                return "";
+            }
+
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        return "";
+    }
+
+
     private void originCountryComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_originCountryComboBoxItemStateChanged
 
         if (evt.getStateChange() == ItemEvent.SELECTED) {
@@ -1191,16 +1224,24 @@ public class Kezdooldal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Kezdooldal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Kezdooldal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Kezdooldal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Kezdooldal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Kezdooldal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Kezdooldal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Kezdooldal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Kezdooldal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
