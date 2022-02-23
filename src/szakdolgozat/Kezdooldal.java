@@ -174,7 +174,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<String>();
+        destinationCountryComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         adminErrorLabel = new javax.swing.JLabel();
@@ -192,11 +192,12 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
+        UserPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -580,7 +581,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -693,9 +694,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(ManageFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 310, 160, 50));
 
-        searchTextfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchTextfieldActionPerformed(evt);
+        searchTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchTextfieldKeyReleased(evt);
             }
         });
         AdminPanel.add(searchTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 390, 300, 50));
@@ -710,6 +711,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         AdminPanel.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-560, -70, -1, -1));
 
         getContentPane().add(AdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
+        getContentPane().add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -863,6 +865,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void numberOfSeatsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberOfSeatsTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numberOfSeatsTextFieldActionPerformed
+    private DefaultTableModel model;
 
     public void keepJtableData() {
 
@@ -902,7 +905,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 i++;
             }
 
-            DefaultTableModel model = new DefaultTableModel(data, columns);
+            model = new DefaultTableModel(data, columns);
             addFlightTable.setModel(model);
             con.close();
         } catch (ClassNotFoundException ex) {
@@ -910,6 +913,14 @@ public class Kezdooldal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+
+    }
+
+    private void Filter(String text, DefaultTableModel dm) {
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(dm);
+        addFlightTable.setRowSorter(tr);
+
+        tr.setRowFilter(RowFilter.regexFilter(text));
 
     }
 
@@ -1058,6 +1069,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
                 adminErrorLabel.setText(adminErrorHandling());
             }
+
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         } catch (SQLException ex) {
@@ -1261,68 +1273,69 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ManageFlightButonActionPerformed
 
-   
-    private void searchTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextfieldActionPerformed
 
-    }//GEN-LAST:event_searchTextfieldActionPerformed
+    private void searchTextfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextfieldKeyReleased
 
-       public static void main(String args[]) {
-           /* Set the Nimbus look and feel */
+        Filter(searchTextfield.getText(), model);
+    }//GEN-LAST:event_searchTextfieldKeyReleased
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-            */
-           try {
-               for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                   if ("Nimbus".equals(info.getName())) {
-                       javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                       break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
 
-                   }
-               }
-           } catch (ClassNotFoundException ex) {
-               java.util.logging.Logger.getLogger(Kezdooldal.class
-                       .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Kezdooldal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-           } catch (InstantiationException ex) {
-               java.util.logging.Logger.getLogger(Kezdooldal.class
-                       .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Kezdooldal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-           } catch (IllegalAccessException ex) {
-               java.util.logging.Logger.getLogger(Kezdooldal.class
-                       .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Kezdooldal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-           } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-               java.util.logging.Logger.getLogger(Kezdooldal.class
-                       .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-           }
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Kezdooldal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         //</editor-fold>
 
-           /* Create and display the form */
-           java.awt.EventQueue.invokeLater(new Runnable() {
-               public void run() {
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
 
-               }
-           });
-       }
+            }
+        });
+    }
 
-       public void luggagePic() {
+    public void luggagePic() {
 
-           BufferedImage img = null;
-           try {
-               img = ImageIO.read(new File("person_at_airport_holding_coffee_and_luggage.jpg"));
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("person_at_airport_holding_coffee_and_luggage.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-           Image dimg = img.getScaledInstance(luggagePic.getWidth(), luggagePic.getHeight(),
-                   Image.SCALE_SMOOTH);
+        Image dimg = img.getScaledInstance(luggagePic.getWidth(), luggagePic.getHeight(),
+                Image.SCALE_SMOOTH);
 
-           ImageIcon imageIcon = new ImageIcon(dimg);
+        ImageIcon imageIcon = new ImageIcon(dimg);
 
-           luggagePic.setIcon(imageIcon);
+        luggagePic.setIcon(imageIcon);
 
-       }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1333,6 +1346,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel FlywithusJlabel;
     private javax.swing.JButton ManageFlightButton;
     private javax.swing.JPanel RegistrationPanel;
+    private javax.swing.JPanel UserPanel;
     private javax.swing.JTable addFlightTable;
     private javax.swing.JButton adminBackButton;
     private javax.swing.JLabel adminErrorLabel;
@@ -1412,4 +1426,4 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JTextField zipCodeTextfield;
     // End of variables declaration//GEN-END:variables
 
-    }
+}
