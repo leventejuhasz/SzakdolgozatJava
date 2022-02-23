@@ -66,6 +66,16 @@ public class Kezdooldal extends javax.swing.JFrame {
         System.out.println("admin panel be");
     }
 
+    public void showUserPanel() {
+        UserPanel.show();
+        System.out.println("User panel be");
+    }
+
+    public void dontShowUserPanel() {
+        UserPanel.hide();
+        System.out.println("User panel ki");
+    }
+
     public void dontShowAdminPanel() {
 
         AdminPanel.hide();
@@ -198,6 +208,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         searchLabel = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         UserPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -711,7 +722,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         AdminPanel.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-560, -70, -1, -1));
 
         getContentPane().add(AdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
-        getContentPane().add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jButton1.setText("jButton1");
+        UserPanel.add(jButton1);
+
+        getContentPane().add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1130, 680));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -990,6 +1005,8 @@ public class Kezdooldal extends javax.swing.JFrame {
             ResultSet result = ps.executeQuery();
             if (result.next()) {
                 System.out.println("felh");
+            } else {
+                System.out.println("hibás");
             }
 
         } catch (SQLException ex) {
@@ -998,6 +1015,10 @@ public class Kezdooldal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_logginButtonActionPerformed
+
+    public void checkUser() {
+
+    }
 
     public static boolean patternMatches(String emailAddress, String regexPattern) {
         return Pattern.compile(regexPattern)
@@ -1383,6 +1404,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameTextfield;
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameErrorLabel;
