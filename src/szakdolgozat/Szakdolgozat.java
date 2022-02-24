@@ -10,6 +10,7 @@ public class Szakdolgozat {
 
         Kezdooldal k = new Kezdooldal();
 
+       
         k.setVisible(true);
         k.setResizable(false);
         k.setLocationRelativeTo(null);

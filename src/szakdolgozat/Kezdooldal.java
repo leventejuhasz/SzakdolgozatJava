@@ -57,7 +57,8 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     public Kezdooldal() {
         initComponents();
-
+       
+       
     }
 
     public void showAdminPanel() {
@@ -208,12 +209,21 @@ public class Kezdooldal extends javax.swing.JFrame {
         searchLabel = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         UserPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        userBackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1150, 700));
+        setSize(new java.awt.Dimension(1150, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loginPanel.setBackground(new java.awt.Color(255, 255, 255));
+        loginPanel.setMaximumSize(null);
+        loginPanel.setMinimumSize(new java.awt.Dimension(1150, 700));
+        loginPanel.setPreferredSize(new java.awt.Dimension(1150, 700));
+        loginPanel.setVerifyInputWhenFocusTarget(false);
         loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         passwordLabel.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
@@ -283,10 +293,11 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         bluebackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bluebackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/asd.jpg"))); // NOI18N
-        loginPanel.add(bluebackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, -10, 710, 710));
+        loginPanel.add(bluebackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 750, 700));
 
         getContentPane().add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
+        RegistrationPanel.setMaximumSize(new java.awt.Dimension(1150, 700));
         RegistrationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         streetTextfield.setBackground(new java.awt.Color(51, 51, 51));
@@ -524,6 +535,9 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         getContentPane().add(RegistrationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
+        AdminPanel.setMaximumSize(new java.awt.Dimension(1150, 700));
+        AdminPanel.setMinimumSize(new java.awt.Dimension(1150, 700));
+        AdminPanel.setPreferredSize(new java.awt.Dimension(1150, 700));
         AdminPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         departureTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -723,10 +737,35 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         getContentPane().add(AdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
-        jButton1.setText("jButton1");
-        UserPanel.add(jButton1);
+        UserPanel.setMaximumSize(new java.awt.Dimension(1150, 700));
+        UserPanel.setMinimumSize(new java.awt.Dimension(1150, 700));
+        UserPanel.setName(""); // NOI18N
+        UserPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1130, 680));
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 255, 255));
+        jLabel1.setText("My tickets");
+        UserPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 255, 255));
+        jLabel2.setText("Buy Ticket");
+        UserPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 255, 255));
+        jLabel3.setText("Log Out");
+        UserPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
+        userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        userBackgroundLabel.setMaximumSize(null);
+        userBackgroundLabel.setMinimumSize(null);
+        userBackgroundLabel.setName(""); // NOI18N
+        userBackgroundLabel.setPreferredSize(null);
+        UserPanel.add(userBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        getContentPane().add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -973,17 +1012,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         return false;
     }
 
-    private void logginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logginButtonActionPerformed
-
-        if (checkAdmin()) {
-            dontShowLoginPanel();
-            dontShowRegistrationPanel();
-            showAdminPanel();
-            System.out.println("admin");
-            keepJtableData();
-            countries();
-        }
-
+    public boolean isCheckUserLogin() {
         Connection con;
         PreparedStatement ps;
         try {
@@ -1004,21 +1033,76 @@ public class Kezdooldal extends javax.swing.JFrame {
             ps = con.prepareStatement("Select Email, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + password + "'");
             ResultSet result = ps.executeQuery();
             if (result.next()) {
-                System.out.println("felh");
-            } else {
-                System.out.println("hibás");
+                return true;
+
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
+    }
+
+
+    private void logginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logginButtonActionPerformed
+
+        boolean hibasAdat = true;
+
+        if (checkAdmin()) {
+            dontShowLoginPanel();
+            dontShowRegistrationPanel();
+            showAdminPanel();
+            System.out.println("admin");
+            keepJtableData();
+            countries();
+            hibasAdat = false;
+        }
+
+        if (isCheckUserLogin()) {
+            System.out.println("bent");
+            dontShowLoginPanel();
+            showUserPanel();
+            hibasAdat = false;
+        }
+
+        Connection con;
+        PreparedStatement ps;
+        try {
+
+            MessageDigest md = null;
+            try {
+                md = MessageDigest.getInstance("MD5");
+
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Kezdooldal.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+            md.update(passwordTextField.getText().getBytes());
+            byte[] digest = md.digest();
+            String password = DatatypeConverter.printHexBinary(digest).toUpperCase();
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+
+            Statement smt = con.createStatement();
+
+            ps = con.prepareStatement("Select Email, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + password + "'");
+            ResultSet result = ps.executeQuery();
+            if (result.next()) {
+                System.out.println("felh");
+
+            }
+
+            if (hibasAdat == true) {
+
+                loginErrorLabel.setText("Hibás felhasználónév vagy jelszó!");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Kezdooldal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_logginButtonActionPerformed
-
-    public void checkUser() {
-
-    }
 
     public static boolean patternMatches(String emailAddress, String regexPattern) {
         return Pattern.compile(regexPattern)
@@ -1121,9 +1205,12 @@ public class Kezdooldal extends javax.swing.JFrame {
             originAirportNameComboBox.setModel((new DefaultComboBoxModel(AirportNames.toArray())));
 
         } catch (SQLException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Kezdooldal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Kezdooldal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -1147,9 +1234,12 @@ public class Kezdooldal extends javax.swing.JFrame {
             destinationAirportNameComboBox.setModel((new DefaultComboBoxModel(AirportNames.toArray())));
 
         } catch (SQLException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Kezdooldal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Kezdooldal.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -1404,7 +1494,9 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameTextfield;
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderLabel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameErrorLabel;
@@ -1443,6 +1535,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel streetLabel;
     private javax.swing.JTextField streetTextfield;
     private javax.swing.JLabel succesfullRegistrationLabel;
+    private javax.swing.JLabel userBackgroundLabel;
     private javax.swing.JRadioButton womanRadioButton;
     private javax.swing.JLabel zipCodeErrorLabel;
     private javax.swing.JTextField zipCodeTextfield;
