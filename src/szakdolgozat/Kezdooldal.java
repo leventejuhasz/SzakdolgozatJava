@@ -57,8 +57,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     public Kezdooldal() {
         initComponents();
-       
-       
+
     }
 
     public void showAdminPanel() {
@@ -68,11 +67,23 @@ public class Kezdooldal extends javax.swing.JFrame {
     }
 
     public void showUserPanel() {
+        String myTickets = "<html><u>My tickets</u></html>";
+        String logout = "<html><u>Log out</u></html>";
+        String buyTickets = "<html><u>Buy Tickets</u></html>";
+
+        myTicketsLabel.setText(myTickets);
+        logOutLabel.setText(logout);
+        buyTicketsLabel.setText(buyTickets);
+        this.myTicketsLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.buyTicketsLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.logOutLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        myTicketsjScrollPane.setVisible(false);
         UserPanel.show();
         System.out.println("User panel be");
     }
 
     public void dontShowUserPanel() {
+
         UserPanel.hide();
         System.out.println("User panel ki");
     }
@@ -209,18 +220,21 @@ public class Kezdooldal extends javax.swing.JFrame {
         searchLabel = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         UserPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        myTicketsLabel = new javax.swing.JLabel();
+        buyTicketsLabel = new javax.swing.JLabel();
+        logOutLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        buyTicketsJscrollPane = new javax.swing.JScrollPane();
+        BuyTicketsTable = new javax.swing.JTable();
         userBackgroundLabel = new javax.swing.JLabel();
+        myTicketsjScrollPane = new javax.swing.JScrollPane();
+        myTicketsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1150, 700));
         setSize(new java.awt.Dimension(1150, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loginPanel.setBackground(new java.awt.Color(255, 255, 255));
-        loginPanel.setMaximumSize(null);
         loginPanel.setMinimumSize(new java.awt.Dimension(1150, 700));
         loginPanel.setPreferredSize(new java.awt.Dimension(1150, 700));
         loginPanel.setVerifyInputWhenFocusTarget(false);
@@ -742,20 +756,54 @@ public class Kezdooldal extends javax.swing.JFrame {
         UserPanel.setName(""); // NOI18N
         UserPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 255, 255));
-        jLabel1.setText("My tickets");
-        UserPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        myTicketsLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        myTicketsLabel.setForeground(new java.awt.Color(102, 255, 255));
+        myTicketsLabel.setText("My tickets");
+        myTicketsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                myTicketsLabelMouseClicked(evt);
+            }
+        });
+        UserPanel.add(myTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 255, 255));
-        jLabel2.setText("Buy Ticket");
-        UserPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        buyTicketsLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        buyTicketsLabel.setForeground(new java.awt.Color(102, 255, 255));
+        buyTicketsLabel.setText("Buy Ticket");
+        buyTicketsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buyTicketsLabelMouseClicked(evt);
+            }
+        });
+        UserPanel.add(buyTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 255, 255));
-        jLabel3.setText("Log Out");
-        UserPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        logOutLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        logOutLabel.setForeground(new java.awt.Color(102, 255, 255));
+        logOutLabel.setText("Log Out");
+        logOutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutLabelMouseClicked(evt);
+            }
+        });
+        UserPanel.add(logOutLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BuyTicketsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        buyTicketsJscrollPane.setViewportView(BuyTicketsTable);
+
+        jPanel1.add(buyTicketsJscrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 990, 200));
+
+        UserPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 1070, 700));
 
         userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
         userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -764,6 +812,21 @@ public class Kezdooldal extends javax.swing.JFrame {
         userBackgroundLabel.setName(""); // NOI18N
         userBackgroundLabel.setPreferredSize(null);
         UserPanel.add(userBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        myTicketsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        myTicketsjScrollPane.setViewportView(myTicketsTable);
+
+        UserPanel.add(myTicketsjScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 280, -1, -1));
 
         getContentPane().add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
@@ -1390,6 +1453,23 @@ public class Kezdooldal extends javax.swing.JFrame {
         Filter(searchTextfield.getText(), model);
     }//GEN-LAST:event_searchTextfieldKeyReleased
 
+
+    private void myTicketsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myTicketsLabelMouseClicked
+        myTicketsjScrollPane.setVisible(true);
+        buyTicketsJscrollPane.setVisible(false);
+
+    }//GEN-LAST:event_myTicketsLabelMouseClicked
+
+    private void buyTicketsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buyTicketsLabelMouseClicked
+        buyTicketsJscrollPane.setVisible(true);
+        myTicketsjScrollPane.setVisible(false);
+    }//GEN-LAST:event_buyTicketsLabelMouseClicked
+
+    private void logOutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutLabelMouseClicked
+        dontShowUserPanel();
+        ShowLoginPanel();
+    }//GEN-LAST:event_logOutLabelMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1453,6 +1533,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JPanel AdminPanel;
     private javax.swing.JComboBox ArrivalTimeHourComboBox;
     private javax.swing.JComboBox ArrivalTimeMinComboBox;
+    private javax.swing.JTable BuyTicketsTable;
     private javax.swing.JLabel ComeJlabel;
     private javax.swing.JLabel FlywithusJlabel;
     private javax.swing.JButton ManageFlightButton;
@@ -1468,6 +1549,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel background;
     private javax.swing.JLabel bluebackgroundLabel;
+    private javax.swing.JScrollPane buyTicketsJscrollPane;
+    private javax.swing.JLabel buyTicketsLabel;
     private javax.swing.JLabel cityErrorLabel;
     private javax.swing.JLabel cityLabel;
     private javax.swing.JTextField cityTextfield;
@@ -1494,15 +1577,14 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameTextfield;
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameErrorLabel;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextfield;
     private javax.swing.JLabel leftBackgroundLabel;
+    private javax.swing.JLabel logOutLabel;
     private javax.swing.JButton logginButton;
     private javax.swing.JLabel loginEmailLabel;
     private javax.swing.JTextField loginEmailTextField;
@@ -1510,6 +1592,9 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
+    private javax.swing.JLabel myTicketsLabel;
+    private javax.swing.JTable myTicketsTable;
+    private javax.swing.JScrollPane myTicketsjScrollPane;
     private javax.swing.JLabel numberOfSeats;
     private javax.swing.JTextField numberOfSeatsTextField;
     private javax.swing.JComboBox originAirportNameComboBox;
