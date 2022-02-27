@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Feb 20. 17:27
+-- Létrehozás ideje: 2022. Feb 26. 19:52
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 8.1.2
 
@@ -8005,7 +8005,8 @@ CREATE TABLE `flight_info` (
   `OriginAirportName` varchar(100) NOT NULL,
   `Destination_place` varchar(100) NOT NULL,
   `DestinationAirportName` varchar(100) NOT NULL,
-  `Num_of_seats` int(100) NOT NULL,
+  `Num_of_seats` int(230) NOT NULL,
+  `Num_of_available_seats` int(255) NOT NULL,
   `Flight_num` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -8013,19 +8014,36 @@ CREATE TABLE `flight_info` (
 -- A tábla adatainak kiíratása `flight_info`
 --
 
-INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Flight_num`) VALUES
-('2022-02-27 9:4', '2022-02-28 4:6', 'Andorra', 'Andorra La Vella Airport', 'Angola', 'Albano Machado Airport', 100, 44),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 45),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 46),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 47),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 48),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 49),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, 50),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 52),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 53),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 54),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 55),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, 56);
+INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Num_of_available_seats`, `Flight_num`) VALUES
+('2022-02-27 9:4', '2022-02-28 4:6', 'Andorra', 'Andorra La Vella Airport', 'Angola', 'Albano Machado Airport', 100, 0, 44),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 45),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 46),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 47),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 48),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 49),
+('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 50),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 52),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 53),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 54),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 55),
+('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 56),
+('2022-02-10 6:5', '2022-02-17 5:4', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Brazil', 'Deputado Luís Eduardo Magalhães International Airport', 100, 0, 57),
+('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 123, 59);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `passenger`
+--
+
+CREATE TABLE `passenger` (
+  `Gender` varchar(10) NOT NULL,
+  `FirstName` varchar(100) NOT NULL,
+  `LastName` varchar(100) NOT NULL,
+  `BirthDate` varchar(30) NOT NULL,
+  `Luggage` varchar(100) NOT NULL,
+  `passenger_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -8130,6 +8148,18 @@ ALTER TABLE `flight_info`
   ADD KEY `Origin_place` (`Origin_place`);
 
 --
+-- A tábla indexei `passenger`
+--
+ALTER TABLE `passenger`
+  ADD KEY `passenger_id` (`passenger_id`);
+
+--
+-- A tábla indexei `price_info`
+--
+ALTER TABLE `price_info`
+  ADD KEY `Flight_num` (`Flight_num`);
+
+--
 -- A tábla indexei `registration_info`
 --
 ALTER TABLE `registration_info`
@@ -8156,13 +8186,29 @@ ALTER TABLE `airport_info`
 -- AUTO_INCREMENT a táblához `flight_info`
 --
 ALTER TABLE `flight_info`
-  MODIFY `Flight_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `Flight_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
   MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- Megkötések a kiírt táblákhoz
+--
+
+--
+-- Megkötések a táblához `passenger`
+--
+ALTER TABLE `passenger`
+  ADD CONSTRAINT `passenger_ibfk_1` FOREIGN KEY (`passenger_id`) REFERENCES `registration_info` (`CustomerId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Megkötések a táblához `price_info`
+--
+ALTER TABLE `price_info`
+  ADD CONSTRAINT `price_info_ibfk_1` FOREIGN KEY (`Flight_num`) REFERENCES `flight_info` (`Flight_num`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

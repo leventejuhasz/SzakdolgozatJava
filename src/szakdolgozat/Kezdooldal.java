@@ -43,6 +43,8 @@ import java.util.regex.Matcher;
 import javax.swing.table.TableRowSorter;
 import javax.xml.bind.DatatypeConverter;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
@@ -54,6 +56,7 @@ import javax.swing.table.*;
 public class Kezdooldal extends javax.swing.JFrame {
 
     private ArrayList<User> users;
+    private int jegyekszama;
 
     public Kezdooldal() {
         initComponents();
@@ -1053,7 +1056,17 @@ public class Kezdooldal extends javax.swing.JFrame {
                 data[i][4] = dec;
                 data[i][5] = dea;
                 data[i][6] = nos;
+
                 i++;
+
+            }
+
+            for (int d = 0; d < count; d++) {
+                for (int j = 0; j < BuyTicketsTable.getColumnCount(); j++) {
+                    if (Integer.parseInt(data[d][6]) < 0) {
+                        data[d][6] = "0";
+                    }
+                }
             }
 
             model = new DefaultTableModel(data, columns);
@@ -1397,9 +1410,10 @@ public class Kezdooldal extends javax.swing.JFrame {
         Filter(destinationTextField.getText(), model);
     }//GEN-LAST:event_destinationTextFieldKeyReleased
 
+
     private void buyTicketsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyTicketsButtonActionPerformed
-        int young = Integer.parseInt(youngComboBox.getSelectedItem().toString());
-        int jegyekszama = Integer.parseInt(adultComboBox.getSelectedItem().toString()) + Integer.parseInt(youngComboBox.getSelectedItem().toString()) + Integer.parseInt(kidComboBox.getSelectedItem().toString()) + Integer.parseInt(infantComboBox.getSelectedItem().toString());
+
+        jegyekszama = Integer.parseInt(adultComboBox.getSelectedItem().toString()) + Integer.parseInt(youngComboBox.getSelectedItem().toString()) + Integer.parseInt(kidComboBox.getSelectedItem().toString()) + Integer.parseInt(infantComboBox.getSelectedItem().toString());
 
         Connection con;
         try {
@@ -1407,27 +1421,47 @@ public class Kezdooldal extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
 
-            smt.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats - " + jegyekszama + " WHERE Departure_time LIKE '"
-                    + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 0) + "' AND Arrival_time LIKE '"
-                    + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 1) + "' AND Origin_place LIKE '"
-                    + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 2) + "' AND OriginAirportName LIKE '"
-                    + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 3) + "' AND Destination_place LIKE '"
-                    + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 4) + "' AND DestinationAirportName LIKE '"
-                    + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 5) + "' AND Num_of_available_seats LIKE '"
-                    + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6) + "' ");
+            if (Integer.parseInt(BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6).toString()) - jegyekszama < 0 || Integer.parseInt(BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6).toString()) < 0) {
+                BuyTicketsTable.setValueAt("Sold out!", Integer.parseInt(BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6).toString()), 6);
+                JFrame jFrame = new JFrame();
+                JOptionPane.showMessageDialog(jFrame, "Sold out!");
+
+            } else {
+
+//                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage, passenger_id) VALUES ('" +uj.getGenderComboBox().getSelectedItem() +"' , '"+uj.getFirtsNamePassengerTextField().getText()+"' , '"+ uj.getLastNamePassengerTextfield().getText()+"' , '"++); 
+//                smt.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats - " + jegyekszama + " WHERE Departure_time LIKE '"
+                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 0) + "' AND Arrival_time LIKE '"
+                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 1) + "' AND Origin_place LIKE '"
+                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 2) + "' AND OriginAirportName LIKE '"
+                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 3) + "' AND Destination_place LIKE '"
+                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 4) + "' AND DestinationAirportName LIKE '"
+                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 5) + "' AND Num_of_available_seats LIKE '"
+                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6) + "' ");
+                loadtoBuyTicketsTableData();
+
+                for (int i = jegyekszama; i > 0; i--) {
+
+                    Passenger uj = new Passenger();
+                    uj.setLocationRelativeTo(null);
+                    uj.setVisible(true);
+                    uj.setTitle("Passenger No." + i);
+                    uj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    uj.comboBoxFeltolt();
+                    uj.getSaveButton().addActionListener(new ActionListener() {
+
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+
+                            uj.dispose();
+                        }
+                    });
+
+                }
+            }
 
             con.close();
             smt.close();
-            loadtoBuyTicketsTableData();
-            
-            
-            for (int i = 0; i < jegyekszama; i++) {
-                
-                
-            }
-            
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
