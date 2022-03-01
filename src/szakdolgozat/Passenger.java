@@ -1,7 +1,14 @@
 package szakdolgozat;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,8 +30,14 @@ public class Passenger extends javax.swing.JFrame {
      */
     public Passenger() {
         initComponents();
-        groupButtons();
+//        groupButtons();
         comboBoxFeltolt();
+        NotaskingRadioButton.setOpaque(false);
+        luggage1.setOpaque(false);
+        luggage2.setOpaque(false);
+        luggage3.setOpaque(false);
+        luggage4.setOpaque(false);
+        luggage5.setOpaque(false);
     }
 
     /**
@@ -60,7 +73,7 @@ public class Passenger extends javax.swing.JFrame {
         passengerGenderLabel4 = new javax.swing.JLabel();
         passengerBackground = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -178,7 +191,24 @@ public class Passenger extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
 
+        Connection con;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            Statement smt = con.createStatement();
 
+            Kezdooldal k = new Kezdooldal();
+
+            String birthdate = this.yearComboBox.getSelectedItem() + "." + this.MonthComboBox.getSelectedItem() + "." + this.dayComboBox.getSelectedItem();
+            smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage, Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + groupButtons() + "' , '" + k.getCustomerId() + "')");
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void MonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthComboBoxActionPerformed
@@ -208,7 +238,7 @@ public class Passenger extends javax.swing.JFrame {
         this.saveButton = saveButton;
     }
 
-    public void groupButtons() {
+    public String groupButtons() {
         ButtonGroup group = new ButtonGroup();
         group.add(NotaskingRadioButton);
         group.add(luggage1);
@@ -216,12 +246,8 @@ public class Passenger extends javax.swing.JFrame {
         group.add(luggage3);
         group.add(luggage4);
         group.add(luggage5);
-        NotaskingRadioButton.setOpaque(false);
-        luggage1.setOpaque(false);
-        luggage2.setOpaque(false);
-        luggage3.setOpaque(false);
-        luggage4.setOpaque(false);
-        luggage5.setOpaque(false);
+
+        return group.getSelection().getActionCommand();
 
     }
 
@@ -247,6 +273,30 @@ public class Passenger extends javax.swing.JFrame {
 
     public void setGenderComboBox(JComboBox genderComboBox) {
         this.genderComboBox = genderComboBox;
+    }
+
+    public JComboBox getMonthComboBox() {
+        return MonthComboBox;
+    }
+
+    public void setMonthComboBox(JComboBox MonthComboBox) {
+        this.MonthComboBox = MonthComboBox;
+    }
+
+    public JComboBox getDayComboBox() {
+        return dayComboBox;
+    }
+
+    public void setDayComboBox(JComboBox dayComboBox) {
+        this.dayComboBox = dayComboBox;
+    }
+
+    public JComboBox getYearComboBox() {
+        return yearComboBox;
+    }
+
+    public void setYearComboBox(JComboBox yearComboBox) {
+        this.yearComboBox = yearComboBox;
     }
 
     public void comboBoxFeltolt() {

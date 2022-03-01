@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Feb 28. 22:16
+-- Létrehozás ideje: 2022. Már 01. 10:53
 -- Kiszolgáló verziója: 10.4.22-MariaDB
--- PHP verzió: 8.1.2
+-- PHP verzió: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -8028,7 +8028,8 @@ INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `Or
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 55),
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 56),
 ('2022-02-10 6:5', '2022-02-17 5:4', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Brazil', 'Deputado Luís Eduardo Magalhães International Airport', 100, -3, 57),
-('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 101, 59);
+('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 101, 59),
+('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 100, 60);
 
 -- --------------------------------------------------------
 
@@ -8045,6 +8046,14 @@ CREATE TABLE `passenger` (
   `passenger_id` int(11) NOT NULL,
   `Customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `passenger`
+--
+
+INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `passenger_id`, `Customer_id`) VALUES
+('Man', 'asd', 'ads', '1953.May.6', 'null', 1, 0),
+('Man', 'asd', 'ads', '1953.May.6', 'null', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -8129,37 +8138,16 @@ INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address
 --
 
 --
--- A tábla indexei `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`AdminId`);
-
---
--- A tábla indexei `airport_info`
---
-ALTER TABLE `airport_info`
-  ADD PRIMARY KEY (`airport_id`);
-
---
 -- A tábla indexei `flight_info`
 --
 ALTER TABLE `flight_info`
-  ADD PRIMARY KEY (`Flight_num`),
-  ADD KEY `Destination_place` (`Destination_place`),
-  ADD KEY `Origin_place` (`Origin_place`);
+  ADD PRIMARY KEY (`Flight_num`);
 
 --
 -- A tábla indexei `passenger`
 --
 ALTER TABLE `passenger`
-  ADD PRIMARY KEY (`passenger_id`),
-  ADD KEY `Customer_id` (`Customer_id`);
-
---
--- A tábla indexei `price_info`
---
-ALTER TABLE `price_info`
-  ADD KEY `Flight_num` (`Flight_num`);
+  ADD PRIMARY KEY (`passenger_id`);
 
 --
 -- A tábla indexei `registration_info`
@@ -8173,44 +8161,22 @@ ALTER TABLE `registration_info`
 --
 
 --
--- AUTO_INCREMENT a táblához `admins`
---
-ALTER TABLE `admins`
-  MODIFY `AdminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT a táblához `airport_info`
---
-ALTER TABLE `airport_info`
-  MODIFY `airport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7954;
-
---
 -- AUTO_INCREMENT a táblához `flight_info`
 --
 ALTER TABLE `flight_info`
-  MODIFY `Flight_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `Flight_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
   MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
-
---
--- Megkötések a kiírt táblákhoz
---
-
---
--- Megkötések a táblához `price_info`
---
-ALTER TABLE `price_info`
-  ADD CONSTRAINT `price_info_ibfk_1` FOREIGN KEY (`Flight_num`) REFERENCES `flight_info` (`Flight_num`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

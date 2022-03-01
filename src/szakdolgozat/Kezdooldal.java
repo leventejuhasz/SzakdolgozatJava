@@ -1079,7 +1079,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
     }
 
-
+    private int customerId;
     private void logginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logginButtonActionPerformed
 
         boolean hibasAdat = true;
@@ -1122,11 +1122,13 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             Statement smt = con.createStatement();
 
-            ps = con.prepareStatement("Select Email, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + password + "'");
+            ps = con.prepareStatement("Select CustomerId, Email, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + password + "'");
             ResultSet result = ps.executeQuery();
             if (result.next()) {
                 System.out.println("felh");
 
+                System.out.println(result.getString("CustomerId"));
+                customerId = Integer.parseInt(result.getString("CustomerId"));
             }
 
             if (hibasAdat == true) {
@@ -1428,7 +1430,6 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             } else {
 
-//                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage, passenger_id) VALUES ('" +uj.getGenderComboBox().getSelectedItem() +"' , '"+uj.getFirtsNamePassengerTextField().getText()+"' , '"+ uj.getLastNamePassengerTextfield().getText()+"' , '"++); 
 //                smt.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats - " + jegyekszama + " WHERE Departure_time LIKE '"
                 //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 0) + "' AND Arrival_time LIKE '"
                 //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 1) + "' AND Origin_place LIKE '"
@@ -1437,26 +1438,13 @@ public class Kezdooldal extends javax.swing.JFrame {
                 //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 4) + "' AND DestinationAirportName LIKE '"
                 //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 5) + "' AND Num_of_available_seats LIKE '"
                 //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6) + "' ");
+                
+                for (int i = 0; i < jegyekszama; i++) {
+                    new Passenger().setVisible(true);
+                    
+                }
                 loadtoBuyTicketsTableData();
 
-                for (int i = jegyekszama; i > 0; i--) {
-
-                    Passenger uj = new Passenger();
-                    uj.setLocationRelativeTo(null);
-                    uj.setVisible(true);
-                    uj.setTitle("Passenger No." + i);
-                    uj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    uj.comboBoxFeltolt();
-                    uj.getSaveButton().addActionListener(new ActionListener() {
-
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
-
-                            uj.dispose();
-                        }
-                    });
-
-                }
             }
 
             con.close();
@@ -1470,6 +1458,48 @@ public class Kezdooldal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_buyTicketsButtonActionPerformed
+
+    public int getJegyekszama() {
+        return jegyekszama;
+    }
+
+    
+    
+    private void insertPasseneger() {
+
+        Connection con;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            Statement smt = con.createStatement();
+
+            for (int i = jegyekszama; i > 0; i--) {
+                Passenger uj = new Passenger();
+                uj.setLocationRelativeTo(null);
+                uj.setVisible(true);
+                uj.setTitle("Passenger No." + i);
+                uj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                uj.comboBoxFeltolt();
+                String birthdate = uj.getYearComboBox().getSelectedItem() + "." + uj.getMonthComboBox().getSelectedItem() + "." + uj.getDayComboBox().getSelectedItem();
+
+                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage, Customer_id) VALUES ('" + uj.getGenderComboBox().getSelectedItem() + "' , '" + uj.getFirtsNamePassengerTextField().getText() + "' , '" + uj.getLastNamePassengerTextfield().getText() + "' , '" + birthdate + "' , '" + uj.groupButtons() + "' , '" + customerId + "')");
+                uj.getSaveButton().addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+
+                        uj.dispose();
+                    }
+                });
+
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     //EVENTES FÜGGYVÉNYEK vége
     //Kivételek kezelése, hibavédések
@@ -1733,6 +1763,12 @@ public class Kezdooldal extends javax.swing.JFrame {
     public void setAddFlightTable(JTable addFlightTable) {
         this.addFlightTable = addFlightTable;
     }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AdminPanel;
     private javax.swing.JComboBox ArrivalTimeHourComboBox;
