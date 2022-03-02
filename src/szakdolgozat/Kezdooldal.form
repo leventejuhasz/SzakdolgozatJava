@@ -1170,7 +1170,7 @@
             <Component class="javax.swing.JTable" name="addFlightTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="0">
+                  <Table columnCount="8" rowCount="0">
                     <Column editable="false" title="Departure Time" type="java.lang.String"/>
                     <Column editable="false" title="Arrival Time" type="java.lang.String"/>
                     <Column editable="false" title="Origin Place" type="java.lang.String"/>
@@ -1178,6 +1178,7 @@
                     <Column editable="false" title="Destination Airport Name" type="java.lang.Object"/>
                     <Column editable="false" title="Destination Place" type="java.lang.String"/>
                     <Column editable="false" title="Number of Seats" type="java.lang.Integer"/>
+                    <Column editable="false" title="Flight Number" type="java.lang.Integer"/>
                   </Table>
                 </Property>
               </Properties>
@@ -1745,7 +1746,7 @@
                 <Component class="javax.swing.JTable" name="BuyTicketsTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="7" rowCount="13">
+                      <Table columnCount="8" rowCount="13">
                         <Column editable="false" title="Departure Time" type="java.lang.Object"/>
                         <Column editable="false" title="Arrival Time" type="java.lang.Object"/>
                         <Column editable="false" title="Origin Country" type="java.lang.Object"/>
@@ -1753,6 +1754,7 @@
                         <Column editable="false" title="Destination Country" type="java.lang.Object"/>
                         <Column editable="false" title="Destination Aiport Name" type="java.lang.Object"/>
                         <Column editable="false" title="Remaining tickets" type="java.lang.Object"/>
+                        <Column editable="false" title="Flight Number" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1827,9 +1829,12 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reservation of seats"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reservationButtonActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="800" y="310" width="220" height="40"/>
+                  <AbsoluteConstraints x="800" y="320" width="220" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>

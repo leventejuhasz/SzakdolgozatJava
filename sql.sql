@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Már 01. 10:53
+-- Létrehozás ideje: 2022. Már 02. 12:23
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -8007,14 +8007,14 @@ CREATE TABLE `flight_info` (
   `DestinationAirportName` varchar(100) NOT NULL,
   `Num_of_seats` int(230) NOT NULL,
   `Num_of_available_seats` int(255) NOT NULL,
-  `Flight_num` int(11) NOT NULL
+  `Flight_num_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `flight_info`
 --
 
-INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Num_of_available_seats`, `Flight_num`) VALUES
+INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Num_of_available_seats`, `Flight_num_id`) VALUES
 ('2022-02-27 9:4', '2022-02-28 4:6', 'Andorra', 'Andorra La Vella Airport', 'Angola', 'Albano Machado Airport', 100, 0, 44),
 ('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 45),
 ('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 46),
@@ -8025,11 +8025,10 @@ INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `Or
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 52),
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 53),
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 54),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 55),
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 56),
 ('2022-02-10 6:5', '2022-02-17 5:4', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Brazil', 'Deputado Luís Eduardo Magalhães International Airport', 100, -3, 57),
-('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 101, 59),
-('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 100, 60);
+('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 97, 59),
+('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 90, 60);
 
 -- --------------------------------------------------------
 
@@ -8042,7 +8041,7 @@ CREATE TABLE `passenger` (
   `FirstName` varchar(100) NOT NULL,
   `LastName` varchar(100) NOT NULL,
   `BirthDate` varchar(30) NOT NULL,
-  `Luggage` varchar(100) NOT NULL,
+  `Luggage` varchar(300) NOT NULL,
   `passenger_id` int(11) NOT NULL,
   `Customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -8053,7 +8052,29 @@ CREATE TABLE `passenger` (
 
 INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `passenger_id`, `Customer_id`) VALUES
 ('Man', 'asd', 'ads', '1953.May.6', 'null', 1, 0),
-('Man', 'asd', 'ads', '1953.May.6', 'null', 2, 0);
+('Man', 'asd', 'ads', '1953.May.6', 'null', 2, 0),
+('Man', 'kac', 'kac', '1950.January.1', 'null', 3, 0),
+('Man', 'asda', 'asdasdas', '1950.January.1', 'null', 4, 0),
+('Women', 'sad', 'asdasda', '1953.January.1', 'null', 5, 0),
+('Women', 'xd', 'xd', '1950.January.1', 'null', 6, 0),
+('Man', 'sadas', 'dasdas', '1950.January.1', 'null', 7, 10),
+('Women', 'asd', 'ad', '1950.January.1', 'null', 8, 65),
+('Man', 'hehe', 'hahha', '1950.January.1', 'null', 9, 65),
+('Man', 'asd', 'asd', '1954.January.1', 'null', 10, 65),
+('None', 'asd', 'asd', '1952.April.5', 'null', 11, 65),
+('Man', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 12, 10),
+('None', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 13, 10),
+('Man', 'ads', 'asd', '1950.January.1', '', 14, 10),
+('None', 'asd', 'ad', '1950.January.1', '', 15, 10),
+('None', 'asd', 'asd', '1950.January.1', '', 16, 10),
+('Women', 'q', 'q', '1950.January.1', '', 17, 10),
+('Man', 'asd', 'asd', '1950.January.1', '', 18, 10),
+('None', 'as', 'a', '1950.January.1', '', 19, 10),
+('Women', 'kecske', 'kecske', '1950.January.1', '', 20, 10),
+('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 21, 10),
+('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 22, 10),
+('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 23, 10),
+('None', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 24, 10);
 
 -- --------------------------------------------------------
 
@@ -8131,7 +8152,8 @@ INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address
 (61, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
 (62, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
 (63, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(64, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33');
+(64, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(65, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'kis@kis.hu', '0638176A683493DF8E7265B4A1291301');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -8141,7 +8163,7 @@ INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address
 -- A tábla indexei `flight_info`
 --
 ALTER TABLE `flight_info`
-  ADD PRIMARY KEY (`Flight_num`);
+  ADD PRIMARY KEY (`Flight_num_id`);
 
 --
 -- A tábla indexei `passenger`
@@ -8164,19 +8186,19 @@ ALTER TABLE `registration_info`
 -- AUTO_INCREMENT a táblához `flight_info`
 --
 ALTER TABLE `flight_info`
-  MODIFY `Flight_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
-  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

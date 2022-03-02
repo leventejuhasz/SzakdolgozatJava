@@ -58,6 +58,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     private ArrayList<User> users;
     private int jegyekszama;
 
+    public static int customerId;
+
     public Kezdooldal() {
         initComponents();
 
@@ -128,7 +130,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<String>();
+        destinationCountryComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         adminErrorLabel = new javax.swing.JLabel();
@@ -146,7 +148,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -567,7 +569,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -580,14 +582,14 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Departure Time", "Arrival Time", "Origin Place", "Origin Airport Name", "Destination Airport Name", "Destination Place", "Number of Seats"
+                "Departure Time", "Arrival Time", "Origin Place", "Origin Airport Name", "Destination Airport Name", "Destination Place", "Number of Seats", "Flight Number"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -737,26 +739,26 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         BuyTicketsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Departure Time", "Arrival Time", "Origin Country", "Origin Airport Name", "Destination Country", "Destination Aiport Name", "Remaining tickets"
+                "Departure Time", "Arrival Time", "Origin Country", "Origin Airport Name", "Destination Country", "Destination Aiport Name", "Remaining tickets", "Flight Number"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -775,7 +777,12 @@ public class Kezdooldal extends javax.swing.JFrame {
         reservationButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reservationButton.setForeground(new java.awt.Color(0, 0, 0));
         reservationButton.setText("Reservation of seats");
-        buyTicketsPanel.add(reservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 310, 220, 40));
+        reservationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservationButtonActionPerformed(evt);
+            }
+        });
+        buyTicketsPanel.add(reservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 320, 220, 40));
 
         userDestinationCountryLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         userDestinationCountryLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -1027,7 +1034,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
-            String query = "Select Departure_time,Arrival_time,Origin_place, OriginAirportName, Destination_place, DestinationAirportName, Num_of_available_seats from flight_info";
+            String query = "Select Departure_time,Arrival_time,Origin_place, OriginAirportName, Destination_place, DestinationAirportName, Num_of_available_seats, Flight_num_id  from flight_info";
             Statement smt = con.createStatement();
             ResultSet res = smt.executeQuery(query);
             Statement s = con.createStatement();
@@ -1036,7 +1043,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             int count = r.getInt("rowcount");
             r.close();
 
-            String columns[] = {BuyTicketsTable.getColumnName(0), BuyTicketsTable.getColumnName(1), BuyTicketsTable.getColumnName(2), BuyTicketsTable.getColumnName(3), BuyTicketsTable.getColumnName(4), BuyTicketsTable.getColumnName(5), BuyTicketsTable.getColumnName(6)};
+            String columns[] = {BuyTicketsTable.getColumnName(0), BuyTicketsTable.getColumnName(1), BuyTicketsTable.getColumnName(2), BuyTicketsTable.getColumnName(3), BuyTicketsTable.getColumnName(4), BuyTicketsTable.getColumnName(5), BuyTicketsTable.getColumnName(6), BuyTicketsTable.getColumnName(7)};
             String data[][] = new String[count][BuyTicketsTable.getColumnCount()];
 
             int i = 0;
@@ -1049,6 +1056,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 String dec = res.getString("Destination_place");
                 String dea = res.getString("DestinationAirportName");
                 String nos = res.getString("Num_of_available_seats");
+                String fid = res.getString("Flight_num_id");
                 data[i][0] = dep;
                 data[i][1] = ati;
                 data[i][2] = orc;
@@ -1056,6 +1064,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 data[i][4] = dec;
                 data[i][5] = dea;
                 data[i][6] = nos;
+                data[i][7] = fid;
 
                 i++;
 
@@ -1079,7 +1088,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
     }
 
-    private int customerId;
+
     private void logginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logginButtonActionPerformed
 
         boolean hibasAdat = true;
@@ -1103,26 +1112,20 @@ public class Kezdooldal extends javax.swing.JFrame {
             hibasAdat = false;
         }
 
+        belepteto(hibasAdat);
+
+    }//GEN-LAST:event_logginButtonActionPerformed
+
+    private void belepteto(boolean hibasAdat) {
         Connection con;
         PreparedStatement ps;
         try {
 
-            MessageDigest md = null;
-            try {
-                md = MessageDigest.getInstance("MD5");
-
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(Kezdooldal.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
-            md.update(passwordTextField.getText().getBytes());
-            byte[] digest = md.digest();
-            String password = DatatypeConverter.printHexBinary(digest).toUpperCase();
             con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
             Statement smt = con.createStatement();
 
-            ps = con.prepareStatement("Select CustomerId, Email, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + password + "'");
+            ps = con.prepareStatement("Select CustomerId, Email, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password() + "'");
             ResultSet result = ps.executeQuery();
             if (result.next()) {
                 System.out.println("felh");
@@ -1141,9 +1144,24 @@ public class Kezdooldal extends javax.swing.JFrame {
                     .getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
 
-    }//GEN-LAST:event_logginButtonActionPerformed
+    private String md5password() {
 
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Kezdooldal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        md.update(passwordTextField.getText().getBytes());
+        byte[] digest = md.digest();
+        String password = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+        return password;
+    }
 
     private void adminBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBackButtonActionPerformed
         dontShowAdminPanel();
@@ -1430,18 +1448,20 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             } else {
 
-//                smt.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats - " + jegyekszama + " WHERE Departure_time LIKE '"
-                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 0) + "' AND Arrival_time LIKE '"
-                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 1) + "' AND Origin_place LIKE '"
-                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 2) + "' AND OriginAirportName LIKE '"
-                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 3) + "' AND Destination_place LIKE '"
-                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 4) + "' AND DestinationAirportName LIKE '"
-                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 5) + "' AND Num_of_available_seats LIKE '"
-                //                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6) + "' ");
-                
+                smt.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats - " + jegyekszama + " WHERE Departure_time LIKE  '"
+                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 0) + "' AND Arrival_time LIKE '"
+                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 1) + "' AND Origin_place LIKE '"
+                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 2) + "' AND OriginAirportName LIKE '"
+                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 3) + "' AND Destination_place LIKE '"
+                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 4) + "' AND DestinationAirportName LIKE '"
+                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 5) + "' AND Num_of_available_seats LIKE '"
+                        + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6) + "' ");
                 for (int i = 0; i < jegyekszama; i++) {
-                    new Passenger().setVisible(true);
-                    
+                    Passenger p = new Passenger();
+                    p.setVisible(true);
+                    p.setLocationRelativeTo(null);
+                    p.setResizable(false);
+
                 }
                 loadtoBuyTicketsTableData();
 
@@ -1459,46 +1479,12 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buyTicketsButtonActionPerformed
 
+    private void reservationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reservationButtonActionPerformed
+
     public int getJegyekszama() {
         return jegyekszama;
-    }
-
-    
-    
-    private void insertPasseneger() {
-
-        Connection con;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-            Statement smt = con.createStatement();
-
-            for (int i = jegyekszama; i > 0; i--) {
-                Passenger uj = new Passenger();
-                uj.setLocationRelativeTo(null);
-                uj.setVisible(true);
-                uj.setTitle("Passenger No." + i);
-                uj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                uj.comboBoxFeltolt();
-                String birthdate = uj.getYearComboBox().getSelectedItem() + "." + uj.getMonthComboBox().getSelectedItem() + "." + uj.getDayComboBox().getSelectedItem();
-
-                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage, Customer_id) VALUES ('" + uj.getGenderComboBox().getSelectedItem() + "' , '" + uj.getFirtsNamePassengerTextField().getText() + "' , '" + uj.getLastNamePassengerTextfield().getText() + "' , '" + birthdate + "' , '" + uj.groupButtons() + "' , '" + customerId + "')");
-                uj.getSaveButton().addActionListener(new ActionListener() {
-
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-
-                        uj.dispose();
-                    }
-                });
-
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     //EVENTES FÜGGYVÉNYEK vége
@@ -1767,8 +1753,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     public int getCustomerId() {
         return customerId;
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AdminPanel;
     private javax.swing.JComboBox ArrivalTimeHourComboBox;
