@@ -97,7 +97,7 @@ public class Passenger extends javax.swing.JFrame {
         jPanel1.add(firtsNamePassengerTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 260, 40));
 
         genderComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        genderComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None", "Man", "Women" }));
+        genderComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Man", "Women" }));
         jPanel1.add(genderComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
         passengerGenderLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

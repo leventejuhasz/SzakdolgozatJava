@@ -175,9 +175,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         kidComboBox = new javax.swing.JComboBox();
         destinationTextField = new javax.swing.JTextField();
         passengerData = new javax.swing.JButton();
+        myTickets = new javax.swing.JScrollPane();
+        myTicketsEditor = new javax.swing.JEditorPane();
         userBackgroundLabel = new javax.swing.JLabel();
-        myTicketsjScrollPane = new javax.swing.JScrollPane();
-        myTicketsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1150, 700));
@@ -713,7 +713,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 myTicketsLabelMouseClicked(evt);
             }
         });
-        UserPanel.add(myTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        UserPanel.add(myTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 30));
 
         buyTicketsLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         buyTicketsLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -810,7 +810,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Adult (17 year+)");
-        buyTicketsPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 110, -1));
+        buyTicketsPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 110, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -852,6 +852,11 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         UserPanel.add(buyTicketsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 1040, 670));
 
+        myTicketsEditor.setText("asdasdasdas");
+        myTickets.setViewportView(myTicketsEditor);
+
+        UserPanel.add(myTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 1040, 630));
+
         userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
         userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         userBackgroundLabel.setMaximumSize(null);
@@ -859,21 +864,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         userBackgroundLabel.setName(""); // NOI18N
         userBackgroundLabel.setPreferredSize(null);
         UserPanel.add(userBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        myTicketsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        myTicketsjScrollPane.setViewportView(myTicketsTable);
-
-        UserPanel.add(myTicketsjScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 280, -1, -1));
 
         getContentPane().add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
@@ -1407,13 +1397,14 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     private void myTicketsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myTicketsLabelMouseClicked
         buyTicketsJscrollPane.setVisible(false);
-        myTicketsjScrollPane.setVisible(true);
+        myTickets.setVisible(true);
         buyTicketsPanel.setVisible(false);
+        loadMyTickets();
     }//GEN-LAST:event_myTicketsLabelMouseClicked
 
     private void buyTicketsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buyTicketsLabelMouseClicked
         buyTicketsJscrollPane.setVisible(true);
-        myTicketsjScrollPane.setVisible(false);
+        myTickets.setVisible(false);
         buyTicketsPanel.setVisible(true);
     }//GEN-LAST:event_buyTicketsLabelMouseClicked
 
@@ -1429,6 +1420,16 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void destinationTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_destinationTextFieldKeyReleased
         Filter(destinationTextField.getText(), model);
     }//GEN-LAST:event_destinationTextFieldKeyReleased
+
+//    private String womanpic() {
+//        String imgsrc = Kezdooldal.class.getClassLoader().getSystemResource("woman.png").toString();
+//
+//        return imgsrc;
+//    }
+    private void loadMyTickets() {
+        myTicketsEditor.setContentType("text/html");
+        myTicketsEditor.setText("<html><img src=\" width=200 height=200> </img> </html>");
+    }
 
 
     private void buyTicketsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyTicketsButtonActionPerformed
@@ -1696,7 +1697,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         this.myTicketsLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.buyTicketsLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.logOutLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        myTicketsjScrollPane.setVisible(false);
+        this.myTickets.setVisible(false);
         UserPanel.show();
         System.out.println("User panel be");
     }
@@ -1828,9 +1829,9 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
+    private javax.swing.JScrollPane myTickets;
+    private javax.swing.JEditorPane myTicketsEditor;
     private javax.swing.JLabel myTicketsLabel;
-    private javax.swing.JTable myTicketsTable;
-    private javax.swing.JScrollPane myTicketsjScrollPane;
     private javax.swing.JLabel numberOfSeats;
     private javax.swing.JTextField numberOfSeatsTextField;
     private javax.swing.JComboBox originAirportNameComboBox;
