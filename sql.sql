@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
-<<<<<<< Updated upstream
 -- Létrehozás ideje: 2022. Már 02. 12:23
-=======
--- Létrehozás ideje: 2022. Feb 26. 19:52
->>>>>>> Stashed changes
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -8011,22 +8007,14 @@ CREATE TABLE `flight_info` (
   `DestinationAirportName` varchar(100) NOT NULL,
   `Num_of_seats` int(230) NOT NULL,
   `Num_of_available_seats` int(255) NOT NULL,
-<<<<<<< Updated upstream
   `Flight_num_id` int(11) NOT NULL
-=======
-  `Flight_num` int(11) NOT NULL
->>>>>>> Stashed changes
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `flight_info`
 --
 
-<<<<<<< Updated upstream
 INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Num_of_available_seats`, `Flight_num_id`) VALUES
-=======
-INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Num_of_available_seats`, `Flight_num`) VALUES
->>>>>>> Stashed changes
 ('2022-02-27 9:4', '2022-02-28 4:6', 'Andorra', 'Andorra La Vella Airport', 'Angola', 'Albano Machado Airport', 100, 0, 44),
 ('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 45),
 ('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 46),
@@ -8037,17 +8025,10 @@ INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `Or
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 52),
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 53),
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 54),
-<<<<<<< Updated upstream
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 56),
 ('2022-02-10 6:5', '2022-02-17 5:4', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Brazil', 'Deputado Luís Eduardo Magalhães International Airport', 100, -3, 57),
 ('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 97, 59),
 ('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 90, 60);
-=======
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 55),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 56),
-('2022-02-10 6:5', '2022-02-17 5:4', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Brazil', 'Deputado Luís Eduardo Magalhães International Airport', 100, 0, 57),
-('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 123, 59);
->>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -8060,7 +8041,6 @@ CREATE TABLE `passenger` (
   `FirstName` varchar(100) NOT NULL,
   `LastName` varchar(100) NOT NULL,
   `BirthDate` varchar(30) NOT NULL,
-<<<<<<< Updated upstream
   `Luggage` varchar(300) NOT NULL,
   `passenger_id` int(11) NOT NULL,
   `Customer_id` int(11) NOT NULL
@@ -8096,12 +8076,6 @@ INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggag
 ('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 23, 10),
 ('None', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 24, 10);
 
-=======
-  `Luggage` varchar(100) NOT NULL,
-  `passenger_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
->>>>>>> Stashed changes
 -- --------------------------------------------------------
 
 --
@@ -8109,11 +8083,7 @@ INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggag
 --
 
 CREATE TABLE `price_info` (
-<<<<<<< Updated upstream
   `Passenger_name` int(30) NOT NULL,
-=======
-  `Customer_name` int(14) NOT NULL,
->>>>>>> Stashed changes
   `Seat_num` int(4) NOT NULL,
   `Price` int(4) NOT NULL,
   `Flight_num` int(12) NOT NULL
@@ -8190,47 +8160,16 @@ INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address
 --
 
 --
-<<<<<<< Updated upstream
 -- A tábla indexei `flight_info`
 --
 ALTER TABLE `flight_info`
   ADD PRIMARY KEY (`Flight_num_id`);
-=======
--- A tábla indexei `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`AdminId`);
-
---
--- A tábla indexei `airport_info`
---
-ALTER TABLE `airport_info`
-  ADD PRIMARY KEY (`airport_id`);
-
---
--- A tábla indexei `flight_info`
---
-ALTER TABLE `flight_info`
-  ADD PRIMARY KEY (`Flight_num`),
-  ADD KEY `Destination_place` (`Destination_place`),
-  ADD KEY `Origin_place` (`Origin_place`);
->>>>>>> Stashed changes
 
 --
 -- A tábla indexei `passenger`
 --
 ALTER TABLE `passenger`
-<<<<<<< Updated upstream
   ADD PRIMARY KEY (`passenger_id`);
-=======
-  ADD KEY `passenger_id` (`passenger_id`);
-
---
--- A tábla indexei `price_info`
---
-ALTER TABLE `price_info`
-  ADD KEY `Flight_num` (`Flight_num`);
->>>>>>> Stashed changes
 
 --
 -- A tábla indexei `registration_info`
@@ -8244,7 +8183,6 @@ ALTER TABLE `registration_info`
 --
 
 --
-<<<<<<< Updated upstream
 -- AUTO_INCREMENT a táblához `flight_info`
 --
 ALTER TABLE `flight_info`
@@ -8255,50 +8193,12 @@ ALTER TABLE `flight_info`
 --
 ALTER TABLE `passenger`
   MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-=======
--- AUTO_INCREMENT a táblához `admins`
---
-ALTER TABLE `admins`
-  MODIFY `AdminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT a táblához `airport_info`
---
-ALTER TABLE `airport_info`
-  MODIFY `airport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7954;
-
---
--- AUTO_INCREMENT a táblához `flight_info`
---
-ALTER TABLE `flight_info`
-  MODIFY `Flight_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
->>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
-<<<<<<< Updated upstream
   MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
-=======
-  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
-
---
--- Megkötések a kiírt táblákhoz
---
-
---
--- Megkötések a táblához `passenger`
---
-ALTER TABLE `passenger`
-  ADD CONSTRAINT `passenger_ibfk_1` FOREIGN KEY (`passenger_id`) REFERENCES `registration_info` (`CustomerId`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Megkötések a táblához `price_info`
---
-ALTER TABLE `price_info`
-  ADD CONSTRAINT `price_info_ibfk_1` FOREIGN KEY (`Flight_num`) REFERENCES `flight_info` (`Flight_num`) ON DELETE CASCADE ON UPDATE CASCADE;
->>>>>>> Stashed changes
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
