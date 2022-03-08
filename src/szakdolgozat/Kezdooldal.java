@@ -259,7 +259,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         forgotPasswordLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         forgotPasswordLabel.setForeground(new java.awt.Color(204, 204, 204));
-        forgotPasswordLabel.setText("Forgot Password?");
+        forgotPasswordLabel.setText("Forgot Password? Click Here.");
         forgotPasswordLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 forgotPasswordLabelMouseClicked(evt);

@@ -10,9 +10,9 @@ import com.mysql.cj.x.protobuf.MysqlxNotice;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.util.Properties;
+import java.util.Random;
 import java.util.regex.Pattern;
 import jdk.nashorn.internal.codegen.CompilerConstants;
-
 
 /**
  *
@@ -96,8 +96,8 @@ public class ForgotPassword extends javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         testUsingSimpleRegex();
 
-        Properties properties = new Properties();
-        Session session = Session.getDefaultInstance(properties, null);
+        Properties properties = System.getProperties();
+        Random random = new Random();
     }//GEN-LAST:event_sendButtonActionPerformed
 
 
