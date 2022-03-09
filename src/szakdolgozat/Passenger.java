@@ -17,6 +17,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import static szakdolgozat.Kezdooldal.customerId;
+import static szakdolgozat.Kezdooldal.Origin_country;
+import static szakdolgozat.Kezdooldal.Destination_country;
+import static szakdolgozat.Kezdooldal.OriginAirportName;
+import static szakdolgozat.Kezdooldal.DestinationAirportName;
+import static szakdolgozat.Kezdooldal.Departure_time;
+import static szakdolgozat.Kezdooldal.Arrival_time;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,12 +34,12 @@ import static szakdolgozat.Kezdooldal.customerId;
  * @author User
  */
 public class Passenger extends javax.swing.JFrame {
-    
+
     public Passenger() {
         initComponents();
-        
+
         comboBoxFeltolt();
-        
+
         NotaskingRadioButton.setOpaque(false);
         luggage1.setOpaque(false);
         luggage2.setOpaque(false);
@@ -107,7 +113,7 @@ public class Passenger extends javax.swing.JFrame {
 
         NotaskingRadioButton.setBackground(new java.awt.Color(102, 102, 102));
         NotaskingRadioButton.setForeground(new java.awt.Color(255, 255, 255));
-        NotaskingRadioButton.setText("I'm not asking (0 Ft)");
+        NotaskingRadioButton.setText("I am not asking (0 Ft)");
         jPanel1.add(NotaskingRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
 
         luggage1.setBackground(new java.awt.Color(102, 102, 102));
@@ -192,108 +198,109 @@ public class Passenger extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        
+
         Connection con;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
-            
-            
+
             String birthdate = this.yearComboBox.getSelectedItem() + "." + this.MonthComboBox.getSelectedItem() + "." + this.dayComboBox.getSelectedItem();
-            
+
+            System.out.println(Arrival_time);
+            System.out.println(Destination_country);
             if (isPassengerError() == false) {
-                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage, Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + customerId + "')");
+                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,  Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + customerId + "')");
                 this.dispose();
             }
-         
-            
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_saveButtonActionPerformed
-    
+
     private boolean isPassengerError() {
-        
+
         int db = 0;
         if (NotaskingRadioButton.isSelected()) {
             db++;
-            
+
         } else if (luggage1.isSelected()) {
-            
+
             db++;
-            
+
         } else if (luggage2.isSelected()) {
-            
+
             db++;
-            
+
         } else if (luggage3.isSelected()) {
-            
+
             db++;
-            
+
         } else if (luggage4.isSelected()) {
-            
+
             db++;
-            
+
         } else if (luggage5.isSelected()) {
-            
+
             db++;
-            
+
         }
-        
+
         if (db != 1) {
             JFrame jFrame = new JFrame();
             JOptionPane.showMessageDialog(jFrame, "Please Select Luggage!");
-            
+
             return true;
         }
+
         
-        if (!firtsNamePassengerTextField.getText().matches(("[a-zA-Z]+"))) {
+        
+        if (!firtsNamePassengerTextField.getText().trim().matches(("[a-zA-Z]+"))) {
             JFrame jFrame = new JFrame();
             JOptionPane.showMessageDialog(jFrame, "First Name can only contains letter!");
             return true;
         }
-        
-        if (!LastNamePassengerTextfield.getText().matches(("[a-zA-Z]+"))) {
+
+        if (!LastNamePassengerTextfield.getText().trim().matches(("[a-zA-Z]+"))) {
             JFrame jFrame = new JFrame();
             JOptionPane.showMessageDialog(jFrame, "Last Name can only contains letter!");
             return true;
         }
-        
+
         return false;
-        
+
     }
-    
+
     private String selectedLuggage() {
-        
+
         if (NotaskingRadioButton.isSelected()) {
-            
+
             return NotaskingRadioButton.getText();
         } else if (luggage1.isSelected()) {
-            
+
             return luggage1.getText();
         } else if (luggage2.isSelected()) {
-            
+
             return luggage2.getText();
         } else if (luggage3.isSelected()) {
-            
+
             return luggage3.getText();
         } else if (luggage4.isSelected()) {
-            
+
             return luggage4.getText();
         } else if (luggage5.isSelected()) {
-            
+
             return luggage5.getText();
         }
-        
+
         return "";
     }
-    
+
 
     private void MonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthComboBoxActionPerformed
         String month = MonthComboBox.getSelectedItem() + "";
@@ -310,76 +317,76 @@ public class Passenger extends javax.swing.JFrame {
             for (int i = 1; i <= 30; i++) {
                 dayComboBox.addItem(i);
             }
-            
+
         }
     }//GEN-LAST:event_MonthComboBoxActionPerformed
-    
+
     public JButton getSaveButton() {
         return saveButton;
     }
-    
+
     public void setSaveButton(JButton saveButton) {
         this.saveButton = saveButton;
     }
-    
+
     public JTextField getLastNamePassengerTextfield() {
         return LastNamePassengerTextfield;
     }
-    
+
     public void setLastNamePassengerTextfield(JTextField LastNamePassengerTextfield) {
         this.LastNamePassengerTextfield = LastNamePassengerTextfield;
     }
-    
+
     public JTextField getFirtsNamePassengerTextField() {
         return firtsNamePassengerTextField;
     }
-    
+
     public void setFirtsNamePassengerTextField(JTextField firtsNamePassengerTextField) {
         this.firtsNamePassengerTextField = firtsNamePassengerTextField;
     }
-    
+
     public JComboBox getGenderComboBox() {
         return genderComboBox;
     }
-    
+
     public void setGenderComboBox(JComboBox genderComboBox) {
         this.genderComboBox = genderComboBox;
     }
-    
+
     public JComboBox getMonthComboBox() {
         return MonthComboBox;
     }
-    
+
     public void setMonthComboBox(JComboBox MonthComboBox) {
         this.MonthComboBox = MonthComboBox;
     }
-    
+
     public JComboBox getDayComboBox() {
         return dayComboBox;
     }
-    
+
     public void setDayComboBox(JComboBox dayComboBox) {
         this.dayComboBox = dayComboBox;
     }
-    
+
     public JComboBox getYearComboBox() {
         return yearComboBox;
     }
-    
+
     public void setYearComboBox(JComboBox yearComboBox) {
         this.yearComboBox = yearComboBox;
     }
-    
+
     public void comboBoxFeltolt() {
         String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         for (int i = 1950; i <= Calendar.getInstance().get(Calendar.YEAR); i++) {
             yearComboBox.addItem(i);
         }
-        
+
         for (int i = 0; i < months.length; i++) {
             MonthComboBox.addItem(months[i]);
         }
-        
+
     }
 
 
