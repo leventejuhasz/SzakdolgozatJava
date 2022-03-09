@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Már 02. 12:23
+-- Létrehozás ideje: 2022. Már 09. 12:34
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -8027,8 +8027,8 @@ INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `Or
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 54),
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 56),
 ('2022-02-10 6:5', '2022-02-17 5:4', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Brazil', 'Deputado Luís Eduardo Magalhães International Airport', 100, -3, 57),
-('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 97, 59),
-('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 90, 60);
+('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 85, 59),
+('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 77, 60);
 
 -- --------------------------------------------------------
 
@@ -8042,6 +8042,12 @@ CREATE TABLE `passenger` (
   `LastName` varchar(100) NOT NULL,
   `BirthDate` varchar(30) NOT NULL,
   `Luggage` varchar(300) NOT NULL,
+  `Origin_country` varchar(200) NOT NULL,
+  `Destination_country` varchar(200) NOT NULL,
+  `OriginAirportName` varchar(300) NOT NULL,
+  `DestinationAirportName` varchar(300) NOT NULL,
+  `Departure_time` varchar(200) NOT NULL,
+  `Arrival_time` varchar(200) NOT NULL,
   `passenger_id` int(11) NOT NULL,
   `Customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -8050,31 +8056,35 @@ CREATE TABLE `passenger` (
 -- A tábla adatainak kiíratása `passenger`
 --
 
-INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `passenger_id`, `Customer_id`) VALUES
-('Man', 'asd', 'ads', '1953.May.6', 'null', 1, 0),
-('Man', 'asd', 'ads', '1953.May.6', 'null', 2, 0),
-('Man', 'kac', 'kac', '1950.January.1', 'null', 3, 0),
-('Man', 'asda', 'asdasdas', '1950.January.1', 'null', 4, 0),
-('Women', 'sad', 'asdasda', '1953.January.1', 'null', 5, 0),
-('Women', 'xd', 'xd', '1950.January.1', 'null', 6, 0),
-('Man', 'sadas', 'dasdas', '1950.January.1', 'null', 7, 10),
-('Women', 'asd', 'ad', '1950.January.1', 'null', 8, 65),
-('Man', 'hehe', 'hahha', '1950.January.1', 'null', 9, 65),
-('Man', 'asd', 'asd', '1954.January.1', 'null', 10, 65),
-('None', 'asd', 'asd', '1952.April.5', 'null', 11, 65),
-('Man', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 12, 10),
-('None', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 13, 10),
-('Man', 'ads', 'asd', '1950.January.1', '', 14, 10),
-('None', 'asd', 'ad', '1950.January.1', '', 15, 10),
-('None', 'asd', 'asd', '1950.January.1', '', 16, 10),
-('Women', 'q', 'q', '1950.January.1', '', 17, 10),
-('Man', 'asd', 'asd', '1950.January.1', '', 18, 10),
-('None', 'as', 'a', '1950.January.1', '', 19, 10),
-('Women', 'kecske', 'kecske', '1950.January.1', '', 20, 10),
-('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 21, 10),
-('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 22, 10),
-('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 23, 10),
-('None', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 24, 10);
+INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `Origin_country`, `Destination_country`, `OriginAirportName`, `DestinationAirportName`, `Departure_time`, `Arrival_time`, `passenger_id`, `Customer_id`) VALUES
+('Man', 'asd', 'ads', '1953.May.6', 'null', '', '', '', '', '', '', 1, 0),
+('Man', 'asd', 'ads', '1953.May.6', 'null', '', '', '', '', '', '', 2, 0),
+('Man', 'kac', 'kac', '1950.January.1', 'null', '', '', '', '', '', '', 3, 0),
+('Man', 'asda', 'asdasdas', '1950.January.1', 'null', '', '', '', '', '', '', 4, 0),
+('Women', 'sad', 'asdasda', '1953.January.1', 'null', '', '', '', '', '', '', 5, 0),
+('Women', 'xd', 'xd', '1950.January.1', 'null', '', '', '', '', '', '', 6, 0),
+('Man', 'sadas', 'dasdas', '1950.January.1', 'null', '', '', '', '', '', '', 7, 0),
+('Women', 'asd', 'ad', '1950.January.1', 'null', '', '', '', '', '', '', 8, 0),
+('Man', 'hehe', 'hahha', '1950.January.1', 'null', '', '', '', '', '', '', 9, 0),
+('Man', 'asd', 'asd', '1954.January.1', 'null', '', '', '', '', '', '', 10, 0),
+('None', 'asd', 'asd', '1952.April.5', 'null', '', '', '', '', '', '', 11, 0),
+('Man', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', '', '', '', '', '', '', 12, 0),
+('None', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', '', '', '', '', '', '', 13, 0),
+('Man', 'ads', 'asd', '1950.January.1', '', '', '', '', '', '', '', 14, 0),
+('None', 'asd', 'ad', '1950.January.1', '', '', '', '', '', '', '', 15, 0),
+('None', 'asd', 'asd', '1950.January.1', '', '', '', '', '', '', '', 16, 0),
+('Women', 'q', 'q', '1950.January.1', '', '', '', '', '', '', '', 17, 0),
+('Man', 'asd', 'asd', '1950.January.1', '', '', '', '', '', '', '', 18, 0),
+('None', 'as', 'a', '1950.January.1', '', '', '', '', '', '', '', 19, 0),
+('Women', 'kecske', 'kecske', '1950.January.1', '', '', '', '', '', '', '', 20, 0),
+('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', '', '', '', '', '', '', 21, 0),
+('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', '', '', '', '', '', '', 22, 0),
+('Man', 'asdads', 'asdas', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', '', '', '', '', '', '', 23, 0),
+('None', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', '', '', '', '', '', '', 24, 0),
+('None', 'juhasz', 'Levente', '1952.June.4', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft', '', '', '', '', '', '', 25, 0),
+('Man', 'Juhsaz', 'dsad', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 26, 0),
+('Man', 'yxc', 'yxc', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 27, 0),
+('Man', 'Kis', 'Cica', '1957.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 45 757 Ft', 'Algeria', 'Anguilla', 'Blida Airport', 'Wallblake Airport', '2022-02-16 9:6', '2022-02-28 9:6', 28, 0);
 
 -- --------------------------------------------------------
 
@@ -8119,41 +8129,41 @@ INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address
 (3, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'leventejuhasz2002@gmail.com', 'Luna0'),
 (4, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'leventejuhasz2002@gmail.com', '98E89BBBB4878EC0CC7833F0F91276C2'),
 (5, 'Juhász', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'ciga@ciga.hu', 'B9ABDD7E4F97F9CD3C43C72F0D45E10E'),
-(10, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'k@h.hu', '4B42D1F541216E6336799F1D9E95EE1B'),
-(11, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'laca@gmail.hu', '0775B8E55054F7A664796DFDF6373C16'),
-(33, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025jbijhgbiub', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(34, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(35, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '202386025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(36, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(37, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(38, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(39, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(40, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(41, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(42, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(43, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(44, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(45, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860231', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(46, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860231', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(47, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(48, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025 2321 3123123123123 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(49, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(50, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(51, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(52, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(53, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '202386025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(54, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(55, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '++36 20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(56, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+4 20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(57, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', ''),
-(58, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', 'EAC93FC0E5BFBE34E7EC3AB68738F26E'),
-(59, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', 'EAC93FC0E5BFBE34E7EC3AB68738F26E'),
-(60, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', 'EAC93FC0E5BFBE34E7EC3AB68738F26E'),
-(61, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(62, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(63, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(64, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(65, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'kis@kis.hu', '0638176A683493DF8E7265B4A1291301');
+(6, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Woman', 'k@h.hu', '4B42D1F541216E6336799F1D9E95EE1B'),
+(7, 'Juhasz', 'Levente', 'Kecskéd óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'laca@gmail.hu', '0775B8E55054F7A664796DFDF6373C16'),
+(8, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025jbijhgbiub', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(9, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '0620 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(10, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '202386025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(11, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(12, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(13, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(14, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(15, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20238602', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(16, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(17, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(18, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(19, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(20, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860231', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(21, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '2023860231', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(22, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(23, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025 2321 3123123123123 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(24, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(25, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(26, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(27, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025 ', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(28, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '202386025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(29, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+36 20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(30, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '++36 20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(31, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '+4 20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(32, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', ''),
+(33, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', 'EAC93FC0E5BFBE34E7EC3AB68738F26E'),
+(34, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', 'EAC93FC0E5BFBE34E7EC3AB68738F26E'),
+(35, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', 'EAC93FC0E5BFBE34E7EC3AB68738F26E'),
+(36, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(37, 'Juhász', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(38, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(39, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(40, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'kis@kis.hu', '0638176A683493DF8E7265B4A1291301');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -8169,14 +8179,20 @@ ALTER TABLE `flight_info`
 -- A tábla indexei `passenger`
 --
 ALTER TABLE `passenger`
-  ADD PRIMARY KEY (`passenger_id`);
+  ADD PRIMARY KEY (`passenger_id`),
+  ADD KEY `Customer_id` (`Customer_id`);
+
+--
+-- A tábla indexei `price_info`
+--
+ALTER TABLE `price_info`
+  ADD KEY `Flight_num` (`Flight_num`);
 
 --
 -- A tábla indexei `registration_info`
 --
 ALTER TABLE `registration_info`
-  ADD PRIMARY KEY (`CustomerId`),
-  ADD KEY `Customer_Password` (`CustomerPassword`);
+  ADD PRIMARY KEY (`CustomerId`);
 
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
@@ -8192,13 +8208,23 @@ ALTER TABLE `flight_info`
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
-  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- Megkötések a kiírt táblákhoz
+--
+
+--
+-- Megkötések a táblához `price_info`
+--
+ALTER TABLE `price_info`
+  ADD CONSTRAINT `price_info_ibfk_1` FOREIGN KEY (`Flight_num`) REFERENCES `flight_info` (`Flight_num_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
