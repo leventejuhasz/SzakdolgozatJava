@@ -9,10 +9,13 @@ import com.mysql.cj.Session;
 import com.mysql.cj.x.protobuf.MysqlxNotice;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
+import java.security.AuthProvider;
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Pattern;
 import jdk.nashorn.internal.codegen.CompilerConstants;
+
+import javax.mail.*;
 
 /**
  *
@@ -20,12 +23,11 @@ import jdk.nashorn.internal.codegen.CompilerConstants;
  */
 public class ForgotPassword extends javax.swing.JFrame {
 
-    /**
-     * Creates new form forgotPassword
-     */
     public ForgotPassword() {
         initComponents();
     }
+
+    private int randomCode;
 
     public static boolean patternMatches(String emailAddress, String regexPattern) {
         return Pattern.compile(regexPattern)
@@ -67,7 +69,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Please write your email here so we can send a varification code!");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         sendButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         sendButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -77,7 +79,7 @@ public class ForgotPassword extends javax.swing.JFrame {
                 sendButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(sendButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, -1, -1));
+        jPanel1.add(sendButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
 
         resultLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         resultLabel.setForeground(new java.awt.Color(255, 51, 51));
@@ -88,7 +90,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         jLabel2.setText("Email: ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 210));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 170));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -96,8 +98,19 @@ public class ForgotPassword extends javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         testUsingSimpleRegex();
 
-        Properties properties = System.getProperties();
-        Random random = new Random();
+        Properties prop = new Properties();
+
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", 587);
+
+        String myAccountsEmail = "xxxx@gmail.com";
+        String myPassword = "xxxxxxxxxxx";
+        
+
+
+
     }//GEN-LAST:event_sendButtonActionPerformed
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Már 09. 12:54
+-- Létrehozás ideje: 2022. Már 10. 12:07
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -8027,8 +8027,8 @@ INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `Or
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 54),
 ('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 56),
 ('2022-02-10 6:5', '2022-02-17 5:4', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Brazil', 'Deputado Luís Eduardo Magalhães International Airport', 100, -3, 57),
-('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 85, 59),
-('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 73, 60);
+('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 83, 59),
+('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 63, 60);
 
 -- --------------------------------------------------------
 
@@ -8048,9 +8048,19 @@ CREATE TABLE `passenger` (
   `DestinationAirportName` varchar(300) NOT NULL,
   `Departure_time` varchar(200) NOT NULL,
   `Arrival_time` varchar(200) NOT NULL,
+  `SeatNum` int(255) NOT NULL,
+  `Flight_num` int(255) NOT NULL,
   `passenger_id` int(11) NOT NULL,
   `Customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `passenger`
+--
+
+INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `Origin_country`, `Destination_country`, `OriginAirportName`, `DestinationAirportName`, `Departure_time`, `Arrival_time`, `SeatNum`, `Flight_num`, `passenger_id`, `Customer_id`) VALUES
+('Women', 'asda', 'sdas', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 0, 60, 33, 41),
+('Man', 'kecske', 'kecske', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 0, 60, 34, 41);
 
 -- --------------------------------------------------------
 
@@ -8107,7 +8117,8 @@ ALTER TABLE `flight_info`
 --
 ALTER TABLE `passenger`
   ADD PRIMARY KEY (`passenger_id`),
-  ADD KEY `Customer_id` (`Customer_id`);
+  ADD KEY `Customer_id` (`Customer_id`),
+  ADD KEY `Flight_num` (`Flight_num`);
 
 --
 -- A tábla indexei `price_info`
@@ -8135,7 +8146,7 @@ ALTER TABLE `flight_info`
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
@@ -8151,7 +8162,8 @@ ALTER TABLE `registration_info`
 -- Megkötések a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  ADD CONSTRAINT `passenger_ibfk_1` FOREIGN KEY (`Customer_id`) REFERENCES `registration_info` (`CustomerId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `passenger_ibfk_1` FOREIGN KEY (`Customer_id`) REFERENCES `registration_info` (`CustomerId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `passenger_ibfk_2` FOREIGN KEY (`Flight_num`) REFERENCES `flight_info` (`Flight_num_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `price_info`

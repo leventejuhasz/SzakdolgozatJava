@@ -23,6 +23,8 @@ import static szakdolgozat.Kezdooldal.OriginAirportName;
 import static szakdolgozat.Kezdooldal.DestinationAirportName;
 import static szakdolgozat.Kezdooldal.Departure_time;
 import static szakdolgozat.Kezdooldal.Arrival_time;
+import static szakdolgozat.Kezdooldal.flightNum;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -210,7 +212,7 @@ public class Passenger extends javax.swing.JFrame {
             System.out.println(Arrival_time);
             System.out.println(Destination_country);
             if (isPassengerError() == false) {
-                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,  Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + customerId + "')");
+                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + 0 + "' , '" + flightNum + "' , '" + customerId + "')");
                 this.dispose();
             }
 
@@ -258,8 +260,6 @@ public class Passenger extends javax.swing.JFrame {
             return true;
         }
 
-        
-        
         if (!firtsNamePassengerTextField.getText().trim().matches(("[a-zA-Z]+"))) {
             JFrame jFrame = new JFrame();
             JOptionPane.showMessageDialog(jFrame, "First Name can only contains letter!");
