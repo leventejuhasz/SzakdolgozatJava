@@ -37,6 +37,8 @@ import static szakdolgozat.Kezdooldal.flightNum;
  */
 public class Passenger extends javax.swing.JFrame {
 
+    private int seatNum;
+
     public Passenger() {
         initComponents();
 
@@ -199,8 +201,8 @@ public class Passenger extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         Connection con;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -212,7 +214,7 @@ public class Passenger extends javax.swing.JFrame {
             System.out.println(Arrival_time);
             System.out.println(Destination_country);
             if (isPassengerError() == false) {
-                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + 0 + "' , '" + flightNum + "' , '" + customerId + "')");
+                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatNum + "' , '" + flightNum + "' , '" + customerId + "')");
                 this.dispose();
             }
 
@@ -225,9 +227,14 @@ public class Passenger extends javax.swing.JFrame {
 
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private boolean isPassengerError() {
+    public void setSeatNum(int seatNum) {
+        this.seatNum = seatNum;
+    }
+
+    public boolean isPassengerError() {
 
         int db = 0;
+        NotaskingRadioButton.setSelected(true);
         if (NotaskingRadioButton.isSelected()) {
             db++;
 

@@ -198,13 +198,13 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         passwordLabel.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
-        passwordLabel.setText("Jelszó:");
+        passwordLabel.setText("password: ");
         passwordLabel.setToolTipText("");
         loginPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 190, 30));
 
         loginEmailLabel.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         loginEmailLabel.setForeground(new java.awt.Color(255, 255, 255));
-        loginEmailLabel.setText("Felhasználónév:");
+        loginEmailLabel.setText("UserName:");
         loginEmailLabel.setToolTipText("");
         loginPanel.add(loginEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 190, 30));
 
@@ -249,7 +249,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         registrationLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         registrationLabel.setForeground(new java.awt.Color(255, 255, 255));
-        registrationLabel.setText("Regisztráció");
+        registrationLabel.setText("Registration");
         registrationLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 registrationLabelMouseClicked(evt);
@@ -775,7 +775,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
@@ -1577,24 +1577,20 @@ public class Kezdooldal extends javax.swing.JFrame {
 
                 } else {
 
-                    smt.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats - " + jegyekszama + " WHERE Departure_time LIKE  '"
-                            + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 0) + "' AND Arrival_time LIKE '"
-                            + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 1) + "' AND Origin_place LIKE '"
-                            + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 2) + "' AND OriginAirportName LIKE '"
-                            + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 3) + "' AND Destination_place LIKE '"
-                            + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 4) + "' AND DestinationAirportName LIKE '"
-                            + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 5) + "' AND Num_of_available_seats LIKE '"
-                            + BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6) + "' ");
-
                     flightNum = (String) BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 7);
-
+                    System.out.println(flightNum);
                     for (int i = 0; i < jegyekszama; i++) {
                         Passenger p = new Passenger();
                         p.setVisible(true);
                         p.setLocationRelativeTo(null);
                         p.setResizable(false);
+                        p.setSeatNum(Integer.parseInt((String) this.BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6)) - 1);
+                        if (p.isPassengerError() != true) {
+
+                        }
 
                     }
+                    smt.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats - " + jegyekszama + " WHERE Flight_num_id = " + flightNum);
                     loadtoBuyTicketsTableData();
 
                 }

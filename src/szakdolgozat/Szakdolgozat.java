@@ -19,8 +19,7 @@ public class Szakdolgozat {
         k.dontShowRegistrationPanel();
         k.dontShowAdminPanel();
         k.dontShowUserPanel();
-//     k.setCenterJframeAlways(k);
-//     k.setAlwaysOnTop(true);
+
     }
 
 }
