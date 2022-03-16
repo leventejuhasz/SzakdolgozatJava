@@ -599,14 +599,14 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Departure Time", "Arrival Time", "Origin Place", "Origin Airport Name", "Destination Airport Name", "Destination Place", "Number of Seats", "Flight Number"
+                "Departure Time", "Arrival Time", "Origin Place", "Origin Airport Name", "Destination Airport Name", "Destination Place", "Number of max Seats", "Number of available Seats", "Flight Number"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1021,7 +1021,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
-            String query = "Select Departure_time,Arrival_time,Origin_place, OriginAirportName, Destination_place, DestinationAirportName, Num_of_seats from flight_info";
+            String query = "Select Departure_time,Arrival_time,Origin_place, OriginAirportName, Destination_place, DestinationAirportName, Num_of_seats, Flight_num_id, Num_of_available_seats from flight_info";
             Statement smt = con.createStatement();
             ResultSet res = smt.executeQuery(query);
             Statement s = con.createStatement();
@@ -1030,7 +1030,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             int count = r.getInt("rowcount");
             r.close();
 
-            String columns[] = {addFlightTable.getColumnName(0), addFlightTable.getColumnName(1), addFlightTable.getColumnName(2), addFlightTable.getColumnName(3), addFlightTable.getColumnName(4), addFlightTable.getColumnName(5), addFlightTable.getColumnName(6)};
+            String columns[] = {addFlightTable.getColumnName(0), addFlightTable.getColumnName(1), addFlightTable.getColumnName(2), addFlightTable.getColumnName(3), addFlightTable.getColumnName(4), addFlightTable.getColumnName(5), addFlightTable.getColumnName(6),addFlightTable.getColumnName(7) , addFlightTable.getColumnName(8)};
             String data[][] = new String[count][addFlightTable.getColumnCount()];
 
             int i = 0;
@@ -1043,6 +1043,8 @@ public class Kezdooldal extends javax.swing.JFrame {
                 String dec = res.getString("Destination_place");
                 String dea = res.getString("DestinationAirportName");
                 String nos = res.getString("Num_of_seats");
+                String nofav= res.getString("Num_of_available_seats");
+                String fnid = res.getString("Flight_num_id");
                 data[i][0] = dep;
                 data[i][1] = ati;
                 data[i][2] = orc;
@@ -1050,6 +1052,8 @@ public class Kezdooldal extends javax.swing.JFrame {
                 data[i][4] = dec;
                 data[i][5] = dea;
                 data[i][6] = nos;
+                data[i][7] = nofav;
+                data[i][8] = fnid;
                 i++;
             }
 
@@ -1079,16 +1083,18 @@ public class Kezdooldal extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
-            String query = "Select Gender, FirstName, LastName, BirthDate , Luggage, Origin_country, Destination_country, passenger.OriginAirportName, passenger.DestinationAirportName, passenger.Departure_time, Flight_num_id,  passenger.Arrival_time, SeatNum From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num";
+            String query = "Select Gender, FirstName, LastName, BirthDate , Luggage, Origin_country, Destination_country, passenger.OriginAirportName, passenger.DestinationAirportName, passenger.Departure_time, Flight_num_id,  passenger.Arrival_time, SeatNum From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num where passenger.Customer_id=" + customerId;
             ResultSet res = smt.executeQuery(query);
             Statement s = con.createStatement();
             ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM passenger where Customer_id LIKE '" + customerId + "'");
             r.next();
             int count = r.getInt("rowcount");
+            System.out.println(count);
+            System.out.println(customerId);
             r.close();
             String columns[] = {myTicketsTable.getColumnName(0), myTicketsTable.getColumnName(1), myTicketsTable.getColumnName(2), myTicketsTable.getColumnName(3), myTicketsTable.getColumnName(4), myTicketsTable.getColumnName(5), myTicketsTable.getColumnName(6), myTicketsTable.getColumnName(7), myTicketsTable.getColumnName(8)};
             String data[][] = new String[count][myTicketsTable.getColumnCount()];
-
+            boolean vanUtas = false;
             int i = 0;
             while (res.next()) {
 
@@ -1110,7 +1116,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 data[i][6] = orp;
                 data[i][7] = dep;
                 data[i][8] = departure;
-
+                vanUtas = true;
                 i++;
 
             }
@@ -1197,6 +1203,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             keepFlightsData();
             countries();
             hibasAdat = false;
+
         }
 
         if (isCheckUserLogin()) {
@@ -1204,6 +1211,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             dontShowLoginPanel();
             showUserPanel();
             this.buyTicketsPanel.setOpaque(false);
+            this.BuyTicketsTable.show();
             loadtoBuyTicketsTableData();
             hibasAdat = false;
         }
@@ -1486,8 +1494,19 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_destinationCountryComboBoxItemStateChanged
 
+    public static String deptime, arrtime, orcountry, destcountry, orairport, destairport, maxnumofseats, adminflightnum, availableseats;
     private void ManageFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageFlightButonActionPerformed
 
+        deptime = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 0);
+        arrtime = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 1);
+        orcountry = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 2);
+        destcountry = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 3);
+        orairport = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 4);
+        destairport = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 5);
+        maxnumofseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 6);
+       availableseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 7); 
+       adminflightnum = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 8);
+        
         ManageFlight m = new ManageFlight();
         m.setLocationRelativeTo(null);
         m.setVisible(true);
@@ -1520,6 +1539,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void logOutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutLabelMouseClicked
         dontShowUserPanel();
         ShowLoginPanel();
+
         loginEmailTextField.setText("");
         passwordTextField.setText("");
         loginErrorLabel.setText("");
@@ -1584,13 +1604,10 @@ public class Kezdooldal extends javax.swing.JFrame {
                         p.setVisible(true);
                         p.setLocationRelativeTo(null);
                         p.setResizable(false);
-                        p.setSeatNum(Integer.parseInt((String) this.BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6)) - 1);
-                        if (p.isPassengerError() != true) {
-
-                        }
+                       
 
                     }
-                    smt.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats - " + jegyekszama + " WHERE Flight_num_id = " + flightNum);
+                    
                     loadtoBuyTicketsTableData();
 
                 }
@@ -1857,6 +1874,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         this.buyTicketsLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.logOutLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.myTickets.setVisible(false);
+        BuyTicketsTable.show();
         UserPanel.show();
         System.out.println("User panel be");
     }

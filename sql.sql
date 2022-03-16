@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Már 10. 12:07
+-- Létrehozás ideje: 2022. Már 16. 13:45
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -8015,20 +8015,8 @@ CREATE TABLE `flight_info` (
 --
 
 INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Num_of_available_seats`, `Flight_num_id`) VALUES
-('2022-02-27 9:4', '2022-02-28 4:6', 'Andorra', 'Andorra La Vella Airport', 'Angola', 'Albano Machado Airport', 100, 0, 44),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 45),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 46),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 47),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 48),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 49),
-('2022-02-19 18:32', '2022-02-18 16:56', 'Algeria', 'Ain Arnat Airport', 'American Samoa', 'Ofu Airport', 100, -4, 50),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 52),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 53),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 54),
-('2022-02-11 0:1', '2022-02-13 0:1', 'Angola', 'Albano Machado Airport', 'Angola', 'Albano Machado Airport', 100, -1, 56),
-('2022-02-10 6:5', '2022-02-17 5:4', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Brazil', 'Deputado Luís Eduardo Magalhães International Airport', 100, -3, 57),
-('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 83, 59),
-('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 63, 60);
+('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 80, 59),
+('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 45, 60);
 
 -- --------------------------------------------------------
 
@@ -8060,7 +8048,23 @@ CREATE TABLE `passenger` (
 
 INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `Origin_country`, `Destination_country`, `OriginAirportName`, `DestinationAirportName`, `Departure_time`, `Arrival_time`, `SeatNum`, `Flight_num`, `passenger_id`, `Customer_id`) VALUES
 ('Women', 'asda', 'sdas', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 0, 60, 33, 41),
-('Man', 'kecske', 'kecske', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 0, 60, 34, 41);
+('Man', 'kecske', 'kecske', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 0, 60, 34, 41),
+('Women', 'cica', 'ca', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 58, 60, 35, 41),
+('Man', 'asd', 'sad', '1961.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 58, 60, 36, 41),
+('Women', 'asd', 'asd', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 54, 60, 37, 41),
+('Man', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 54, 60, 38, 41),
+('Man', 'asd', 'asd', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 54, 60, 39, 41),
+('Women', 'asd', 'asd', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 54, 60, 40, 41),
+('Women', 'Kis', 'Gabor', '1952.June.5', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 41, 43),
+('Man', 'asd', 'asd', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 42, 43),
+('Man', 'kis', 'nagyeelek', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 43, 43),
+('Man', 'adas', 'ads', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 49, 60, 44, 41),
+('Man', 'asd', 'asd', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 49, 60, 45, 41),
+('Man', 'kk', 'aa', '1950.January.1', 'I am not asking (0 Ft)', 'Algeria', 'Anguilla', 'Blida Airport', 'Wallblake Airport', '2022-02-16 9:6', '2022-02-28 9:6', 80, 59, 46, 41),
+('Man', 'kis', 'kca', '1950.March.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 45, 60, 47, 41),
+('Man', 'lol', 'lol', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 45, 60, 48, 41),
+('Man', 'xd', 'xd', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 45, 60, 49, 41),
+('Man', 'as', 'as', '1963.January.1', 'I am not asking (0 Ft)', 'Algeria', 'Anguilla', 'Blida Airport', 'Wallblake Airport', '2022-02-16 9:6', '2022-02-28 9:6', 80, 59, 50, 41);
 
 -- --------------------------------------------------------
 
@@ -8100,7 +8104,9 @@ CREATE TABLE `registration_info` (
 --
 
 INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address`, `zipCode`, `City`, `Country`, `phoneNumber`, `Gender`, `Email`, `CustomerPassword`) VALUES
-(41, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'k@h.hu', '0638176A683493DF8E7265B4A1291301');
+(41, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'k@h.hu', '0638176A683493DF8E7265B4A1291301'),
+(42, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
+(43, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'm@m.hu', '0638176A683493DF8E7265B4A1291301');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -8146,13 +8152,13 @@ ALTER TABLE `flight_info`
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
-  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Megkötések a kiírt táblákhoz

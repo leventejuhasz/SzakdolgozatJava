@@ -1189,14 +1189,15 @@
             <Component class="javax.swing.JTable" name="addFlightTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="0">
+                  <Table columnCount="9" rowCount="0">
                     <Column editable="false" title="Departure Time" type="java.lang.String"/>
                     <Column editable="false" title="Arrival Time" type="java.lang.String"/>
                     <Column editable="false" title="Origin Place" type="java.lang.String"/>
                     <Column editable="false" title="Origin Airport Name" type="java.lang.Object"/>
                     <Column editable="false" title="Destination Airport Name" type="java.lang.Object"/>
                     <Column editable="false" title="Destination Place" type="java.lang.String"/>
-                    <Column editable="false" title="Number of Seats" type="java.lang.Integer"/>
+                    <Column editable="false" title="Number of max Seats" type="java.lang.Integer"/>
+                    <Column editable="false" title="Number of available Seats" type="java.lang.Integer"/>
                     <Column editable="false" title="Flight Number" type="java.lang.Integer"/>
                   </Table>
                 </Property>

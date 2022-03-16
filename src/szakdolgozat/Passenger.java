@@ -37,8 +37,6 @@ import static szakdolgozat.Kezdooldal.flightNum;
  */
 public class Passenger extends javax.swing.JFrame {
 
-    private int seatNum;
-
     public Passenger() {
         initComponents();
 
@@ -208,15 +206,22 @@ public class Passenger extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
+            Statement smt2 = con.createStatement();
+
+            ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
 
             String birthdate = this.yearComboBox.getSelectedItem() + "." + this.MonthComboBox.getSelectedItem() + "." + this.dayComboBox.getSelectedItem();
+            r.next();
+            int seatnum = r.getInt(1);
 
             System.out.println(Arrival_time);
             System.out.println(Destination_country);
             if (isPassengerError() == false) {
-                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatNum + "' , '" + flightNum + "' , '" + customerId + "')");
+                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
                 this.dispose();
             }
+
+            smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-1");
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
@@ -226,10 +231,6 @@ public class Passenger extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_saveButtonActionPerformed
-
-    public void setSeatNum(int seatNum) {
-        this.seatNum = seatNum;
-    }
 
     public boolean isPassengerError() {
 
