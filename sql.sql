@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Már 16. 13:45
+-- Létrehozás ideje: 2022. Már 17. 12:51
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -8015,8 +8015,11 @@ CREATE TABLE `flight_info` (
 --
 
 INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Num_of_available_seats`, `Flight_num_id`) VALUES
-('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 80, 59),
-('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 45, 60);
+('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 77, 59),
+('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 42, 60),
+('2022-03-18 10:30', '2022-03-19 17:30', 'Hungary', 'Miskolc Airport', 'American Samoa', 'Tau Airport', 200, 197, 61),
+('2022-03-18 3:8', '2022-03-19 11:4', 'Aruba', 'Queen Beatrix International Airport', 'Belize', 'Belize City Municipal Airport', 200, 195, 62),
+('2022-03-17 19:15', '2022-03-19 20:13', 'Gambia', 'Banjul International Airport', 'Comoros', 'Iconi Airport', 150, 133, 63);
 
 -- --------------------------------------------------------
 
@@ -8047,8 +8050,6 @@ CREATE TABLE `passenger` (
 --
 
 INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `Origin_country`, `Destination_country`, `OriginAirportName`, `DestinationAirportName`, `Departure_time`, `Arrival_time`, `SeatNum`, `Flight_num`, `passenger_id`, `Customer_id`) VALUES
-('Women', 'asda', 'sdas', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 0, 60, 33, 41),
-('Man', 'kecske', 'kecske', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 0, 60, 34, 41),
 ('Women', 'cica', 'ca', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 58, 60, 35, 41),
 ('Man', 'asd', 'sad', '1961.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 58, 60, 36, 41),
 ('Women', 'asd', 'asd', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 54, 60, 37, 41),
@@ -8058,13 +8059,28 @@ INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggag
 ('Women', 'Kis', 'Gabor', '1952.June.5', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 41, 43),
 ('Man', 'asd', 'asd', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 42, 43),
 ('Man', 'kis', 'nagyeelek', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 43, 43),
-('Man', 'adas', 'ads', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 49, 60, 44, 41),
-('Man', 'asd', 'asd', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 49, 60, 45, 41),
 ('Man', 'kk', 'aa', '1950.January.1', 'I am not asking (0 Ft)', 'Algeria', 'Anguilla', 'Blida Airport', 'Wallblake Airport', '2022-02-16 9:6', '2022-02-28 9:6', 80, 59, 46, 41),
 ('Man', 'kis', 'kca', '1950.March.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 45, 60, 47, 41),
 ('Man', 'lol', 'lol', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 45, 60, 48, 41),
 ('Man', 'xd', 'xd', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 45, 60, 49, 41),
-('Man', 'as', 'as', '1963.January.1', 'I am not asking (0 Ft)', 'Algeria', 'Anguilla', 'Blida Airport', 'Wallblake Airport', '2022-02-16 9:6', '2022-02-28 9:6', 80, 59, 50, 41);
+('Man', 'as', 'as', '1963.January.1', 'I am not asking (0 Ft)', 'Algeria', 'Anguilla', 'Blida Airport', 'Wallblake Airport', '2022-02-16 9:6', '2022-02-28 9:6', 80, 59, 50, 41),
+('Women', 'Kis', 'Gabor', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 199, 62, 51, 43),
+('Women', 'Nagy ', 'Emese', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 198, 62, 52, 43),
+('Man', 'Kis ', 'Jnos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 197, 62, 53, 43),
+('Man', 'Juhasz', 'Levente', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 149, 63, 54, 41),
+('Man', 'asd', 'asd', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 147, 63, 56, 41),
+('Man', 'kis', 'kca', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 146, 63, 57, 41),
+('Man', 'Kis', 'Gabor', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 144, 63, 59, 44),
+('Man', 'nagy', 'Lajos', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 143, 63, 60, 44),
+('Man', 'Nagy', 'Lorant', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 139, 63, 61, 44),
+('Man', 'juhasz', 'Laura', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 138, 63, 62, 44),
+('Man', 'Kis', 'Laszlo', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 196, 62, 63, 44),
+('Man', 'janos', 'janos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 195, 62, 64, 44),
+('Man', 'Kis', 'Anna', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 137, 63, 65, 44),
+('Man', 'Asd', 'Asd', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 136, 63, 66, 44),
+('Man', 'A', 'A', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 135, 63, 67, 44),
+('Man', 'Kos', 'Mos', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 134, 63, 68, 44),
+('Man', 'Juhasz', 'Levente', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 133, 63, 69, 44);
 
 -- --------------------------------------------------------
 
@@ -8076,7 +8092,9 @@ CREATE TABLE `price_info` (
   `Passenger_name` int(30) NOT NULL,
   `Seat_num` int(4) NOT NULL,
   `Price` int(4) NOT NULL,
-  `Flight_num` int(12) NOT NULL
+  `Flight_num` int(12) NOT NULL,
+  `Customer_id` int(11) NOT NULL,
+  `Passenger_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -8106,7 +8124,8 @@ CREATE TABLE `registration_info` (
 INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address`, `zipCode`, `City`, `Country`, `phoneNumber`, `Gender`, `Email`, `CustomerPassword`) VALUES
 (41, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'k@h.hu', '0638176A683493DF8E7265B4A1291301'),
 (42, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(43, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'm@m.hu', '0638176A683493DF8E7265B4A1291301');
+(43, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'm@m.hu', '0638176A683493DF8E7265B4A1291301'),
+(44, 'Kiss', 'Janos', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'zsd@gmail.com', '0638176A683493DF8E7265B4A1291301');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -8146,19 +8165,19 @@ ALTER TABLE `registration_info`
 -- AUTO_INCREMENT a táblához `flight_info`
 --
 ALTER TABLE `flight_info`
-  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
-  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Megkötések a kiírt táblákhoz
