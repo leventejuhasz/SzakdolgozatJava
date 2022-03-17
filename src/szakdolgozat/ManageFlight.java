@@ -10,7 +10,18 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import static szakdolgozat.Kezdooldal.arrtime;
 import static szakdolgozat.Kezdooldal.deptime;
 import static szakdolgozat.Kezdooldal.orairport;
@@ -27,6 +38,8 @@ public class ManageFlight extends javax.swing.JFrame {
         initComponents();
         labels();
         fillTable();
+        sorter();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +51,7 @@ public class ManageFlight extends javax.swing.JFrame {
         passengersTable = new javax.swing.JTable();
         SearchPassenger = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        deletePassengerButton = new javax.swing.JButton();
         destPlaceLabel = new javax.swing.JLabel();
         orplaceLabel = new javax.swing.JLabel();
         arrtimeLabel = new javax.swing.JLabel();
@@ -49,6 +62,7 @@ public class ManageFlight extends javax.swing.JFrame {
         passengertabletitle = new javax.swing.JLabel();
         numofmaxseatLabel = new javax.swing.JLabel();
         flightNumLabel = new javax.swing.JLabel();
+        searchButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,29 +122,34 @@ public class ManageFlight extends javax.swing.JFrame {
         searchLabel.setText("Search Passenger: ");
         ManageFlightPanel.add(searchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setText("Delete Passenger");
-        ManageFlightPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 660, 170, 40));
+        deletePassengerButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        deletePassengerButton.setText("Delete Passenger");
+        deletePassengerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deletePassengerButtonMouseClicked(evt);
+            }
+        });
+        ManageFlightPanel.add(deletePassengerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 660, 170, 40));
 
         destPlaceLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         destPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
         destPlaceLabel.setText("Destination Country: ");
-        ManageFlightPanel.add(destPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        ManageFlightPanel.add(destPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
 
         orplaceLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         orplaceLabel.setForeground(new java.awt.Color(0, 0, 0));
         orplaceLabel.setText("Origin Country: ");
-        ManageFlightPanel.add(orplaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        ManageFlightPanel.add(orplaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
 
         arrtimeLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         arrtimeLabel.setForeground(new java.awt.Color(0, 0, 0));
         arrtimeLabel.setText("Arrival Time: ");
-        ManageFlightPanel.add(arrtimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        ManageFlightPanel.add(arrtimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         numofavseatsLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         numofavseatsLabel.setForeground(new java.awt.Color(0, 0, 0));
         numofavseatsLabel.setText("Number of available seats: ");
-        ManageFlightPanel.add(numofavseatsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, -1, -1));
+        ManageFlightPanel.add(numofavseatsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 90, -1, -1));
 
         deptimeLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         deptimeLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -140,64 +159,126 @@ public class ManageFlight extends javax.swing.JFrame {
         orairportnameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         orairportnameLabel.setForeground(new java.awt.Color(0, 0, 0));
         orairportnameLabel.setText("Origin Airport Name: ");
-        ManageFlightPanel.add(orairportnameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
+        ManageFlightPanel.add(orairportnameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, -1));
 
         destaiportNameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         destaiportNameLabel.setForeground(new java.awt.Color(0, 0, 0));
         destaiportNameLabel.setText("Destination Airport Name: ");
-        ManageFlightPanel.add(destaiportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
+        ManageFlightPanel.add(destaiportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
 
-        passengertabletitle.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        passengertabletitle.setForeground(new java.awt.Color(255, 0, 0));
+        passengertabletitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        passengertabletitle.setForeground(new java.awt.Color(255, 255, 255));
         passengertabletitle.setText("Passengers Table");
-        ManageFlightPanel.add(passengertabletitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, -1, -1));
+        ManageFlightPanel.add(passengertabletitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, -1, -1));
 
         numofmaxseatLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         numofmaxseatLabel.setForeground(new java.awt.Color(0, 0, 0));
         numofmaxseatLabel.setText("Number of max seats: ");
-        ManageFlightPanel.add(numofmaxseatLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, -1, -1));
+        ManageFlightPanel.add(numofmaxseatLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 50, -1, -1));
 
         flightNumLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         flightNumLabel.setForeground(new java.awt.Color(0, 0, 0));
         flightNumLabel.setText("Flight Number: ");
-        ManageFlightPanel.add(flightNumLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 90, -1, -1));
+        ManageFlightPanel.add(flightNumLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 10, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/305614_2.jpg"))); // NOI18N
-        ManageFlightPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 830));
+        searchButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        searchButton.setText("Search");
+        searchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchButtonMouseClicked(evt);
+            }
+        });
+        ManageFlightPanel.add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 660, 110, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/pexels-konevi-3789871-scaled.jpg"))); // NOI18N
+        ManageFlightPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1490, 710));
 
         getContentPane().add(ManageFlightPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-            DefaultTableModel model;
+
+    private void keresees() {
+        TableRowSorter sorter = new TableRowSorter(model);
+        String title = SearchPassenger.getText();
+        passengersTable.setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter(title));
+
+    }
+
+
+    private void deletePassengerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerButtonMouseClicked
+
+        try {
+            if (passengersTable.isRowSelected(passengersTable.getSelectedRow())) {
+                JFrame jFrame = new JFrame();
+                int result = JOptionPane.showConfirmDialog(jFrame, "Are you sure want to delete this passenger?.");
+
+                if (result == 0) {
+
+                   
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+                    Statement smt = con.createStatement();
+                    smt.executeUpdate("Delete FROM passenger where seatNum =" + passengersTable.getValueAt(passengersTable.getSelectedRow(), 3));
+                    con.close();
+                    model.removeRow(passengersTable.getSelectedRow());
+                } 
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+
+    }//GEN-LAST:event_deletePassengerButtonMouseClicked
+
+    private void sorter() {
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(passengersTable.getModel());
+        passengersTable.setRowSorter(sorter);
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+
+        int columnIndexToSort = 3;
+        sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
+
+        sorter.setSortKeys(sortKeys);
+        sorter.sort();
+    }
+
+
+    private void searchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseClicked
+        keresees();
+
+    }//GEN-LAST:event_searchButtonMouseClicked
+    DefaultTableModel model;
 
     private void fillTable() {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-            System.out.println(adminflightnum);
             String query = "Select passenger.FirstName, passenger.LastName, BirthDate , Luggage, SeatNum, registration_info.FirstName, registration_info.LastName, Email , phoneNumber FROM passenger Inner Join registration_info ON registration_info.CustomerId = passenger.Customer_id where Flight_num = " + adminflightnum;
             Statement smt = con.createStatement();
             ResultSet res = smt.executeQuery(query);
             Statement s = con.createStatement();
-            System.out.println(adminflightnum);
-            ResultSet r = s.executeQuery("SELECT COUNT(passenger_id) as rowcount FROM passenger WHERE Flight_num ="+adminflightnum);
+            ResultSet r = s.executeQuery("SELECT COUNT(passenger_id) as rowcount FROM passenger WHERE Flight_num =" + adminflightnum);
             r.next();
             int count = r.getInt("rowcount");
             r.close();
-            System.out.println(count);
             String columns[] = {passengersTable.getColumnName(0), passengersTable.getColumnName(1), passengersTable.getColumnName(2), passengersTable.getColumnName(3), passengersTable.getColumnName(4), passengersTable.getColumnName(5), passengersTable.getColumnName(6)};
             String data[][] = new String[count][passengersTable.getColumnCount()];
             System.out.println("kutya");
             int i = 0;
             while (res.next()) {
- System.out.println("c");
-                String passname = res.getString("FirstName" + " " + res.getString("LastName"));
+                String passname = res.getString("passenger.FirstName") + " " + res.getString("passenger.LastName");
                 String bd = res.getString("BirthDate");
                 String lug = res.getString("Luggage");
                 String seat = res.getString("SeatNum");
-                String contactname = res.getString("FirstName" + " " + "LastName");
+                String contactname = res.getString("registration_info.FirstName") + " " + res.getString("registration_info.LastName");
                 String nos = res.getString("Email");
                 String fid = res.getString("phoneNumber");
                 data[i][0] = passname;
@@ -208,8 +289,6 @@ public class ManageFlight extends javax.swing.JFrame {
                 data[i][5] = nos;
                 data[i][6] = fid;
                 i++;
-               
-               System.out.println("c");
             }
 
             model = new DefaultTableModel(data, columns);
@@ -241,11 +320,11 @@ public class ManageFlight extends javax.swing.JFrame {
     private javax.swing.JPanel ManageFlightPanel;
     private javax.swing.JTextField SearchPassenger;
     private javax.swing.JLabel arrtimeLabel;
+    private javax.swing.JButton deletePassengerButton;
     private javax.swing.JLabel deptimeLabel;
     private javax.swing.JLabel destPlaceLabel;
     private javax.swing.JLabel destaiportNameLabel;
     private javax.swing.JLabel flightNumLabel;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel numofavseatsLabel;
@@ -254,6 +333,7 @@ public class ManageFlight extends javax.swing.JFrame {
     private javax.swing.JLabel orplaceLabel;
     private javax.swing.JTable passengersTable;
     private javax.swing.JLabel passengertabletitle;
+    private javax.swing.JButton searchButton;
     private javax.swing.JLabel searchLabel;
     // End of variables declaration//GEN-END:variables
 }

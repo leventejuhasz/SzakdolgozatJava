@@ -3,6 +3,7 @@
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="undecorated" type="boolean" value="true"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1150, 700]"/>
     </Property>
@@ -242,6 +243,21 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="750" y="350" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="exitLabelButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/szakdolgozat/X11-icon.png"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="exitLabelButtonMouseClicked"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="1100" y="0" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -998,7 +1014,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Departure Time: "/>
           </Properties>
@@ -1014,7 +1030,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Arrival Time: "/>
           </Properties>
@@ -1030,7 +1046,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Origin Airport Name: "/>
           </Properties>
@@ -1046,7 +1062,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Destination Airport Name: "/>
           </Properties>
@@ -1062,7 +1078,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Number of Seats: "/>
           </Properties>
@@ -1081,7 +1097,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="610" width="50" height="-1"/>
+              <AbsoluteConstraints x="220" y="620" width="50" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -1208,7 +1224,7 @@
         <Component class="javax.swing.JLabel" name="adminErrorLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
+              <Font name="Dialog" size="36" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="ff" type="rgb"/>
@@ -1216,7 +1232,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="640" width="-1" height="-1"/>
+              <AbsoluteConstraints x="130" y="650" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -1238,14 +1254,14 @@
         <Component class="com.toedter.calendar.JDateChooser" name="departureTimejDateChooser">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="120" y="330" width="210" height="-1"/>
+              <AbsoluteConstraints x="130" y="340" width="210" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="arrivalTImejDateChooser">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="120" y="370" width="210" height="-1"/>
+              <AbsoluteConstraints x="100" y="380" width="210" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -1495,7 +1511,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Hour:"/>
           </Properties>
@@ -1511,7 +1527,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Minute:"/>
           </Properties>
@@ -1527,7 +1543,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Hour:"/>
           </Properties>
@@ -1543,7 +1559,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Minute: "/>
           </Properties>
@@ -1559,7 +1575,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Origin Country: "/>
           </Properties>
@@ -1575,7 +1591,7 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Destination Country: "/>
           </Properties>
@@ -1638,7 +1654,7 @@
               <Font name="Dialog" size="18" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Search Flight:"/>
           </Properties>
@@ -1651,13 +1667,13 @@
         <Component class="javax.swing.JLabel" name="background">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/szakdolgozat/2560px-F1_light_blue_flag.svg.png"/>
+              <Image iconType="3" name="/szakdolgozat/microsoft-flight-simulator-6.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="-560" y="-70" width="-1" height="-1"/>
+              <AbsoluteConstraints x="-30" y="-120" width="-1" height="1310"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -1847,14 +1863,14 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Reservation of seats"/>
+                <Property name="text" type="java.lang.String" value="Add Passengers"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reservationButtonActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="reservationButtonMouseClicked"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="800" y="320" width="220" height="40"/>
+                  <AbsoluteConstraints x="810" y="320" width="220" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -1945,7 +1961,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="280" y="290" width="110" height="-1"/>
+                  <AbsoluteConstraints x="280" y="310" width="110" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -2155,7 +2171,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="410" y="10" width="-1" height="-1"/>
+              <AbsoluteConstraints x="480" y="10" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

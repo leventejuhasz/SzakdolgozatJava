@@ -67,7 +67,8 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     public Kezdooldal() {
         initComponents();
-
+        mozgato();
+        this.exitLabelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     @SuppressWarnings("unchecked")
@@ -86,6 +87,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         registrationLabel = new javax.swing.JLabel();
         loginErrorLabel = new javax.swing.JLabel();
         forgotPasswordLabel = new javax.swing.JLabel();
+        exitLabelButton = new javax.swing.JLabel();
         bluebackgroundLabel = new javax.swing.JLabel();
         RegistrationPanel = new javax.swing.JPanel();
         streetTextfield = new javax.swing.JTextField();
@@ -187,6 +189,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         userBackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setSize(new java.awt.Dimension(1150, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -270,6 +273,14 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         });
         loginPanel.add(forgotPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, -1, -1));
+
+        exitLabelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/X11-icon.png"))); // NOI18N
+        exitLabelButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitLabelButtonMouseClicked(evt);
+            }
+        });
+        loginPanel.add(exitLabelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 0, -1, -1));
 
         bluebackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bluebackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/asd.jpg"))); // NOI18N
@@ -521,27 +532,27 @@ public class Kezdooldal extends javax.swing.JFrame {
         AdminPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         departureTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        departureTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        departureTimeLabel.setForeground(new java.awt.Color(204, 204, 204));
         departureTimeLabel.setText("Departure Time: ");
         AdminPanel.add(departureTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, 30));
 
         arrivalTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        arrivalTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        arrivalTimeLabel.setForeground(new java.awt.Color(204, 204, 204));
         arrivalTimeLabel.setText("Arrival Time: ");
         AdminPanel.add(arrivalTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, 30));
 
         originPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        originPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
+        originPlaceLabel.setForeground(new java.awt.Color(204, 204, 204));
         originPlaceLabel.setText("Origin Airport Name: ");
         AdminPanel.add(originPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, 200, 30));
 
         destinationPlaceLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        destinationPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
+        destinationPlaceLabel.setForeground(new java.awt.Color(204, 204, 204));
         destinationPlaceLabel.setText("Destination Airport Name: ");
         AdminPanel.add(destinationPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 190, 30));
 
         numberOfSeats.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        numberOfSeats.setForeground(new java.awt.Color(0, 0, 0));
+        numberOfSeats.setForeground(new java.awt.Color(204, 204, 204));
         numberOfSeats.setText("Number of Seats: ");
         AdminPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, -1, 30));
 
@@ -551,7 +562,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 numberOfSeatsTextFieldActionPerformed(evt);
             }
         });
-        AdminPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 610, 50, -1));
+        AdminPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 620, 50, -1));
 
         adminRegisterFlightButton.setBackground(new java.awt.Color(0, 0, 0));
         adminRegisterFlightButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -621,9 +632,9 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         AdminPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1150, 210));
 
-        adminErrorLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        adminErrorLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         adminErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        AdminPanel.add(adminErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 640, -1, -1));
+        AdminPanel.add(adminErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 650, -1, -1));
 
         originAirportNameComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -631,8 +642,8 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         });
         AdminPanel.add(originAirportNameComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 290, 30));
-        AdminPanel.add(departureTimejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 210, -1));
-        AdminPanel.add(arrivalTImejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 210, -1));
+        AdminPanel.add(departureTimejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 210, -1));
+        AdminPanel.add(arrivalTImejDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 210, -1));
 
         departureTimeHourComboBox.setMaximumRowCount(24);
         departureTimeHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
@@ -657,32 +668,32 @@ public class Kezdooldal extends javax.swing.JFrame {
         AdminPanel.add(originCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 290, 30));
 
         depHourLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        depHourLabel.setForeground(new java.awt.Color(0, 0, 0));
+        depHourLabel.setForeground(new java.awt.Color(204, 204, 204));
         depHourLabel.setText("Hour:");
         AdminPanel.add(depHourLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, -1, 30));
 
         depMinLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        depMinLabel.setForeground(new java.awt.Color(0, 0, 0));
+        depMinLabel.setForeground(new java.awt.Color(204, 204, 204));
         depMinLabel.setText("Minute:");
         AdminPanel.add(depMinLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 370, -1, 30));
 
         arrHourLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        arrHourLabel.setForeground(new java.awt.Color(0, 0, 0));
+        arrHourLabel.setForeground(new java.awt.Color(204, 204, 204));
         arrHourLabel.setText("Hour:");
         AdminPanel.add(arrHourLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, -1, 30));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Minute: ");
         AdminPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, -1, 30));
 
         originPlaceLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        originPlaceLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        originPlaceLabel1.setForeground(new java.awt.Color(204, 204, 204));
         originPlaceLabel1.setText("Origin Country: ");
         AdminPanel.add(originPlaceLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 180, 30));
 
         destinationPlaceLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        destinationPlaceLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        destinationPlaceLabel1.setForeground(new java.awt.Color(204, 204, 204));
         destinationPlaceLabel1.setText("Destination Country: ");
         AdminPanel.add(destinationPlaceLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, -1, 30));
 
@@ -707,13 +718,13 @@ public class Kezdooldal extends javax.swing.JFrame {
         AdminPanel.add(searchTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 390, 300, 50));
 
         searchLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        searchLabel.setForeground(new java.awt.Color(0, 0, 0));
+        searchLabel.setForeground(new java.awt.Color(204, 204, 204));
         searchLabel.setText("Search Flight:");
         AdminPanel.add(searchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 400, -1, -1));
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/2560px-F1_light_blue_flag.svg.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/microsoft-flight-simulator-6.jpg"))); // NOI18N
         background.setText("jLabel1");
-        AdminPanel.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-560, -70, -1, -1));
+        AdminPanel.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -120, -1, 1310));
 
         getContentPane().add(AdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
@@ -800,13 +811,13 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         reservationButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reservationButton.setForeground(new java.awt.Color(0, 0, 0));
-        reservationButton.setText("Reservation of seats");
-        reservationButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reservationButtonActionPerformed(evt);
+        reservationButton.setText("Add Passengers");
+        reservationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reservationButtonMouseClicked(evt);
             }
         });
-        buyTicketsPanel.add(reservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 320, 220, 40));
+        buyTicketsPanel.add(reservationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 320, 220, 40));
 
         userDestinationCountryLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         userDestinationCountryLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -834,7 +845,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Adult (17 year+)");
-        buyTicketsPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 110, -1));
+        buyTicketsPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 110, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -909,7 +920,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         welcomeUser.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         welcomeUser.setForeground(new java.awt.Color(255, 255, 255));
-        UserPanel.add(welcomeUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        UserPanel.add(welcomeUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, -1, -1));
 
         userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
         userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1030,7 +1041,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             int count = r.getInt("rowcount");
             r.close();
 
-            String columns[] = {addFlightTable.getColumnName(0), addFlightTable.getColumnName(1), addFlightTable.getColumnName(2), addFlightTable.getColumnName(3), addFlightTable.getColumnName(4), addFlightTable.getColumnName(5), addFlightTable.getColumnName(6),addFlightTable.getColumnName(7) , addFlightTable.getColumnName(8)};
+            String columns[] = {addFlightTable.getColumnName(0), addFlightTable.getColumnName(1), addFlightTable.getColumnName(2), addFlightTable.getColumnName(3), addFlightTable.getColumnName(4), addFlightTable.getColumnName(5), addFlightTable.getColumnName(6), addFlightTable.getColumnName(7), addFlightTable.getColumnName(8)};
             String data[][] = new String[count][addFlightTable.getColumnCount()];
 
             int i = 0;
@@ -1043,7 +1054,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 String dec = res.getString("Destination_place");
                 String dea = res.getString("DestinationAirportName");
                 String nos = res.getString("Num_of_seats");
-                String nofav= res.getString("Num_of_available_seats");
+                String nofav = res.getString("Num_of_available_seats");
                 String fnid = res.getString("Flight_num_id");
                 data[i][0] = dep;
                 data[i][1] = ati;
@@ -1321,6 +1332,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                             originAirportNameComboBox.getSelectedItem(),
                             destinationCountryComboBox.getSelectedItem(),
                             destinationAirportNameComboBox.getSelectedItem(),
+                            Integer.parseInt(numberOfSeatsTextField.getText()),
                             Integer.parseInt(numberOfSeatsTextField.getText())}
                 );
             } else {
@@ -1500,13 +1512,13 @@ public class Kezdooldal extends javax.swing.JFrame {
         deptime = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 0);
         arrtime = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 1);
         orcountry = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 2);
-        destcountry = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 3);
-        orairport = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 4);
+        orairport = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 3);
+        destcountry = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 4);
         destairport = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 5);
         maxnumofseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 6);
-       availableseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 7); 
-       adminflightnum = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 8);
-        
+        availableseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 7);
+        adminflightnum = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 8);
+
         ManageFlight m = new ManageFlight();
         m.setLocationRelativeTo(null);
         m.setVisible(true);
@@ -1577,6 +1589,46 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     private void buyTicketsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyTicketsButtonActionPerformed
 
+
+    }//GEN-LAST:event_buyTicketsButtonActionPerformed
+
+    private void forgotPasswordLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotPasswordLabelMouseClicked
+        ForgotPassword p = new ForgotPassword();
+        p.setVisible(true);
+        p.setResizable(false);
+        p.setLocationRelativeTo(null);
+        p.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_forgotPasswordLabelMouseClicked
+
+    private void utasletrehozas(String cim) {
+        Passenger p = new Passenger();
+        p.setVisible(true);
+        p.setLocationRelativeTo(null);
+        p.setResizable(false);
+        p.setTitle(cim);
+
+    }
+    int posX = 0, posY = 0;
+
+    private void mozgato() {
+
+        this.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                posX = e.getX();
+                posY = e.getY();
+            }
+        });
+
+        this.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent evt) {
+                //sets frame position when mouse dragged			
+                setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
+
+            }
+        });
+    }
+
+    private void reservationButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservationButtonMouseClicked
         if (notselectedFlight() != "") {
 
             JFrame jFrame = new JFrame();
@@ -1584,6 +1636,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         } else {
             Connection con;
             getDataFromBuyTicketsTableToPassenger();
+
+            int felnott = Integer.parseInt(adultComboBox.getSelectedItem().toString());
+            int serdulo = Integer.parseInt(youngComboBox.getSelectedItem().toString());
+            int gyerek = Integer.parseInt(kidComboBox.getSelectedItem().toString());
+            int csecsemo = Integer.parseInt(infantComboBox.getSelectedItem().toString());
             jegyekszama = Integer.parseInt(adultComboBox.getSelectedItem().toString()) + Integer.parseInt(youngComboBox.getSelectedItem().toString()) + Integer.parseInt(kidComboBox.getSelectedItem().toString()) + Integer.parseInt(infantComboBox.getSelectedItem().toString());
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -1598,16 +1655,24 @@ public class Kezdooldal extends javax.swing.JFrame {
                 } else {
 
                     flightNum = (String) BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 7);
-                    System.out.println(flightNum);
-                    for (int i = 0; i < jegyekszama; i++) {
-                        Passenger p = new Passenger();
-                        p.setVisible(true);
-                        p.setLocationRelativeTo(null);
-                        p.setResizable(false);
-                       
+
+                    for (int i = 1; i < felnott + 1; i++) {
+                        utasletrehozas("Passenger(adult) no." + i);
+                    }
+
+                    for (int i = 1; i < serdulo + 1; i++) {
+                        utasletrehozas("Passenger(young) no." + i);
+                    }
+
+                    for (int i = 1; i < gyerek + 1; i++) {
+                        utasletrehozas("Passenger(Kid) no." + i);
 
                     }
-                    
+
+                    for (int i = 1; i < csecsemo + 1; i++) {
+                        utasletrehozas("Passenger(Infant) no." + i);
+                    }
+
                     loadtoBuyTicketsTableData();
 
                 }
@@ -1622,19 +1687,27 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_buyTicketsButtonActionPerformed
+    }//GEN-LAST:event_reservationButtonMouseClicked
 
-    private void reservationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reservationButtonActionPerformed
+    private void exitLabelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelButtonMouseClicked
 
-    private void forgotPasswordLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotPasswordLabelMouseClicked
-        ForgotPassword p = new ForgotPassword();
-        p.setVisible(true);
-        p.setResizable(false);
-        p.setLocationRelativeTo(null);
-        p.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_forgotPasswordLabelMouseClicked
+        int n = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure want to exit?",
+                "Exit guestion", JOptionPane.YES_NO_OPTION);
+        
+        if (n==0) {
+               System.exit(0);
+        }
+     
+
+    }//GEN-LAST:event_exitLabelButtonMouseClicked
+
+    private void iconDesign() {
+
+        this.exitLabelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+    }
 
     public int getJegyekszama() {
         return jegyekszama;
@@ -1645,8 +1718,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     private String adminErrorHandling() {
 
         if (originAirportNameComboBox.getSelectedItem().equals(destinationAirportNameComboBox.getSelectedItem())) {
-            System.out.println("Rossz dátumok.");
-            return "Kérem válasszon egy másik uticélt.";
+
+            return "Please select another destination.";
 
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -1658,11 +1731,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         System.out.println(usz);
         try {
             if (dateFormat.parse(depdate).before(dateFormat.parse(arrival)) == false) {
-                return "Rossz dátum";
+                return "Bad date!";
 
             } else if (usz < 0 || usz > 230) {
 
-                return "Hibás ülésszám!";
+                return "Maximum number of seats can't be more than 230!";
             } else {
                 return "";
             }
@@ -1982,6 +2055,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel emailErrorLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextfield;
+    private javax.swing.JLabel exitLabelButton;
     private javax.swing.JLabel firstNameErrorLabel;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField firstNameTextfield;
