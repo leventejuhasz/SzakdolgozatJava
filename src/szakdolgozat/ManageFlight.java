@@ -5,6 +5,9 @@
  */
 package szakdolgozat;
 
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -39,7 +42,28 @@ public class ManageFlight extends javax.swing.JFrame {
         labels();
         fillTable();
         sorter();
+        mozgato();
+        this.closeManageFlighFrametLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
+    }
+    int posX = 0, posY = 0;
+
+    private void mozgato() {
+
+        this.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                posX = e.getX();
+                posY = e.getY();
+            }
+        });
+
+        this.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent evt) {
+                //sets frame position when mouse dragged			
+                setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
+
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -63,9 +87,11 @@ public class ManageFlight extends javax.swing.JFrame {
         numofmaxseatLabel = new javax.swing.JLabel();
         flightNumLabel = new javax.swing.JLabel();
         searchButton = new javax.swing.JButton();
+        closeManageFlighFrametLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ManageFlightPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,72 +140,72 @@ public class ManageFlight extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(passengersTable);
 
-        ManageFlightPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 1460, 450));
-        ManageFlightPanel.add(SearchPassenger, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 660, 240, 40));
+        ManageFlightPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1490, 440));
+        ManageFlightPanel.add(SearchPassenger, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 540, 240, 40));
 
         searchLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        searchLabel.setForeground(new java.awt.Color(0, 0, 0));
+        searchLabel.setForeground(new java.awt.Color(255, 255, 255));
         searchLabel.setText("Search Passenger: ");
-        ManageFlightPanel.add(searchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, -1, -1));
+        ManageFlightPanel.add(searchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 500, -1, -1));
 
         deletePassengerButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        deletePassengerButton.setText("Delete Passenger");
+        deletePassengerButton.setText("Delete Selected Passenger");
         deletePassengerButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deletePassengerButtonMouseClicked(evt);
             }
         });
-        ManageFlightPanel.add(deletePassengerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 660, 170, 40));
+        ManageFlightPanel.add(deletePassengerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 540, 230, 40));
 
         destPlaceLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        destPlaceLabel.setForeground(new java.awt.Color(0, 0, 0));
+        destPlaceLabel.setForeground(new java.awt.Color(255, 255, 255));
         destPlaceLabel.setText("Destination Country: ");
-        ManageFlightPanel.add(destPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
+        ManageFlightPanel.add(destPlaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, -1, -1));
 
         orplaceLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        orplaceLabel.setForeground(new java.awt.Color(0, 0, 0));
+        orplaceLabel.setForeground(new java.awt.Color(255, 255, 255));
         orplaceLabel.setText("Origin Country: ");
-        ManageFlightPanel.add(orplaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        ManageFlightPanel.add(orplaceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, -1, -1));
 
         arrtimeLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        arrtimeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        arrtimeLabel.setForeground(new java.awt.Color(255, 255, 255));
         arrtimeLabel.setText("Arrival Time: ");
-        ManageFlightPanel.add(arrtimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        ManageFlightPanel.add(arrtimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
 
         numofavseatsLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        numofavseatsLabel.setForeground(new java.awt.Color(0, 0, 0));
+        numofavseatsLabel.setForeground(new java.awt.Color(255, 255, 255));
         numofavseatsLabel.setText("Number of available seats: ");
-        ManageFlightPanel.add(numofavseatsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 90, -1, -1));
+        ManageFlightPanel.add(numofavseatsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 560, -1, -1));
 
         deptimeLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        deptimeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        deptimeLabel.setForeground(new java.awt.Color(255, 255, 255));
         deptimeLabel.setText("Departure Time: ");
-        ManageFlightPanel.add(deptimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        ManageFlightPanel.add(deptimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
 
         orairportnameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        orairportnameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        orairportnameLabel.setForeground(new java.awt.Color(255, 255, 255));
         orairportnameLabel.setText("Origin Airport Name: ");
-        ManageFlightPanel.add(orairportnameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, -1));
+        ManageFlightPanel.add(orairportnameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, -1, -1));
 
         destaiportNameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        destaiportNameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        destaiportNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         destaiportNameLabel.setText("Destination Airport Name: ");
-        ManageFlightPanel.add(destaiportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
+        ManageFlightPanel.add(destaiportNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, -1, -1));
 
         passengertabletitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         passengertabletitle.setForeground(new java.awt.Color(255, 255, 255));
-        passengertabletitle.setText("Passengers Table");
-        ManageFlightPanel.add(passengertabletitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, -1, -1));
+        passengertabletitle.setText("Passengers");
+        ManageFlightPanel.add(passengertabletitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, -1, -1));
 
         numofmaxseatLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        numofmaxseatLabel.setForeground(new java.awt.Color(0, 0, 0));
+        numofmaxseatLabel.setForeground(new java.awt.Color(255, 255, 255));
         numofmaxseatLabel.setText("Number of max seats: ");
-        ManageFlightPanel.add(numofmaxseatLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 50, -1, -1));
+        ManageFlightPanel.add(numofmaxseatLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 530, -1, -1));
 
         flightNumLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        flightNumLabel.setForeground(new java.awt.Color(0, 0, 0));
+        flightNumLabel.setForeground(new java.awt.Color(255, 255, 255));
         flightNumLabel.setText("Flight Number: ");
-        ManageFlightPanel.add(flightNumLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 10, -1, -1));
+        ManageFlightPanel.add(flightNumLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, -1, -1));
 
         searchButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         searchButton.setText("Search");
@@ -188,9 +214,19 @@ public class ManageFlight extends javax.swing.JFrame {
                 searchButtonMouseClicked(evt);
             }
         });
-        ManageFlightPanel.add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 660, 110, 40));
+        ManageFlightPanel.add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 590, 110, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/pexels-konevi-3789871-scaled.jpg"))); // NOI18N
+        closeManageFlighFrametLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/X11-icon.png"))); // NOI18N
+        closeManageFlighFrametLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeManageFlighFrametLabelMouseClicked(evt);
+            }
+        });
+        ManageFlightPanel.add(closeManageFlighFrametLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 0, 50, -1));
+
+        jLabel1.setBackground(new java.awt.Color(0, 204, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/High_resolution_wallpaper_background_ID_77700337015.jpg"))); // NOI18N
         ManageFlightPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1490, 710));
 
         getContentPane().add(ManageFlightPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -216,14 +252,13 @@ public class ManageFlight extends javax.swing.JFrame {
 
                 if (result == 0) {
 
-                   
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
                     Statement smt = con.createStatement();
                     smt.executeUpdate("Delete FROM passenger where seatNum =" + passengersTable.getValueAt(passengersTable.getSelectedRow(), 3));
                     con.close();
                     model.removeRow(passengersTable.getSelectedRow());
-                } 
+                }
 
             }
 
@@ -254,6 +289,17 @@ public class ManageFlight extends javax.swing.JFrame {
         keresees();
 
     }//GEN-LAST:event_searchButtonMouseClicked
+
+    private void closeManageFlighFrametLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeManageFlighFrametLabelMouseClicked
+        int n = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure want to exit?",
+                "Exit guestion", JOptionPane.YES_NO_OPTION);
+
+        if (n == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_closeManageFlighFrametLabelMouseClicked
     DefaultTableModel model;
 
     private void fillTable() {
@@ -320,6 +366,7 @@ public class ManageFlight extends javax.swing.JFrame {
     private javax.swing.JPanel ManageFlightPanel;
     private javax.swing.JTextField SearchPassenger;
     private javax.swing.JLabel arrtimeLabel;
+    private javax.swing.JLabel closeManageFlighFrametLabel;
     private javax.swing.JButton deletePassengerButton;
     private javax.swing.JLabel deptimeLabel;
     private javax.swing.JLabel destPlaceLabel;

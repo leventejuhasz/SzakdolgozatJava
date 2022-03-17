@@ -88,27 +88,27 @@ public class Passenger extends javax.swing.JFrame {
         lastNameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lastNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         lastNameLabel.setText("Last Name: ");
-        jPanel1.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, 20));
+        jPanel1.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 20));
 
         LastNamePassengerTextfield.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jPanel1.add(LastNamePassengerTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 260, 40));
+        jPanel1.add(LastNamePassengerTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 260, 40));
 
         firstNameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         firstNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         firstNameLabel.setText("First Name: ");
-        jPanel1.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, 20));
+        jPanel1.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 20));
 
         firtsNamePassengerTextField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jPanel1.add(firtsNamePassengerTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 260, 40));
+        jPanel1.add(firtsNamePassengerTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 260, 40));
 
         genderComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         genderComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Man", "Women" }));
-        jPanel1.add(genderComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
+        jPanel1.add(genderComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         passengerGenderLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         passengerGenderLabel.setForeground(new java.awt.Color(255, 255, 255));
         passengerGenderLabel.setText("Gender: ");
-        jPanel1.add(passengerGenderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, 20));
+        jPanel1.add(passengerGenderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, 20));
 
         NotaskingRadioButton.setBackground(new java.awt.Color(102, 102, 102));
         NotaskingRadioButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -158,7 +158,7 @@ public class Passenger extends javax.swing.JFrame {
         passengerGenderLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         passengerGenderLabel1.setForeground(new java.awt.Color(255, 255, 255));
         passengerGenderLabel1.setText("Birth date: ");
-        jPanel1.add(passengerGenderLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, 20));
+        jPanel1.add(passengerGenderLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, 20));
 
         jPanel1.add(yearComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
 

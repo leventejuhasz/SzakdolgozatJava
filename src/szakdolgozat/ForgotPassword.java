@@ -15,7 +15,6 @@ import java.util.Random;
 import java.util.regex.Pattern;
 import jdk.nashorn.internal.codegen.CompilerConstants;
 
-import javax.mail.*;
 
 /**
  *

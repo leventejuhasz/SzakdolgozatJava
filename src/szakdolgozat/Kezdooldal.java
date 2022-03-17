@@ -43,6 +43,7 @@ import java.util.regex.Matcher;
 import javax.swing.table.TableRowSorter;
 import javax.xml.bind.DatatypeConverter;
 import java.awt.BorderLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -68,7 +69,11 @@ public class Kezdooldal extends javax.swing.JFrame {
     public Kezdooldal() {
         initComponents();
         mozgato();
-        this.exitLabelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        setCursorOnLabel(closeProgramIconOnLoginPanel);
+        setCursorOnLabel(closeProgramIconOnRegistration);
+        setCursorOnLabel(closeProgramIconOnUserPanel);
+        setCursorOnLabel(closeProgramIconOnAdminPanel);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -87,7 +92,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         registrationLabel = new javax.swing.JLabel();
         loginErrorLabel = new javax.swing.JLabel();
         forgotPasswordLabel = new javax.swing.JLabel();
-        exitLabelButton = new javax.swing.JLabel();
+        closeProgramIconOnLoginPanel = new javax.swing.JLabel();
         bluebackgroundLabel = new javax.swing.JLabel();
         RegistrationPanel = new javax.swing.JPanel();
         streetTextfield = new javax.swing.JTextField();
@@ -127,6 +132,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         registrationPasswordLabel = new javax.swing.JLabel();
         registrationPasswordErrorHandlingLabel = new javax.swing.JLabel();
         genderErrorLabel = new javax.swing.JLabel();
+        closeProgramIconOnRegistration = new javax.swing.JLabel();
         luggagePic = new javax.swing.JLabel();
         AdminPanel = new javax.swing.JPanel();
         departureTimeLabel = new javax.swing.JLabel();
@@ -138,7 +144,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<>();
+        destinationCountryComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         adminErrorLabel = new javax.swing.JLabel();
@@ -156,13 +162,15 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
+        closeProgramIconOnAdminPanel = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         UserPanel = new javax.swing.JPanel();
         myTicketsLabel = new javax.swing.JLabel();
+        closeProgramIconOnUserPanel = new javax.swing.JLabel();
         buyTicketsLabel = new javax.swing.JLabel();
         logOutLabel = new javax.swing.JLabel();
         buyTicketsPanel = new javax.swing.JPanel();
@@ -274,13 +282,13 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         loginPanel.add(forgotPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, -1, -1));
 
-        exitLabelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/X11-icon.png"))); // NOI18N
-        exitLabelButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        closeProgramIconOnLoginPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/X11-icon.png"))); // NOI18N
+        closeProgramIconOnLoginPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitLabelButtonMouseClicked(evt);
+                closeProgramIconOnLoginPanelMouseClicked(evt);
             }
         });
-        loginPanel.add(exitLabelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 0, -1, -1));
+        loginPanel.add(closeProgramIconOnLoginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 0, -1, -1));
 
         bluebackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bluebackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/asd.jpg"))); // NOI18N
@@ -522,7 +530,15 @@ public class Kezdooldal extends javax.swing.JFrame {
         genderErrorLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         genderErrorLabel.setForeground(new java.awt.Color(255, 0, 51));
         RegistrationPanel.add(genderErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, -1, -1));
-        RegistrationPanel.add(luggagePic, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
+
+        closeProgramIconOnRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/X11-icon.png"))); // NOI18N
+        closeProgramIconOnRegistration.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeProgramIconOnRegistrationMouseClicked(evt);
+            }
+        });
+        RegistrationPanel.add(closeProgramIconOnRegistration, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 0, -1, -1));
+        RegistrationPanel.add(luggagePic, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 710));
 
         getContentPane().add(RegistrationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
@@ -584,7 +600,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 adminBackButtonActionPerformed(evt);
             }
         });
-        AdminPanel.add(adminBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, 100, 40));
+        AdminPanel.add(adminBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
 
         deleteButon.setBackground(new java.awt.Color(0, 0, 0));
         deleteButon.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -597,7 +613,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -722,6 +738,14 @@ public class Kezdooldal extends javax.swing.JFrame {
         searchLabel.setText("Search Flight:");
         AdminPanel.add(searchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 400, -1, -1));
 
+        closeProgramIconOnAdminPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/X11-icon.png"))); // NOI18N
+        closeProgramIconOnAdminPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeProgramIconOnAdminPanelMouseClicked(evt);
+            }
+        });
+        AdminPanel.add(closeProgramIconOnAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 0, -1, -1));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/microsoft-flight-simulator-6.jpg"))); // NOI18N
         background.setText("jLabel1");
         AdminPanel.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -120, -1, 1310));
@@ -742,6 +766,14 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         });
         UserPanel.add(myTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 30));
+
+        closeProgramIconOnUserPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/X11-icon.png"))); // NOI18N
+        closeProgramIconOnUserPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeProgramIconOnUserPanelMouseClicked(evt);
+            }
+        });
+        UserPanel.add(closeProgramIconOnUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 0, -1, -1));
 
         buyTicketsLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         buyTicketsLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -802,7 +834,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         buyTicketsJscrollPane.setViewportView(BuyTicketsTable);
 
-        buyTicketsPanel.add(buyTicketsJscrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1030, 230));
+        buyTicketsPanel.add(buyTicketsJscrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1030, 230));
 
         ourDepartingFlightsLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         ourDepartingFlightsLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -885,7 +917,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         passengerData.setText("Passenger Data");
         buyTicketsPanel.add(passengerData, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 180, 40));
 
-        UserPanel.add(buyTicketsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 1040, 650));
+        UserPanel.add(buyTicketsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 1040, 650));
 
         myTickets.setBackground(new java.awt.Color(0, 0, 0));
         myTickets.setForeground(new java.awt.Color(0, 0, 0));
@@ -928,7 +960,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         userBackgroundLabel.setMinimumSize(null);
         userBackgroundLabel.setName(""); // NOI18N
         userBackgroundLabel.setPreferredSize(null);
-        UserPanel.add(userBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        UserPanel.add(userBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, -1));
 
         getContentPane().add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
 
@@ -945,6 +977,10 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_womanRadioButtonActionPerformed
 
+    public void setCursorOnLabel(JLabel label) {
+
+        label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
 
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
         dontShowRegistrationPanel();
@@ -1689,25 +1725,36 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_reservationButtonMouseClicked
 
-    private void exitLabelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelButtonMouseClicked
+    private void exitQuestion() {
 
         int n = JOptionPane.showConfirmDialog(
                 this,
                 "Are you sure want to exit?",
                 "Exit guestion", JOptionPane.YES_NO_OPTION);
-        
-        if (n==0) {
-               System.exit(0);
+
+        if (n == 0) {
+            System.exit(0);
         }
-     
-
-    }//GEN-LAST:event_exitLabelButtonMouseClicked
-
-    private void iconDesign() {
-
-        this.exitLabelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
     }
+
+    private void closeProgramIconOnLoginPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeProgramIconOnLoginPanelMouseClicked
+
+        exitQuestion();
+
+    }//GEN-LAST:event_closeProgramIconOnLoginPanelMouseClicked
+
+    private void closeProgramIconOnRegistrationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeProgramIconOnRegistrationMouseClicked
+
+        exitQuestion();
+    }//GEN-LAST:event_closeProgramIconOnRegistrationMouseClicked
+
+    private void closeProgramIconOnUserPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeProgramIconOnUserPanelMouseClicked
+        exitQuestion();
+    }//GEN-LAST:event_closeProgramIconOnUserPanelMouseClicked
+
+    private void closeProgramIconOnAdminPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeProgramIconOnAdminPanelMouseClicked
+        exitQuestion();
+    }//GEN-LAST:event_closeProgramIconOnAdminPanelMouseClicked
 
     public int getJegyekszama() {
         return jegyekszama;
@@ -2036,6 +2083,10 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel cityErrorLabel;
     private javax.swing.JLabel cityLabel;
     private javax.swing.JTextField cityTextfield;
+    private javax.swing.JLabel closeProgramIconOnAdminPanel;
+    private javax.swing.JLabel closeProgramIconOnLoginPanel;
+    private javax.swing.JLabel closeProgramIconOnRegistration;
+    private javax.swing.JLabel closeProgramIconOnUserPanel;
     private javax.swing.JLabel contactNumberLabel;
     private javax.swing.JLabel countryErrorLabel;
     private javax.swing.JLabel countryLabel;
@@ -2055,7 +2106,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel emailErrorLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextfield;
-    private javax.swing.JLabel exitLabelButton;
     private javax.swing.JLabel firstNameErrorLabel;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField firstNameTextfield;
