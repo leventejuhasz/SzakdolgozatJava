@@ -68,11 +68,14 @@ public class Kezdooldal extends javax.swing.JFrame {
     public Kezdooldal() {
         initComponents();
         mozgato();
+        closeProgramIcons();
+    }
+
+    private void closeProgramIcons() {
         setCursorOnLabel(closeProgramIconOnLoginPanel);
         setCursorOnLabel(closeProgramIconOnRegistration);
         setCursorOnLabel(closeProgramIconOnUserPanel);
         setCursorOnLabel(closeProgramIconOnAdminPanel);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -853,9 +856,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         buyTicketsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         buyTicketsButton.setForeground(new java.awt.Color(0, 0, 0));
         buyTicketsButton.setText("Buy tickets");
-        buyTicketsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buyTicketsButtonActionPerformed(evt);
+        buyTicketsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buyTicketsButtonMouseClicked(evt);
             }
         });
         buyTicketsPanel.add(buyTicketsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 600, -1, 40));
@@ -1060,6 +1063,12 @@ public class Kezdooldal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_registrationButtonActionPerformed
+
+    private void connection() throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+    }
 
 
     private void numberOfSeatsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberOfSeatsTextFieldActionPerformed
@@ -1615,11 +1624,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         return "";
     }
 
-    private void buyTicketsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyTicketsButtonActionPerformed
-
-
-    }//GEN-LAST:event_buyTicketsButtonActionPerformed
-
     private void forgotPasswordLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotPasswordLabelMouseClicked
         ForgotPassword p = new ForgotPassword();
         p.setVisible(true);
@@ -1736,6 +1740,17 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void closeProgramIconOnAdminPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeProgramIconOnAdminPanelMouseClicked
         exitQuestion();
     }//GEN-LAST:event_closeProgramIconOnAdminPanelMouseClicked
+
+    private void buyTicketsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buyTicketsButtonMouseClicked
+ 
+        Pay p = new Pay();
+        
+        p.setVisible(true);
+        p.setLocationRelativeTo(null);
+
+        
+        
+    }//GEN-LAST:event_buyTicketsButtonMouseClicked
 
     public int getJegyekszama() {
         return jegyekszama;
