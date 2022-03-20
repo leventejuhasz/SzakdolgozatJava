@@ -35,8 +35,9 @@ public class Pay extends javax.swing.JFrame {
 
     public Pay() {
         initComponents();
-        payNowButton.setBounds(70, 80, 100, 30);
-        payNowButton.setBorder(new RoundedBorder(15));
+
+        jButton2.setBorder(new RoundedBorder(30));
+
         mozgato();
         designPaymentInterface();
     }
@@ -87,7 +88,6 @@ public class Pay extends javax.swing.JFrame {
         firstlastNameTextfield = new javax.swing.JTextField();
         yearTextfield = new javax.swing.JTextField();
         expireslabel = new javax.swing.JLabel();
-        payNowButton = new javax.swing.JButton();
         cardholderlabel = new javax.swing.JLabel();
         cardnumberlabel = new javax.swing.JLabel();
         cvcLabel = new javax.swing.JLabel();
@@ -95,6 +95,7 @@ public class Pay extends javax.swing.JFrame {
         monthTextfield = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         cardIconLabel = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         whitebackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -198,30 +199,12 @@ public class Pay extends javax.swing.JFrame {
         yearTextfield.setBorder(null);
         yearTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
         yearTextfield.setOpaque(false);
-        yearTextfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yearTextfieldActionPerformed(evt);
-            }
-        });
         jPanel1.add(yearTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 30, 20));
 
         expireslabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         expireslabel.setForeground(new java.awt.Color(255, 255, 255));
         expireslabel.setText("Expires");
         jPanel1.add(expireslabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 330, -1, -1));
-
-        payNowButton.setBackground(new java.awt.Color(0, 255, 51));
-        payNowButton.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        payNowButton.setForeground(new java.awt.Color(255, 255, 255));
-        payNowButton.setText("Pay now");
-        payNowButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 10, true));
-        payNowButton.setBorderPainted(false);
-        payNowButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                payNowButtonMouseClicked(evt);
-            }
-        });
-        jPanel1.add(payNowButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, 450, 50));
 
         cardholderlabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         cardholderlabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -264,6 +247,14 @@ public class Pay extends javax.swing.JFrame {
         cardIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/image (1).png"))); // NOI18N
         jPanel1.add(cardIconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(0, 255, 51));
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Pay now");
+        jButton2.setBorderPainted(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, 470, 60));
+
         whitebackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/white-color-solid-background-1920x1080.png"))); // NOI18N
         whitebackground.setText("jLabel4");
         jPanel1.add(whitebackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, -1, -1));
@@ -274,16 +265,18 @@ public class Pay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelPaymentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelPaymentsLabelMouseClicked
-        this.dispose();
+        int n = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure wants to stop the payment?",
+                "Exit",
+                JOptionPane.YES_NO_OPTION);
+
+        if (n == 0) {
+            this.dispose();
+        }
+
+
     }//GEN-LAST:event_cancelPaymentsLabelMouseClicked
-
-    private void payNowButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payNowButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_payNowButtonMouseClicked
-
-    private void yearTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearTextfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yearTextfieldActionPerformed
 
     int posX = 0, posY = 0;
 
@@ -300,7 +293,6 @@ public class Pay extends javax.swing.JFrame {
             public void mouseDragged(MouseEvent evt) {
                 //sets frame position when mouse dragged			
                 setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
-
             }
         });
 
@@ -320,11 +312,11 @@ public class Pay extends javax.swing.JFrame {
     private javax.swing.JTextField first4CardNumber;
     private javax.swing.JTextField firstlastNameTextfield;
     private javax.swing.JLabel greybackground;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField last4CardNumber;
     private javax.swing.JTextField monthTextfield;
-    private javax.swing.JButton payNowButton;
     private javax.swing.JLabel payments2Title;
     private javax.swing.JLabel paymentsTitle;
     private javax.swing.JTextField second4CardNumber;
