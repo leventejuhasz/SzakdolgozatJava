@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Már 17. 12:51
+-- Létrehozás ideje: 2022. Már 21. 13:32
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admins` (
-  `AdminId` int(11) NOT NULL,
+  `Admin_Id` int(11) NOT NULL,
   `Email` varchar(69) NOT NULL,
   `Password` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -37,7 +37,7 @@ CREATE TABLE `admins` (
 -- A tábla adatainak kiíratása `admins`
 --
 
-INSERT INTO `admins` (`AdminId`, `Email`, `Password`) VALUES
+INSERT INTO `admins` (`Admin_Id`, `Email`, `Password`) VALUES
 (1, 'admin@gmail.hu', '0638176a683493df8e7265b4a1291301');
 
 -- --------------------------------------------------------
@@ -8001,12 +8001,13 @@ CREATE TABLE `flight_cancellation` (
 CREATE TABLE `flight_info` (
   `Departure_time` varchar(60) NOT NULL,
   `Arrival_time` varchar(60) NOT NULL,
-  `Origin_place` varchar(100) NOT NULL,
+  `Origin_country` varchar(100) NOT NULL,
   `OriginAirportName` varchar(100) NOT NULL,
-  `Destination_place` varchar(100) NOT NULL,
+  `Destination_country` varchar(100) NOT NULL,
   `DestinationAirportName` varchar(100) NOT NULL,
-  `Num_of_seats` int(230) NOT NULL,
+  `Num_of_max_seats` int(230) NOT NULL,
   `Num_of_available_seats` int(255) NOT NULL,
+  `Base_Price` int(11) NOT NULL,
   `Flight_num_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -8014,12 +8015,23 @@ CREATE TABLE `flight_info` (
 -- A tábla adatainak kiíratása `flight_info`
 --
 
-INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_place`, `OriginAirportName`, `Destination_place`, `DestinationAirportName`, `Num_of_seats`, `Num_of_available_seats`, `Flight_num_id`) VALUES
-('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 77, 59),
-('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 42, 60),
-('2022-03-18 10:30', '2022-03-19 17:30', 'Hungary', 'Miskolc Airport', 'American Samoa', 'Tau Airport', 200, 197, 61),
-('2022-03-18 3:8', '2022-03-19 11:4', 'Aruba', 'Queen Beatrix International Airport', 'Belize', 'Belize City Municipal Airport', 200, 195, 62),
-('2022-03-17 19:15', '2022-03-19 20:13', 'Gambia', 'Banjul International Airport', 'Comoros', 'Iconi Airport', 150, 133, 63);
+INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_country`, `OriginAirportName`, `Destination_country`, `DestinationAirportName`, `Num_of_max_seats`, `Num_of_available_seats`, `Base_Price`, `Flight_num_id`) VALUES
+('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 77, 0, 59),
+('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 42, 0, 60),
+('2022-03-18 10:30', '2022-03-19 17:30', 'Hungary', 'Miskolc Airport', 'American Samoa', 'Tau Airport', 200, 197, 0, 61),
+('2022-03-18 3:8', '2022-03-19 11:4', 'Aruba', 'Queen Beatrix International Airport', 'Belize', 'Belize City Municipal Airport', 200, 195, 0, 62),
+('2022-03-22 10:30', '2022-03-23 15:30', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Laos', 'Attopeu Airport', 10, 10, 20, 65),
+('2022-03-25 0:1', '2022-03-27 0:1', 'Algeria', 'Ain Arnat Airport', 'Hungary', 'Budapest Ferenc Liszt International Airport', 100, 100, 30, 66),
+('2022-03-25 0:1', '2022-03-27 0:1', 'Algeria', 'Ain Arnat Airport', 'Hungary', 'Budapest Ferenc Liszt International Airport', 100, 100, 50, 67),
+('2022-03-18 0:1', '2022-03-25 0:1', 'American Samoa', 'Pago Pago International Airport', 'Antarctica', 'Teniente R. Marsh Airport', 100, 100, 30, 68),
+('2022-03-12 0:1', '2022-03-19 0:1', 'Angola', 'Albano Machado Airport', 'Andorra', 'Andorra La Vella Airport', 100, 100, 100, 69),
+('2022-03-26 0:1', '2022-03-27 0:1', 'American Samoa', 'Ofu Airport', 'Anguilla', 'Wallblake Airport', 100, 100, 100, 70),
+('2022-03-26 17:29', '2022-03-27 18:7', 'American Samoa', 'Tau Airport', 'Burkina Faso', 'Boulsa Airport', 100, 100, 100, 71),
+('2022-03-25 0:1', '2022-03-26 0:1', 'Botswana', 'Lobatse Airport', 'Fiji', 'Castaway Island Resort Airport', 100, 100, 100, 72),
+('2022-03-25 0:1', '2022-03-28 0:1', 'Denmark', 'Karup Airport', 'Belgium', 'Brussels Airport (Zaventem Airport)', 100, 100, 100, 73),
+('2022-03-25 0:1', '2022-03-27 0:1', 'Canada', 'Bella Bella (Campbell Island) Airport', 'Cambodia', 'Phnom Penh International Airport', 100, 100, 100, 74),
+('2022-03-25 0:1', '2022-03-27 0:1', 'Canada', 'Bella Bella (Campbell Island) Airport', 'Cambodia', 'Phnom Penh International Airport', 100, 100, 100, 75),
+('2022-03-25 0:1', '2022-03-26 0:1', 'Angola', 'Benguela Airport (Gen. V. Deslandes Airport)', 'Anguilla', 'Wallblake Airport', 100, 100, 90, 76);
 
 -- --------------------------------------------------------
 
@@ -8067,20 +8079,8 @@ INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggag
 ('Women', 'Kis', 'Gabor', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 199, 62, 51, 43),
 ('Women', 'Nagy ', 'Emese', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 198, 62, 52, 43),
 ('Man', 'Kis ', 'Jnos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 197, 62, 53, 43),
-('Man', 'Juhasz', 'Levente', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 149, 63, 54, 41),
-('Man', 'asd', 'asd', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 147, 63, 56, 41),
-('Man', 'kis', 'kca', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 146, 63, 57, 41),
-('Man', 'Kis', 'Gabor', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 144, 63, 59, 44),
-('Man', 'nagy', 'Lajos', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 143, 63, 60, 44),
-('Man', 'Nagy', 'Lorant', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 139, 63, 61, 44),
-('Man', 'juhasz', 'Laura', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 138, 63, 62, 44),
 ('Man', 'Kis', 'Laszlo', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 196, 62, 63, 44),
-('Man', 'janos', 'janos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 195, 62, 64, 44),
-('Man', 'Kis', 'Anna', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 137, 63, 65, 44),
-('Man', 'Asd', 'Asd', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 136, 63, 66, 44),
-('Man', 'A', 'A', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 135, 63, 67, 44),
-('Man', 'Kos', 'Mos', '1950.January.1', 'I am not asking (0 Ft)', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 134, 63, 68, 44),
-('Man', 'Juhasz', 'Levente', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft', 'Gambia', 'Comoros', 'Banjul International Airport', 'Iconi Airport', '2022-03-17 19:15', '2022-03-19 20:13', 133, 63, 69, 44);
+('Man', 'janos', 'janos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 195, 62, 64, 44);
 
 -- --------------------------------------------------------
 
@@ -8090,7 +8090,6 @@ INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggag
 
 CREATE TABLE `price_info` (
   `Passenger_name` int(30) NOT NULL,
-  `Seat_num` int(4) NOT NULL,
   `Price` int(4) NOT NULL,
   `Flight_num` int(12) NOT NULL,
   `Customer_id` int(11) NOT NULL,
@@ -8104,7 +8103,7 @@ CREATE TABLE `price_info` (
 --
 
 CREATE TABLE `registration_info` (
-  `CustomerId` int(11) NOT NULL,
+  `Customer_id` int(11) NOT NULL,
   `FirstName` varchar(60) NOT NULL,
   `LastName` varchar(60) NOT NULL,
   `Address` varchar(60) NOT NULL,
@@ -8121,11 +8120,12 @@ CREATE TABLE `registration_info` (
 -- A tábla adatainak kiíratása `registration_info`
 --
 
-INSERT INTO `registration_info` (`CustomerId`, `FirstName`, `LastName`, `Address`, `zipCode`, `City`, `Country`, `phoneNumber`, `Gender`, `Email`, `CustomerPassword`) VALUES
+INSERT INTO `registration_info` (`Customer_id`, `FirstName`, `LastName`, `Address`, `zipCode`, `City`, `Country`, `phoneNumber`, `Gender`, `Email`, `CustomerPassword`) VALUES
 (41, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'k@h.hu', '0638176A683493DF8E7265B4A1291301'),
 (42, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
 (43, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'm@m.hu', '0638176A683493DF8E7265B4A1291301'),
-(44, 'Kiss', 'Janos', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'zsd@gmail.com', '0638176A683493DF8E7265B4A1291301');
+(44, 'Kiss', 'Janos', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'zsd@gmail.com', '0638176A683493DF8E7265B4A1291301'),
+(45, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'hehe@gmail.hu', '7C13CCA5BE06513317E5310CD3F67A33');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -8155,7 +8155,7 @@ ALTER TABLE `price_info`
 -- A tábla indexei `registration_info`
 --
 ALTER TABLE `registration_info`
-  ADD PRIMARY KEY (`CustomerId`);
+  ADD PRIMARY KEY (`Customer_id`);
 
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
@@ -8165,19 +8165,19 @@ ALTER TABLE `registration_info`
 -- AUTO_INCREMENT a táblához `flight_info`
 --
 ALTER TABLE `flight_info`
-  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
-  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `Customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -8187,7 +8187,7 @@ ALTER TABLE `registration_info`
 -- Megkötések a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  ADD CONSTRAINT `passenger_ibfk_1` FOREIGN KEY (`Customer_id`) REFERENCES `registration_info` (`CustomerId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `passenger_ibfk_1` FOREIGN KEY (`Customer_id`) REFERENCES `registration_info` (`Customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `passenger_ibfk_2` FOREIGN KEY (`Flight_num`) REFERENCES `flight_info` (`Flight_num_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

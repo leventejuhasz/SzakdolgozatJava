@@ -307,17 +307,17 @@ public class ManageFlight extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-            String query = "Select passenger.FirstName, passenger.LastName, BirthDate , Luggage, SeatNum, registration_info.FirstName, registration_info.LastName, Email , phoneNumber FROM passenger Inner Join registration_info ON registration_info.CustomerId = passenger.Customer_id where Flight_num = " + adminflightnum;
+            String query = "Select passenger.FirstName, passenger.LastName, BirthDate , Luggage, SeatNum, registration_info.FirstName, registration_info.LastName, Email , phoneNumber FROM passenger Inner Join registration_info ON registration_info.Customer_id = passenger.Customer_id where Flight_num = " + adminflightnum;
             Statement smt = con.createStatement();
             ResultSet res = smt.executeQuery(query);
             Statement s = con.createStatement();
+            System.out.println(adminflightnum);
             ResultSet r = s.executeQuery("SELECT COUNT(passenger_id) as rowcount FROM passenger WHERE Flight_num =" + adminflightnum);
             r.next();
             int count = r.getInt("rowcount");
             r.close();
             String columns[] = {passengersTable.getColumnName(0), passengersTable.getColumnName(1), passengersTable.getColumnName(2), passengersTable.getColumnName(3), passengersTable.getColumnName(4), passengersTable.getColumnName(5), passengersTable.getColumnName(6)};
             String data[][] = new String[count][passengersTable.getColumnCount()];
-            System.out.println("kutya");
             int i = 0;
             while (res.next()) {
                 String passname = res.getString("passenger.FirstName") + " " + res.getString("passenger.LastName");
