@@ -70,6 +70,7 @@ public class cartFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cartPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -102,16 +103,16 @@ public class cartFrame extends javax.swing.JFrame {
         });
         myTickets.setViewportView(myTicketsTable);
 
-        cartPanel.add(myTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1270, 170));
+        cartPanel.add(myTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1290, 170));
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton1.setText("Delete");
+        jButton1.setText("Delete Passenger");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        cartPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 254, 110, 40));
+        cartPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 260, 200, 40));
 
         closeProgramIconOnUserPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/X11-icon.png"))); // NOI18N
         closeProgramIconOnUserPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,7 +120,7 @@ public class cartFrame extends javax.swing.JFrame {
                 closeProgramIconOnUserPanelMouseClicked(evt);
             }
         });
-        cartPanel.add(closeProgramIconOnUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, -1, -1));
+        cartPanel.add(closeProgramIconOnUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 10, -1, -1));
 
         backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("BACK");
@@ -138,34 +139,22 @@ public class cartFrame extends javax.swing.JFrame {
                 buyTicketsButtonMouseClicked(evt);
             }
         });
-        cartPanel.add(buyTicketsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 510, -1, 40));
+        cartPanel.add(buyTicketsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 300, -1, 40));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Number of Tickets: ");
-        cartPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
+        cartPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("To be paid in total: ");
-        cartPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+        cartPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 260, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/High_resolution_wallpaper_background_ID_77700337015.jpg"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        cartPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-620, -40, -1, 1630));
+        cartPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-990, -930, -1, 1330));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(cartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1268, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(cartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 1310, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -218,7 +207,7 @@ public class cartFrame extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
-            String query = "Select FirstName, LastName,Luggage,SeatNum,  flight_info.Origin_country, passenger.OriginAirportName, flight_info.Destination_country, , passenger.DestinationAirportName, passenger.Departure_time, passenger.Arrival_time, Flight_num_id  From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num where passenger.Customer_id=" + customerId;
+            String query = "Select FirstName, LastName,Luggage,SeatNum, flight_info.Origin_country, passenger.OriginAirportName, flight_info.Destination_country, , passenger.DestinationAirportName, passenger.Departure_time, passenger.Arrival_time, Flight_num_id  From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num where passenger.Customer_id=" + customerId;
             ResultSet res = smt.executeQuery(query);
             Statement s = con.createStatement();
             ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM passenger where Customer_id LIKE '" + customerId + "'");
@@ -234,23 +223,23 @@ public class cartFrame extends javax.swing.JFrame {
             while (res.next()) {
 
                 String name = res.getString("FirstName") + " " + res.getString("LastName");
-                String gender = res.getString("Gender");
-                String birth = res.getString("BirthDate");
                 String luggage = res.getString("Luggage");
                 String seatn = res.getString("SeatNum");
-                String departure = res.getString("Departure_Time");
                 String orp = res.getString("Origin_country") + ", " + res.getString("OriginAirportName");
                 String dep = res.getString("Destination_country") + ", " + res.getString("DestinationAirportName");
+                String departure = res.getString("Departure_time");
+                String arr = res.getString("Arrival_time");
                 String fid = res.getString("Flight_num_id");
+                String price = res.getString("Price");
                 data[i][0] = name;
-                data[i][1] = gender;
-                data[i][2] = birth;
-                data[i][3] = luggage;
-                data[i][4] = seatn;
-                data[i][5] = fid;
-                data[i][6] = orp;
-                data[i][7] = dep;
-                data[i][8] = departure;
+                data[i][1] = luggage;
+                data[i][2] = seatn;
+                data[i][3] = orp;
+                data[i][4] = dep;
+                data[i][5] = departure;
+                data[i][6] = arr;
+                data[i][7] = fid;
+                data[i][8] = price;
                 vanUtas = true;
                 i++;
 

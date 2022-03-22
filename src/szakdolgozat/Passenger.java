@@ -1,12 +1,15 @@
 package szakdolgozat;
 
+import com.sun.org.apache.xerces.internal.impl.dv.xs.MonthDV;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import static java.text.DateFormat.Field.MONTH;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -237,15 +240,23 @@ public class Passenger extends javax.swing.JFrame {
 
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    public static int objectToInt(Object obj) {
+        int x = ((Number) obj).intValue();
+        return x;
+    }
+
     private long getdifferenceInYears() {
 
-        LocalDate date1 = LocalDate.parse(this.yearComboBox.getSelectedItem() + "-" + this.MonthComboBox.getSelectedItem() + "-" + this.dayComboBox.getSelectedItem());
-        LocalDate date2 = LocalDate.parse("2022-03-22");
-        Period period = date1.until(date2);
-        int yearsBetween = period.getYears();
-        System.out.println("yearsBetween:" + yearsBetween);
+        int ev = objectToInt(this.yearComboBox.getSelectedItem());
+        int honap = objectToInt(this.MonthComboBox.getSelectedItem());
+        int nap = objectToInt(this.dayComboBox.getSelectedItem());
+        LocalDate start = LocalDate.of(ev, honap, nap);
+        LocalDate stop = LocalDate.now(ZoneId.of("Europe/Luxembourg"));
+        long years = java.time.temporal.ChronoUnit.YEARS.between(start, stop);
 
-        return yearsBetween;
+        System.out.println(years);
+
+        return years;
     }
 
     public boolean isPassengerError() {
@@ -350,87 +361,31 @@ public class Passenger extends javax.swing.JFrame {
 
     private void MonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthComboBoxActionPerformed
         String month = MonthComboBox.getSelectedItem() + "";
-        if (month.matches("2")) {
+        if (month.matches("02")) {
             for (int i = 1; i <= 29; i++) {
-                dayComboBox.addItem(i);
+                dayComboBox.addItem(new Integer(i));
             }
-        } else if (month.matches("1") || month.matches("3") || month.matches("5") || month.matches("8") || month.matches("10") || month.matches("12")) {
+        } else if (month.matches("01") || month.matches("03") || month.matches("05") || month.matches("08") || month.matches("10") || month.matches("12")) {
             for (int i = 1; i <= 31; i++) {
-                dayComboBox.addItem(i);
+                dayComboBox.addItem(new Integer(i));
             }
         } else {
             for (int i = 1; i <= 30; i++) {
-                dayComboBox.addItem(i);
+                dayComboBox.addItem(new Integer(i));
             }
 
         }
     }//GEN-LAST:event_MonthComboBoxActionPerformed
     public void comboBoxFeltolt() {
-        String[] months = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
         for (int i = 1950; i <= Calendar.getInstance().get(Calendar.YEAR); i++) {
-            yearComboBox.addItem(i);
+            yearComboBox.addItem(new Integer(i));
         }
 
         for (int i = 0; i < months.length; i++) {
-            MonthComboBox.addItem(months[i]);
+            MonthComboBox.addItem(new Integer(months[i]));
         }
 
-    }
-
-    public JButton getSaveButton() {
-        return saveButton;
-    }
-
-    public void setSaveButton(JButton saveButton) {
-        this.saveButton = saveButton;
-    }
-
-    public JTextField getLastNamePassengerTextfield() {
-        return LastNamePassengerTextfield;
-    }
-
-    public void setLastNamePassengerTextfield(JTextField LastNamePassengerTextfield) {
-        this.LastNamePassengerTextfield = LastNamePassengerTextfield;
-    }
-
-    public JTextField getFirtsNamePassengerTextField() {
-        return firtsNamePassengerTextField;
-    }
-
-    public void setFirtsNamePassengerTextField(JTextField firtsNamePassengerTextField) {
-        this.firtsNamePassengerTextField = firtsNamePassengerTextField;
-    }
-
-    public JComboBox getGenderComboBox() {
-        return genderComboBox;
-    }
-
-    public void setGenderComboBox(JComboBox genderComboBox) {
-        this.genderComboBox = genderComboBox;
-    }
-
-    public JComboBox getMonthComboBox() {
-        return MonthComboBox;
-    }
-
-    public void setMonthComboBox(JComboBox MonthComboBox) {
-        this.MonthComboBox = MonthComboBox;
-    }
-
-    public JComboBox getDayComboBox() {
-        return dayComboBox;
-    }
-
-    public void setDayComboBox(JComboBox dayComboBox) {
-        this.dayComboBox = dayComboBox;
-    }
-
-    public JComboBox getYearComboBox() {
-        return yearComboBox;
-    }
-
-    public void setYearComboBox(JComboBox yearComboBox) {
-        this.yearComboBox = yearComboBox;
     }
 
 
