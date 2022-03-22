@@ -1,5 +1,6 @@
 package szakdolgozat;
 
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -31,6 +32,7 @@ public class cartFrame extends javax.swing.JFrame {
         initComponents();
         loadMyTickets();
         mozgato();
+        design();
     }
 
     private void exitQuestion() {
@@ -43,6 +45,11 @@ public class cartFrame extends javax.swing.JFrame {
         if (n == 0) {
             this.dispose();
         }
+    }
+
+    private void design() {
+
+        this.closeProgramIconOnUserPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     @SuppressWarnings("unchecked")
@@ -211,7 +218,7 @@ public class cartFrame extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
-            String query = "Select Gender, FirstName, LastName, BirthDate , Luggage, flight_info.Origin_country, flight_info.Destination_country, passenger.OriginAirportName, passenger.DestinationAirportName, passenger.Departure_time, Flight_num_id,  passenger.Arrival_time, SeatNum From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num where passenger.Customer_id=" + customerId;
+            String query = "Select FirstName, LastName,Luggage,SeatNum,  flight_info.Origin_country, passenger.OriginAirportName, flight_info.Destination_country, , passenger.DestinationAirportName, passenger.Departure_time, passenger.Arrival_time, Flight_num_id  From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num where passenger.Customer_id=" + customerId;
             ResultSet res = smt.executeQuery(query);
             Statement s = con.createStatement();
             ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM passenger where Customer_id LIKE '" + customerId + "'");

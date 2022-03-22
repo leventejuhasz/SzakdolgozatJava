@@ -6,7 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
@@ -50,7 +59,6 @@ public class Passenger extends javax.swing.JFrame {
         luggage5.setOpaque(false);
         NotaskingRadioButton.setSelected(true);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -216,7 +224,7 @@ public class Passenger extends javax.swing.JFrame {
                 smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
 
                 this.dispose();
-
+                System.out.println(getdifferenceInYears());
                 smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-1 where Flight_num_id = " + flightNum);
             }
 
@@ -228,6 +236,17 @@ public class Passenger extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private long getdifferenceInYears() {
+
+        LocalDate date1 = LocalDate.parse(this.yearComboBox.getSelectedItem() + "-" + this.MonthComboBox.getSelectedItem() + "-" + this.dayComboBox.getSelectedItem());
+        LocalDate date2 = LocalDate.parse("2022-03-22");
+        Period period = date1.until(date2);
+        int yearsBetween = period.getYears();
+        System.out.println("yearsBetween:" + yearsBetween);
+
+        return yearsBetween;
+    }
 
     public boolean isPassengerError() {
 
@@ -262,7 +281,6 @@ public class Passenger extends javax.swing.JFrame {
             db++;
 
         }
-
         if (db > 1) {
             JFrame jFrame = new JFrame();
             JOptionPane.showMessageDialog(jFrame, "Please select only one luggage!");
@@ -275,21 +293,28 @@ public class Passenger extends javax.swing.JFrame {
             return true;
         }
 
+        char[] chars2 = firtsNamePassengerTextField.getText().toCharArray();
+
+        for (char c : chars2) {
+            if (!Character.isLetter(c)) {
+                JFrame jFrame = new JFrame();
+                JOptionPane.showMessageDialog(jFrame, "First Name can contains only letters!");
+                return true;
+            }
+        }
+
+        char[] chars = LastNamePassengerTextfield.getText().toCharArray();
+
+        for (char c : chars) {
+            if (!Character.isLetter(c)) {
+                JFrame jFrame = new JFrame();
+                JOptionPane.showMessageDialog(jFrame, "Last Name can contains only letters!");
+                return true;
+            }
+        }
         if (!Character.isUpperCase(LastNamePassengerTextfield.getText().charAt(0))) {
             JFrame jFrame = new JFrame();
             JOptionPane.showMessageDialog(jFrame, "Last Name needs to start with uppercase!");
-            return true;
-        }
-
-        if (!firtsNamePassengerTextField.getText().trim().matches(("[a-zA-Z]+"))) {
-            JFrame jFrame = new JFrame();
-            JOptionPane.showMessageDialog(jFrame, "First Name can only contains letter!");
-            return true;
-        }
-
-        if (!LastNamePassengerTextfield.getText().trim().matches(("[a-zA-Z]+"))) {
-            JFrame jFrame = new JFrame();
-            JOptionPane.showMessageDialog(jFrame, "Last Name can only contains letter!");
             return true;
         }
 
@@ -325,11 +350,11 @@ public class Passenger extends javax.swing.JFrame {
 
     private void MonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthComboBoxActionPerformed
         String month = MonthComboBox.getSelectedItem() + "";
-        if (month.matches("February")) {
+        if (month.matches("2")) {
             for (int i = 1; i <= 29; i++) {
                 dayComboBox.addItem(i);
             }
-        } else if (month.matches("January") || month.matches("March") || month.matches("May") || month.matches("August") || month.matches("October") || month.matches("December")) {
+        } else if (month.matches("1") || month.matches("3") || month.matches("5") || month.matches("8") || month.matches("10") || month.matches("12")) {
             for (int i = 1; i <= 31; i++) {
                 dayComboBox.addItem(i);
             }
@@ -340,6 +365,17 @@ public class Passenger extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_MonthComboBoxActionPerformed
+    public void comboBoxFeltolt() {
+        String[] months = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        for (int i = 1950; i <= Calendar.getInstance().get(Calendar.YEAR); i++) {
+            yearComboBox.addItem(i);
+        }
+
+        for (int i = 0; i < months.length; i++) {
+            MonthComboBox.addItem(months[i]);
+        }
+
+    }
 
     public JButton getSaveButton() {
         return saveButton;
@@ -395,18 +431,6 @@ public class Passenger extends javax.swing.JFrame {
 
     public void setYearComboBox(JComboBox yearComboBox) {
         this.yearComboBox = yearComboBox;
-    }
-
-    public void comboBoxFeltolt() {
-        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        for (int i = 1950; i <= Calendar.getInstance().get(Calendar.YEAR); i++) {
-            yearComboBox.addItem(i);
-        }
-
-        for (int i = 0; i < months.length; i++) {
-            MonthComboBox.addItem(months[i]);
-        }
-
     }
 
 

@@ -190,14 +190,8 @@ public class Kezdooldal extends javax.swing.JFrame {
         userDestinationCountryLabel = new javax.swing.JLabel();
         buyTicketsButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        youngComboBox = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        infantComboBox = new javax.swing.JComboBox();
-        adultComboBox = new javax.swing.JComboBox();
-        jLabel8 = new javax.swing.JLabel();
-        kidComboBox = new javax.swing.JComboBox();
+        numOfticketstoBuyTextfield = new javax.swing.JComboBox();
         destinationTextField = new javax.swing.JTextField();
         passengerData = new javax.swing.JButton();
         welcomeUser = new javax.swing.JLabel();
@@ -900,37 +894,18 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel3.setText("How many tickets do you want to buy?");
         buyTicketsPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
 
-        youngComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        buyTicketsPanel.add(youngComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 70, 30));
-
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Adult (17 year+)");
-        buyTicketsPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 110, -1));
+        jLabel4.setText("Number of tickets");
+        buyTicketsPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 310, 130, -1));
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Young (12-16)");
-        buyTicketsPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, 110, -1));
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Kid (2-11year)");
-        buyTicketsPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, 130, -1));
-
-        infantComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        buyTicketsPanel.add(infantComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 330, 70, 30));
-
-        adultComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        buyTicketsPanel.add(adultComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 70, 30));
-
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Infant(Under 2 year)");
-        buyTicketsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 310, 150, -1));
-
-        kidComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        buyTicketsPanel.add(kidComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 70, 30));
+        numOfticketstoBuyTextfield.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        numOfticketstoBuyTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numOfticketstoBuyTextfieldActionPerformed(evt);
+            }
+        });
+        buyTicketsPanel.add(numOfticketstoBuyTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 110, 30));
 
         destinationTextField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         destinationTextField.setForeground(new java.awt.Color(0, 0, 0));
@@ -1327,19 +1302,14 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         try {
 
-            adminErrorLabel.setText("");     int s = 100 - Integer.parseInt(promotionTextField.getText());
+            adminErrorLabel.setText("");
+            int s = 100 - Integer.parseInt(promotionTextField.getText());
 
             int amount = (s * Integer.parseInt(priceOfTheFlightTextField.getText())) / 100;
             if (adminErrorHandling() == "") {
                 String sql = "Insert Into flight_info(Departure_time, Arrival_time, Origin_country,OriginAirportName, Destination_country,DestinationAirportName, Num_of_max_seats, Num_of_available_seats,Base_Price)  VALUES ( '" + depdate + "' , '" + arrival + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + originAirportNameComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + destinationAirportNameComboBox.getSelectedItem() + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "' , '" + amount + "')";
                 sqlUpdate(sql);
                 DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
-
-           
-
-               
-                 
-   
                 model.addRow(
                         new Object[]{
                             depdate,
@@ -1587,9 +1557,8 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             return "Please select a flight!";
         }
-
-        if (youngComboBox.getSelectedItem() == "0" && (String) adultComboBox.getSelectedItem() == "0" && (String) kidComboBox.getSelectedItem() == "0" && (String) infantComboBox.getSelectedItem() == "0") {
-            return "Please select a ticket!";
+        if (numOfticketstoBuyTextfield.getSelectedItem() == "0") {
+            return "Please choose how many tickets do you want to buy.";
         }
 
         return "";
@@ -1640,11 +1609,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             getDataFromBuyTicketsTableToPassenger();
 
-            int felnott = Integer.parseInt(adultComboBox.getSelectedItem().toString());
-            int serdulo = Integer.parseInt(youngComboBox.getSelectedItem().toString());
-            int gyerek = Integer.parseInt(kidComboBox.getSelectedItem().toString());
-            int csecsemo = Integer.parseInt(infantComboBox.getSelectedItem().toString());
-            jegyekszama = Integer.parseInt(adultComboBox.getSelectedItem().toString()) + Integer.parseInt(youngComboBox.getSelectedItem().toString()) + Integer.parseInt(kidComboBox.getSelectedItem().toString()) + Integer.parseInt(infantComboBox.getSelectedItem().toString());
+            jegyekszama = Integer.parseInt(numOfticketstoBuyTextfield.getSelectedItem().toString());
 
             if (Integer.parseInt(BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6).toString()) - jegyekszama < 0 || Integer.parseInt(BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6).toString()) < 0) {
 
@@ -1655,21 +1620,8 @@ public class Kezdooldal extends javax.swing.JFrame {
 
                 flightNum = (String) BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 7);
 
-                for (int i = 1; i < felnott + 1; i++) {
-                    utasletrehozas("Passenger(adult) no." + i);
-                }
-
-                for (int i = 1; i < serdulo + 1; i++) {
-                    utasletrehozas("Passenger(young) no." + i);
-                }
-
-                for (int i = 1; i < gyerek + 1; i++) {
-                    utasletrehozas("Passenger(Kid) no." + i);
-
-                }
-
-                for (int i = 1; i < csecsemo + 1; i++) {
-                    utasletrehozas("Passenger(Infant) no." + i);
+                for (int i = 1; i < jegyekszama + 1; i++) {
+                    utasletrehozas("Passenger no." + i);
                 }
 
                 loadtoBuyTicketsTableData();
@@ -1728,14 +1680,16 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     private void cartLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartLabelMouseClicked
 
-        this.buyTicketsPanel.hide();
-
         cartFrame c = new cartFrame();
         c.setVisible(true);
         c.setLocationRelativeTo(null);
 
 
     }//GEN-LAST:event_cartLabelMouseClicked
+
+    private void numOfticketstoBuyTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numOfticketstoBuyTextfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numOfticketstoBuyTextfieldActionPerformed
 
     public int getJegyekszama() {
         return jegyekszama;
@@ -2050,7 +2004,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JButton adminBackButton;
     private javax.swing.JLabel adminErrorLabel;
     private javax.swing.JButton adminRegisterFlightButton;
-    private javax.swing.JComboBox adultComboBox;
     private javax.swing.JLabel arrHourLabel;
     private com.toedter.calendar.JDateChooser arrivalTImejDateChooser;
     private javax.swing.JLabel arrivalTimeLabel;
@@ -2094,18 +2047,13 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel forgotPasswordLabel;
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderLabel;
-    private javax.swing.JComboBox infantComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox kidComboBox;
     private javax.swing.JLabel lastNameErrorLabel;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextfield;
@@ -2118,6 +2066,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
+    private javax.swing.JComboBox numOfticketstoBuyTextfield;
     private javax.swing.JLabel numberOfSeats;
     private javax.swing.JLabel numberOfSeats1;
     private javax.swing.JTextField numberOfSeatsTextField;
@@ -2153,7 +2102,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel userDestinationCountryLabel;
     private javax.swing.JLabel welcomeUser;
     private javax.swing.JRadioButton womanRadioButton;
-    private javax.swing.JComboBox youngComboBox;
     private javax.swing.JLabel zipCodeErrorLabel;
     private javax.swing.JTextField zipCodeTextfield;
     // End of variables declaration//GEN-END:variables
