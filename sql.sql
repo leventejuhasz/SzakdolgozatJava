@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Már 21. 13:32
+-- Létrehozás ideje: 2022. Már 23. 11:25
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -8028,10 +8028,13 @@ INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_country`, `
 ('2022-03-26 0:1', '2022-03-27 0:1', 'American Samoa', 'Ofu Airport', 'Anguilla', 'Wallblake Airport', 100, 100, 100, 70),
 ('2022-03-26 17:29', '2022-03-27 18:7', 'American Samoa', 'Tau Airport', 'Burkina Faso', 'Boulsa Airport', 100, 100, 100, 71),
 ('2022-03-25 0:1', '2022-03-26 0:1', 'Botswana', 'Lobatse Airport', 'Fiji', 'Castaway Island Resort Airport', 100, 100, 100, 72),
-('2022-03-25 0:1', '2022-03-28 0:1', 'Denmark', 'Karup Airport', 'Belgium', 'Brussels Airport (Zaventem Airport)', 100, 100, 100, 73),
+('2022-03-25 0:1', '2022-03-28 0:1', 'Denmark', 'Karup Airport', 'Belgium', 'Brussels Airport (Zaventem Airport)', 100, 98, 100, 73),
 ('2022-03-25 0:1', '2022-03-27 0:1', 'Canada', 'Bella Bella (Campbell Island) Airport', 'Cambodia', 'Phnom Penh International Airport', 100, 100, 100, 74),
 ('2022-03-25 0:1', '2022-03-27 0:1', 'Canada', 'Bella Bella (Campbell Island) Airport', 'Cambodia', 'Phnom Penh International Airport', 100, 100, 100, 75),
-('2022-03-25 0:1', '2022-03-26 0:1', 'Angola', 'Benguela Airport (Gen. V. Deslandes Airport)', 'Anguilla', 'Wallblake Airport', 100, 100, 90, 76);
+('2022-03-25 0:1', '2022-03-26 0:1', 'Angola', 'Benguela Airport (Gen. V. Deslandes Airport)', 'Anguilla', 'Wallblake Airport', 100, 95, 90, 76),
+('2022-03-25 0:1', '2022-03-27 0:1', 'Antarctica', 'Teniente R. Marsh Airport', 'Cambodia', 'Angkor International Airport', 230, 230, 272, 77),
+('2022-03-25 0:1', '2022-03-27 0:1', 'Zambia', 'Southdowns Airport', 'Essex United Kingdom', 'London Southend Airport', 100, 95, 765, 78),
+('2022-03-31 12:30', '2022-04-01 8:30', 'Bangladesh', 'Jessore Airport', 'Azerbaijan', 'Lankaran International Airport', 120, 119, 650, 79);
 
 -- --------------------------------------------------------
 
@@ -8062,25 +8065,31 @@ CREATE TABLE `passenger` (
 --
 
 INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `Origin_country`, `Destination_country`, `OriginAirportName`, `DestinationAirportName`, `Departure_time`, `Arrival_time`, `SeatNum`, `Flight_num`, `passenger_id`, `Customer_id`) VALUES
-('Women', 'cica', 'ca', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 58, 60, 35, 41),
-('Man', 'asd', 'sad', '1961.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 58, 60, 36, 41),
-('Women', 'asd', 'asd', '1950.January.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 54, 60, 37, 41),
-('Man', 'asd', 'asd', '1950.January.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 54, 60, 38, 41),
-('Man', 'asd', 'asd', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 54, 60, 39, 41),
-('Women', 'asd', 'asd', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 54, 60, 40, 41),
 ('Women', 'Kis', 'Gabor', '1952.June.5', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 41, 43),
 ('Man', 'asd', 'asd', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 42, 43),
 ('Man', 'kis', 'nagyeelek', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 43, 43),
-('Man', 'kk', 'aa', '1950.January.1', 'I am not asking (0 Ft)', 'Algeria', 'Anguilla', 'Blida Airport', 'Wallblake Airport', '2022-02-16 9:6', '2022-02-28 9:6', 80, 59, 46, 41),
-('Man', 'kis', 'kca', '1950.March.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 45, 60, 47, 41),
-('Man', 'lol', 'lol', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 45, 60, 48, 41),
-('Man', 'xd', 'xd', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 45, 60, 49, 41),
-('Man', 'as', 'as', '1963.January.1', 'I am not asking (0 Ft)', 'Algeria', 'Anguilla', 'Blida Airport', 'Wallblake Airport', '2022-02-16 9:6', '2022-02-28 9:6', 80, 59, 50, 41),
 ('Women', 'Kis', 'Gabor', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 199, 62, 51, 43),
 ('Women', 'Nagy ', 'Emese', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 198, 62, 52, 43),
 ('Man', 'Kis ', 'Jnos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 197, 62, 53, 43),
 ('Man', 'Kis', 'Laszlo', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 196, 62, 63, 44),
-('Man', 'janos', 'janos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 195, 62, 64, 44);
+('Man', 'janos', 'janos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 195, 62, 64, 44),
+('Man', 'Nagy ', 'Lajos', '1950.January.1', 'I am not asking (0 Ft)', 'Angola', 'Anguilla', 'Benguela Airport (Gen. V. Deslandes Airport)', 'Wallblake Airport', '2022-03-25 0:1', '2022-03-26 0:1', 98, 76, 73, 41),
+('Man', 'Nagy', 'Emese', '1950.January.1', 'I am not asking (0 Ft)', 'Angola', 'Anguilla', 'Benguela Airport (Gen. V. Deslandes Airport)', 'Wallblake Airport', '2022-03-25 0:1', '2022-03-26 0:1', 97, 76, 74, 41),
+('Man', 'Nagy', 'Jozsef', '1950.January.1', 'I am not asking (0 Ft)', 'Denmark', 'Belgium', 'Karup Airport', 'Brussels Airport (Zaventem Airport)', '2022-03-25 0:1', '2022-03-28 0:1', 98, 73, 76, 41),
+('Man', 'Nagy', 'Áron', '1974.July.30', 'I am not asking (0 Ft)', 'Angola', 'Anguilla', 'Benguela Airport (Gen. V. Deslandes Airport)', 'Wallblake Airport', '2022-03-25 0:1', '2022-03-26 0:1', 95, 76, 81, 41),
+('Man', 'Juhasz', 'Levne', '2000.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 99, 78, 88, 41),
+('Man', 'Nagy', 'Istvan', '2000.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 98, 78, 89, 41),
+('Women', 'Nagy', 'Emese', '1983.1.1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 98, 78, 90, 41),
+('Man', 'Kis', 'Lajos', '1988.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 98, 78, 91, 41),
+('Women', 'Nagy', 'Emese', '1986.1.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 98, 78, 92, 41),
+('Man', 'Nagy', 'Lajos', '2001.1.1', 'I am not asking (0 Ft)', 'Denmark', 'Belgium', 'Karup Airport', 'Brussels Airport (Zaventem Airport)', '2022-03-25 0:1', '2022-03-28 0:1', 97, 73, 93, 41),
+('Man', 'Kis', 'Gabo', '2002.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 98, 78, 94, 41),
+('Man', 'Kis', 'Gabo', '2002.1.1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft', 'Angola', 'Anguilla', 'Benguela Airport (Gen. V. Deslandes Airport)', 'Wallblake Airport', '2022-03-25 0:1', '2022-03-26 0:1', 95, 76, 95, 41),
+('Man', 'Kis', 'Ljas', '1985.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 98, 78, 96, 41),
+('Man', 'Kis', 'Kisa', '2013.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 97, 78, 97, 41),
+('Man', 'Kis', 'Lajos', '2017.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 96, 78, 98, 41),
+('Man', 'Nagy', 'Emse', '2014.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 95, 78, 99, 41),
+('Man', 'Juhasz', 'Levente', '2010.1.1', 'I am not asking (0 Ft)', 'Bangladesh', 'Azerbaijan', 'Jessore Airport', 'Lankaran International Airport', '2022-03-31 12:30', '2022-04-01 8:30', 119, 79, 100, 41);
 
 -- --------------------------------------------------------
 
@@ -8089,12 +8098,24 @@ INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggag
 --
 
 CREATE TABLE `price_info` (
-  `Passenger_name` int(30) NOT NULL,
+  `Passenger_name` varchar(300) NOT NULL,
   `Price` int(4) NOT NULL,
   `Flight_num` int(12) NOT NULL,
   `Customer_id` int(11) NOT NULL,
   `Passenger_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `price_info`
+--
+
+INSERT INTO `price_info` (`Passenger_name`, `Price`, `Flight_num`, `Customer_id`, `Passenger_id`) VALUES
+('Kis Gabo', 90, 76, 41, 95),
+('Kis Ljas', 765, 78, 41, 96),
+('Kis Kisa', 25, 78, 41, 97),
+('Kis Lajos', 25, 78, 41, 98),
+('Nagy Emse', 25, 78, 41, 99),
+('Juhasz Levente', 600, 79, 41, 100);
 
 -- --------------------------------------------------------
 
@@ -8165,13 +8186,13 @@ ALTER TABLE `registration_info`
 -- AUTO_INCREMENT a táblához `flight_info`
 --
 ALTER TABLE `flight_info`
-  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
