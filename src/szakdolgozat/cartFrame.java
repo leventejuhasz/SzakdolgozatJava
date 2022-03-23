@@ -10,9 +10,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static szakdolgozat.Kezdooldal.customerId;
+import static szakdolgozat.Passenger.PassengerAge;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,14 +27,14 @@ import static szakdolgozat.Kezdooldal.customerId;
  */
 public class cartFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form cartFrame
-     */
+    public static String base_price;
+
     public cartFrame() {
         initComponents();
         loadMyTickets();
         mozgato();
         design();
+
     }
 
     private void exitQuestion() {
@@ -48,8 +50,15 @@ public class cartFrame extends javax.swing.JFrame {
     }
 
     private void design() {
+        numOfTicketsLabel.setText("Number of Tickets: " + myTicketsTable.getRowCount());
 
-        this.closeProgramIconOnUserPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        int total = 0;
+
+        for (int i = 0; i < myTicketsTable.getRowCount(); i++) {
+            total += Integer.parseInt((String) myTicketsTable.getValueAt(i, 8).toString().replaceAll(" EUR", ""));
+        }
+        totalPay.setText("To be paid in total: " + total + " EUR");
+
     }
 
     @SuppressWarnings("unchecked")
@@ -59,12 +68,11 @@ public class cartFrame extends javax.swing.JFrame {
         cartPanel = new javax.swing.JPanel();
         myTickets = new javax.swing.JScrollPane();
         myTicketsTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        closeProgramIconOnUserPanel = new javax.swing.JLabel();
+        deletePassenger = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         buyTicketsButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        numOfTicketsLabel = new javax.swing.JLabel();
+        totalPay = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,22 +113,14 @@ public class cartFrame extends javax.swing.JFrame {
 
         cartPanel.add(myTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1290, 170));
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton1.setText("Delete Passenger");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        cartPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 260, 200, 40));
-
-        closeProgramIconOnUserPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/X11-icon.png"))); // NOI18N
-        closeProgramIconOnUserPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        deletePassenger.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        deletePassenger.setText("Delete Passenger");
+        deletePassenger.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeProgramIconOnUserPanelMouseClicked(evt);
+                deletePassengerMouseClicked(evt);
             }
         });
-        cartPanel.add(closeProgramIconOnUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 10, -1, -1));
+        cartPanel.add(deletePassenger, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 260, 200, 40));
 
         backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("BACK");
@@ -141,27 +141,23 @@ public class cartFrame extends javax.swing.JFrame {
         });
         cartPanel.add(buyTicketsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 300, -1, 40));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Number of Tickets: ");
-        cartPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+        numOfTicketsLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        numOfTicketsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        numOfTicketsLabel.setText("Number of Tickets: ");
+        cartPanel.add(numOfTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("To be paid in total: ");
-        cartPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 260, -1, -1));
+        totalPay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        totalPay.setForeground(new java.awt.Color(255, 255, 255));
+        totalPay.setText("To be paid in total: ");
+        cartPanel.add(totalPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 260, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/High_resolution_wallpaper_background_ID_77700337015.jpg"))); // NOI18N
-        cartPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-990, -930, -1, 1330));
+        cartPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-990, -930, 2300, 1330));
 
-        getContentPane().add(cartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 1310, 570));
+        getContentPane().add(cartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 1310, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void closeProgramIconOnUserPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeProgramIconOnUserPanelMouseClicked
-        exitQuestion();
-    }//GEN-LAST:event_closeProgramIconOnUserPanelMouseClicked
 
     private void buyTicketsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buyTicketsButtonMouseClicked
 
@@ -171,6 +167,26 @@ public class cartFrame extends javax.swing.JFrame {
         p.setLocationRelativeTo(null);
 
     }//GEN-LAST:event_buyTicketsButtonMouseClicked
+
+    
+
+    private void updatePrice() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); 
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");   
+            Statement smt = con.createStatement();
+            
+            
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+       
+   
+
+    }
 
     int posX = 0, posY = 0;
 
@@ -196,9 +212,34 @@ public class cartFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backButtonMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void deletePassengerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerMouseClicked
+
+        try {
+            if (myTicketsTable.isRowSelected(myTicketsTable.getSelectedRow())) {
+                JFrame jFrame = new JFrame();
+                int result = JOptionPane.showConfirmDialog(jFrame, "Are you sure want to delete this passenger?");
+
+                if (result == 0) {
+
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+                    Statement smt = con.createStatement();
+                    smt.executeUpdate("Delete FROM passenger where seatNum =" + myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 2));
+                    con.close();
+                    model2.removeRow(myTicketsTable.getSelectedRow());
+
+                }
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+
+    }//GEN-LAST:event_deletePassengerMouseClicked
     private DefaultTableModel model2;
 
     private void loadMyTickets() {
@@ -207,7 +248,7 @@ public class cartFrame extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
-            String query = "Select FirstName, LastName,Luggage,SeatNum, flight_info.Origin_country, passenger.OriginAirportName, flight_info.Destination_country, , passenger.DestinationAirportName, passenger.Departure_time, passenger.Arrival_time, Flight_num_id  From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num where passenger.Customer_id=" + customerId;
+            String query = "Select FirstName, LastName,Luggage,SeatNum, flight_info.Origin_country, passenger.OriginAirportName, flight_info.Destination_country, passenger.DestinationAirportName, passenger.Departure_time, passenger.Arrival_time, Flight_num_id, Base_Price  From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num where passenger.Customer_id=" + customerId;
             ResultSet res = smt.executeQuery(query);
             Statement s = con.createStatement();
             ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM passenger where Customer_id LIKE '" + customerId + "'");
@@ -230,7 +271,7 @@ public class cartFrame extends javax.swing.JFrame {
                 String departure = res.getString("Departure_time");
                 String arr = res.getString("Arrival_time");
                 String fid = res.getString("Flight_num_id");
-                String price = res.getString("Price");
+                String price = res.getString("Base_Price") + " EUR";
                 data[i][0] = name;
                 data[i][1] = luggage;
                 data[i][2] = seatn;
@@ -260,12 +301,11 @@ public class cartFrame extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JButton buyTicketsButton;
     private javax.swing.JPanel cartPanel;
-    private javax.swing.JLabel closeProgramIconOnUserPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton deletePassenger;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane myTickets;
     private javax.swing.JTable myTicketsTable;
+    private javax.swing.JLabel numOfTicketsLabel;
+    private javax.swing.JLabel totalPay;
     // End of variables declaration//GEN-END:variables
 }

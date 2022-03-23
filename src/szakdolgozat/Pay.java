@@ -55,6 +55,13 @@ public class Pay extends javax.swing.JFrame {
 
     }
 
+    private void paying(){
+    
+    
+    
+    }
+    
+    
     private void limittexfieldnumbers(JTextField textfield, int limit) {
 
         textfield.addKeyListener(new KeyAdapter() {

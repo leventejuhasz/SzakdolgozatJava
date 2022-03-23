@@ -1,0 +1,2 @@
+szakdolgozat.RoundedBorder
+szakdolgozat.Pay

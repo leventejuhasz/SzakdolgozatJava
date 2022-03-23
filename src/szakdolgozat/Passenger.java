@@ -36,6 +36,7 @@ import static szakdolgozat.Kezdooldal.DestinationAirportName;
 import static szakdolgozat.Kezdooldal.Departure_time;
 import static szakdolgozat.Kezdooldal.Arrival_time;
 import static szakdolgozat.Kezdooldal.flightNum;
+import static szakdolgozat.Kezdooldal.basePrice;
 
 
 /*
@@ -48,6 +49,8 @@ import static szakdolgozat.Kezdooldal.flightNum;
  * @author User
  */
 public class Passenger extends javax.swing.JFrame {
+
+    public static long PassengerAge;
 
     public Passenger() {
         initComponents();
@@ -207,6 +210,40 @@ public class Passenger extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private int checkAge(int age) {
+
+        if (age < 2) {
+            return 20;
+        }
+
+        if (age <= 12 && age >= 2) {
+            return 15;
+        }
+
+        if (age <= 15 && age <= 17) {
+            return 10;
+
+        }
+
+        return 0;
+
+    }
+
+    private int calculatePassengerTicketPrice() {
+
+        int s = 100 - checkAge((int) getdifferenceInYears());
+
+        int amount = (basePrice-(s * basePrice) % 100);
+
+
+        System.out.println(s);
+        System.out.println(basePrice);
+        
+        System.out.println(amount);
+        return amount;
+
+    }
+
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         Connection con;
@@ -218,7 +255,8 @@ public class Passenger extends javax.swing.JFrame {
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
                 Statement smt = con.createStatement();
                 Statement smt2 = con.createStatement();
-
+                Statement smt3 = con.createStatement();
+                Statement smt4 = con.createStatement();
                 ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
 
                 String birthdate = this.yearComboBox.getSelectedItem() + "." + this.MonthComboBox.getSelectedItem() + "." + this.dayComboBox.getSelectedItem();
@@ -226,9 +264,18 @@ public class Passenger extends javax.swing.JFrame {
                 int seatnum = r.getInt(1);
                 smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
 
-                this.dispose();
-                System.out.println(getdifferenceInYears());
+                PreparedStatement ps = con.prepareStatement("Select passenger_id from passenger where Customer_id =" + customerId + " ORDER BY passenger_id DESC LIMIT 1");
+                int passenger_Id = 0;
+                ResultSet result = ps.executeQuery();
+                if (result.next()) {
+                    passenger_Id = Integer.parseInt(result.getString("passenger_id"));
+
+                }
+                PassengerAge = getdifferenceInYears();
+                smt3.executeUpdate("Insert INTO price_info (Passenger_name, Price, Flight_num, Customer_id, Passenger_id)  VALUES ('" + this.firtsNamePassengerTextField.getText() + " " + LastNamePassengerTextfield.getText() + "' , '" + calculatePassengerTicketPrice() + "' , '" + flightNum + "' , '" + customerId + "' , '" + passenger_Id + "')");
+
                 smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-1 where Flight_num_id = " + flightNum);
+                this.dispose();
             }
 
         } catch (ClassNotFoundException ex) {
@@ -253,8 +300,6 @@ public class Passenger extends javax.swing.JFrame {
         LocalDate start = LocalDate.of(ev, honap, nap);
         LocalDate stop = LocalDate.now(ZoneId.of("Europe/Luxembourg"));
         long years = java.time.temporal.ChronoUnit.YEARS.between(start, stop);
-
-        System.out.println(years);
 
         return years;
     }

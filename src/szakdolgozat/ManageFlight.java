@@ -34,6 +34,7 @@ import static szakdolgozat.Kezdooldal.destcountry;
 import static szakdolgozat.Kezdooldal.maxnumofseats;
 import static szakdolgozat.Kezdooldal.adminflightnum;
 import static szakdolgozat.Kezdooldal.availableseats;
+import static szakdolgozat.Kezdooldal.promotion;
 
 public class ManageFlight extends javax.swing.JFrame {
 
@@ -88,6 +89,7 @@ public class ManageFlight extends javax.swing.JFrame {
         flightNumLabel = new javax.swing.JLabel();
         searchButton = new javax.swing.JButton();
         closeManageFlighFrametLabel = new javax.swing.JLabel();
+        promotionLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -155,7 +157,7 @@ public class ManageFlight extends javax.swing.JFrame {
                 deletePassengerButtonMouseClicked(evt);
             }
         });
-        ManageFlightPanel.add(deletePassengerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 540, 230, 40));
+        ManageFlightPanel.add(deletePassengerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 540, 230, 40));
 
         destPlaceLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         destPlaceLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,7 +177,7 @@ public class ManageFlight extends javax.swing.JFrame {
         numofavseatsLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         numofavseatsLabel.setForeground(new java.awt.Color(255, 255, 255));
         numofavseatsLabel.setText("Number of available seats: ");
-        ManageFlightPanel.add(numofavseatsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 560, -1, -1));
+        ManageFlightPanel.add(numofavseatsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 570, -1, -1));
 
         deptimeLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         deptimeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -223,6 +225,11 @@ public class ManageFlight extends javax.swing.JFrame {
             }
         });
         ManageFlightPanel.add(closeManageFlighFrametLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 0, 50, -1));
+
+        promotionLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        promotionLabel.setForeground(new java.awt.Color(255, 255, 255));
+        promotionLabel.setText("Promotion: ");
+        ManageFlightPanel.add(promotionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(0, 204, 255));
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
@@ -358,6 +365,7 @@ public class ManageFlight extends javax.swing.JFrame {
         numofmaxseatLabel.setText("Number of max seats: " + maxnumofseats);
         numofavseatsLabel.setText("Number of available seats: " + availableseats);
         flightNumLabel.setText("Flight number: " + adminflightnum);
+        promotionLabel.setText("Promotion: "+promotion+"%");
 
     }
 
@@ -380,6 +388,7 @@ public class ManageFlight extends javax.swing.JFrame {
     private javax.swing.JLabel orplaceLabel;
     private javax.swing.JTable passengersTable;
     private javax.swing.JLabel passengertabletitle;
+    private javax.swing.JLabel promotionLabel;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel searchLabel;
     // End of variables declaration//GEN-END:variables
