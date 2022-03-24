@@ -256,7 +256,6 @@ public class Passenger extends javax.swing.JFrame {
                 Statement smt = con.createStatement();
                 Statement smt2 = con.createStatement();
                 Statement smt3 = con.createStatement();
-                Statement smt4 = con.createStatement();
                 ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
 
                 String birthdate = this.yearComboBox.getSelectedItem() + "." + this.MonthComboBox.getSelectedItem() + "." + this.dayComboBox.getSelectedItem();

@@ -36,7 +36,7 @@ public class Pay extends javax.swing.JFrame {
     public Pay() {
         initComponents();
 
-        jButton2.setBorder(new RoundedBorder(30));
+        payButton.setBorder(new RoundedBorder(30));
 
         mozgato();
         designPaymentInterface();
@@ -55,13 +55,74 @@ public class Pay extends javax.swing.JFrame {
 
     }
 
-    private void paying(){
-    
-    
-    
+    public boolean onlyDigits(String str, int n) {
+
+        for (int i = 0; i < n; i++) {
+
+            if (str.charAt(i) >= '0'
+                    && str.charAt(i) <= '9') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
-    
-    
+
+    private void errorFramePopUp(String errorText) {
+
+        JFrame jFrame = new JFrame();
+        JOptionPane.showMessageDialog(jFrame, errorText);
+    }
+
+    public boolean ischeckPayment() {
+        boolean checkCodeError = false;
+        if (!onlyDigits(first4CardNumber.getText(), 4) == true) {
+            errorFramePopUp("Card numbers can contains only numbers!");
+            checkCodeError = true;
+        }
+        if (!onlyDigits(second4CardNumber.getText(), 4) == true) {
+            errorFramePopUp("Card numbers can contains only numbers!");
+            checkCodeError = true;
+        }
+        if (!onlyDigits(third4CardNumber.getText(), 4) == true) {
+            errorFramePopUp("Card numbers can contains only numbers!");
+            checkCodeError = true;
+        }
+        if (!onlyDigits(last4CardNumber.getText(), 4) == true) {
+            errorFramePopUp("Card numbers can contains only numbers!");
+            checkCodeError = true;
+        }
+        char[] chars = firstlastNameTextfield.getText().toCharArray();
+        for (char c : chars) {
+            if (!Character.isLetter(c) || c == ' ') {
+                errorFramePopUp("Card holders name can contains only text!");
+                checkCodeError = true;
+            }
+        }
+
+        if (!onlyDigits(yearTextfield.getText(), 2) == true) {
+            errorFramePopUp("Year can only a number!");
+            checkCodeError = true;
+        }
+
+        if (!onlyDigits(monthTextfield.getText(), 2) == true) {
+            errorFramePopUp("Month can only a number!");
+            checkCodeError = true;
+        }
+        if (!onlyDigits(cvcTextField.getText(), 3) == true) {
+
+            errorFramePopUp("CVC code can only contains number!");
+            checkCodeError = true;
+        }
+        if (cvcTextField.getText().length() > 3) {
+            errorFramePopUp("CVC code needs to be 3 number!");
+            checkCodeError = true;
+        }
+        return false;
+
+    }
+
     private void limittexfieldnumbers(JTextField textfield, int limit) {
 
         textfield.addKeyListener(new KeyAdapter() {
@@ -102,7 +163,7 @@ public class Pay extends javax.swing.JFrame {
         monthTextfield = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         cardIconLabel = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        payButton = new javax.swing.JButton();
         whitebackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -254,13 +315,18 @@ public class Pay extends javax.swing.JFrame {
         cardIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/image (1).png"))); // NOI18N
         jPanel1.add(cardIconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(0, 255, 51));
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Pay now");
-        jButton2.setBorderPainted(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, 470, 60));
+        payButton.setBackground(new java.awt.Color(0, 255, 51));
+        payButton.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        payButton.setForeground(new java.awt.Color(255, 255, 255));
+        payButton.setText("Pay now");
+        payButton.setBorderPainted(false);
+        payButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        payButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                payButtonMouseClicked(evt);
+            }
+        });
+        jPanel1.add(payButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, 470, 60));
 
         whitebackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/white-color-solid-background-1920x1080.png"))); // NOI18N
         whitebackground.setText("jLabel4");
@@ -284,6 +350,12 @@ public class Pay extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_cancelPaymentsLabelMouseClicked
+
+    private void payButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payButtonMouseClicked
+        if (ischeckPayment() == false) {
+
+        }
+    }//GEN-LAST:event_payButtonMouseClicked
 
     int posX = 0, posY = 0;
 
@@ -319,11 +391,11 @@ public class Pay extends javax.swing.JFrame {
     private javax.swing.JTextField first4CardNumber;
     private javax.swing.JTextField firstlastNameTextfield;
     private javax.swing.JLabel greybackground;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField last4CardNumber;
     private javax.swing.JTextField monthTextfield;
+    private javax.swing.JButton payButton;
     private javax.swing.JLabel payments2Title;
     private javax.swing.JLabel paymentsTitle;
     private javax.swing.JTextField second4CardNumber;

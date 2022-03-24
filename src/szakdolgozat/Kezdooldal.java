@@ -193,8 +193,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         numOfticketstoBuyTextfield = new javax.swing.JComboBox();
         destinationTextField = new javax.swing.JTextField();
-        welcomeUser = new javax.swing.JLabel();
         cartLabel = new javax.swing.JLabel();
+        Settings = new javax.swing.JLabel();
+        myTickets = new javax.swing.JLabel();
         userBackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -795,7 +796,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 closeProgramIconOnUserPanelMouseClicked(evt);
             }
         });
-        UserPanel.add(closeProgramIconOnUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 10, -1, -1));
+        UserPanel.add(closeProgramIconOnUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 0, -1, -1));
 
         buyTicketsLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         buyTicketsLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -805,7 +806,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 buyTicketsLabelMouseClicked(evt);
             }
         });
-        UserPanel.add(buyTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
+        UserPanel.add(buyTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
         logOutLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         logOutLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -815,7 +816,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 logOutLabelMouseClicked(evt);
             }
         });
-        UserPanel.add(logOutLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, -1, -1));
+        UserPanel.add(logOutLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 20, -1, -1));
 
         buyTicketsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -859,7 +860,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         BuyTicketsTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
         buyTicketsJscrollPane.setViewportView(BuyTicketsTable);
 
-        buyTicketsPanel.add(buyTicketsJscrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1070, 230));
+        buyTicketsPanel.add(buyTicketsJscrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1150, 230));
 
         ourDepartingFlightsLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         ourDepartingFlightsLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -908,11 +909,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         buyTicketsPanel.add(destinationTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 250, 30));
 
-        UserPanel.add(buyTicketsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 1070, 380));
-
-        welcomeUser.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        welcomeUser.setForeground(new java.awt.Color(255, 255, 255));
-        UserPanel.add(welcomeUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, -1, -1));
+        UserPanel.add(buyTicketsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1150, 370));
 
         cartLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         cartLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -923,7 +920,27 @@ public class Kezdooldal extends javax.swing.JFrame {
                 cartLabelMouseClicked(evt);
             }
         });
-        UserPanel.add(cartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 40));
+        UserPanel.add(cartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 100, 40));
+
+        Settings.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        Settings.setForeground(new java.awt.Color(102, 255, 255));
+        Settings.setText("Settings");
+        Settings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsMouseClicked(evt);
+            }
+        });
+        UserPanel.add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 70, -1));
+
+        myTickets.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        myTickets.setForeground(new java.awt.Color(102, 255, 255));
+        myTickets.setText("My Tickets");
+        myTickets.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                myTicketsMouseClicked(evt);
+            }
+        });
+        UserPanel.add(myTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 90, -1));
 
         userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
         userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1233,7 +1250,6 @@ public class Kezdooldal extends javax.swing.JFrame {
                 customerId = Integer.parseInt(result.getString("Customer_id"));
                 String kapcsolattarto = result.getString("FirstName");
                 kapcsolattarto += " " + result.getString("LastName");
-                welcomeUser.setText("Welcome " + kapcsolattarto);
             }
 
             if (hibasAdat == true) {
@@ -1296,7 +1312,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             int amount = (s * Integer.parseInt(priceOfTheFlightTextField.getText())) / 100;
             if (adminErrorHandling() == "") {
-                String sql = "Insert Into flight_info(Departure_time, Arrival_time, Origin_country,OriginAirportName, Destination_country,DestinationAirportName, Num_of_max_seats, Num_of_available_seats,Base_Price)  VALUES ( '" + depdate + "' , '" + arrival + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + originAirportNameComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + destinationAirportNameComboBox.getSelectedItem() + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "' , '" + amount + "')";
+                String sql = "Insert Into flight_info(Departure_time, Arrival_time, Origin_country,OriginAirportName, Destination_country,DestinationAirportName, Num_of_max_seats, Num_of_available_seats,Base_Price)  VALUES ( '" + depdate + "' , '" + arrival + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + originAirportNameComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + destinationAirportNameComboBox.getSelectedItem() + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "' , '" + amount + "' )";
                 sqlUpdate(sql);
                 DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
                 model.addRow(
@@ -1425,14 +1441,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             try {
 
-                String sql = "DELETE FROM flight_info WHERE "
-                        + "Departure_time LIKE '" + addFlightTable.getModel().getValueAt(addFlightTable.getSelectedRow(), 0).toString() + "' AND "
-                        + "Arrival_time LIKE '" + addFlightTable.getModel().getValueAt(addFlightTable.getSelectedRow(), 1).toString() + "' AND "
-                        + "Origin_place	LIKE '" + addFlightTable.getModel().getValueAt(addFlightTable.getSelectedRow(), 2).toString() + "' AND "
-                        + "OriginAirportName LIKE '" + addFlightTable.getModel().getValueAt(addFlightTable.getSelectedRow(), 3).toString() + "' AND "
-                        + "Destination_place LIKE '" + addFlightTable.getModel().getValueAt(addFlightTable.getSelectedRow(), 4).toString() + "' AND "
-                        + "DestinationAirportName LIKE '" + addFlightTable.getModel().getValueAt(addFlightTable.getSelectedRow(), 5).toString() + "' AND "
-                        + "Num_of_seats LIKE '" + addFlightTable.getModel().getValueAt(addFlightTable.getSelectedRow(), 6).toString() + "' ";
+                String sql = "DELETE FROM flight_info WHERE Flight_num_id =" + flightNum;         ;
 
                 sqlUpdate(sql);
                 ((DefaultTableModel) addFlightTable.getModel()).removeRow(addFlightTable.getSelectedRow());
@@ -1590,8 +1599,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
     }
 
-    
-
 
     private void reservationButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservationButtonMouseClicked
         if (notselectedFlight() != "") {
@@ -1674,6 +1681,14 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void numOfticketstoBuyTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numOfticketstoBuyTextfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numOfticketstoBuyTextfieldActionPerformed
+
+    private void myTicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myTicketsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myTicketsMouseClicked
+
+    private void SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SettingsMouseClicked
 
     public int getJegyekszama() {
         return jegyekszama;
@@ -1983,6 +1998,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel FlywithusJlabel;
     private javax.swing.JButton ManageFlightButton;
     private javax.swing.JPanel RegistrationPanel;
+    private javax.swing.JLabel Settings;
     private javax.swing.JPanel UserPanel;
     private javax.swing.JTable addFlightTable;
     private javax.swing.JButton adminBackButton;
@@ -2049,6 +2065,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
+    private javax.swing.JLabel myTickets;
     private javax.swing.JComboBox numOfticketstoBuyTextfield;
     private javax.swing.JLabel numberOfSeats;
     private javax.swing.JLabel numberOfSeats1;
@@ -2082,7 +2099,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel succesfullRegistrationLabel;
     private javax.swing.JLabel userBackgroundLabel;
     private javax.swing.JLabel userDestinationCountryLabel;
-    private javax.swing.JLabel welcomeUser;
     private javax.swing.JRadioButton womanRadioButton;
     private javax.swing.JLabel zipCodeErrorLabel;
     private javax.swing.JTextField zipCodeTextfield;

@@ -177,7 +177,7 @@ public class ManageFlight extends javax.swing.JFrame {
         numofavseatsLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         numofavseatsLabel.setForeground(new java.awt.Color(255, 255, 255));
         numofavseatsLabel.setText("Number of available seats: ");
-        ManageFlightPanel.add(numofavseatsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 570, -1, -1));
+        ManageFlightPanel.add(numofavseatsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 560, -1, -1));
 
         deptimeLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         deptimeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,7 +229,7 @@ public class ManageFlight extends javax.swing.JFrame {
         promotionLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         promotionLabel.setForeground(new java.awt.Color(255, 255, 255));
         promotionLabel.setText("Promotion: ");
-        ManageFlightPanel.add(promotionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, -1, -1));
+        ManageFlightPanel.add(promotionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 590, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(0, 204, 255));
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
