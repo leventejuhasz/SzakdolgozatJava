@@ -150,7 +150,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft"/>
+            <Property name="text" type="java.lang.String" value="1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 29 EUR"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -166,7 +166,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft"/>
+            <Property name="text" type="java.lang.String" value="1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 48 EUR"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -182,7 +182,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 45 757 Ft"/>
+            <Property name="text" type="java.lang.String" value="1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 120 EUR"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -198,7 +198,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft"/>
+            <Property name="text" type="java.lang.String" value="1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 75 EUR "/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -214,7 +214,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 35 618 Ft"/>
+            <Property name="text" type="java.lang.String" value="2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 94 EUR"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import static szakdolgozat.Kezdooldal.customerId;
 import static szakdolgozat.Kezdooldal.Origin_country;
 import static szakdolgozat.Kezdooldal.Destination_country;
@@ -36,8 +37,8 @@ import static szakdolgozat.Kezdooldal.DestinationAirportName;
 import static szakdolgozat.Kezdooldal.Departure_time;
 import static szakdolgozat.Kezdooldal.Arrival_time;
 import static szakdolgozat.Kezdooldal.flightNum;
+import static szakdolgozat.Kezdooldal.cartTable;
 import static szakdolgozat.Kezdooldal.basePrice;
-
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -51,7 +52,11 @@ import static szakdolgozat.Kezdooldal.basePrice;
 public class Passenger extends javax.swing.JFrame {
 
     public static long PassengerAge;
+    public static String firstName, lastName, gender, luggage, birthdate;
+    public static int price;
+    public static int total, numberOfTickets;
 
+    private int luggagePrice;
     public Passenger() {
         initComponents();
 
@@ -64,6 +69,7 @@ public class Passenger extends javax.swing.JFrame {
         luggage4.setOpaque(false);
         luggage5.setOpaque(false);
         NotaskingRadioButton.setSelected(true);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -131,27 +137,27 @@ public class Passenger extends javax.swing.JFrame {
 
         luggage1.setBackground(new java.awt.Color(102, 102, 102));
         luggage1.setForeground(new java.awt.Color(255, 255, 255));
-        luggage1.setText("1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 11 136 Ft");
+        luggage1.setText("1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 29 EUR");
         jPanel1.add(luggage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
         luggage2.setBackground(new java.awt.Color(102, 102, 102));
         luggage2.setForeground(new java.awt.Color(255, 255, 255));
-        luggage2.setText("1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 18 308 Ft");
+        luggage2.setText("1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 48 EUR");
         jPanel1.add(luggage2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
 
         luggage5.setBackground(new java.awt.Color(102, 102, 102));
         luggage5.setForeground(new java.awt.Color(255, 255, 255));
-        luggage5.setText("1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 45 757 Ft");
+        luggage5.setText("1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 120 EUR");
         jPanel1.add(luggage5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, -1, -1));
 
         luggage3.setBackground(new java.awt.Color(102, 102, 102));
         luggage3.setForeground(new java.awt.Color(255, 255, 255));
-        luggage3.setText("1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 28 447 Ft");
+        luggage3.setText("1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 75 EUR ");
         jPanel1.add(luggage3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, -1, -1));
 
         luggage4.setBackground(new java.awt.Color(102, 102, 102));
         luggage4.setForeground(new java.awt.Color(255, 255, 255));
-        luggage4.setText("2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 35 618 Ft");
+        luggage4.setText("2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 94 EUR");
         jPanel1.add(luggage4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, -1, -1));
 
         luggageLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -220,7 +226,7 @@ public class Passenger extends javax.swing.JFrame {
             return 15;
         }
 
-        if (age <= 15 && age <= 17) {
+        if (age >= 15 && age <= 17) {
             return 10;
 
         }
@@ -231,56 +237,34 @@ public class Passenger extends javax.swing.JFrame {
 
     private int calculatePassengerTicketPrice() {
 
-        int s = 100 - checkAge((int) getdifferenceInYears());
+        int promotion = checkAge((int) getdifferenceInYears());
 
-        int amount = (basePrice-(s * basePrice) % 100);
+        int amount = (int) (basePrice - (basePrice * ((double) promotion / (double) 100)));
 
-
-        System.out.println(s);
-        System.out.println(basePrice);
-        
-        System.out.println(amount);
         return amount;
 
     }
 
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        Connection con;
-        try {
 
-            if (isPassengerError() == false) {
+        if (isPassengerError() == false) {
 
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-                Statement smt = con.createStatement();
-                Statement smt2 = con.createStatement();
-                Statement smt3 = con.createStatement();
-                ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
+            DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
+            model.addRow(
+                    new Object[]{
+                        firtsNamePassengerTextField.getText() + " " + LastNamePassengerTextfield.getText(),
+                        selectedLuggage(),
+                        Origin_country + ", " + OriginAirportName,
+                        Destination_country + ", " + DestinationAirportName,
+                        Departure_time,
+                        Arrival_time,
+                        flightNum,
+                        luggagePrice+calculatePassengerTicketPrice() + " EUR"}
+            );
+            numberOfTickets = cartTable.getRowCount();
 
-                String birthdate = this.yearComboBox.getSelectedItem() + "." + this.MonthComboBox.getSelectedItem() + "." + this.dayComboBox.getSelectedItem();
-                r.next();
-                int seatnum = r.getInt(1);
-                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + this.genderComboBox.getSelectedItem() + "' , '" + this.firtsNamePassengerTextField.getText() + "' , '" + this.LastNamePassengerTextfield.getText() + "' , '" + birthdate + "' , '" + selectedLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
-
-                PreparedStatement ps = con.prepareStatement("Select passenger_id from passenger where Customer_id =" + customerId + " ORDER BY passenger_id DESC LIMIT 1");
-                int passenger_Id = 0;
-                ResultSet result = ps.executeQuery();
-                if (result.next()) {
-                    passenger_Id = Integer.parseInt(result.getString("passenger_id"));
-
-                }
-                PassengerAge = getdifferenceInYears();
-                smt3.executeUpdate("Insert INTO price_info (Passenger_name, Price, Flight_num, Customer_id, Passenger_id)  VALUES ('" + this.firtsNamePassengerTextField.getText() + " " + LastNamePassengerTextfield.getText() + "' , '" + calculatePassengerTicketPrice() + "' , '" + flightNum + "' , '" + customerId + "' , '" + passenger_Id + "')");
-
-                smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-1 where Flight_num_id = " + flightNum);
-                this.dispose();
-            }
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+            this.dispose();
         }
 
 
@@ -383,19 +367,19 @@ public class Passenger extends javax.swing.JFrame {
 
             return NotaskingRadioButton.getText();
         } else if (luggage1.isSelected()) {
-
+            luggagePrice += 29;
             return luggage1.getText();
         } else if (luggage2.isSelected()) {
-
+            luggagePrice += 48;
             return luggage2.getText();
         } else if (luggage3.isSelected()) {
-
+            luggagePrice += 75;
             return luggage3.getText();
         } else if (luggage4.isSelected()) {
-
+            luggagePrice += 94;
             return luggage4.getText();
         } else if (luggage5.isSelected()) {
-
+            luggagePrice += 120;
             return luggage5.getText();
         }
 

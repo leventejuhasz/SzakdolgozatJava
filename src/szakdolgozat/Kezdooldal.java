@@ -55,6 +55,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.StyledDocument;
 import sun.applet.AppletViewer;
+import static szakdolgozat.Passenger.total;
+import static szakdolgozat.Passenger.numberOfTickets;
 
 /**
  *
@@ -66,12 +68,16 @@ public class Kezdooldal extends javax.swing.JFrame {
     public static int customerId;
     public static String Origin_country, Destination_country, Departure_time, Arrival_time, OriginAirportName, DestinationAirportName;
     public static String flightNum;
+    public static int seatnum;
     public static int basePrice;
+    public static JTable cartTable;
 
     public Kezdooldal() {
         initComponents();
         mozgato();
         closeProgramIcons();
+        cartTable = cartTableUserPanel;
+
     }
 
     private void closeProgramIcons() {
@@ -79,6 +85,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         setCursorOnLabel(closeProgramIconOnRegistration);
         setCursorOnLabel(closeProgramIconOnUserPanel);
         setCursorOnLabel(closeProgramIconOnAdminPanel);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -193,6 +200,13 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         numOfticketstoBuyTextfield = new javax.swing.JComboBox();
         destinationTextField = new javax.swing.JTextField();
+        cartTablePanel = new javax.swing.JPanel();
+        cartJtable = new javax.swing.JScrollPane();
+        cartTableUserPanel = new javax.swing.JTable();
+        totalPay = new javax.swing.JLabel();
+        numOfTicketsLabel = new javax.swing.JLabel();
+        deletePassenger = new javax.swing.JButton();
+        buyTicketsButton = new javax.swing.JButton();
         cartLabel = new javax.swing.JLabel();
         Settings = new javax.swing.JLabel();
         myTickets = new javax.swing.JLabel();
@@ -911,6 +925,64 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         UserPanel.add(buyTicketsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1150, 370));
 
+        cartTablePanel.setOpaque(false);
+        cartTablePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cartJtable.setBackground(new java.awt.Color(0, 0, 0));
+        cartJtable.setForeground(new java.awt.Color(0, 0, 0));
+
+        cartTableUserPanel.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Luggage", "Origin place", "Destination Place", "Departure Time", "Arrival Time", "Flight Number", "Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        cartTableUserPanel.setOpaque(false);
+        cartJtable.setViewportView(cartTableUserPanel);
+
+        cartTablePanel.add(cartJtable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 170));
+
+        totalPay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        totalPay.setForeground(new java.awt.Color(255, 255, 255));
+        totalPay.setText("To be paid in total: ");
+        cartTablePanel.add(totalPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
+
+        numOfTicketsLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        numOfTicketsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        numOfTicketsLabel.setText("Number of Tickets: ");
+        cartTablePanel.add(numOfTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+
+        deletePassenger.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        deletePassenger.setText("Delete passenger from cart");
+        deletePassenger.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deletePassengerMouseClicked(evt);
+            }
+        });
+        cartTablePanel.add(deletePassenger, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 320, 40));
+
+        buyTicketsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        buyTicketsButton.setForeground(new java.awt.Color(0, 0, 0));
+        buyTicketsButton.setText("Buy tickets");
+        buyTicketsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buyTicketsButtonMouseClicked(evt);
+            }
+        });
+        cartTablePanel.add(buyTicketsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, 40));
+
+        UserPanel.add(cartTablePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1150, 370));
+
         cartLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         cartLabel.setForeground(new java.awt.Color(102, 255, 255));
         cartLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/shopping-cart.png"))); // NOI18N
@@ -1229,6 +1301,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             this.buyTicketsPanel.show();
             this.BuyTicketsTable.show();
             this.buyTicketsPanel.setOpaque(false);
+            this.cartTablePanel.hide();
             loadtoBuyTicketsTableData();
             hibasAdat = false;
         }
@@ -1441,7 +1514,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             try {
 
-                String sql = "DELETE FROM flight_info WHERE Flight_num_id =" + flightNum;         ;
+                String sql = "DELETE FROM flight_info WHERE Flight_num_id =" + flightNum;;
 
                 sqlUpdate(sql);
                 ((DefaultTableModel) addFlightTable.getModel()).removeRow(addFlightTable.getSelectedRow());
@@ -1524,6 +1597,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         buyTicketsJscrollPane.setVisible(true);
 
         buyTicketsPanel.setVisible(true);
+        this.cartTablePanel.hide();
     }//GEN-LAST:event_buyTicketsLabelMouseClicked
 
     private void logOutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutLabelMouseClicked
@@ -1671,10 +1745,23 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     private void cartLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartLabelMouseClicked
 
-        cartFrame c = new cartFrame();
-        c.setVisible(true);
-        c.setLocationRelativeTo(null);
+        this.buyTicketsPanel.hide();
+        this.cartTablePanel.show();
 
+        numOfTicketsLabel.setText("Number of Tickets: " + numberOfTickets);
+        int tesztCount = 0;
+        for (int i = 0; i < cartTable.getRowCount(); i++) {
+            tesztCount += Integer.parseInt((String) cartTable.getValueAt(i, 7).toString().replaceAll(" EUR", ""));
+        }
+        
+        
+        if (tesztCount > total || total == 0) {
+            for (int i = 0; i < cartTable.getRowCount(); i++) {
+                total += Integer.parseInt((String) cartTable.getValueAt(i, 7).toString().replaceAll(" EUR", ""));
+            }
+        }
+
+        totalPay.setText("To be pay in total: " + total + " EUR");
 
     }//GEN-LAST:event_cartLabelMouseClicked
 
@@ -1689,6 +1776,35 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_SettingsMouseClicked
+
+
+    private void deletePassengerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerMouseClicked
+
+        if (cartTableUserPanel.isRowSelected(cartTableUserPanel.getSelectedRow())) {
+
+            DefaultTableModel model = (DefaultTableModel) cartTableUserPanel.getModel();
+
+            int selectedPassengerPrice = Integer.parseInt((String) cartTable.getValueAt(cartTable.getSelectedRow(), 7).toString().replace(" EUR", ""));
+
+            total = total - selectedPassengerPrice;
+            model.removeRow(cartTableUserPanel.getSelectedRow());
+            numberOfTickets = cartTable.getRowCount();
+            numOfTicketsLabel.setText("Number of Tickets: " + numberOfTickets);
+
+            totalPay.setText("To be pay in total: " + total + " EUR");
+
+        }
+
+
+    }//GEN-LAST:event_deletePassengerMouseClicked
+
+    private void buyTicketsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buyTicketsButtonMouseClicked
+
+        Pay p = new Pay();
+
+        p.setVisible(true);
+        p.setLocationRelativeTo(null);
+    }//GEN-LAST:event_buyTicketsButtonMouseClicked
 
     public int getJegyekszama() {
         return jegyekszama;
@@ -1921,13 +2037,19 @@ public class Kezdooldal extends javax.swing.JFrame {
         String cart = "<html><u>Cart</u></html>";
         String logout = "<html><u>Log out</u></html>";
         String buyTickets = "<html><u>Buy Tickets</u></html>";
-
+        String settings = "<html><u>Settings</u></html>";
+        String myTicket = "<html><u>My Tickets</u></html>";
         cartLabel.setText(cart);
         logOutLabel.setText(logout);
         buyTicketsLabel.setText(buyTickets);
+        this.Settings.setText(settings);
+        this.myTickets.setText(myTicket);
         this.cartLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.buyTicketsLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.logOutLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.Settings.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.myTickets.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
         BuyTicketsTable.show();
         UserPanel.show();
         System.out.println("User panel be");
@@ -2010,10 +2132,14 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel background;
     private javax.swing.JLabel bluebackgroundLabel;
+    private javax.swing.JButton buyTicketsButton;
     private javax.swing.JScrollPane buyTicketsJscrollPane;
     private javax.swing.JLabel buyTicketsLabel;
     private javax.swing.JPanel buyTicketsPanel;
+    private javax.swing.JScrollPane cartJtable;
     private javax.swing.JLabel cartLabel;
+    private javax.swing.JPanel cartTablePanel;
+    private javax.swing.JTable cartTableUserPanel;
     private javax.swing.JLabel cityErrorLabel;
     private javax.swing.JLabel cityLabel;
     private javax.swing.JTextField cityTextfield;
@@ -2026,6 +2152,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel countryLabel;
     private javax.swing.JTextField countryTextfield;
     private javax.swing.JButton deleteButon;
+    private javax.swing.JButton deletePassenger;
     private javax.swing.JLabel depHourLabel;
     private javax.swing.JLabel depMinLabel;
     private javax.swing.JComboBox departureTimeHourComboBox;
@@ -2066,6 +2193,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
     private javax.swing.JLabel myTickets;
+    private javax.swing.JLabel numOfTicketsLabel;
     private javax.swing.JComboBox numOfticketstoBuyTextfield;
     private javax.swing.JLabel numberOfSeats;
     private javax.swing.JLabel numberOfSeats1;
@@ -2097,6 +2225,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel streetLabel;
     private javax.swing.JTextField streetTextfield;
     private javax.swing.JLabel succesfullRegistrationLabel;
+    private javax.swing.JLabel totalPay;
     private javax.swing.JLabel userBackgroundLabel;
     private javax.swing.JLabel userDestinationCountryLabel;
     private javax.swing.JRadioButton womanRadioButton;

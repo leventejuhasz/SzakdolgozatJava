@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static szakdolgozat.Kezdooldal.customerId;
 import static szakdolgozat.Passenger.PassengerAge;
@@ -29,8 +30,11 @@ public class cartFrame extends javax.swing.JFrame {
 
     public static String base_price;
 
+
+
     public cartFrame() {
         initComponents();
+
         loadMyTickets();
         mozgato();
         design();
@@ -87,22 +91,22 @@ public class cartFrame extends javax.swing.JFrame {
 
         myTicketsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Luggage", "Seat Number", "Origin place", "Destination Place", "Departure Time", "Arrival Time", "Flight Number", "Price"
+                "Name", "Luggage", "Origin place", "Destination Place", "Departure Time", "Arrival Time", "Flight Number", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -168,23 +172,17 @@ public class cartFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buyTicketsButtonMouseClicked
 
-    
-
     private void updatePrice() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");   
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
-            
-            
-            
+
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-       
-   
 
     }
 
@@ -257,7 +255,7 @@ public class cartFrame extends javax.swing.JFrame {
             System.out.println(count);
             System.out.println(customerId);
             r.close();
-            String columns[] = {myTicketsTable.getColumnName(0), myTicketsTable.getColumnName(1), myTicketsTable.getColumnName(2), myTicketsTable.getColumnName(3), myTicketsTable.getColumnName(4), myTicketsTable.getColumnName(5), myTicketsTable.getColumnName(6), myTicketsTable.getColumnName(7), myTicketsTable.getColumnName(8)};
+            String columns[] = {myTicketsTable.getColumnName(0), myTicketsTable.getColumnName(1), myTicketsTable.getColumnName(2), myTicketsTable.getColumnName(3), myTicketsTable.getColumnName(4), myTicketsTable.getColumnName(5), myTicketsTable.getColumnName(6), myTicketsTable.getColumnName(7)};
             String data[][] = new String[count][myTicketsTable.getColumnCount()];
             boolean vanUtas = false;
             int i = 0;
@@ -288,6 +286,7 @@ public class cartFrame extends javax.swing.JFrame {
 
             model2 = new DefaultTableModel(data, columns);
             myTicketsTable.setModel(model2);
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
