@@ -55,7 +55,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.StyledDocument;
 import sun.applet.AppletViewer;
-import static szakdolgozat.Passenger.total;
 import static szakdolgozat.Passenger.numberOfTickets;
 
 /**
@@ -65,6 +64,8 @@ import static szakdolgozat.Passenger.numberOfTickets;
 public class Kezdooldal extends javax.swing.JFrame {
 
     private int jegyekszama;
+  
+    public static int total;
     public static int customerId;
     public static String Origin_country, Destination_country, Departure_time, Arrival_time, OriginAirportName, DestinationAirportName;
     public static String flightNum;
@@ -1770,7 +1771,9 @@ public class Kezdooldal extends javax.swing.JFrame {
     }//GEN-LAST:event_numOfticketstoBuyTextfieldActionPerformed
 
     private void myTicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myTicketsMouseClicked
-        // TODO add your handling code here:
+       myTickets m = new myTickets();
+       m.setVisible(true);
+       m.setLocationRelativeTo(null);
     }//GEN-LAST:event_myTicketsMouseClicked
 
     private void SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsMouseClicked

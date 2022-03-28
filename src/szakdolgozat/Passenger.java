@@ -51,12 +51,13 @@ import static szakdolgozat.Kezdooldal.basePrice;
  */
 public class Passenger extends javax.swing.JFrame {
 
+    public static int numberOfTickets;
     public static long PassengerAge;
     public static String firstName, lastName, gender, luggage, birthdate;
     public static int price;
-    public static int total, numberOfTickets;
 
     private int luggagePrice;
+
     public Passenger() {
         initComponents();
 
@@ -69,9 +70,12 @@ public class Passenger extends javax.swing.JFrame {
         luggage4.setOpaque(false);
         luggage5.setOpaque(false);
         NotaskingRadioButton.setSelected(true);
-
+        
+        
     }
 
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -260,13 +264,19 @@ public class Passenger extends javax.swing.JFrame {
                         Departure_time,
                         Arrival_time,
                         flightNum,
-                        luggagePrice+calculatePassengerTicketPrice() + " EUR"}
+                        luggagePrice + calculatePassengerTicketPrice() + " EUR"}
             );
             numberOfTickets = cartTable.getRowCount();
 
             this.dispose();
         }
 
+        
+        firstName = firtsNamePassengerTextField.getText();
+        lastName = LastNamePassengerTextfield.getText();
+        gender = (String) genderComboBox.getSelectedItem();
+        luggage = selectedLuggage();
+        birthdate = yearComboBox.getSelectedItem()+"-"+MonthComboBox.getSelectedItem()+"-"+dayComboBox.getSelectedItem();
 
     }//GEN-LAST:event_saveButtonActionPerformed
 

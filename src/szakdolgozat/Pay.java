@@ -25,19 +25,23 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.imageio.ImageIO;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import static szakdolgozat.Kezdooldal.Arrival_time;
 import static szakdolgozat.Kezdooldal.Departure_time;
 import static szakdolgozat.Kezdooldal.DestinationAirportName;
 import static szakdolgozat.Kezdooldal.Destination_country;
 import static szakdolgozat.Kezdooldal.OriginAirportName;
 import static szakdolgozat.Kezdooldal.Origin_country;
+import static szakdolgozat.Kezdooldal.cartTable;
 import static szakdolgozat.Kezdooldal.customerId;
 import static szakdolgozat.Kezdooldal.flightNum;
 import static szakdolgozat.Passenger.PassengerAge;
@@ -47,6 +51,9 @@ import static szakdolgozat.Passenger.lastName;
 import static szakdolgozat.Passenger.gender;
 import static szakdolgozat.Passenger.luggage;
 import static szakdolgozat.Passenger.price;
+import static szakdolgozat.Kezdooldal.total;
+import static szakdolgozat.Passenger.numberOfTickets;
+
 /**
  *
  * @author User
@@ -55,14 +62,13 @@ public class Pay extends javax.swing.JFrame {
 
     public Pay() {
         initComponents();
-
         mozgato();
         designPaymentInterface();
     }
 
     private void designPaymentInterface() {
+        amountToBePaidLabel.setText("€" + total);
         this.cancelPaymentsLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
         limittexfieldnumbers(first4CardNumber, 4);
         limittexfieldnumbers(second4CardNumber, 4);
         limittexfieldnumbers(third4CardNumber, 4);
@@ -111,12 +117,10 @@ public class Pay extends javax.swing.JFrame {
             errorFramePopUp("Card numbers can contains only numbers!");
             checkCodeError = true;
         }
-        char[] chars = firstlastNameTextfield.getText().toCharArray();
-        for (char c : chars) {
-            if (!Character.isLetter(c) || c == ' ') {
-                errorFramePopUp("Card holders name can contains only text!");
-                checkCodeError = true;
-            }
+
+        if (onlyLettersSpaces(firstlastNameTextfield.getText()) == false) {
+            errorFramePopUp("The card holders name can contains only letters and space!");
+            checkCodeError = true;
         }
 
         if (!onlyDigits(yearTextfield.getText(), 2) == true) {
@@ -151,6 +155,33 @@ public class Pay extends javax.swing.JFrame {
                 }
             }
         });
+
+    }
+
+    public static boolean onlyLettersSpaces(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (Character.isLetter(ch) || ch == ' ') {
+                continue;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private void sikeresFizetes() {
+        Icon pie = null;
+        try {
+            pie = new ImageIcon(ImageIO.read(Szakdolgozat.class.getResourceAsStream("icons8-check-64.png")));
+        } catch (IOException ex) {
+            Logger.getLogger(Pay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        JOptionPane.showMessageDialog(this,
+                "Succsefull payment!",
+                "Inane custom dialog",
+                JOptionPane.INFORMATION_MESSAGE,
+                pie);
 
     }
 
@@ -371,6 +402,8 @@ public class Pay extends javax.swing.JFrame {
 
     private void payButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payButtonMouseClicked
         if (ischeckPayment() == false) {
+            DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
+            model.setRowCount(0);
             Connection con;
             try {
 
@@ -381,9 +414,9 @@ public class Pay extends javax.swing.JFrame {
                 Statement smt3 = con.createStatement();
                 ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
 
-               
                 r.next();
                 int seatnum = r.getInt(1);
+
                 smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + gender + "' , '" + firstName + "' , '" + lastName + "' , '" + birthdate + "' , '" + luggage + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
 
                 PreparedStatement ps = con.prepareStatement("Select passenger_id from passenger where Customer_id =" + customerId + " ORDER BY passenger_id DESC LIMIT 1");
@@ -396,9 +429,11 @@ public class Pay extends javax.swing.JFrame {
 
                 smt3.executeUpdate("Insert INTO price_info (Passenger_name, Price, Flight_num, Customer_id, Passenger_id)  VALUES ('" + firstName + " " + lastName + "' , '" + price + "' , '" + flightNum + "' , '" + customerId + "' , '" + passenger_Id + "')");
 
-                smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-1 where Flight_num_id = " + flightNum);
+                smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-" + numberOfTickets + " where Flight_num_id = " + flightNum);
+
                 this.dispose();
 
+                sikeresFizetes();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -408,9 +443,7 @@ public class Pay extends javax.swing.JFrame {
 
     }//GEN-LAST:event_payButtonMouseClicked
     }
-        int posX = 0, posY = 0;
-
-    
+    int posX = 0, posY = 0;
 
     private void mozgato() {
 
@@ -428,14 +461,6 @@ public class Pay extends javax.swing.JFrame {
             }
         });
 
-    }
-    
-    
-    
-    
-    private void fizetes(){
-    
-    
     }
 
 
@@ -467,4 +492,3 @@ public class Pay extends javax.swing.JFrame {
     private javax.swing.JTextField yearTextfield;
     // End of variables declaration//GEN-END:variables
 }
-
