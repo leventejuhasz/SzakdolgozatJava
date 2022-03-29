@@ -39,6 +39,7 @@ import static szakdolgozat.Kezdooldal.Arrival_time;
 import static szakdolgozat.Kezdooldal.flightNum;
 import static szakdolgozat.Kezdooldal.cartTable;
 import static szakdolgozat.Kezdooldal.basePrice;
+import static szakdolgozat.PassengersInfo.passengers;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -70,12 +71,9 @@ public class Passenger extends javax.swing.JFrame {
         luggage4.setOpaque(false);
         luggage5.setOpaque(false);
         NotaskingRadioButton.setSelected(true);
-        
-        
+
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -267,16 +265,17 @@ public class Passenger extends javax.swing.JFrame {
                         luggagePrice + calculatePassengerTicketPrice() + " EUR"}
             );
             numberOfTickets = cartTable.getRowCount();
+            firstName = firtsNamePassengerTextField.getText();
+            lastName = LastNamePassengerTextfield.getText();
+            gender = (String) genderComboBox.getSelectedItem();
+            luggage = selectedLuggage();
+            birthdate = yearComboBox.getSelectedItem() + "-" + MonthComboBox.getSelectedItem() + "-" + dayComboBox.getSelectedItem();
+
+            passengers.add(new PassengerInfo(firstName, lastName, gender, birthdate, luggage, luggagePrice + calculatePassengerTicketPrice()));
 
             this.dispose();
         }
 
-        
-        firstName = firtsNamePassengerTextField.getText();
-        lastName = LastNamePassengerTextfield.getText();
-        gender = (String) genderComboBox.getSelectedItem();
-        luggage = selectedLuggage();
-        birthdate = yearComboBox.getSelectedItem()+"-"+MonthComboBox.getSelectedItem()+"-"+dayComboBox.getSelectedItem();
 
     }//GEN-LAST:event_saveButtonActionPerformed
 

@@ -72,6 +72,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     public static int seatnum;
     public static int basePrice;
     public static JTable cartTable;
+    
+    
 
     public Kezdooldal() {
         initComponents();
@@ -89,6 +91,17 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }
 
+    public void setNumberOfSeats(JLabel numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
+    }
+
+    public void setTotalPay(JLabel totalPay) {
+        this.totalPay = totalPay;
+    }
+
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -962,6 +975,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         numOfTicketsLabel.setForeground(new java.awt.Color(255, 255, 255));
         numOfTicketsLabel.setText("Number of Tickets: ");
         cartTablePanel.add(numOfTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        numOfTicketsLabel.getAccessibleContext().setAccessibleDescription("");
 
         deletePassenger.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         deletePassenger.setText("Delete passenger from cart");
@@ -2196,7 +2210,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
     private javax.swing.JLabel myTickets;
-    private javax.swing.JLabel numOfTicketsLabel;
+    public static javax.swing.JLabel numOfTicketsLabel;
     private javax.swing.JComboBox numOfticketstoBuyTextfield;
     private javax.swing.JLabel numberOfSeats;
     private javax.swing.JLabel numberOfSeats1;
@@ -2228,7 +2242,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel streetLabel;
     private javax.swing.JTextField streetTextfield;
     private javax.swing.JLabel succesfullRegistrationLabel;
-    private javax.swing.JLabel totalPay;
+    public static javax.swing.JLabel totalPay;
     private javax.swing.JLabel userBackgroundLabel;
     private javax.swing.JLabel userDestinationCountryLabel;
     private javax.swing.JRadioButton womanRadioButton;

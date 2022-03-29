@@ -53,6 +53,9 @@ import static szakdolgozat.Passenger.luggage;
 import static szakdolgozat.Passenger.price;
 import static szakdolgozat.Kezdooldal.total;
 import static szakdolgozat.Passenger.numberOfTickets;
+import static szakdolgozat.Kezdooldal.totalPay;
+import static szakdolgozat.Kezdooldal.numOfTicketsLabel;
+import static szakdolgozat.PassengersInfo.passengers;
 
 /**
  *
@@ -404,6 +407,11 @@ public class Pay extends javax.swing.JFrame {
         if (ischeckPayment() == false) {
             DefaultTableModel model = (DefaultTableModel) cartTable.getModel();
             model.setRowCount(0);
+            total = 0;
+            numberOfTickets = 0;
+            totalPay.setText("To be paid in total: " + total + " EUR");
+            numOfTicketsLabel.setText("Number of tickets: " + numberOfTickets);
+
             Connection con;
             try {
 
@@ -412,12 +420,21 @@ public class Pay extends javax.swing.JFrame {
                 Statement smt = con.createStatement();
                 Statement smt2 = con.createStatement();
                 Statement smt3 = con.createStatement();
-                ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
+                Statement smt4 = con.createStatement();
+//
+//                ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
+//                r.next();
+//                int seatnum = r.getInt(1);
 
-                r.next();
-                int seatnum = r.getInt(1);
+                for (int i = 0; i < passengers.size(); i++) {
 
-                smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + gender + "' , '" + firstName + "' , '" + lastName + "' , '" + birthdate + "' , '" + luggage + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
+                    ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
+                    r.next();
+                    int seatnum = r.getInt(1); 
+                    smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-1 where Flight_num_id = " + flightNum);
+                    smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + passengers.get(i).getGender() + "' , '" + passengers.get(i).getFirstName() + "' , '" + passengers.get(i).getLastName() + "' , '" + passengers.get(i).getBirthdate() + "' , '" + passengers.get(i).getLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
+
+                }
 
                 PreparedStatement ps = con.prepareStatement("Select passenger_id from passenger where Customer_id =" + customerId + " ORDER BY passenger_id DESC LIMIT 1");
                 int passenger_Id = 0;
@@ -429,7 +446,7 @@ public class Pay extends javax.swing.JFrame {
 
                 smt3.executeUpdate("Insert INTO price_info (Passenger_name, Price, Flight_num, Customer_id, Passenger_id)  VALUES ('" + firstName + " " + lastName + "' , '" + price + "' , '" + flightNum + "' , '" + customerId + "' , '" + passenger_Id + "')");
 
-                smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-" + numberOfTickets + " where Flight_num_id = " + flightNum);
+               
 
                 this.dispose();
 
