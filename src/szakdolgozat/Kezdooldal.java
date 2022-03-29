@@ -170,7 +170,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<>();
+        destinationCountryComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         adminErrorLabel = new javax.swing.JLabel();
@@ -188,7 +188,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -224,6 +224,12 @@ public class Kezdooldal extends javax.swing.JFrame {
         cartLabel = new javax.swing.JLabel();
         Settings = new javax.swing.JLabel();
         myTickets = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         userBackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -639,7 +645,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -1028,6 +1034,34 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         });
         UserPanel.add(myTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 90, -1));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/icons8-place-marker-50.png"))); // NOI18N
+        jLabel7.setText("1053 Budapest, Kossuth Lajos street 7-9.");
+        UserPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\icons8-vertical-line-30.png")); // NOI18N
+        UserPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 640, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\icons8-vertical-line-30.png")); // NOI18N
+        UserPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 640, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/icons8-email-50.png"))); // NOI18N
+        jLabel12.setText("info@airline.hu");
+        UserPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 630, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/icons8-phone-50.png"))); // NOI18N
+        jLabel11.setText("(36) 1 510 0550");
+        UserPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 630, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/black-color-solid-background-1920x1080.png"))); // NOI18N
+        jLabel6.setText("jLabel6");
+        UserPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 1150, 80));
 
         userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
         userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1576,8 +1610,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_destinationCountryComboBoxItemStateChanged
 
-    public static String deptime, arrtime, orcountry, destcountry, orairport, destairport, maxnumofseats;
-    ;
+    public static String deptime, arrtime, orcountry, destcountry, orairport, destairport, maxnumofseats; 
     public static String adminflightnum, availableseats, promotion;
 
     private void ManageFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageFlightButonActionPerformed
@@ -1664,6 +1697,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         Passenger p = new Passenger();
         p.setVisible(true);
         p.setLocationRelativeTo(null);
+      
         p.setResizable(false);
         p.setTitle(cim);
 
@@ -2191,10 +2225,16 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameErrorLabel;

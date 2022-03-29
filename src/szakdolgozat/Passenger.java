@@ -1,6 +1,9 @@
 package szakdolgozat;
 
 import com.sun.org.apache.xerces.internal.impl.dv.xs.MonthDV;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -72,6 +75,8 @@ public class Passenger extends javax.swing.JFrame {
         luggage5.setOpaque(false);
         NotaskingRadioButton.setSelected(true);
 
+        mozgato();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -134,7 +139,7 @@ public class Passenger extends javax.swing.JFrame {
 
         NotaskingRadioButton.setBackground(new java.awt.Color(102, 102, 102));
         NotaskingRadioButton.setForeground(new java.awt.Color(255, 255, 255));
-        NotaskingRadioButton.setText("I am not asking (0 Ft)");
+        NotaskingRadioButton.setText("I am not asking (0 EUR)");
         jPanel1.add(NotaskingRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
 
         luggage1.setBackground(new java.awt.Color(102, 102, 102));
@@ -211,7 +216,7 @@ public class Passenger extends javax.swing.JFrame {
         passengerBackground.setBackground(new java.awt.Color(102, 102, 102));
         passengerBackground.setForeground(new java.awt.Color(255, 255, 255));
         passengerBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
-        jPanel1.add(passengerBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(-540, -200, 1760, -1));
+        jPanel1.add(passengerBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(-520, -210, 1760, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 680));
 
@@ -235,6 +240,25 @@ public class Passenger extends javax.swing.JFrame {
 
         return 0;
 
+    }
+    int posX, posY;
+
+    private void mozgato() {
+
+        this.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                posX = e.getX();
+                posY = e.getY();
+            }
+        });
+
+        this.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent evt) {
+                //sets frame position when mouse dragged			
+                setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
+
+            }
+        });
     }
 
     private int calculatePassengerTicketPrice() {

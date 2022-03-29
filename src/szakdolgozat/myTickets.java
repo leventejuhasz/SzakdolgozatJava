@@ -30,14 +30,11 @@ public class myTickets extends javax.swing.JFrame {
 
     public static String base_price;
 
-
-
     public myTickets() {
         initComponents();
 
         loadMyTickets();
         mozgato();
-
 
     }
 
@@ -52,8 +49,6 @@ public class myTickets extends javax.swing.JFrame {
             this.dispose();
         }
     }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -77,22 +72,22 @@ public class myTickets extends javax.swing.JFrame {
 
         myTicketsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Luggage", "Origin place", "Destination Place", "Departure Time", "Arrival Time", "Seat number", "Flight Number", "Price", "Ticket into PDF"
+                "Name", "Luggage", "Origin place", "Destination Place", "Departure Time", "Arrival Time", "Seat number", "Flight Number", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -119,8 +114,6 @@ public class myTickets extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    
 
     int posX = 0, posY = 0;
 
@@ -153,7 +146,7 @@ public class myTickets extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
             Statement smt = con.createStatement();
-            String query = "Select FirstName, LastName,Luggage,SeatNum, flight_info.Origin_country, passenger.OriginAirportName, flight_info.Destination_country, passenger.DestinationAirportName, passenger.Departure_time, passenger.Arrival_time, Flight_num_id, Base_Price  From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num where passenger.Customer_id=" + customerId;
+            String query = "Select FirstName, LastName,Luggage,SeatNum, flight_info.Origin_country, passenger.OriginAirportName, flight_info.Destination_country, passenger.DestinationAirportName, passenger.Departure_time, passenger.Arrival_time, Flight_num_id, price_info.price  From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num Inner Join price_info ON price_info.Passenger_id = passenger.passenger_id  where passenger.Customer_id=" + customerId;
             ResultSet res = smt.executeQuery(query);
             Statement s = con.createStatement();
             ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM passenger where Customer_id LIKE '" + customerId + "'");
@@ -162,9 +155,9 @@ public class myTickets extends javax.swing.JFrame {
             System.out.println(count);
             System.out.println(customerId);
             r.close();
-            String columns[] = {myTicketsTable.getColumnName(0), myTicketsTable.getColumnName(1), myTicketsTable.getColumnName(2), myTicketsTable.getColumnName(3), myTicketsTable.getColumnName(4), myTicketsTable.getColumnName(5), myTicketsTable.getColumnName(6), myTicketsTable.getColumnName(7)};
+            String columns[] = {myTicketsTable.getColumnName(0), myTicketsTable.getColumnName(1), myTicketsTable.getColumnName(2), myTicketsTable.getColumnName(3), myTicketsTable.getColumnName(4), myTicketsTable.getColumnName(5), myTicketsTable.getColumnName(6), myTicketsTable.getColumnName(7), myTicketsTable.getColumnName(8)};
             String data[][] = new String[count][myTicketsTable.getColumnCount()];
-            boolean vanUtas = false;
+
             int i = 0;
             while (res.next()) {
 
@@ -176,7 +169,7 @@ public class myTickets extends javax.swing.JFrame {
                 String departure = res.getString("Departure_time");
                 String arr = res.getString("Arrival_time");
                 String fid = res.getString("Flight_num_id");
-                String price = res.getString("Base_Price") + " EUR";
+                String price = res.getString("price") + " EUR";
                 data[i][0] = name;
                 data[i][1] = luggage;
                 data[i][2] = seatn;
@@ -185,8 +178,8 @@ public class myTickets extends javax.swing.JFrame {
                 data[i][5] = departure;
                 data[i][6] = arr;
                 data[i][7] = fid;
-                data[i][8] = seatn;
-                vanUtas = true;
+                data[i][8] = price;
+
                 i++;
 
             }
@@ -194,9 +187,9 @@ public class myTickets extends javax.swing.JFrame {
             model2 = new DefaultTableModel(data, columns);
             myTicketsTable.setModel(model2);
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
