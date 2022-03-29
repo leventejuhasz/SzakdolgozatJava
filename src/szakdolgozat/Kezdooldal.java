@@ -221,6 +221,19 @@ public class Kezdooldal extends javax.swing.JFrame {
         numOfTicketsLabel = new javax.swing.JLabel();
         deletePassenger = new javax.swing.JButton();
         buyTicketsButton = new javax.swing.JButton();
+        SettingsPanel = new javax.swing.JPanel();
+        genderIcon = new javax.swing.JLabel();
+        settingsNametextfield = new javax.swing.JTextField();
+        settingsEmailAddressTextfield = new javax.swing.JTextField();
+        settingsPhoneNumberTextfield = new javax.swing.JTextField();
+        settingsAddressTextfield = new javax.swing.JTextField();
+        settingsPasswordTextfield = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         cartLabel = new javax.swing.JLabel();
         Settings = new javax.swing.JLabel();
         myTickets = new javax.swing.JLabel();
@@ -1003,6 +1016,64 @@ public class Kezdooldal extends javax.swing.JFrame {
         cartTablePanel.add(buyTicketsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, 40));
 
         UserPanel.add(cartTablePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1150, 370));
+
+        SettingsPanel.setOpaque(false);
+        SettingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        genderIcon.setText("jLabel16");
+        SettingsPanel.add(genderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 140, -1, -1));
+
+        settingsNametextfield.setText("Name: ");
+        SettingsPanel.add(settingsNametextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 290, -1));
+
+        settingsEmailAddressTextfield.setText("Email address: ");
+        SettingsPanel.add(settingsEmailAddressTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 290, -1));
+
+        settingsPhoneNumberTextfield.setText("Phone Number: ");
+        SettingsPanel.add(settingsPhoneNumberTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 290, -1));
+
+        settingsAddressTextfield.setText("Address: ");
+        SettingsPanel.add(settingsAddressTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 290, -1));
+
+        settingsPasswordTextfield.setText("jPasswordField1");
+        settingsPasswordTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsPasswordTextfieldActionPerformed(evt);
+            }
+        });
+        SettingsPanel.add(settingsPasswordTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 290, -1));
+
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Save settings");
+        SettingsPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Email address: ");
+        SettingsPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Phone number: ");
+        SettingsPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Address: ");
+        SettingsPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Password: ");
+        SettingsPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Name: ");
+        SettingsPanel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
+
+        UserPanel.add(SettingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1150, 370));
 
         cartLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         cartLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -1819,13 +1890,16 @@ public class Kezdooldal extends javax.swing.JFrame {
     }//GEN-LAST:event_numOfticketstoBuyTextfieldActionPerformed
 
     private void myTicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myTicketsMouseClicked
-       myTickets m = new myTickets();
+       MyTickets m = new MyTickets();
        m.setVisible(true);
        m.setLocationRelativeTo(null);
     }//GEN-LAST:event_myTicketsMouseClicked
 
     private void SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsMouseClicked
-        // TODO add your handling code here:
+   
+        buyTicketsPanel.hide();
+        cartTablePanel.hide();
+        SettingsPanel.show();
     }//GEN-LAST:event_SettingsMouseClicked
 
 
@@ -1856,6 +1930,10 @@ public class Kezdooldal extends javax.swing.JFrame {
         p.setVisible(true);
         p.setLocationRelativeTo(null);
     }//GEN-LAST:event_buyTicketsButtonMouseClicked
+
+    private void settingsPasswordTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsPasswordTextfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_settingsPasswordTextfieldActionPerformed
 
     public int getJegyekszama() {
         return jegyekszama;
@@ -2172,6 +2250,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JButton ManageFlightButton;
     private javax.swing.JPanel RegistrationPanel;
     private javax.swing.JLabel Settings;
+    private javax.swing.JPanel SettingsPanel;
     private javax.swing.JPanel UserPanel;
     private javax.swing.JTable addFlightTable;
     private javax.swing.JButton adminBackButton;
@@ -2223,11 +2302,18 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameTextfield;
     private javax.swing.JLabel forgotPasswordLabel;
     private javax.swing.JLabel genderErrorLabel;
+    private javax.swing.JLabel genderIcon;
     private javax.swing.JLabel genderLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2278,6 +2364,11 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JButton reservationButton;
     private javax.swing.JLabel searchLabel;
     private javax.swing.JTextField searchTextfield;
+    private javax.swing.JTextField settingsAddressTextfield;
+    private javax.swing.JTextField settingsEmailAddressTextfield;
+    private javax.swing.JTextField settingsNametextfield;
+    private javax.swing.JPasswordField settingsPasswordTextfield;
+    private javax.swing.JTextField settingsPhoneNumberTextfield;
     private javax.swing.JLabel streetErrorLabel;
     private javax.swing.JLabel streetLabel;
     private javax.swing.JTextField streetTextfield;

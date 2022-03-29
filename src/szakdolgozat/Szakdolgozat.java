@@ -19,6 +19,7 @@ public class Szakdolgozat {
         k.dontShowRegistrationPanel();
         k.dontShowAdminPanel();
         k.dontShowUserPanel();
+        
 
     }
 

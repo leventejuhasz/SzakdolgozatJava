@@ -26,11 +26,11 @@ import static szakdolgozat.Passenger.PassengerAge;
  *
  * @author Juhasz Levente
  */
-public class myTickets extends javax.swing.JFrame {
+public class MyTickets extends javax.swing.JFrame {
 
     public static String base_price;
 
-    public myTickets() {
+    public MyTickets() {
         initComponents();
 
         loadMyTickets();
