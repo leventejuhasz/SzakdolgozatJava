@@ -167,7 +167,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<>();
+        destinationCountryComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         adminErrorLabel = new javax.swing.JLabel();
@@ -185,7 +185,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -237,6 +237,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        notifications = new javax.swing.JLabel();
         userBackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -652,7 +653,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -847,7 +848,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 buyTicketsLabelMouseClicked(evt);
             }
         });
-        UserPanel.add(buyTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        UserPanel.add(buyTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
         logOutLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         logOutLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -1115,7 +1116,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 SettingsMouseClicked(evt);
             }
         });
-        UserPanel.add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 70, -1));
+        UserPanel.add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 70, -1));
 
         myTickets.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         myTickets.setForeground(new java.awt.Color(102, 255, 255));
@@ -1125,7 +1126,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 myTicketsMouseClicked(evt);
             }
         });
-        UserPanel.add(myTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 90, -1));
+        UserPanel.add(myTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 90, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -1150,6 +1151,16 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/black-color-solid-background-1920x1080.png"))); // NOI18N
         jLabel6.setText("jLabel6");
         UserPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 1150, 80));
+
+        notifications.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        notifications.setForeground(new java.awt.Color(102, 255, 255));
+        notifications.setText("Notifications");
+        notifications.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notificationsMouseClicked(evt);
+            }
+        });
+        UserPanel.add(notifications, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
         userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -2064,6 +2075,10 @@ public class Kezdooldal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_settingsEmailAddressTextfieldActionPerformed
 
+    private void notificationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificationsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_notificationsMouseClicked
+
     public int getJegyekszama() {
         return jegyekszama;
     }
@@ -2482,6 +2497,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
     private javax.swing.JLabel myTickets;
+    private javax.swing.JLabel notifications;
     public static javax.swing.JLabel numOfTicketsLabel;
     private javax.swing.JComboBox numOfticketstoBuyTextfield;
     private javax.swing.JLabel numberOfSeats;

@@ -72,15 +72,7 @@ public class MyTickets extends javax.swing.JFrame {
 
         myTicketsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Name", "Luggage", "Origin place", "Destination Place", "Departure Time", "Arrival Time", "Seat number", "Flight Number", "Price"
@@ -153,7 +145,6 @@ public class MyTickets extends javax.swing.JFrame {
             r.next();
             int count = r.getInt("rowcount");
             System.out.println(count);
-            System.out.println(customerId);
             r.close();
             String columns[] = {myTicketsTable.getColumnName(0), myTicketsTable.getColumnName(1), myTicketsTable.getColumnName(2), myTicketsTable.getColumnName(3), myTicketsTable.getColumnName(4), myTicketsTable.getColumnName(5), myTicketsTable.getColumnName(6), myTicketsTable.getColumnName(7), myTicketsTable.getColumnName(8)};
             String data[][] = new String[count][myTicketsTable.getColumnCount()];
@@ -172,11 +163,11 @@ public class MyTickets extends javax.swing.JFrame {
                 String price = res.getString("price") + " EUR";
                 data[i][0] = name;
                 data[i][1] = luggage;
-                data[i][2] = seatn;
+                data[i][2] = arr;
                 data[i][3] = orp;
                 data[i][4] = dep;
                 data[i][5] = departure;
-                data[i][6] = arr;
+                data[i][6] = seatn;
                 data[i][7] = fid;
                 data[i][8] = price;
 
