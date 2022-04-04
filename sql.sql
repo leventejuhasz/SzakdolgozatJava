@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Ápr 04. 12:30
+-- Létrehozás ideje: 2022. Ápr 04. 12:56
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -7999,7 +7999,8 @@ CREATE TABLE `flight_info` (
 --
 
 INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_country`, `OriginAirportName`, `Destination_country`, `DestinationAirportName`, `Num_of_max_seats`, `Num_of_available_seats`, `Base_Price`, `Flight_num_id`) VALUES
-('2022-04-13 12:59', '2022-04-14 12:59', 'Nig', 'Nig', 'Asd', 'Asd', 230, 230, 899, 86);
+('2022-04-13 12:59', '2022-04-14 12:59', 'Nig', 'Nig', 'Asd', 'Asd', 230, 229, 899, 86),
+('2022-04-15 0:1', '2022-04-30 0:1', 'American Samoa', 'Pago Pago International Airport', 'American Samoa', 'Ofu Airport', 100, 94, 27, 88);
 
 -- --------------------------------------------------------
 
@@ -8021,9 +8022,17 @@ CREATE TABLE `passenger` (
   `Arrival_time` varchar(200) NOT NULL,
   `SeatNum` int(255) NOT NULL,
   `Flight_num` int(255) NOT NULL,
-  `passenger_id` int(11) NOT NULL,
-  `Customer_id` int(11) NOT NULL
+  `Customer_id` int(11) NOT NULL,
+  `passenger_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `passenger`
+--
+
+INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `Origin_country`, `Destination_country`, `OriginAirportName`, `DestinationAirportName`, `Departure_time`, `Arrival_time`, `SeatNum`, `Flight_num`, `Customer_id`, `passenger_id`) VALUES
+('Man', 'A', 'A', '1950-1-1', 'I am not asking (0 EUR)', 'American Samoa', 'American Samoa', 'Pago Pago International Airport', 'Ofu Airport', '2022-04-15 0:1', '2022-04-30 0:1', 95, 88, 68, 203),
+('Man', 'B', 'B', '1950-1-1', '2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 94 EUR', 'American Samoa', 'American Samoa', 'Pago Pago International Airport', 'Ofu Airport', '2022-04-15 0:1', '2022-04-30 0:1', 94, 88, 68, 204);
 
 -- --------------------------------------------------------
 
@@ -8038,6 +8047,14 @@ CREATE TABLE `price_info` (
   `Customer_id` int(11) NOT NULL,
   `Passenger_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `price_info`
+--
+
+INSERT INTO `price_info` (`Passenger_name`, `Price`, `Flight_num`, `Customer_id`, `Passenger_id`) VALUES
+('A A', 27, 88, 68, 203),
+('B B', 215, 88, 68, 204);
 
 -- --------------------------------------------------------
 
@@ -8064,18 +8081,7 @@ CREATE TABLE `registration_info` (
 --
 
 INSERT INTO `registration_info` (`Customer_id`, `FirstName`, `LastName`, `Address`, `zipCode`, `City`, `Country`, `phoneNumber`, `Gender`, `Email`, `CustomerPassword`) VALUES
-(41, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6070', 'Man', '20 238 6070', '0638176A683493DF8E7265B4A1291301'),
-(57, 'Nagy', 'Jenő', '', 2323, '', '', '201234567', 'Man', '201234567', 'D41D8CD98F00B204E9800998ECF8427E'),
-(58, 'Orbán', 'Viktor', 'Király utca 23', 2840, 'ViktorCity', 'Hungary', '201234596', 'Man', 'vitya@fidesz.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
-(59, 'Orbán', 'Viktor', 'Király utca 23', 2840, '', 'Hungary', '201234596', 'Man', 'vitya@fidesz.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
-(60, 'Orbán', 'Viktor', 'Király utca 23', 2840, 'asd', 'Hungary', '201234596', 'Man', 'vitya@fidesz.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
-(61, 'OrbanSemjen', 'Viktor', ' óvoda utca 23.', 2563, 'Kecsked', 'Hungary', '20 238 6025', 'Man', 'king@fidesz.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
-(62, 'OrbanSemjen', 'Viktor', ' óvoda utca 23.', 2563, 'Kecsked', 'Hungary', 'king2@fidesz.hu', 'Man', 'king2@fidesz.hu', '7815696ECBF1C96E6894B779456D330E'),
-(63, 'Semjen', 'Zsolt', 'asdf 23', 2556, 'Cig', 'Hungary', '231234567', 'Man', 'alma@asd.com', 'D41D8CD98F00B204E9800998ECF8427E'),
-(64, 'As', 'AS', 'Kutya utca 23.', 1234, 'Oroszlány', '123123', '213123123', 'Man', 'kutya@kutya.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
-(65, 'A', 'A', '3123123', 12321, '2312312', '1233123', '3123213', 'Man', 'nagy@nagy.hu', '7815696ECBF1C96E6894B779456D330E'),
-(66, 'A', 'A', 'a', 12333, 'a', 'a', '12345678', 'Man', 'a@a.hu', '0CC175B9C0F1B6A831C399E269772661'),
-(67, 'Retard', 'asd', 'asd', 1231, 'asda', 'asd', '123456789', 'Man', 'asd@asd.asd', '7815696ECBF1C96E6894B779456D330E');
+(68, 'Juhasz', 'Levente', 'Ovoda', 2132, 'Kuasda', 'Hungary', '232234214', 'Man', 'k@h.hu', '0638176A683493DF8E7265B4A1291301');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -8115,19 +8121,19 @@ ALTER TABLE `registration_info`
 -- AUTO_INCREMENT a táblához `flight_info`
 --
 ALTER TABLE `flight_info`
-  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
-  MODIFY `Customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `Customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Megkötések a kiírt táblákhoz
