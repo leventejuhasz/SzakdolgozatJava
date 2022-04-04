@@ -8,6 +8,8 @@ package szakdolgozat;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -255,7 +257,7 @@ public class ManageFlight extends javax.swing.JFrame {
         try {
             if (passengersTable.isRowSelected(passengersTable.getSelectedRow())) {
                 JFrame jFrame = new JFrame();
-                int result = JOptionPane.showConfirmDialog(jFrame, "Are you sure want to delete this passenger?.");
+                int result = JOptionPane.showConfirmDialog(jFrame, "Are you sure want to delete this passenger?");
 
                 if (result == 0) {
 
@@ -263,6 +265,17 @@ public class ManageFlight extends javax.swing.JFrame {
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
                     Statement smt = con.createStatement();
                     smt.executeUpdate("Delete FROM passenger where seatNum =" + passengersTable.getValueAt(passengersTable.getSelectedRow(), 3));
+                    Statement smt2 = con.createStatement();
+
+                    smt2.executeUpdate("Update flight_info SET Num_of_available_seats = (Num_of_available_seats + 1) where Flight_num_id = " + adminflightnum);
+                    Statement smt3 = con.createStatement();
+                    ResultSet r = smt3.executeQuery("Select Num_of_available_seats from flight_info where Flight_num_id =" + adminflightnum);
+
+                    if (r.next()) {
+                        availableseats = r.getString("Num_of_available_seats");
+                    }
+                    numofavseatsLabel.setText("Number of available seats: " + availableseats);
+
                     con.close();
                     model.removeRow(passengersTable.getSelectedRow());
                 }
@@ -303,7 +316,10 @@ public class ManageFlight extends javax.swing.JFrame {
                 "Are you sure want to exit?",
                 "Exit guestion", JOptionPane.YES_NO_OPTION);
 
+        
         if (n == 0) {
+            
+    
             this.dispose();
         }
     }//GEN-LAST:event_closeManageFlighFrametLabelMouseClicked
@@ -354,6 +370,8 @@ public class ManageFlight extends javax.swing.JFrame {
         }
     }
 
+   
+
     private void labels() {
 
         deptimeLabel.setText("Departure time: " + deptime);
@@ -365,7 +383,7 @@ public class ManageFlight extends javax.swing.JFrame {
         numofmaxseatLabel.setText("Number of max seats: " + maxnumofseats);
         numofavseatsLabel.setText("Number of available seats: " + availableseats);
         flightNumLabel.setText("Flight number: " + adminflightnum);
-        promotionLabel.setText("Promotion: "+promotion+"%");
+        promotionLabel.setText("Promotion: " + promotion + "%");
 
     }
 
@@ -374,7 +392,7 @@ public class ManageFlight extends javax.swing.JFrame {
     private javax.swing.JPanel ManageFlightPanel;
     private javax.swing.JTextField SearchPassenger;
     private javax.swing.JLabel arrtimeLabel;
-    private javax.swing.JLabel closeManageFlighFrametLabel;
+    public static javax.swing.JLabel closeManageFlighFrametLabel;
     private javax.swing.JButton deletePassengerButton;
     private javax.swing.JLabel deptimeLabel;
     private javax.swing.JLabel destPlaceLabel;

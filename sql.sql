@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2022. Már 30. 12:57
+-- Létrehozás ideje: 2022. Ápr 04. 12:30
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.27
 
@@ -7978,23 +7978,6 @@ INSERT INTO `airport_info` (`iataCode`, `AirportName`, `Location`, `Country`, `a
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `flight_cancellation`
---
-
-CREATE TABLE `flight_cancellation` (
-  `Customer_id` varchar(8) NOT NULL,
-  `Flight_num` varchar(12) NOT NULL,
-  `Origin` varchar(16) NOT NULL,
-  `Destination` varchar(16) NOT NULL,
-  `Flight_name` varchar(12) NOT NULL,
-  `Departure_time` time NOT NULL,
-  `Arrival_time` time NOT NULL,
-  `Seat_num` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Tábla szerkezet ehhez a táblához `flight_info`
 --
 
@@ -8016,29 +7999,7 @@ CREATE TABLE `flight_info` (
 --
 
 INSERT INTO `flight_info` (`Departure_time`, `Arrival_time`, `Origin_country`, `OriginAirportName`, `Destination_country`, `DestinationAirportName`, `Num_of_max_seats`, `Num_of_available_seats`, `Base_Price`, `Flight_num_id`) VALUES
-('2022-02-16 9:6', '2022-02-28 9:6', 'Algeria', 'Blida Airport', 'Anguilla', 'Wallblake Airport', 230, 77, 0, 59),
-('2022-03-02 3:4', '2022-03-25 5:7', 'Russia', 'Sheremetyevo International Airport', 'Ukraine', 'Donetsk International Airport', 100, 42, 0, 60),
-('2022-03-18 10:30', '2022-03-19 17:30', 'Hungary', 'Miskolc Airport', 'American Samoa', 'Tau Airport', 200, 197, 0, 61),
-('2022-03-18 3:8', '2022-03-19 11:4', 'Aruba', 'Queen Beatrix International Airport', 'Belize', 'Belize City Municipal Airport', 200, 195, 0, 62),
-('2022-03-22 10:30', '2022-03-23 15:30', 'Hungary', 'Budapest Ferenc Liszt International Airport', 'Laos', 'Attopeu Airport', 10, 10, 20, 65),
-('2022-03-25 0:1', '2022-03-27 0:1', 'Algeria', 'Ain Arnat Airport', 'Hungary', 'Budapest Ferenc Liszt International Airport', 100, 100, 30, 66),
-('2022-03-25 0:1', '2022-03-27 0:1', 'Algeria', 'Ain Arnat Airport', 'Hungary', 'Budapest Ferenc Liszt International Airport', 100, 100, 50, 67),
-('2022-03-18 0:1', '2022-03-25 0:1', 'American Samoa', 'Pago Pago International Airport', 'Antarctica', 'Teniente R. Marsh Airport', 100, 100, 30, 68),
-('2022-03-12 0:1', '2022-03-19 0:1', 'Angola', 'Albano Machado Airport', 'Andorra', 'Andorra La Vella Airport', 100, 100, 100, 69),
-('2022-03-26 0:1', '2022-03-27 0:1', 'American Samoa', 'Ofu Airport', 'Anguilla', 'Wallblake Airport', 100, 100, 100, 70),
-('2022-03-26 17:29', '2022-03-27 18:7', 'American Samoa', 'Tau Airport', 'Burkina Faso', 'Boulsa Airport', 100, 100, 100, 71),
-('2022-03-25 0:1', '2022-03-26 0:1', 'Botswana', 'Lobatse Airport', 'Fiji', 'Castaway Island Resort Airport', 100, 100, 100, 72),
-('2022-03-25 0:1', '2022-03-28 0:1', 'Denmark', 'Karup Airport', 'Belgium', 'Brussels Airport (Zaventem Airport)', 100, 98, 100, 73),
-('2022-03-25 0:1', '2022-03-27 0:1', 'Canada', 'Bella Bella (Campbell Island) Airport', 'Cambodia', 'Phnom Penh International Airport', 100, 100, 100, 74),
-('2022-03-25 0:1', '2022-03-27 0:1', 'Canada', 'Bella Bella (Campbell Island) Airport', 'Cambodia', 'Phnom Penh International Airport', 100, 100, 100, 75),
-('2022-03-25 0:1', '2022-03-26 0:1', 'Angola', 'Benguela Airport (Gen. V. Deslandes Airport)', 'Anguilla', 'Wallblake Airport', 100, 95, 90, 76),
-('2022-03-25 0:1', '2022-03-27 0:1', 'Antarctica', 'Teniente R. Marsh Airport', 'Cambodia', 'Angkor International Airport', 230, 230, 272, 77),
-('2022-03-25 0:1', '2022-03-27 0:1', 'Zambia', 'Southdowns Airport', 'Essex United Kingdom', 'London Southend Airport', 100, 94, 765, 78),
-('2022-03-31 12:30', '2022-04-01 8:30', 'Bangladesh', 'Jessore Airport', 'Azerbaijan', 'Lankaran International Airport', 120, 118, 650, 79),
-('2022-03-24 13:30', '2022-03-25 10:40', 'Yemen', 'Qishn Airport', 'Bolivia', 'Capitán Oriel Lea Plaza Airport', 100, 97, 650, 80),
-('2022-03-25 0:1', '2022-03-26 0:1', 'Andorra', 'Andorra La Vella Airport', 'Bosnia and Herzegovina', 'Banja Luka International Airport', 100, 100, 90, 81),
-('2022-03-25 0:1', '2022-03-26 0:1', 'Andorra', 'Andorra La Vella Airport', 'Bosnia and Herzegovina', 'Banja Luka International Airport', 100, 98, 0, 82),
-('2022-03-25 0:1', '2022-03-26 0:1', 'Andorra', 'Andorra La Vella Airport', 'Bosnia and Herzegovina', 'Banja Luka International Airport', 100, 98, 100, 83);
+('2022-04-13 12:59', '2022-04-14 12:59', 'Nig', 'Nig', 'Asd', 'Asd', 230, 230, 899, 86);
 
 -- --------------------------------------------------------
 
@@ -8064,42 +8025,6 @@ CREATE TABLE `passenger` (
   `Customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- A tábla adatainak kiíratása `passenger`
---
-
-INSERT INTO `passenger` (`Gender`, `FirstName`, `LastName`, `BirthDate`, `Luggage`, `Origin_country`, `Destination_country`, `OriginAirportName`, `DestinationAirportName`, `Departure_time`, `Arrival_time`, `SeatNum`, `Flight_num`, `passenger_id`, `Customer_id`) VALUES
-('Women', 'Kis', 'Gabor', '1952.June.5', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 41, 43),
-('Man', 'asd', 'asd', '1950.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 42, 43),
-('Man', 'kis', 'nagyeelek', '1954.January.1', 'I am not asking (0 Ft)', 'Russia', 'Ukraine', 'Sheremetyevo International Airport', 'Donetsk International Airport', '2022-03-02 3:4', '2022-03-25 5:7', 52, 60, 43, 43),
-('Women', 'Kis', 'Gabor', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 199, 62, 51, 43),
-('Women', 'Nagy ', 'Emese', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 198, 62, 52, 43),
-('Man', 'Kis ', 'Jnos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 197, 62, 53, 43),
-('Man', 'Kis', 'Laszlo', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 196, 62, 63, 44),
-('Man', 'janos', 'janos', '1950.January.1', 'I am not asking (0 Ft)', 'Aruba', 'Belize', 'Queen Beatrix International Airport', 'Belize City Municipal Airport', '2022-03-18 3:8', '2022-03-19 11:4', 195, 62, 64, 44),
-('Man', 'Nagy', 'Emese', '1950.January.1', 'I am not asking (0 Ft)', 'Angola', 'Anguilla', 'Benguela Airport (Gen. V. Deslandes Airport)', 'Wallblake Airport', '2022-03-25 0:1', '2022-03-26 0:1', 97, 76, 74, 41),
-('Man', 'Nagy', 'Lajos', '2001.1.1', 'I am not asking (0 Ft)', 'Denmark', 'Belgium', 'Karup Airport', 'Brussels Airport (Zaventem Airport)', '2022-03-25 0:1', '2022-03-28 0:1', 97, 73, 93, 41),
-('Man', 'Kis', 'Kisa', '2013.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 97, 78, 97, 41),
-('Man', 'Kis', 'Lajos', '2017.1.1', 'I am not asking (0 Ft)', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 96, 78, 98, 41),
-('Man', 'Juhasz', 'Levente', '2010.1.1', 'I am not asking (0 Ft)', 'Bangladesh', 'Azerbaijan', 'Jessore Airport', 'Lankaran International Airport', '2022-03-31 12:30', '2022-04-01 8:30', 119, 79, 100, 41),
-('Man', 'Kis', 'Lajos', '1950.1.1', 'I am not asking (0 Ft)', 'Andorra', 'Bosnia and Herzegovina', 'Andorra La Vella Airport', 'Banja Luka International Airport', '2022-03-25 0:1', '2022-03-26 0:1', 99, 83, 103, 41),
-('Man', 'A', 'A', '2005-1-1', '', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 94, 78, 104, 41),
-('Man', 'A', 'A', '2016-1-1', '2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 94 EUR', 'Andorra', 'Bosnia and Herzegovina', 'Andorra La Vella Airport', 'Banja Luka International Airport', '2022-03-25 0:1', '2022-03-26 0:1', 98, 83, 105, 41),
-('Man', 'A', 'A', '1950-1-1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 48 EUR', 'Zambia', 'Essex United Kingdom', 'Southdowns Airport', 'London Southend Airport', '2022-03-25 0:1', '2022-03-27 0:1', 93, 78, 106, 41),
-('Man', 'A', 'A', '2022-1-1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 75 EUR ', 'Yemen', 'Bolivia', 'Qishn Airport', 'Capitán Oriel Lea Plaza Airport', '2022-03-24 13:30', '2022-03-25 10:40', 99, 80, 107, 41),
-('Man', 'Nagy', 'Kacsa', '2021-1-1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 75 EUR ', 'Algeria', 'Hungary', 'Ain Arnat Airport', 'Budapest Ferenc Liszt International Airport', '2022-03-25 0:1', '2022-03-27 0:1', 99, 67, 108, 41),
-('Man', 'Kis', 'Gabo', '1950-1-1', 'I am not asking (0 Ft)', 'Bangladesh', 'Azerbaijan', 'Jessore Airport', 'Lankaran International Airport', '2022-03-31 12:30', '2022-04-01 8:30', 118, 79, 109, 41),
-('Man', 'Kis', 'Lajos', '2022-1-1', '2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 94 EUR', 'Algeria', 'Hungary', 'Ain Arnat Airport', 'Budapest Ferenc Liszt International Airport', '2022-03-25 0:1', '2022-03-27 0:1', 99, 66, 110, 41),
-('Man', 'Nagy', 'Lajos', '2005-1-1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 29 EUR', 'Algeria', 'Hungary', 'Ain Arnat Airport', 'Budapest Ferenc Liszt International Airport', '2022-03-25 0:1', '2022-03-27 0:1', 99, 66, 111, 41),
-('Man', 'Kis', 'Gabo', '1950-1-1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 120 EUR', 'Algeria', 'Hungary', 'Ain Arnat Airport', 'Budapest Ferenc Liszt International Airport', '2022-03-25 0:1', '2022-03-27 0:1', 99, 66, 112, 41),
-('Man', 'AA', 'A', '1950-1-1', '2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 94 EUR', 'Yemen', 'Bolivia', 'Qishn Airport', 'Capitán Oriel Lea Plaza Airport', '2022-03-24 13:30', '2022-03-25 10:40', 99, 80, 113, 41),
-('Man', 'B', 'B', '1950-1-1', '2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 94 EUR', 'Yemen', 'Bolivia', 'Qishn Airport', 'Capitán Oriel Lea Plaza Airport', '2022-03-24 13:30', '2022-03-25 10:40', 99, 80, 114, 41),
-('Man', 'C', 'C', '1950-1-1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) and 1 piece of 20 kg Checked Baggage (119 x 119 x 81 cm) + 75 EUR ', 'Yemen', 'Bolivia', 'Qishn Airport', 'Capitán Oriel Lea Plaza Airport', '2022-03-24 13:30', '2022-03-25 10:40', 99, 80, 115, 41),
-('Man', 'A', 'A', '2011-1-1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 48 EUR', 'Yemen', 'Bolivia', 'Qishn Airport', 'Capitán Oriel Lea Plaza Airport', '2022-03-24 13:30', '2022-03-25 10:40', 99, 80, 116, 41),
-('Man', 'B', 'B', '1976-1-1', '1 piece of 10 kg Checked Baggage (55 x 40 x 20 cm) + 29 EUR', 'Yemen', 'Bolivia', 'Qishn Airport', 'Capitán Oriel Lea Plaza Airport', '2022-03-24 13:30', '2022-03-25 10:40', 98, 80, 117, 41),
-('Man', 'C', 'C', '2013-1-1', '2 pieces of 20 kg Checked Baggage (119 x 119 x 81 cm) + 94 EUR', 'Yemen', 'Bolivia', 'Qishn Airport', 'Capitán Oriel Lea Plaza Airport', '2022-03-24 13:30', '2022-03-25 10:40', 97, 80, 118, 41),
-('Man', 'Juhasz', 'Levente', '1950-1-1', '1 piece of checked baggage weighing 20 kg (119 x 119 x 81 cm) + 48 EUR', 'Bangladesh', 'Azerbaijan', 'Jessore Airport', 'Lankaran International Airport', '2022-03-31 12:30', '2022-04-01 8:30', 118, 79, 119, 41);
-
 -- --------------------------------------------------------
 
 --
@@ -8113,34 +8038,6 @@ CREATE TABLE `price_info` (
   `Customer_id` int(11) NOT NULL,
   `Passenger_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- A tábla adatainak kiíratása `price_info`
---
-
-INSERT INTO `price_info` (`Passenger_name`, `Price`, `Flight_num`, `Customer_id`, `Passenger_id`) VALUES
-('Kis Gabo', 90, 76, 41, 95),
-('Kis Ljas', 765, 78, 41, 96),
-('Kis Kisa', 25, 78, 41, 97),
-('Kis Lajos', 25, 78, 41, 98),
-('Nagy Emse', 25, 78, 41, 99),
-('Juhasz Levente', 600, 79, 41, 100),
-('Juhasz Levente', 0, 82, 41, 101),
-('Nagy Árpád', 0, 82, 41, 102),
-('Kis Lajos', 100, 83, 41, 103),
-('A A', 0, 78, 41, 104),
-('A A', 0, 83, 41, 105),
-('A A', 0, 78, 41, 106),
-('A A', 0, 80, 41, 107),
-('Nagy Kacsa', 0, 67, 41, 108),
-('Kis Gabo', 0, 79, 41, 109),
-('Nagy Emese', 0, 80, 41, 109),
-('A A', 0, 77, 41, 109),
-('B B', 0, 71, 41, 109),
-('Kis Gabo', 0, 66, 41, 112),
-('C C', 0, 80, 41, 115),
-('C C', 0, 80, 41, 118),
-('Juhasz Levente', 0, 79, 41, 119);
 
 -- --------------------------------------------------------
 
@@ -8167,22 +8064,18 @@ CREATE TABLE `registration_info` (
 --
 
 INSERT INTO `registration_info` (`Customer_id`, `FirstName`, `LastName`, `Address`, `zipCode`, `City`, `Country`, `phoneNumber`, `Gender`, `Email`, `CustomerPassword`) VALUES
-(41, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6070', 'Man', 'k@h.hu', '0638176A683493DF8E7265B4A1291301'),
-(42, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz2002@gmail.com', '7C13CCA5BE06513317E5310CD3F67A33'),
-(43, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'm@m.hu', '0638176A683493DF8E7265B4A1291301'),
-(44, 'Kiss', 'Janos', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'zsd@gmail.com', '0638176A683493DF8E7265B4A1291301'),
-(45, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'hehe@gmail.hu', '7C13CCA5BE06513317E5310CD3F67A33'),
-(46, 'Nagy', 'Anna', 'óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Woman', 'szar@szar.hu', ''),
-(47, 'Kis', 'Lujza', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Woman', 'lujza@gmail.hu', ''),
-(48, 'Kis', 'Emese', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Woman', 'kis@emese.hu', ''),
-(49, 'Nagy', 'Anna', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Woman', 'l@l.hu', ''),
-(50, 'Nagy', 'Gabo', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Woman', 'viszlat@gmail.hu', 'kecske'),
-(51, 'Kis', 'Lajos', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Woman', 'l@k.hu', 'kecske'),
-(52, 'Nagy', 'Emese', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Woman', 'nagy@nagy.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
-(53, 'Nagy', 'Emese', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Woman', '20 238 6033', '0638176A683493DF8E7265B4A1291301'),
-(54, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Woman', 'szerencsetlen@gmail.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
-(55, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'leventejuhasz20022@gmail.com', 'D41D8CD98F00B204E9800998ECF8427E'),
-(56, 'Kis', 'Gabo', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6025', 'Man', 'xd@xd.hu', '0638176A683493DF8E7265B4A1291301');
+(41, 'Juhasz', 'Levente', ' óvoda utca 23.', 1232, 'Kecskéd', 'Hungary', '20 238 6070', 'Man', '20 238 6070', '0638176A683493DF8E7265B4A1291301'),
+(57, 'Nagy', 'Jenő', '', 2323, '', '', '201234567', 'Man', '201234567', 'D41D8CD98F00B204E9800998ECF8427E'),
+(58, 'Orbán', 'Viktor', 'Király utca 23', 2840, 'ViktorCity', 'Hungary', '201234596', 'Man', 'vitya@fidesz.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
+(59, 'Orbán', 'Viktor', 'Király utca 23', 2840, '', 'Hungary', '201234596', 'Man', 'vitya@fidesz.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
+(60, 'Orbán', 'Viktor', 'Király utca 23', 2840, 'asd', 'Hungary', '201234596', 'Man', 'vitya@fidesz.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
+(61, 'OrbanSemjen', 'Viktor', ' óvoda utca 23.', 2563, 'Kecsked', 'Hungary', '20 238 6025', 'Man', 'king@fidesz.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
+(62, 'OrbanSemjen', 'Viktor', ' óvoda utca 23.', 2563, 'Kecsked', 'Hungary', 'king2@fidesz.hu', 'Man', 'king2@fidesz.hu', '7815696ECBF1C96E6894B779456D330E'),
+(63, 'Semjen', 'Zsolt', 'asdf 23', 2556, 'Cig', 'Hungary', '231234567', 'Man', 'alma@asd.com', 'D41D8CD98F00B204E9800998ECF8427E'),
+(64, 'As', 'AS', 'Kutya utca 23.', 1234, 'Oroszlány', '123123', '213123123', 'Man', 'kutya@kutya.hu', 'D41D8CD98F00B204E9800998ECF8427E'),
+(65, 'A', 'A', '3123123', 12321, '2312312', '1233123', '3123213', 'Man', 'nagy@nagy.hu', '7815696ECBF1C96E6894B779456D330E'),
+(66, 'A', 'A', 'a', 12333, 'a', 'a', '12345678', 'Man', 'a@a.hu', '0CC175B9C0F1B6A831C399E269772661'),
+(67, 'Retard', 'asd', 'asd', 1231, 'asda', 'asd', '123456789', 'Man', 'asd@asd.asd', '7815696ECBF1C96E6894B779456D330E');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -8222,19 +8115,19 @@ ALTER TABLE `registration_info`
 -- AUTO_INCREMENT a táblához `flight_info`
 --
 ALTER TABLE `flight_info`
-  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `Flight_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT a táblához `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
 
 --
 -- AUTO_INCREMENT a táblához `registration_info`
 --
 ALTER TABLE `registration_info`
-  MODIFY `Customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `Customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- Megkötések a kiírt táblákhoz
