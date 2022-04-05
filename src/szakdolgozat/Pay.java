@@ -421,7 +421,6 @@ public class Pay extends javax.swing.JFrame {
                 Statement smt2 = con.createStatement();
                 Statement smt3 = con.createStatement();
 
-
                 for (int i = 0; i < passengers.size(); i++) {
 
                     ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
@@ -429,6 +428,8 @@ public class Pay extends javax.swing.JFrame {
                     int seatnum = r.getInt(1);
                     System.out.println(seatnum);
                     smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-1 where Flight_num_id = " + flightNum);
+
+                    System.out.println("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + passengers.get(i).getGender() + "' , '" + passengers.get(i).getFirstName() + "' , '" + passengers.get(i).getLastName() + "' , '" + passengers.get(i).getBirthdate() + "' , '" + passengers.get(i).getLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
                     smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + passengers.get(i).getGender() + "' , '" + passengers.get(i).getFirstName() + "' , '" + passengers.get(i).getLastName() + "' , '" + passengers.get(i).getBirthdate() + "' , '" + passengers.get(i).getLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
                     int passenger_Id = 0;
                     PreparedStatement ps = con.prepareStatement("Select passenger_id from passenger where Customer_id =" + customerId + " ORDER BY passenger_id DESC LIMIT 1");

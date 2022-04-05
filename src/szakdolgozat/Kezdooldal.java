@@ -487,6 +487,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         registrationPasswordAgainTextField.setBackground(new java.awt.Color(51, 51, 51));
         registrationPasswordAgainTextField.setForeground(new java.awt.Color(255, 255, 255));
         registrationPasswordAgainTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        registrationPasswordAgainTextField.setCaretColor(new java.awt.Color(255, 255, 255));
         RegistrationPanel.add(registrationPasswordAgainTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 460, 240, 30));
 
         emailLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -497,6 +498,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         registrationPasswordTextField.setBackground(new java.awt.Color(51, 51, 51));
         registrationPasswordTextField.setForeground(new java.awt.Color(255, 255, 255));
         registrationPasswordTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        registrationPasswordTextField.setCaretColor(new java.awt.Color(255, 255, 255));
+        registrationPasswordTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        registrationPasswordTextField.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         RegistrationPanel.add(registrationPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 240, 30));
 
         registrationPasswordLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -1394,13 +1398,17 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
-            ps = con.prepareStatement("Select Customer_id, Email, FirstName, LastName, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password(registrationPasswordTextField.getText()) + "'");
+            ps = con.prepareStatement("Select Customer_id, Email, FirstName, LastName, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password(passwordTextField.getText()) + "'");
             ResultSet result = ps.executeQuery();
+
             if (result.next()) {
+
                 customerId = Integer.parseInt(result.getString("Customer_id"));
+
                 String kapcsolattarto = result.getString("FirstName");
                 kapcsolattarto += " " + result.getString("LastName");
             }
+            
 
             if (hibasAdat == true) {
 
@@ -2010,7 +2018,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         return jegyekszama;
     }
 
-    //EVENTES FÜGGYVÉNYEK vége
     //Kivételek kezelése, hibavédések
     private String adminErrorHandling() {
 
@@ -2025,7 +2032,6 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         int usz = Integer.parseInt(numberOfSeatsTextField.getText());
 
-        System.out.println(usz);
         try {
             if (dateFormat.parse(depdate).before(dateFormat.parse(arrival)) == false) {
                 return "Bad date!";
@@ -2043,6 +2049,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         return "";
     }
 
+    public boolean onlyNumber(String text) {
+        boolean result = text.matches("[0-9]+");
+        return result;
+    }
+
     public void errorPopUp(String text) {
         JOptionPane.showMessageDialog(this,
                 text,
@@ -2053,12 +2064,14 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     public boolean isRegistrationErrorHandling() {
 
-        if (stringErrorHandling(firstNameTextfield.getText()) != "") {
-            errorPopUp(stringErrorHandling(firstNameTextfield.getText()));
+        if (stringErrorHandling(firstNameTextfield.getText(), firstNameLabel) != "") {
+            errorPopUp(stringErrorHandling(firstNameTextfield.getText(), firstNameLabel));
+            return false;
         }
 
-        if (stringErrorHandling(lastNameTextfield.getText()) != "") {
-            errorPopUp(stringErrorHandling(lastNameTextfield.getText()));
+        if (stringErrorHandling(lastNameTextfield.getText(), lastNameLabel) != "") {
+            errorPopUp(stringErrorHandling(lastNameTextfield.getText(), lastNameLabel));
+            return false;
         }
 
         if (firstNameTextfield.getText().matches("")) {
@@ -2075,9 +2088,23 @@ public class Kezdooldal extends javax.swing.JFrame {
             errorPopUp("Zip code is missing!");
             return false;
         }
+        if (!onlyNumber(zipCodeTextfield.getText())) {
+            errorPopUp("Zip code can contains only numbers!");
+            return false;
+        }
+
+        if (zipCodeTextfield.getText().length() < 4 || zipCodeTextfield.getText().length() > 8) {
+            errorPopUp("Wrong zip code length!");
+            return false;
+        }
 
         if (cityTextfield.getText().matches("")) {
             errorPopUp("City is missing!");
+            return false;
+        }
+
+        if (stringErrorHandling(cityTextfield.getText(), cityLabel) != "") {
+            errorPopUp(stringErrorHandling(cityTextfield.getText(), cityLabel));
             return false;
         }
 
@@ -2089,6 +2116,11 @@ public class Kezdooldal extends javax.swing.JFrame {
             errorPopUp("Country is missing!");
             return false;
         }
+        if (stringErrorHandling(countryTextfield.getText(), countryLabel) != "") {
+            errorPopUp(stringErrorHandling(countryTextfield.getText(), countryLabel));
+            return false;
+        }
+
         if (phoneNumberTextfield.getText().matches("")) {
             errorPopUp("Phone number is missing!");
             return false;
@@ -2106,17 +2138,6 @@ public class Kezdooldal extends javax.swing.JFrame {
             errorPopUp("Please write a password!");
             return false;
 
-        }
-        if (zipCodeTextfield.getText().length() < 4) {
-
-            errorPopUp("The zip code is too short!");
-
-            return false;
-        }
-        if (zipCodeTextfield.getText().length() > 8) {
-            errorPopUp("The zip code is too long!");
-
-            return false;
         }
 
         if (!isPhoneNumberValid(phoneNumberTextfield.getText())) {
@@ -2208,7 +2229,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
             ps = con.prepareStatement("Select Email, Password From admins where Email LIKE '" + loginEmailTextField.getText() + "' AND Password Like '" + password + "'");
-            System.out.println("Select Email, Password From admins where Email LIKE '" + loginEmailTextField.getText() + "' AND Password Like '" + password + "'");
+
             ResultSet result = ps.executeQuery();
             if (result.next()) {
                 return true;
@@ -2243,25 +2264,26 @@ public class Kezdooldal extends javax.swing.JFrame {
         return false;
     }
 
-    public String stringErrorHandling(String text) {
+    public String stringErrorHandling(String text, JLabel l) {
 
         if (text.length() > 20) {
 
             return "Text is too long" + text;
         }
 
-        if (!Pattern.matches("[a-zA-Z]+", text)) {
-            return "Can not contain number!";
-        }
-
+        String labeltext = l.getText().replaceAll(":", "");
         char[] chars = text.toCharArray();
 
         for (char c : chars) {
             if (!Character.isLetter(c)) {
 
-                return "Last Name can contains only letters!";
+                return labeltext + " can contains only letters!";
 
             }
+        }
+
+        if (!Character.isUpperCase(text.codePointAt(0))) {
+            return labeltext + " needs to start uppercase!";
         }
 
         return "";
@@ -2392,10 +2414,6 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     public void setAddFlightTable(JTable addFlightTable) {
         this.addFlightTable = addFlightTable;
-    }
-
-    public int getCustomerId() {
-        return customerId;
     }
 
 
