@@ -182,7 +182,7 @@ public class Pay extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this,
                 "Succsefull payment!",
-                "Inane custom dialog",
+                "Succsefull payment!",
                 JOptionPane.INFORMATION_MESSAGE,
                 pie);
 

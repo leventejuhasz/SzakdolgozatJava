@@ -14,9 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import static szakdolgozat.Kezdooldal.customerId;
 import static szakdolgozat.Passenger.PassengerAge;
 
+import java.io.FileOutputStream; 
+ 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -58,6 +61,7 @@ public class MyTickets extends javax.swing.JFrame {
         myTickets = new javax.swing.JScrollPane();
         myTicketsTable = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
+        saveToPDf = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,8 +111,17 @@ public class MyTickets extends javax.swing.JFrame {
         });
         cartPanel.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
+        saveToPDf.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        saveToPDf.setText("Save to PDF");
+        saveToPDf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saveToPDfMouseClicked(evt);
+            }
+        });
+        cartPanel.add(saveToPDf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/High_resolution_wallpaper_background_ID_77700337015.jpg"))); // NOI18N
-        cartPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-990, -930, 2300, 1330));
+        cartPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1000, -930, 2300, 1330));
 
         getContentPane().add(cartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 1310, 400));
 
@@ -138,6 +151,12 @@ public class MyTickets extends javax.swing.JFrame {
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
         this.dispose();
     }//GEN-LAST:event_backButtonMouseClicked
+
+    private void saveToPDfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveToPDfMouseClicked
+
+
+  
+    }//GEN-LAST:event_saveToPDfMouseClicked
     private DefaultTableModel model2;
 
     private void loadMyTickets() {
@@ -202,5 +221,6 @@ public class MyTickets extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane myTickets;
     private javax.swing.JTable myTicketsTable;
+    private javax.swing.JButton saveToPDf;
     // End of variables declaration//GEN-END:variables
 }
