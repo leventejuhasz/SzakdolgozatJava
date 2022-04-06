@@ -162,7 +162,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<String>();
+        destinationCountryComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -179,7 +179,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -599,7 +599,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -607,9 +607,22 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(destinationCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 530, 290, 30));
 
+        addFlightTable.setBackground(new java.awt.Color(255, 255, 255));
+        addFlightTable.setForeground(new java.awt.Color(51, 51, 51));
         addFlightTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "Departure Time", "Arrival Time", "Origin Place", "Origin Airport Name", "Destination Airport Name", "Destination Place", "Number of max Seats", "Number of available Seats", "Base price", "Flight Number"
@@ -630,6 +643,9 @@ public class Kezdooldal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        addFlightTable.setGridColor(new java.awt.Color(51, 0, 255));
+        addFlightTable.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        addFlightTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jScrollPane1.setViewportView(addFlightTable);
 
         AdminPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1150, 210));
@@ -858,7 +874,8 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         });
         BuyTicketsTable.setGridColor(new java.awt.Color(51, 51, 255));
-        BuyTicketsTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        BuyTicketsTable.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        BuyTicketsTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
         buyTicketsJscrollPane.setViewportView(BuyTicketsTable);
 
         buyTicketsPanel.add(buyTicketsJscrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1150, 230));
@@ -918,6 +935,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         cartJtable.setBackground(new java.awt.Color(0, 0, 0));
         cartJtable.setForeground(new java.awt.Color(0, 0, 0));
 
+        cartTableUserPanel.setForeground(new java.awt.Color(51, 51, 255));
         cartTableUserPanel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -935,6 +953,8 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         });
         cartTableUserPanel.setOpaque(false);
+        cartTableUserPanel.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        cartTableUserPanel.setSelectionForeground(new java.awt.Color(51, 51, 51));
         cartJtable.setViewportView(cartTableUserPanel);
 
         cartTablePanel.add(cartJtable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 170));
@@ -1386,6 +1406,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             keepFlightsData();
             countries();
             comboboxListeners();
+            lejartDatumokTorlese();
             hibasAdat = false;
 
         }
@@ -1880,24 +1901,38 @@ public class Kezdooldal extends javax.swing.JFrame {
     }//GEN-LAST:event_numOfticketstoBuyTextfieldActionPerformed
 
     private void myTicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myTicketsMouseClicked
-        MyTickets m = new MyTickets();
-        m.setVisible(true);
-        m.setLocationRelativeTo(null);
+
+        MyTickets.getObj().setVisible(true);
+        MyTickets.getObj().setLocationRelativeTo(null);
+      
+
     }//GEN-LAST:event_myTicketsMouseClicked
 
     public void lejartDatumokTorlese() {
 
-        String strDate1 = "23/11/20";
-        String strDate2 = "20/12/20";
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uu", Locale.ENGLISH);
-        LocalDate date1 = LocalDate.parse(strDate1, dtf);
-        LocalDate date2 = LocalDate.parse(strDate2, dtf);
+        ArrayList<String> indulasiDatumok = new ArrayList<>();
 
-        if (date2.isAfter(date1)) {
-            System.out.println(date2 + " is after " + date1);
+        for (int i = 0; i < addFlightTable.getRowCount(); i++) {
+            String datum = (String) addFlightTable.getValueAt(i, 1).toString();
+
+            indulasiDatumok.add(datum);
+
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            for (int i = 0; i < addFlightTable.getRowCount(); i++) {
+
+                if (!dateFormat.parse(maiDatum()).before(dateFormat.parse(indulasiDatumok.get(i)))) {
+
+                    ((DefaultTableModel) addFlightTable.getModel()).removeRow(i);
+                }
+
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       
+        System.out.println(indulasiDatumok);
 
     }
 
@@ -2072,6 +2107,19 @@ public class Kezdooldal extends javax.swing.JFrame {
         return jegyekszama;
     }
 
+    private String maiDatum() {
+        LocalDateTime now = LocalDateTime.now();
+        int year = now.getYear();
+        int month = now.getMonthValue();
+        int day = now.getDayOfMonth();
+        int hour = now.getHour();
+        int min = now.getMinute();
+
+        String mai = year + "-" + month + "-" + day + " " + hour + ":" + min + "";
+
+        return mai;
+    }
+
     //Kivételek kezelése, hibavédések
     private boolean adminErrorHandling() {
 
@@ -2080,15 +2128,8 @@ public class Kezdooldal extends javax.swing.JFrame {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem();
                 String depdate = dateFormat.format(departureTimejDateChooser.getDate()) + " " + departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem();
-                LocalDateTime now = LocalDateTime.now();
-                int year = now.getYear();
-                int month = now.getMonthValue();
-                int day = now.getDayOfMonth();
-                int hour = now.getHour();
-                int min = now.getMinute();
 
-                String mai = year + "-" + month + "-" + day + " " + hour + ":" + min + "";
-                if (!dateFormat.parse(mai).before(dateFormat.parse(depdate)) || !dateFormat.parse(mai).before(dateFormat.parse(arrival)) || !dateFormat.parse(depdate).before(dateFormat.parse(arrival))) {
+                if (!dateFormat.parse(maiDatum()).before(dateFormat.parse(depdate)) || !dateFormat.parse(maiDatum()).before(dateFormat.parse(arrival)) || !dateFormat.parse(depdate).before(dateFormat.parse(arrival))) {
                     errorPopUp("You cant give a date like that!");
                     return false;
                 }

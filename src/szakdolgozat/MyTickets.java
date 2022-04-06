@@ -18,8 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import static szakdolgozat.Kezdooldal.customerId;
 import static szakdolgozat.Passenger.PassengerAge;
 
-import java.io.FileOutputStream; 
- 
+import java.io.FileOutputStream;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -31,14 +31,22 @@ import java.io.FileOutputStream;
  */
 public class MyTickets extends javax.swing.JFrame {
 
+    private static MyTickets obj = null;
     public static String base_price;
 
-    public MyTickets() {
+    MyTickets() {
         initComponents();
 
         loadMyTickets();
         mozgato();
 
+    }
+
+    public static MyTickets getObj() {
+        if (obj == null) {
+            obj = new MyTickets();
+        }
+        return obj;
     }
 
     private void exitQuestion() {
@@ -74,6 +82,7 @@ public class MyTickets extends javax.swing.JFrame {
         myTickets.setBackground(new java.awt.Color(0, 0, 0));
         myTickets.setForeground(new java.awt.Color(0, 0, 0));
 
+        myTicketsTable.setForeground(new java.awt.Color(51, 51, 255));
         myTicketsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -98,6 +107,8 @@ public class MyTickets extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        myTicketsTable.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        myTicketsTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
         myTickets.setViewportView(myTicketsTable);
 
         cartPanel.add(myTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1290, 170));
@@ -155,7 +166,6 @@ public class MyTickets extends javax.swing.JFrame {
     private void saveToPDfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveToPDfMouseClicked
 
 
-  
     }//GEN-LAST:event_saveToPDfMouseClicked
     private DefaultTableModel model2;
 
