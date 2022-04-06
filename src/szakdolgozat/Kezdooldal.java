@@ -162,7 +162,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<>();
+        destinationCountryComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -179,7 +179,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -599,7 +599,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -1290,6 +1290,17 @@ public class Kezdooldal extends javax.swing.JFrame {
             while (res.next()) {
 
                 String dep = res.getString("Departure_Time");
+                boolean kesobbi = false;
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    if (dateFormat.parse(maiDatum()).after(dateFormat.parse(dep))) {
+                        String sql = "Delete FROM flight_info where Departure_time like '" + dep + "'";
+                        sqlUpdate(sql);
+                        kesobbi = true;
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 String ati = res.getString("Arrival_Time");
                 String orc = res.getString("Origin_country");
                 String ora = res.getString("OriginAirportName");
@@ -1299,16 +1310,20 @@ public class Kezdooldal extends javax.swing.JFrame {
                 String nofav = res.getString("Num_of_available_seats");
                 String bp = res.getString("Base_Price") + " EUR";
                 String fnid = res.getString("Flight_num_id");
-                data[i][0] = dep;
-                data[i][1] = ati;
-                data[i][2] = orc;
-                data[i][3] = ora;
-                data[i][4] = dec;
-                data[i][5] = dea;
-                data[i][6] = nos;
-                data[i][7] = nofav;
-                data[i][8] = bp;
-                data[i][9] = fnid;
+
+                if (kesobbi == false) {
+                    data[i][0] = dep;
+
+                    data[i][1] = ati;
+                    data[i][2] = orc;
+                    data[i][3] = ora;
+                    data[i][4] = dec;
+                    data[i][5] = dea;
+                    data[i][6] = nos;
+                    data[i][7] = nofav;
+                    data[i][8] = bp;
+                    data[i][9] = fnid;
+                }
                 i++;
             }
 
@@ -1353,6 +1368,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             while (res.next()) {
 
                 String dep = res.getString("Departure_Time");
+
                 String ati = res.getString("Arrival_Time");
                 String orc = res.getString("Origin_country");
                 String ora = res.getString("OriginAirportName");
@@ -1498,8 +1514,8 @@ public class Kezdooldal extends javax.swing.JFrame {
             if (adminErrorHandling()) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
 
-                String depdate = dateFormat.format(departureTimejDateChooser.getDate()) + " " + departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem();
-                String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem();
+                String depdate = dateFormat.format(departureTimejDateChooser.getDate()) + " " + departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem() + ":00";
+                String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem() + ":00";
                 String sql = "Insert Into flight_info(Departure_time, Arrival_time, Origin_country,OriginAirportName, Destination_country,DestinationAirportName, Num_of_max_seats, Num_of_available_seats,Base_Price)  VALUES ( '" + depdate + "' , '" + arrival + "' , '" + originCountryComboBox.getSelectedItem() + "' , '" + originAirportNameComboBox.getSelectedItem() + "' , '" + destinationCountryComboBox.getSelectedItem() + "' , '" + destinationAirportNameComboBox.getSelectedItem() + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "' , '" + Integer.parseInt(numberOfSeatsTextField.getText()) + "' , '" + amount + "' )";
                 sqlUpdate(sql);
                 DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
@@ -1904,7 +1920,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         MyTickets.getObj().setVisible(true);
         MyTickets.getObj().setLocationRelativeTo(null);
-      
+
 
     }//GEN-LAST:event_myTicketsMouseClicked
 
@@ -1913,26 +1929,30 @@ public class Kezdooldal extends javax.swing.JFrame {
         ArrayList<String> indulasiDatumok = new ArrayList<>();
 
         for (int i = 0; i < addFlightTable.getRowCount(); i++) {
-            String datum = (String) addFlightTable.getValueAt(i, 1).toString();
+            String datum = (String) addFlightTable.getValueAt(i, 0).toString();
 
             indulasiDatumok.add(datum);
 
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        System.out.println(addFlightTable.getRowCount());
         try {
-            for (int i = 0; i < addFlightTable.getRowCount(); i++) {
 
-                if (!dateFormat.parse(maiDatum()).before(dateFormat.parse(indulasiDatumok.get(i)))) {
+            for (int i = 0; i < indulasiDatumok.size(); i++) {
 
-                    ((DefaultTableModel) addFlightTable.getModel()).removeRow(i);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                if (dateFormat.parse(maiDatum()).after(dateFormat.parse(indulasiDatumok.get(i)))) {
+
+                    indulasiDatumok.remove(indulasiDatumok.get(i));
+                    ((DefaultTableModel) addFlightTable.getModel()).removeRow(i - 1);
                 }
 
             }
+
+            System.out.println(addFlightTable.getRowCount());
         } catch (ParseException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        System.out.println(indulasiDatumok);
 
     }
 
@@ -2115,7 +2135,8 @@ public class Kezdooldal extends javax.swing.JFrame {
         int hour = now.getHour();
         int min = now.getMinute();
 
-        String mai = year + "-" + month + "-" + day + " " + hour + ":" + min + "";
+        int sec = now.getSecond();
+        String mai = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
 
         return mai;
     }
@@ -2125,11 +2146,13 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         try {
             if (departureTimejDateChooser.getDate() != null && arrivalTImejDateChooser.getDate() != null) {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem();
-                String depdate = dateFormat.format(departureTimejDateChooser.getDate()) + " " + departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem()+":"+"00";
+                String depdate = dateFormat.format(departureTimejDateChooser.getDate()) + " " + departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem()+":00";
 
-                if (!dateFormat.parse(maiDatum()).before(dateFormat.parse(depdate)) || !dateFormat.parse(maiDatum()).before(dateFormat.parse(arrival)) || !dateFormat.parse(depdate).before(dateFormat.parse(arrival))) {
+                System.out.println(arrival);
+                System.out.println(depdate);
+                if (dateFormat.parse(maiDatum()).after(dateFormat.parse(depdate)) || dateFormat.parse(maiDatum()).after(dateFormat.parse(arrival)) || dateFormat.parse(arrival).after(dateFormat.parse(depdate))) {
                     errorPopUp("You cant give a date like that!");
                     return false;
                 }
