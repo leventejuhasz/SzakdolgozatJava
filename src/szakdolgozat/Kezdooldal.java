@@ -162,7 +162,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<String>();
+        destinationCountryComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -179,7 +179,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -231,6 +231,10 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         blackBackgroundLabel = new javax.swing.JLabel();
+        aboutUs = new javax.swing.JLabel();
+        AboutUsPanel = new javax.swing.JPanel();
+        pic = new javax.swing.JLabel();
+        aboutUsText = new javax.swing.JLabel();
         userBackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -599,7 +603,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -823,7 +827,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 buyTicketsLabelMouseClicked(evt);
             }
         });
-        UserPanel.add(buyTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        UserPanel.add(buyTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         logOutLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         logOutLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -995,7 +999,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         SettingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         genderIcon.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        SettingsPanel.add(genderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 340, 250));
+        SettingsPanel.add(genderIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 340, 240));
 
         changeEmailButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         changeEmailButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -1134,6 +1138,29 @@ public class Kezdooldal extends javax.swing.JFrame {
         blackBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/black-color-solid-background-1920x1080.png"))); // NOI18N
         blackBackgroundLabel.setText("jLabel6");
         UserPanel.add(blackBackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 1150, 80));
+
+        aboutUs.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        aboutUs.setForeground(new java.awt.Color(102, 255, 255));
+        aboutUs.setText("About us");
+        aboutUs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AboutUsMouseClicked(evt);
+            }
+        });
+        UserPanel.add(aboutUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 70));
+
+        AboutUsPanel.setOpaque(false);
+        AboutUsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/airport-medical-aid_300.jpg"))); // NOI18N
+        AboutUsPanel.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 310, -1));
+
+        aboutUsText.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        aboutUsText.setForeground(new java.awt.Color(102, 255, 255));
+        aboutUsText.setText("<html>London International Airport Our airport is here to help you get wherever you want to go. Start here, go anywhere\nOur Impact\n\nOur Airport provides a significant contribution to the Southern Ontario economy. The Airport is financially self-sustaining and does not rely on any subsidy or financial benefit from any level of government. In 2021 we will pay close to $950,000 in municipal taxes to the City of London. Below are some of the highlights of our economic contribution to our region.\n\nThe first airport in London was established in 1928 on a grass field located south of the city. In 1939, land was purchased at the present site and construction of a more advanced facility began.  \n\nDuring the second world war, London Airport was used extensively as a military training base. Work started on the RCAF Station Crumlin in November 1939, and it became a major centre for the British Commonwealth Air Training Plan. In 1945, Transport Canada assumed operations of the airport and embarked upon a major expansion program during the following three decades. From 1974 to 1998 construction programs costing more than $12 million were undertaken to upgrade and renovate airport facilities, runways, etc. \n\nIn 1994 the Government of Canada announced the implementation of a National Airports Policy. This policy supported the federal government’s withdrawal as operators of airports. The top twenty-six Canadian airports, including London, were eligible for a long-term lease to local Airport Authorities.  \n\n\n</html>");
+        AboutUsPanel.add(aboutUsText, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 780, 440));
+
+        UserPanel.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1130, 570));
 
         userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
         userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1293,10 +1320,13 @@ public class Kezdooldal extends javax.swing.JFrame {
                 boolean kesobbi = false;
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    if (dateFormat.parse(maiDatum()).after(dateFormat.parse(dep))) {
-                        String sql = "Delete FROM flight_info where Departure_time like '" + dep + "'";
-                        sqlUpdate(sql);
-                        kesobbi = true;
+                    if (dep != "") {
+
+                        if (dateFormat.parse(maiDatum()).after(dateFormat.parse(dep))) {
+                            String sql = "Delete FROM flight_info where Departure_time like '" + dep + "'";
+                            sqlUpdate(sql);
+                            kesobbi = true;
+                        }
                     }
                 } catch (ParseException ex) {
                     Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1422,7 +1452,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             keepFlightsData();
             countries();
             comboboxListeners();
-            lejartDatumokTorlese();
+//            lejartDatumokTorlese();
             hibasAdat = false;
 
         }
@@ -1648,7 +1678,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     }
 
     //EVENTES FÜGGYVÉNYEK
-
     private void deleteFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFlightButonActionPerformed
 
         JFrame qurstionPopUp = new JFrame();
@@ -1744,6 +1773,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         buyTicketsPanel.setVisible(true);
         this.cartTablePanel.hide();
         this.SettingsPanel.hide();
+        this.AboutUsPanel.hide();
     }//GEN-LAST:event_buyTicketsLabelMouseClicked
 
     private void logOutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutLabelMouseClicked
@@ -1895,6 +1925,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         this.buyTicketsPanel.hide();
         this.cartTablePanel.show();
         this.SettingsPanel.hide();
+        this.AboutUsPanel.hide();
 
         numOfTicketsLabel.setText("Number of Tickets: " + numberOfTickets);
         int tesztCount = 0;
@@ -1919,49 +1950,50 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void myTicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myTicketsMouseClicked
 
         MyTickets.getObj().setVisible(true);
+        MyTickets.getObj().loadMyTickets();
         MyTickets.getObj().setLocationRelativeTo(null);
 
 
     }//GEN-LAST:event_myTicketsMouseClicked
 
-    public void lejartDatumokTorlese() {
-
-        ArrayList<String> indulasiDatumok = new ArrayList<>();
-
-        for (int i = 0; i < addFlightTable.getRowCount(); i++) {
-            String datum = (String) addFlightTable.getValueAt(i, 0).toString();
-
-            indulasiDatumok.add(datum);
-
-        }
-
-        System.out.println(addFlightTable.getRowCount());
-        try {
-
-            for (int i = 0; i < indulasiDatumok.size(); i++) {
-
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                if (dateFormat.parse(maiDatum()).after(dateFormat.parse(indulasiDatumok.get(i)))) {
-
-                    indulasiDatumok.remove(indulasiDatumok.get(i));
-                    ((DefaultTableModel) addFlightTable.getModel()).removeRow(i - 1);
-                }
-
-            }
-
-            System.out.println(addFlightTable.getRowCount());
-        } catch (ParseException ex) {
-            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
+//    public void lejartDatumokTorlese() {
+//
+//        ArrayList<String> indulasiDatumok = new ArrayList<>();
+//
+//        for (int i = 0; i < addFlightTable.getRowCount(); i++) {
+//            String datum = (String) addFlightTable.getValueAt(i, 0).toString();
+//
+//            indulasiDatumok.add(datum);
+//
+//        }
+//
+//        System.out.println(addFlightTable.getRowCount());
+//        try {
+//
+//            for (int i = 0; i < indulasiDatumok.size(); i++) {
+//
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                if (dateFormat.parse(maiDatum()).after(dateFormat.parse(indulasiDatumok.get(i)))) {
+//
+//                    indulasiDatumok.remove(indulasiDatumok.get(i));
+//                    ((DefaultTableModel) addFlightTable.getModel()).removeRow(i - 1);
+//                }
+//
+//            }
+//
+//            System.out.println(addFlightTable.getRowCount());
+//        } catch (ParseException ex) {
+//            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
 
     private void SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsMouseClicked
 
         buyTicketsPanel.hide();
         cartTablePanel.hide();
         SettingsPanel.show();
+        this.AboutUsPanel.hide();
 
         Connection con;
         PreparedStatement ps;
@@ -2123,6 +2155,13 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_departureTimeHourComboBoxItemStateChanged
 
+    private void AboutUsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutUsMouseClicked
+        this.AboutUsPanel.show();
+        this.SettingsPanel.hide();
+        this.buyTicketsPanel.hide();
+        
+    }//GEN-LAST:event_AboutUsMouseClicked
+
     public int getJegyekszama() {
         return jegyekszama;
     }
@@ -2146,13 +2185,14 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         try {
             if (departureTimejDateChooser.getDate() != null && arrivalTImejDateChooser.getDate() != null) {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem()+":"+"00";
-                String depdate = dateFormat.format(departureTimejDateChooser.getDate()) + " " + departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem()+":00";
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-                System.out.println(arrival);
+                String arrival = dateFormat.format(arrivalTImejDateChooser.getDate()) + " " + ArrivalTimeHourComboBox.getSelectedItem() + ":" + ArrivalTimeMinComboBox.getSelectedItem() + ":" + "00";
+                String depdate = dateFormat.format(departureTimejDateChooser.getDate()) + " " + departureTimeHourComboBox.getSelectedItem() + ":" + departureTimeMinuteComboBox.getSelectedItem() + ":00";
+
                 System.out.println(depdate);
-                if (dateFormat.parse(maiDatum()).after(dateFormat.parse(depdate)) || dateFormat.parse(maiDatum()).after(dateFormat.parse(arrival)) || dateFormat.parse(arrival).after(dateFormat.parse(depdate))) {
+                SimpleDateFormat hasonlito = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                if (hasonlito.parse(maiDatum()).after(hasonlito.parse(depdate)) || hasonlito.parse(maiDatum()).after(hasonlito.parse(arrival)) || hasonlito.parse(depdate).after(hasonlito.parse(arrival))) {
                     errorPopUp("You cant give a date like that!");
                     return false;
                 }
@@ -2518,9 +2558,12 @@ public class Kezdooldal extends javax.swing.JFrame {
         String buyTickets = "<html><u>Buy Tickets</u></html>";
         String settings = "<html><u>Settings</u></html>";
         String myTicket = "<html><u>My Tickets</u></html>";
+        String aboutus = "<html><u>About Us</u></html>";
+
         cartLabel.setText(cart);
         logOutLabel.setText(logout);
         buyTicketsLabel.setText(buyTickets);
+        aboutUs.setText(aboutus);
         this.Settings.setText(settings);
         this.myTickets.setText(myTicket);
         this.cartLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -2528,10 +2571,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         this.logOutLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.Settings.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.myTickets.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
+        this.aboutUs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         BuyTicketsTable.show();
         UserPanel.show();
         SettingsPanel.hide();
+        AboutUsPanel.hide();
         System.out.println("User panel be");
     }
 
@@ -2588,6 +2632,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AboutUsPanel;
     private javax.swing.JPanel AdminPanel;
     private javax.swing.JComboBox ArrivalTimeHourComboBox;
     private javax.swing.JComboBox ArrivalTimeMinComboBox;
@@ -2601,6 +2646,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel Settings;
     private javax.swing.JPanel SettingsPanel;
     private javax.swing.JPanel UserPanel;
+    private javax.swing.JLabel aboutUs;
+    private javax.swing.JLabel aboutUsText;
     private javax.swing.JTable addFlightTable;
     private javax.swing.JButton adminBackButton;
     private javax.swing.JButton adminRegisterFlightButton;
@@ -2689,6 +2736,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordTextField;
     private javax.swing.JLabel phoneNumberLabel;
     private javax.swing.JTextField phoneNumberTextfield;
+    private javax.swing.JLabel pic;
     private javax.swing.JTextField priceOfTheFlightTextField;
     private javax.swing.JLabel promotionLabel;
     private javax.swing.JTextField promotionTextField;

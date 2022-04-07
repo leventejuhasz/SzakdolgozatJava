@@ -1,5 +1,11 @@
 package szakdolgozat;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -18,7 +24,12 @@ import javax.swing.table.DefaultTableModel;
 import static szakdolgozat.Kezdooldal.customerId;
 import static szakdolgozat.Passenger.PassengerAge;
 
+import com.itextpdf.text.pdf.*;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Map;
+import javax.swing.JFileChooser;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -132,9 +143,9 @@ public class MyTickets extends javax.swing.JFrame {
         cartPanel.add(saveToPDf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/High_resolution_wallpaper_background_ID_77700337015.jpg"))); // NOI18N
-        cartPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1000, -930, 2300, 1330));
+        cartPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1000, -930, 2310, 1270));
 
-        getContentPane().add(cartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 1310, 400));
+        getContentPane().add(cartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 1310, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -165,11 +176,68 @@ public class MyTickets extends javax.swing.JFrame {
 
     private void saveToPDfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveToPDfMouseClicked
 
+        JFileChooser savePath = new JFileChooser();
+        savePath.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int retval = savePath.showSaveDialog(this);
+        if (retval == JFileChooser.APPROVE_OPTION) {
+            try {
+
+                SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+
+                String query = "Select Passenger_id from price_info where Flight_num = " + myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 7);
+                Statement smt = con.createStatement();
+
+                ResultSet res = smt.executeQuery(query);
+                if (res.next()) {
+                    String id = res.getString("Passenger_id");
+                    Document writePdf = new Document();
+                    PdfWriter writer = PdfWriter.getInstance(writePdf, new FileOutputStream(savePath.getSelectedFile() + "/" + myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 0) + "_" + id + ".pdf"));
+                    writePdf.open();
+                    PdfPTable table = new PdfPTable(1);
+                    PdfPCell cell = new PdfPCell();
+                    Paragraph olvasojegy = new Paragraph("Jegy");
+                    olvasojegy.setFont(new Font(Font.FontFamily.UNDEFINED, 20));
+                    olvasojegy.setSpacingAfter(5f);
+                    olvasojegy.setAlignment(Element.ALIGN_CENTER);
+                    cell.addElement(olvasojegy);
+                    Paragraph adatok = new Paragraph(String.format("Név: %s\nCsomag: %s\nIndulás: %s\nÜlés:", myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 0), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 1), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 4), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 4)));
+                    adatok.setSpacingAfter(10f);
+                    cell.addElement(adatok);
+                    BarcodeEAN barcode = new BarcodeEAN();
+                    barcode.setCodeType(Barcode.EAN8);
+                    String code = id;
+                    for (int i = code.length(); i < 8; i++) {
+                        code = "0" + code;
+                    }
+                    barcode.setCode(code);
+                    barcode.setGuardBars(false);
+                    barcode.setBarHeight(8f);
+                    barcode.setSize(5f);
+                    Image img = barcode.createImageWithBarcode(writer.getDirectContent(), BaseColor.BLACK, BaseColor.GRAY);
+                    img.setWidthPercentage(60f);
+                    img.setAlignment(Element.ALIGN_CENTER);
+                    cell.addElement(img);
+                    cell.setPadding(50);
+                    table.addCell(cell);
+                    writePdf.add(table);
+                    writePdf.close();
+                    JOptionPane.showMessageDialog(rootPane, "Sikeres mentés!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    String sql = "Update Passenger Set flight_num = 0";
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }//GEN-LAST:event_saveToPDfMouseClicked
     private DefaultTableModel model2;
 
-    private void loadMyTickets() {
+    public void loadMyTickets() {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -201,11 +269,11 @@ public class MyTickets extends javax.swing.JFrame {
                 String price = res.getString("price") + " EUR";
                 data[i][0] = name;
                 data[i][1] = luggage;
-                data[i][2] = seatn;
-                data[i][3] = orp;
-                data[i][4] = dep;
-                data[i][5] = departure;
-                data[i][6] = arr;
+                data[i][2] = orp;
+                data[i][3] = dep;
+                data[i][4] = departure;
+                data[i][5] = arr;
+                data[i][6] = seatn;
                 data[i][7] = fid;
                 data[i][8] = price;
 
