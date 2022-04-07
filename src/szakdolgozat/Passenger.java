@@ -229,7 +229,7 @@ public class Passenger extends javax.swing.JFrame {
             return 20;
         }
 
-        if (age <= 12 && age >= 2) {
+        if (age <= 14 && age >= 2) {
             return 15;
         }
 

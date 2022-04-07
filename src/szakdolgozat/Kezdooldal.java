@@ -83,7 +83,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         initComponents();
         mozgato();
         closeProgramIcons();
-        cartTable = cartTableUserPanel;
 
     }
 
@@ -92,15 +91,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         setCursorOnLabel(closeProgramIconOnRegistration);
         setCursorOnLabel(closeProgramIconOnUserPanel);
         setCursorOnLabel(closeProgramIconOnAdminPanel);
-
-    }
-
-    public void setNumberOfSeats(JLabel numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
-    }
-
-    public void setTotalPay(JLabel totalPay) {
-        this.totalPay = totalPay;
+        cartTable = cartTableUserPanel;
     }
 
     @SuppressWarnings("unchecked")
@@ -162,7 +153,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<>();
+        destinationCountryComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -179,7 +170,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -190,6 +181,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         promotionLabel = new javax.swing.JLabel();
         promotionTextField = new javax.swing.JTextField();
         szazalek = new javax.swing.JLabel();
+        numberOfSeats2 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         UserPanel = new javax.swing.JPanel();
         closeProgramIconOnUserPanel = new javax.swing.JLabel();
@@ -205,6 +197,10 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         numOfticketstoBuyTextfield = new javax.swing.JComboBox();
         destinationTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         cartTablePanel = new javax.swing.JPanel();
         cartJtable = new javax.swing.JScrollPane();
         cartTableUserPanel = new javax.swing.JTable();
@@ -256,7 +252,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         loginEmailLabel.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         loginEmailLabel.setForeground(new java.awt.Color(255, 255, 255));
-        loginEmailLabel.setText("UserName:");
+        loginEmailLabel.setText("Email:");
         loginEmailLabel.setToolTipText("");
         loginPanel.add(loginEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 190, 30));
 
@@ -273,11 +269,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         loginEmailTextField.setBackground(new java.awt.Color(255, 255, 255));
         loginEmailTextField.setForeground(new java.awt.Color(0, 0, 0));
         loginEmailTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        loginEmailTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginEmailTextFieldActionPerformed(evt);
-            }
-        });
         loginPanel.add(loginEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 320, 30));
 
         passwordTextField.setBackground(new java.awt.Color(255, 255, 255));
@@ -559,15 +550,10 @@ public class Kezdooldal extends javax.swing.JFrame {
         numberOfSeats.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         numberOfSeats.setForeground(new java.awt.Color(204, 204, 204));
         numberOfSeats.setText("Number of Seats: ");
-        AdminPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 610, -1, 30));
+        AdminPanel.add(numberOfSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 620, -1, 30));
 
         numberOfSeatsTextField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         numberOfSeatsTextField.setText("100");
-        numberOfSeatsTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numberOfSeatsTextFieldActionPerformed(evt);
-            }
-        });
         AdminPanel.add(numberOfSeatsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 620, 50, -1));
 
         adminRegisterFlightButton.setBackground(new java.awt.Color(0, 0, 0));
@@ -603,7 +589,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -666,24 +652,14 @@ public class Kezdooldal extends javax.swing.JFrame {
         departureTimeHourComboBox.setMaximumRowCount(24);
         departureTimeHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         departureTimeHourComboBox.setSelectedIndex(17);
-        departureTimeHourComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                departureTimeHourComboBoxItemStateChanged(evt);
-            }
-        });
         AdminPanel.add(departureTimeHourComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 60, 30));
 
-        departureTimeMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        departureTimeMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         AdminPanel.add(departureTimeMinuteComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 330, 60, 30));
 
         ArrivalTimeHourComboBox.setMaximumRowCount(24);
         ArrivalTimeHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         ArrivalTimeHourComboBox.setSelectedIndex(17);
-        ArrivalTimeHourComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ArrivalTimeHourComboBoxActionPerformed(evt);
-            }
-        });
         AdminPanel.add(ArrivalTimeHourComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 60, 30));
 
         ArrivalTimeMinComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
@@ -767,11 +743,6 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         priceOfTheFlightTextField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         priceOfTheFlightTextField.setText("30");
-        priceOfTheFlightTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceOfTheFlightTextFieldActionPerformed(evt);
-            }
-        });
         AdminPanel.add(priceOfTheFlightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 650, 100, -1));
 
         EURlabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -788,17 +759,17 @@ public class Kezdooldal extends javax.swing.JFrame {
         promotionTextField.setForeground(new java.awt.Color(0, 0, 0));
         promotionTextField.setText("10");
         promotionTextField.setToolTipText("");
-        promotionTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                promotionTextFieldActionPerformed(evt);
-            }
-        });
         AdminPanel.add(promotionTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 650, 30, -1));
 
         szazalek.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         szazalek.setForeground(new java.awt.Color(204, 204, 204));
         szazalek.setText("%");
-        AdminPanel.add(szazalek, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 620, -1, 80));
+        AdminPanel.add(szazalek, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 620, -1, 90));
+
+        numberOfSeats2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        numberOfSeats2.setForeground(new java.awt.Color(204, 204, 204));
+        numberOfSeats2.setText("(max: 230)");
+        AdminPanel.add(numberOfSeats2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 620, -1, 30));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/microsoft-flight-simulator-6.jpg"))); // NOI18N
         background.setText("jLabel1");
@@ -839,6 +810,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         UserPanel.add(logOutLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 20, -1, -1));
 
+        buyTicketsPanel.setOpaque(false);
         buyTicketsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BuyTicketsTable.setForeground(new java.awt.Color(0, 0, 0));
@@ -931,7 +903,27 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         buyTicketsPanel.add(destinationTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 250, 30));
 
-        UserPanel.add(buyTicketsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1150, 370));
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Discounts:");
+        buyTicketsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, 60));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("2-14 year: 15%");
+        buyTicketsPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 150, -1));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Under 2 years: 20%");
+        buyTicketsPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("14-17 year: 10%");
+        buyTicketsPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+
+        UserPanel.add(buyTicketsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1150, 500));
 
         cartTablePanel.setOpaque(false);
         cartTablePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1009,11 +1001,6 @@ public class Kezdooldal extends javax.swing.JFrame {
                 changeEmailButtonMouseClicked(evt);
             }
         });
-        changeEmailButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changeEmailButtonActionPerformed(evt);
-            }
-        });
         SettingsPanel.add(changeEmailButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 90, 30));
 
         changePhoneNumberButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -1033,11 +1020,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         settingsEmailAddressTextfield.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         settingsEmailAddressTextfield.setInheritsPopupMenu(true);
         settingsEmailAddressTextfield.setOpaque(false);
-        settingsEmailAddressTextfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsEmailAddressTextfieldActionPerformed(evt);
-            }
-        });
         SettingsPanel.add(settingsEmailAddressTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 230, 30));
 
         settingsPhoneNumberTextfield.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -1046,11 +1028,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         settingsPhoneNumberTextfield.setBorder(null);
         settingsPhoneNumberTextfield.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         settingsPhoneNumberTextfield.setOpaque(false);
-        settingsPhoneNumberTextfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsPhoneNumberTextfieldActionPerformed(evt);
-            }
-        });
         SettingsPanel.add(settingsPhoneNumberTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 230, 30));
 
         saveSettingsNumberSettingsButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -1078,7 +1055,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         jLabel14.setText("Phone number: ");
         SettingsPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
-        UserPanel.add(SettingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1150, 550));
+        UserPanel.add(SettingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1150, 530));
 
         cartLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         cartLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -1089,7 +1066,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 cartLabelMouseClicked(evt);
             }
         });
-        UserPanel.add(cartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 100, 40));
+        UserPanel.add(cartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 90, 40));
 
         Settings.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         Settings.setForeground(new java.awt.Color(102, 255, 255));
@@ -1160,7 +1137,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         aboutUsText.setText("<html>London International Airport Our airport is here to help you get wherever you want to go. Start here, go anywhere\nOur Impact\n\nOur Airport provides a significant contribution to the Southern Ontario economy. The Airport is financially self-sustaining and does not rely on any subsidy or financial benefit from any level of government. In 2021 we will pay close to $950,000 in municipal taxes to the City of London. Below are some of the highlights of our economic contribution to our region.\n\nThe first airport in London was established in 1928 on a grass field located south of the city. In 1939, land was purchased at the present site and construction of a more advanced facility began.  \n\nDuring the second world war, London Airport was used extensively as a military training base. Work started on the RCAF Station Crumlin in November 1939, and it became a major centre for the British Commonwealth Air Training Plan. In 1945, Transport Canada assumed operations of the airport and embarked upon a major expansion program during the following three decades. From 1974 to 1998 construction programs costing more than $12 million were undertaken to upgrade and renovate airport facilities, runways, etc. \n\nIn 1994 the Government of Canada announced the implementation of a National Airports Policy. This policy supported the federal government’s withdrawal as operators of airports. The top twenty-six Canadian airports, including London, were eligible for a long-term lease to local Airport Authorities.  \n\n\n</html>");
         AboutUsPanel.add(aboutUsText, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 780, 440));
 
-        UserPanel.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1130, 570));
+        UserPanel.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1130, 540));
 
         userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
         userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1175,26 +1152,16 @@ public class Kezdooldal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginEmailTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loginEmailTextFieldActionPerformed
-
     private void womanRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_womanRadioButtonActionPerformed
         if (this.womanRadioButton.isSelected()) {
             this.manRadioButton.setSelected(false);
         }
     }//GEN-LAST:event_womanRadioButtonActionPerformed
 
-    public void setCursorOnLabel(JLabel label) {
-
-        label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    }
 
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
         dontShowRegistrationPanel();
         ShowLoginPanel();
-
-
     }//GEN-LAST:event_backButtonMouseClicked
 
     private void manRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manRadioButtonActionPerformed
@@ -1203,12 +1170,14 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_manRadioButtonActionPerformed
 
+    //sql Update, Delete, insert into utasitasok hivo metodusa
     private void sqlUpdate(String sql) throws ClassNotFoundException, SQLException {
 
         connectToDatabase().executeUpdate(sql);
 
     }
 
+    //csatlakozás az adatbázishoz
     private Statement connectToDatabase() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
@@ -1218,6 +1187,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         return smt;
     }
 
+    //md5 password codeja
     private void md5PasswordCode(String password) {
 
         MessageDigest md = null;
@@ -1235,15 +1205,6 @@ public class Kezdooldal extends javax.swing.JFrame {
     private void registrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationButtonActionPerformed
 
         if (isRegistrationErrorHandling()) {
-            String firstName = firstNameTextfield.getText();
-            String lastName = lastNameTextfield.getText();
-            String adress = streetTextfield.getText();
-            int contactNumber = Integer.parseInt(zipCodeTextfield.getText());
-            String city = cityTextfield.getText();
-            String country = countryTextfield.getText();
-            String phoneNumber = phoneNumberTextfield.getText();
-            String email = emailTextfield.getText();
-
             String gender = "";
             if (this.womanRadioButton.isSelected()) {
                 gender = this.womanRadioButton.getText();
@@ -1255,7 +1216,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             md5PasswordCode(password);
 
             try {
-                String sql = "INSERT INTO registration_info(FirstName,LastName,Address,zipCode,City,Country,phoneNumber,Gender,Email, CustomerPassword ) VALUES ('" + firstName + "' , '" + lastName + "' , '" + adress + "' , '" + contactNumber + "' , '" + city + "' , '" + country + "' , '" + phoneNumber + "' , '" + gender + "' , '" + email + "', '" + md5password(registrationPasswordTextField.getText()) + "' );";
+                String sql = "INSERT INTO registration_info(FirstName,LastName,Address,zipCode,City,Country,phoneNumber,Gender,Email, CustomerPassword ) VALUES ('" + firstNameTextfield.getText() + "' , '" + lastNameTextfield.getText() + "' , '" + streetTextfield.getText() + "' , '" + Integer.parseInt(zipCodeTextfield.getText()) + "' , '" + cityTextfield.getText() + "' , '" + countryTextfield.getText() + "' , '" + phoneNumberTextfield.getText() + "' , '" + gender + "' , '" + emailTextfield.getText() + "', '" + md5password(registrationPasswordTextField.getText()) + "' );";
                 sqlUpdate(sql);
 
             } catch (Exception e) {
@@ -1268,8 +1229,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         } else {
 
-            JFrame jFrame = new JFrame();
-            JOptionPane.showMessageDialog(jFrame, "Sikertelen Regisztráció!");
+            errorPopUp("Sikertelen regisztráció!");
         }
 
 
@@ -1288,35 +1248,39 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }
 
+    private ResultSet lekerdezes(String sql) throws ClassNotFoundException, SQLException {
+        Statement smt = connectToDatabase();
 
-    private void numberOfSeatsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberOfSeatsTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_numberOfSeatsTextFieldActionPerformed
+        ResultSet res = smt.executeQuery(sql);
+
+        return res;
+
+    }
+
     private DefaultTableModel model;
 
+    //járatok frissítése, megtartása az admin táblázatbans
     public void keepFlightsData() {
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
             String query = "Select Departure_time,Arrival_time,Origin_country, OriginAirportName, Destination_country, DestinationAirportName, Num_of_max_seats, Flight_num_id, Num_of_available_seats,Base_Price from flight_info";
-            Statement smt = con.createStatement();
 
-            ResultSet res = smt.executeQuery(query);
-            Statement s = con.createStatement();
-            ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM flight_info");
-            r.next();
-            int count = r.getInt("rowcount");
-            r.close();
+            ResultSet s = lekerdezes(query);
+
+            String sqlcountrow = "SELECT COUNT(*) AS rowcount FROM flight_info";
+            ResultSet s2 = lekerdezes(sqlcountrow);
+            s2.next();
+            int count = s2.getInt("rowcount");
+            s2.close();
 
             String columns[] = {addFlightTable.getColumnName(0), addFlightTable.getColumnName(1), addFlightTable.getColumnName(2), addFlightTable.getColumnName(3), addFlightTable.getColumnName(4), addFlightTable.getColumnName(5), addFlightTable.getColumnName(6), addFlightTable.getColumnName(7), addFlightTable.getColumnName(8), addFlightTable.getColumnName(9)};
             String data[][] = new String[count][addFlightTable.getColumnCount()];
 
             int i = 0;
-            while (res.next()) {
+            while (s.next()) {
 
-                String dep = res.getString("Departure_Time");
+                String dep = s.getString("Departure_Time");
                 boolean kesobbi = false;
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
@@ -1331,15 +1295,15 @@ public class Kezdooldal extends javax.swing.JFrame {
                 } catch (ParseException ex) {
                     Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                String ati = res.getString("Arrival_Time");
-                String orc = res.getString("Origin_country");
-                String ora = res.getString("OriginAirportName");
-                String dec = res.getString("Destination_country");
-                String dea = res.getString("DestinationAirportName");
-                String nos = res.getString("Num_of_max_seats");
-                String nofav = res.getString("Num_of_available_seats");
-                String bp = res.getString("Base_Price") + " EUR";
-                String fnid = res.getString("Flight_num_id");
+                String ati = s.getString("Arrival_Time");
+                String orc = s.getString("Origin_country");
+                String ora = s.getString("OriginAirportName");
+                String dec = s.getString("Destination_country");
+                String dea = s.getString("DestinationAirportName");
+                String nos = s.getString("Num_of_max_seats");
+                String nofav = s.getString("Num_of_available_seats");
+                String bp = s.getString("Base_Price") + " EUR";
+                String fnid = s.getString("Flight_num_id");
 
                 if (kesobbi == false) {
                     data[i][0] = dep;
@@ -1359,7 +1323,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             model = new DefaultTableModel(data, columns);
             addFlightTable.setModel(model);
-            con.close();
+            s.close();
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         } catch (SQLException ex) {
@@ -1379,34 +1343,32 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     private void loadtoBuyTicketsTableData() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
 
             String query = "Select Departure_time,Arrival_time,Origin_country, OriginAirportName, Destination_country, DestinationAirportName, Num_of_available_seats, Base_Price, Flight_num_id from flight_info";
-            Statement smt = con.createStatement();
-            ResultSet res = smt.executeQuery(query);
-            Statement s = con.createStatement();
-            ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM flight_info");
-            r.next();
-            int count = r.getInt("rowcount");
-            r.close();
+            ResultSet s = lekerdezes(query);
+
+            String sqlcountrow = "SELECT COUNT(*) AS rowcount FROM flight_info";
+            ResultSet s2 = lekerdezes(sqlcountrow);
+            s2.next();
+            int count = s2.getInt("rowcount");
+            s2.close();
 
             String columns[] = {BuyTicketsTable.getColumnName(0), BuyTicketsTable.getColumnName(1), BuyTicketsTable.getColumnName(2), BuyTicketsTable.getColumnName(3), BuyTicketsTable.getColumnName(4), BuyTicketsTable.getColumnName(5), BuyTicketsTable.getColumnName(6), BuyTicketsTable.getColumnName(7), BuyTicketsTable.getColumnName(8)};
             String data[][] = new String[count][BuyTicketsTable.getColumnCount()];
 
             int i = 0;
-            while (res.next()) {
+            while (s.next()) {
 
-                String dep = res.getString("Departure_Time");
+                String dep = s.getString("Departure_Time");
 
-                String ati = res.getString("Arrival_Time");
-                String orc = res.getString("Origin_country");
-                String ora = res.getString("OriginAirportName");
-                String dec = res.getString("Destination_country");
-                String dea = res.getString("DestinationAirportName");
-                String nos = res.getString("Num_of_available_seats");
-                String price = res.getString("Base_Price") + " EUR";
-                String fid = res.getString("Flight_num_id");
+                String ati = s.getString("Arrival_Time");
+                String orc = s.getString("Origin_country");
+                String ora = s.getString("OriginAirportName");
+                String dec = s.getString("Destination_country");
+                String dea = s.getString("DestinationAirportName");
+                String nos = s.getString("Num_of_available_seats");
+                String price = s.getString("Base_Price") + " EUR";
+                String fid = s.getString("Flight_num_id");
                 data[i][0] = dep;
                 data[i][1] = ati;
                 data[i][2] = orc;
@@ -1431,7 +1393,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             model = new DefaultTableModel(data, columns);
             BuyTicketsTable.setModel(model);
-            con.close();
+            s.close();
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         } catch (SQLException ex) {
@@ -1448,22 +1410,18 @@ public class Kezdooldal extends javax.swing.JFrame {
             dontShowLoginPanel();
             dontShowRegistrationPanel();
             showAdminPanel();
-            System.out.println("admin");
             keepFlightsData();
             countries();
-            comboboxListeners();
-//            lejartDatumokTorlese();
+
             hibasAdat = false;
 
         }
 
         if (isCheckUserLogin()) {
-
             dontShowLoginPanel();
             showUserPanel();
             this.buyTicketsPanel.show();
             this.BuyTicketsTable.show();
-            this.buyTicketsPanel.setOpaque(false);
             this.cartTablePanel.hide();
             loadtoBuyTicketsTableData();
             hibasAdat = false;
@@ -1474,21 +1432,17 @@ public class Kezdooldal extends javax.swing.JFrame {
     }//GEN-LAST:event_logginButtonActionPerformed
 
     private void belepteto(boolean hibasAdat) {
-        Connection con;
-        PreparedStatement ps;
+
         try {
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            String query = "Select Customer_id, Email, FirstName, LastName, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password(passwordTextField.getText()) + "'";
+            ResultSet s = lekerdezes(query);
+            if (s.next()) {
 
-            ps = con.prepareStatement("Select Customer_id, Email, FirstName, LastName, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password(passwordTextField.getText()) + "'");
-            ResultSet result = ps.executeQuery();
+                customerId = Integer.parseInt(s.getString("Customer_id"));
 
-            if (result.next()) {
-
-                customerId = Integer.parseInt(result.getString("Customer_id"));
-
-                String kapcsolattarto = result.getString("FirstName");
-                kapcsolattarto += " " + result.getString("LastName");
+                String kapcsolattarto = s.getString("FirstName");
+                kapcsolattarto += " " + s.getString("LastName");
             }
 
             if (hibasAdat == true) {
@@ -1498,9 +1452,12 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+    //atalakítani md5 kódra a jelszót
 
     private String md5password(String text) {
 
@@ -1550,10 +1507,8 @@ public class Kezdooldal extends javax.swing.JFrame {
                 sqlUpdate(sql);
                 DefaultTableModel model = (DefaultTableModel) addFlightTable.getModel();
 
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-                Statement smt = con.createStatement();
-                ResultSet rs = smt.executeQuery("SELECT Flight_num_id FROM flight_info order by Flight_num_id DESC limit 1");
+                String sql2 = "SELECT Flight_num_id FROM flight_info order by Flight_num_id DESC limit 1";
+                ResultSet rs = lekerdezes(sql2);
                 int flightnumid = 0;
                 boolean elso = false;
                 while (rs.next()) {
@@ -1594,11 +1549,9 @@ public class Kezdooldal extends javax.swing.JFrame {
         ArrayList<String> AirportNames = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-            Statement smt = con.createStatement();
+            String sql = "SELECT distinct AirportName FROM airport_info where Country LIKE '" + country + "' order by AirportName ASC";
 
-            ResultSet rs = smt.executeQuery("SELECT distinct AirportName FROM airport_info where Country LIKE '" + country + "' order by AirportName ASC");
+            ResultSet rs = lekerdezes(sql);
 
             while (rs.next()) {
                 String orszag = "AirportName";
@@ -1653,11 +1606,10 @@ public class Kezdooldal extends javax.swing.JFrame {
         ArrayList<String> countries = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-            Statement smt = con.createStatement();
 
-            ResultSet rs = smt.executeQuery("SELECT distinct Country FROM airport_info order by Country ASC");
+            String sql = "SELECT distinct Country FROM airport_info order by Country ASC";
+
+            ResultSet rs = lekerdezes(sql);
 
             while (rs.next()) {
                 String orszag = "Country";
@@ -1680,27 +1632,30 @@ public class Kezdooldal extends javax.swing.JFrame {
     //EVENTES FÜGGYVÉNYEK
     private void deleteFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFlightButonActionPerformed
 
-        JFrame qurstionPopUp = new JFrame();
-        int result = JOptionPane.showConfirmDialog(qurstionPopUp, "Are you sure you want to delete this flight?");
+        if (addFlightTable.getSelectionModel().isSelectionEmpty()) {
+            errorPopUp("Please select a flight!");
+        } else {
+            JFrame qurstionPopUp = new JFrame();
+            int result = JOptionPane.showConfirmDialog(qurstionPopUp, "Are you sure you want to delete this flight?");
+            if (result == 0) {
 
-        if (result == 0) {
+                try {
 
-            try {
+                    String sql = "DELETE FROM flight_info WHERE Flight_num_id =" + addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 9);
 
-                String sql = "DELETE FROM flight_info WHERE Flight_num_id =" + addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 9);
+                    sqlUpdate(sql);
+                    ((DefaultTableModel) addFlightTable.getModel()).removeRow(addFlightTable.getSelectedRow());
 
-                sqlUpdate(sql);
-                ((DefaultTableModel) addFlightTable.getModel()).removeRow(addFlightTable.getSelectedRow());
+                } catch (ClassNotFoundException ex) {
+                    System.out.println(ex);
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
 
-            } catch (ClassNotFoundException ex) {
-                System.out.println(ex);
-            } catch (SQLException ex) {
-                System.out.println(ex);
+            } else if (result == 1) {
+                qurstionPopUp.dispatchEvent(new WindowEvent(qurstionPopUp, WindowEvent.WINDOW_CLOSING));
+
             }
-
-        } else if (result == 1) {
-            qurstionPopUp.dispatchEvent(new WindowEvent(qurstionPopUp, WindowEvent.WINDOW_CLOSING));
-
         }
 
 
@@ -1730,33 +1685,40 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_destinationCountryComboBoxItemStateChanged
 
+    //adatok kimentése, a kiválasztatott járatról a MaangeFlight osztályra
     public static String deptime, arrtime, orcountry, destcountry, orairport, destairport, maxnumofseats;
     public static String adminflightnum, availableseats, promotion;
     public static Kezdooldal k;
     private void ManageFlightButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageFlightButonActionPerformed
 
-        deptime = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 0);
-        arrtime = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 1);
-        orcountry = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 2);
-        orairport = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 3);
-        destcountry = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 4);
-        destairport = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 5);
-        maxnumofseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 6);
-        availableseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 7);
-        adminflightnum = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 9);
-        promotion = promotionTextField.getText();
-        ManageFlight m = new ManageFlight();
-        m.setLocationRelativeTo(null);
-        m.setVisible(true);
-        m.setResizable(false);
+        if (!addFlightTable.getSelectionModel().isSelectionEmpty()) {
+            deptime = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 0);
+            arrtime = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 1);
+            orcountry = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 2);
+            orairport = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 3);
+            destcountry = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 4);
+            destairport = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 5);
+            maxnumofseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 6);
+            availableseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 7);
+            adminflightnum = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 9);
+            promotion = promotionTextField.getText();
+            ManageFlight m = new ManageFlight();
+            m.setLocationRelativeTo(null);
+            m.setVisible(true);
+            m.setResizable(false);
 
-        closeManageFlighFrametLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                keepFlightsData();
-            }
+            closeManageFlighFrametLabel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    keepFlightsData();
+                }
 
-        });
+            });
+
+        }else{
+            errorPopUp("Please Select a flight!");
+        }
+
 
     }//GEN-LAST:event_ManageFlightButonActionPerformed
 
@@ -1830,6 +1792,8 @@ public class Kezdooldal extends javax.swing.JFrame {
         p.setTitle(cim);
 
     }
+
+    //Frame mozgatása
     int posX = 0, posY = 0;
 
     private void mozgato() {
@@ -1865,8 +1829,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             if (Integer.parseInt(BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6).toString()) - jegyekszama < 0 || Integer.parseInt(BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 6).toString()) < 0) {
 
-                JFrame jFrame = new JFrame();
-                JOptionPane.showMessageDialog(jFrame, "Sold out!");
+                errorPopUp("Sold out!");
 
             } else {
 
@@ -1916,10 +1879,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         exitQuestion();
     }//GEN-LAST:event_closeProgramIconOnAdminPanelMouseClicked
 
-    private void priceOfTheFlightTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceOfTheFlightTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceOfTheFlightTextFieldActionPerformed
-
+    //Kosár frissítése
     private void cartLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartLabelMouseClicked
 
         this.buyTicketsPanel.hide();
@@ -1956,37 +1916,6 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_myTicketsMouseClicked
 
-//    public void lejartDatumokTorlese() {
-//
-//        ArrayList<String> indulasiDatumok = new ArrayList<>();
-//
-//        for (int i = 0; i < addFlightTable.getRowCount(); i++) {
-//            String datum = (String) addFlightTable.getValueAt(i, 0).toString();
-//
-//            indulasiDatumok.add(datum);
-//
-//        }
-//
-//        System.out.println(addFlightTable.getRowCount());
-//        try {
-//
-//            for (int i = 0; i < indulasiDatumok.size(); i++) {
-//
-//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                if (dateFormat.parse(maiDatum()).after(dateFormat.parse(indulasiDatumok.get(i)))) {
-//
-//                    indulasiDatumok.remove(indulasiDatumok.get(i));
-//                    ((DefaultTableModel) addFlightTable.getModel()).removeRow(i - 1);
-//                }
-//
-//            }
-//
-//            System.out.println(addFlightTable.getRowCount());
-//        } catch (ParseException ex) {
-//            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
 
     private void SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsMouseClicked
 
@@ -1995,14 +1924,11 @@ public class Kezdooldal extends javax.swing.JFrame {
         SettingsPanel.show();
         this.AboutUsPanel.hide();
 
-        Connection con;
-        PreparedStatement ps;
         try {
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            String sql = "Select FirstName, LastName, Email, phoneNumber,  Gender From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password(passwordTextField.getText()) + "'";
 
-            ps = con.prepareStatement("Select FirstName, LastName, Email, phoneNumber,  Gender From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password(passwordTextField.getText()) + "'");
-            ResultSet result = ps.executeQuery();
+            ResultSet result = lekerdezes(sql);
             String kapcsolattarto = "";
             String email = null, phonenumber = null, gender = null;
             if (result.next()) {
@@ -2019,7 +1945,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             settingsPhoneNumberTextfield.setText(phonenumber);
             settingsEmailAddressTextfield.setEditable(false);
             settingsPhoneNumberTextfield.setEditable(false);
-            System.out.println(gender);
+
             if (gender.matches("Woman")) {
 
                 ImageIcon imgThisImg = new ImageIcon("image/woman.png");
@@ -2033,12 +1959,14 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
     }//GEN-LAST:event_SettingsMouseClicked
 
-
+    //kosár kezelése, ha törlünk egy jegyet
     private void deletePassengerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerMouseClicked
 
         if (cartTableUserPanel.isRowSelected(cartTableUserPanel.getSelectedRow())) {
@@ -2066,6 +1994,8 @@ public class Kezdooldal extends javax.swing.JFrame {
         p.setVisible(true);
         p.setLocationRelativeTo(null);
     }//GEN-LAST:event_buyTicketsButtonMouseClicked
+
+    //settings, beállításokban textfield megváltoztatására hívófüggyvény
     int changecounter = 0;
 
     private void changeTextfield(JTextField textfield) {
@@ -2082,6 +2012,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         }
 
     }
+//settings, beállításokban textfield megváltoztatásának visszavonása,  hívófüggyvény
 
     private void saveTextField(JTextField textfield) {
         textfield.setText(textfield.getText());
@@ -2093,17 +2024,18 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     }
 
-
+//telefonszama és email cím mentése
     private void saveSettingsNumberSettingsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveSettingsNumberSettingsButtonMouseClicked
 
         saveTextField(settingsEmailAddressTextfield);
         saveTextField(settingsPhoneNumberTextfield);
         String sql = null;
-        if (!isEmailAlreadyRegistered(settingsPhoneNumberTextfield.getText())) {
+
+        if (!isPhoneAlreadyRegistered(settingsPhoneNumberTextfield.getText()) && !isEmailValid(settingsPhoneNumberTextfield.getText())) {
             sql = "Update registration_info SET phoneNumber = '" + settingsPhoneNumberTextfield.getText() + "' where Customer_id= " + customerId;
         }
         String sql2 = null;
-        if (!isPhoneAlreadyRegistered(settingsEmailAddressTextfield.getText())) {
+        if (!isEmailAlreadyRegistered(settingsEmailAddressTextfield.getText()) && !isPhoneNumberValid(settingsEmailAddressTextfield.getText())) {
             sql2 = "Update registration_info SET email = '" + settingsEmailAddressTextfield.getText() + "' where Customer_id= " + customerId;
         }
         try {
@@ -2131,40 +2063,13 @@ public class Kezdooldal extends javax.swing.JFrame {
         changeTextfield(settingsEmailAddressTextfield);
     }//GEN-LAST:event_changeEmailButtonMouseClicked
 
-    private void changeEmailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeEmailButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_changeEmailButtonActionPerformed
-
-    private void settingsPhoneNumberTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsPhoneNumberTextfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_settingsPhoneNumberTextfieldActionPerformed
-
-    private void settingsEmailAddressTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsEmailAddressTextfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_settingsEmailAddressTextfieldActionPerformed
-
-    private void promotionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promotionTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_promotionTextFieldActionPerformed
-
-    private void ArrivalTimeHourComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArrivalTimeHourComboBoxActionPerformed
-
-    }//GEN-LAST:event_ArrivalTimeHourComboBoxActionPerformed
-
-    private void departureTimeHourComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_departureTimeHourComboBoxItemStateChanged
-
-    }//GEN-LAST:event_departureTimeHourComboBoxItemStateChanged
-
     private void AboutUsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutUsMouseClicked
         this.AboutUsPanel.show();
         this.SettingsPanel.hide();
         this.buyTicketsPanel.hide();
-        
-    }//GEN-LAST:event_AboutUsMouseClicked
+        this.cartTablePanel.hide();
 
-    public int getJegyekszama() {
-        return jegyekszama;
-    }
+    }//GEN-LAST:event_AboutUsMouseClicked
 
     private String maiDatum() {
         LocalDateTime now = LocalDateTime.now();
@@ -2357,11 +2262,9 @@ public class Kezdooldal extends javax.swing.JFrame {
     private boolean isPhoneAlreadyRegistered(String phone) {
 
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            String sql = "SELECT phoneNumber FROM registration_info WHERE phoneNumber LIKE '" + phone + "'";
 
-            PreparedStatement ps = con.prepareStatement("SELECT phoneNumber FROM registration_info WHERE phoneNumber LIKE '" + phone + "'");
-
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs = lekerdezes(sql);
 
             if (rs.next()) {
                 return true;
@@ -2369,6 +2272,8 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.out.println(ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -2376,11 +2281,9 @@ public class Kezdooldal extends javax.swing.JFrame {
     private boolean isEmailAlreadyRegistered(String email) {
 
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            String sql = "SELECT Email FROM registration_info WHERE Email LIKE '" + email + "'";
 
-            PreparedStatement ps = con.prepareStatement("SELECT Email FROM registration_info WHERE Email LIKE '" + email + "'");
-
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs = lekerdezes(sql);
 
             if (rs.next()) {
                 return true;
@@ -2388,6 +2291,8 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.out.println(ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -2402,8 +2307,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     }
 
     public boolean checkAdmin() {
-        Connection con;
-        PreparedStatement ps;
+
         try {
 
             MessageDigest md = null;
@@ -2415,11 +2319,9 @@ public class Kezdooldal extends javax.swing.JFrame {
             md.update(passwordTextField.getText().getBytes());
             byte[] digest = md.digest();
             String password = DatatypeConverter.printHexBinary(digest).toUpperCase();
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            String sql = "Select Email, Password From admins where Email LIKE '" + loginEmailTextField.getText() + "' AND Password Like '" + password + "'";
 
-            ps = con.prepareStatement("Select Email, Password From admins where Email LIKE '" + loginEmailTextField.getText() + "' AND Password Like '" + password + "'");
-
-            ResultSet result = ps.executeQuery();
+            ResultSet result = lekerdezes(sql);
             if (result.next()) {
 
                 return true;
@@ -2430,45 +2332,27 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    private void comboboxListeners() {
-        String[] nullas = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
-        String[] nemnullas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
-        departureTimeHourComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (Integer.parseInt((String) departureTimeHourComboBox.getSelectedItem()) == 0) {
-                    departureTimeMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(nullas));
-                } else {
-                    departureTimeMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(nemnullas));
-                }
-            }
-        });
-
-        if (Integer.parseInt((String) ArrivalTimeHourComboBox.getSelectedItem()) == 0) {
-            ArrivalTimeMinComboBox.setModel(new javax.swing.DefaultComboBoxModel(nullas));
-        } else {
-            ArrivalTimeMinComboBox.setModel(new javax.swing.DefaultComboBoxModel(nemnullas));
-        }
-    }
-
     public boolean isCheckUserLogin() {
-        Connection con;
-        PreparedStatement ps;
+
         try {
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+            String sql = "Select Email, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password(passwordTextField.getText()) + "'";
 
-            ps = con.prepareStatement("Select Email, CustomerPassword From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password(passwordTextField.getText()) + "'");
-            ResultSet result = ps.executeQuery();
+            ResultSet result = lekerdezes(sql);
             if (result.next()) {
                 return true;
 
             }
 
         } catch (SQLException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
@@ -2549,87 +2433,79 @@ public class Kezdooldal extends javax.swing.JFrame {
         limittexfieldnumbers(numberOfSeatsTextField, 3);
         limittexfieldnumbers(priceOfTheFlightTextField, 3);
         limittexfieldnumbers(promotionTextField, 2);
-        System.out.println("admin panel be");
+
+    }
+
+    public void setCursorOnLabel(JLabel label) {
+
+        label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+
+    public String alahuzva(String text) {
+
+        return "<html><u>" + text + "</u></html>";
     }
 
     public void showUserPanel() {
-        String cart = "<html><u>Cart</u></html>";
-        String logout = "<html><u>Log out</u></html>";
-        String buyTickets = "<html><u>Buy Tickets</u></html>";
-        String settings = "<html><u>Settings</u></html>";
-        String myTicket = "<html><u>My Tickets</u></html>";
-        String aboutus = "<html><u>About Us</u></html>";
+        cartLabel.setText(alahuzva("Cart"));
+        logOutLabel.setText(alahuzva("Log out"));
+        buyTicketsLabel.setText(alahuzva("Settings"));
+        aboutUs.setText(alahuzva("About Us"));
+        Settings.setText(alahuzva("Settings"));
+        myTickets.setText(alahuzva("My Tickets"));
+        setCursorOnLabel(cartLabel);
+        setCursorOnLabel(buyTicketsLabel);
+        setCursorOnLabel(logOutLabel);
+        setCursorOnLabel(Settings);
+        setCursorOnLabel(cartLabel);
+        setCursorOnLabel(aboutUs);
+        setCursorOnLabel(myTickets);
 
-        cartLabel.setText(cart);
-        logOutLabel.setText(logout);
-        buyTicketsLabel.setText(buyTickets);
-        aboutUs.setText(aboutus);
-        this.Settings.setText(settings);
-        this.myTickets.setText(myTicket);
-        this.cartLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.buyTicketsLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.logOutLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.Settings.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.myTickets.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.aboutUs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         BuyTicketsTable.show();
         UserPanel.show();
         SettingsPanel.hide();
         AboutUsPanel.hide();
-        System.out.println("User panel be");
+
     }
 
     public void dontShowUserPanel() {
 
         UserPanel.hide();
-        System.out.println("User panel ki");
+
     }
 
     public void dontShowAdminPanel() {
 
         AdminPanel.hide();
-        System.out.println("admin panel ki");
+
     }
 
     public void dontShowRegistrationPanel() {
 
         RegistrationPanel.hide();
-        System.out.println("registration panel ki");
+
     }
 
     public void showRegistrationPanel() {
         RegistrationPanel.show();
-        System.out.println("registration panel be");
+
     }
 
     public void dontShowLoginPanel() {
         this.loginPanel.hide();
-        System.out.println("login panel ki");
 
     }
 
     public void ShowLoginPanel() {
 
         this.loginPanel.show();
-        String text = "<html><u> Registration</u></html>";
-        this.registrationLabel.setText(text);
-        this.registrationLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        String forgot = "<html><u>Forgot password? Click Here.</u></html>";
-        this.forgotPasswordLabel.setText(forgot);
-        this.forgotPasswordLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        System.out.println("login panel be");
-    }
 
-    //Panelek, Framek eltüntetése, bekapcsolásának vége
-    //gettterek, setterek
-    public JTable getAddFlightTable() {
-        return addFlightTable;
-    }
+        this.registrationLabel.setText(alahuzva("Registration"));
+        setCursorOnLabel(registrationLabel);
+        this.forgotPasswordLabel.setText(alahuzva("Forgot password? Click Here."));
+        setCursorOnLabel(forgotPasswordLabel);
 
-    public void setAddFlightTable(JTable addFlightTable) {
-        this.addFlightTable = addFlightTable;
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AboutUsPanel;
@@ -2701,13 +2577,17 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel genderErrorLabel;
     private javax.swing.JLabel genderIcon;
     private javax.swing.JLabel genderLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextfield;
@@ -2725,6 +2605,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JComboBox numOfticketstoBuyTextfield;
     private javax.swing.JLabel numberOfSeats;
     private javax.swing.JLabel numberOfSeats1;
+    private javax.swing.JLabel numberOfSeats2;
     private javax.swing.JTextField numberOfSeatsTextField;
     private javax.swing.JComboBox originAirportNameComboBox;
     private javax.swing.JComboBox originCountryComboBox;

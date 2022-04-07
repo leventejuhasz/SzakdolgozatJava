@@ -49,6 +49,32 @@ public class ManageFlight extends javax.swing.JFrame {
         this.closeManageFlighFrametLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
     }
+
+    private void sqlUpdate(String sql) throws ClassNotFoundException, SQLException {
+
+        connectToDatabase().executeUpdate(sql);
+
+    }
+
+    private ResultSet lekerdezes(String sql) throws ClassNotFoundException, SQLException {
+        Statement smt = connectToDatabase();
+
+        ResultSet res = smt.executeQuery(sql);
+
+        return res;
+
+    }
+
+    //csatlakozás az adatbázishoz
+    private Statement connectToDatabase() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+
+        Statement smt = con.createStatement();
+
+        return smt;
+    }
+
     int posX = 0, posY = 0;
 
     private void mozgato() {
@@ -251,35 +277,42 @@ public class ManageFlight extends javax.swing.JFrame {
 
     }
 
+    public void errorPopUp(String text) {
+        JOptionPane.showMessageDialog(this,
+                text,
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
 
+    }
     private void deletePassengerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerButtonMouseClicked
 
         try {
-            if (passengersTable.isRowSelected(passengersTable.getSelectedRow())) {
+            if (passengersTable.getSelectionModel().isSelectionEmpty()) {
                 JFrame jFrame = new JFrame();
                 int result = JOptionPane.showConfirmDialog(jFrame, "Are you sure want to delete this passenger?");
 
                 if (result == 0) {
+                    String sql = "Delete FROM passenger where seatNum =" + passengersTable.getValueAt(passengersTable.getSelectedRow(), 3);
+                    sqlUpdate(sql);
+                    String sql2 = "Update flight_info SET Num_of_available_seats = (Num_of_available_seats + 1) where Flight_num_id = " + adminflightnum;
 
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-                    Statement smt = con.createStatement();
-                    smt.executeUpdate("Delete FROM passenger where seatNum =" + passengersTable.getValueAt(passengersTable.getSelectedRow(), 3));
-                    Statement smt2 = con.createStatement();
+                    sqlUpdate(sql2);
 
-                    smt2.executeUpdate("Update flight_info SET Num_of_available_seats = (Num_of_available_seats + 1) where Flight_num_id = " + adminflightnum);
-                    Statement smt3 = con.createStatement();
-                    ResultSet r = smt3.executeQuery("Select Num_of_available_seats from flight_info where Flight_num_id =" + adminflightnum);
+                    String sql3 = "Select Num_of_available_seats from flight_info where Flight_num_id =" + adminflightnum;
+
+                    ResultSet r = lekerdezes(sql3);
 
                     if (r.next()) {
                         availableseats = r.getString("Num_of_available_seats");
                     }
                     numofavseatsLabel.setText("Number of available seats: " + availableseats);
 
-                    con.close();
                     model.removeRow(passengersTable.getSelectedRow());
+                    r.close();
                 }
 
+            } else {
+                errorPopUp("Please select a Passenger!");
             }
 
         } catch (ClassNotFoundException ex) {
@@ -316,10 +349,8 @@ public class ManageFlight extends javax.swing.JFrame {
                 "Are you sure want to exit?",
                 "Exit guestion", JOptionPane.YES_NO_OPTION);
 
-        
         if (n == 0) {
-            
-    
+
             this.dispose();
         }
     }//GEN-LAST:event_closeManageFlighFrametLabelMouseClicked
@@ -328,14 +359,12 @@ public class ManageFlight extends javax.swing.JFrame {
     private void fillTable() {
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+
             String query = "Select passenger.FirstName, passenger.LastName, BirthDate , Luggage, SeatNum, registration_info.FirstName, registration_info.LastName, Email , phoneNumber FROM passenger Inner Join registration_info ON registration_info.Customer_id = passenger.Customer_id where Flight_num = " + adminflightnum;
-            Statement smt = con.createStatement();
-            ResultSet res = smt.executeQuery(query);
-            Statement s = con.createStatement();
-            System.out.println(adminflightnum);
-            ResultSet r = s.executeQuery("SELECT COUNT(passenger_id) as rowcount FROM passenger WHERE Flight_num =" + adminflightnum);
+
+            ResultSet res = lekerdezes(query);
+
+            ResultSet r = lekerdezes("SELECT COUNT(passenger_id) as rowcount FROM passenger WHERE Flight_num =" + adminflightnum);
             r.next();
             int count = r.getInt("rowcount");
             r.close();
@@ -362,15 +391,15 @@ public class ManageFlight extends javax.swing.JFrame {
 
             model = new DefaultTableModel(data, columns);
             passengersTable.setModel(model);
-            con.close();
+
+            res.close();
+            r.close();
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
-
-   
 
     private void labels() {
 

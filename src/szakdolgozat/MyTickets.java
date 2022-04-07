@@ -72,6 +72,31 @@ public class MyTickets extends javax.swing.JFrame {
         }
     }
 
+    private void sqlUpdate(String sql) throws ClassNotFoundException, SQLException {
+
+        connectToDatabase().executeUpdate(sql);
+
+    }
+
+    private ResultSet lekerdezes(String sql) throws ClassNotFoundException, SQLException {
+        Statement smt = connectToDatabase();
+
+        ResultSet res = smt.executeQuery(sql);
+
+        return res;
+
+    }
+
+    //csatlakozás az adatbázishoz
+    private Statement connectToDatabase() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+
+        Statement smt = con.createStatement();
+
+        return smt;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -184,13 +209,9 @@ public class MyTickets extends javax.swing.JFrame {
 
                 SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-
                 String query = "Select Passenger_id from price_info where Flight_num = " + myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 7);
-                Statement smt = con.createStatement();
 
-                ResultSet res = smt.executeQuery(query);
+                ResultSet res = lekerdezes(query);
                 if (res.next()) {
                     String id = res.getString("Passenger_id");
                     Document writePdf = new Document();
@@ -203,7 +224,7 @@ public class MyTickets extends javax.swing.JFrame {
                     olvasojegy.setSpacingAfter(5f);
                     olvasojegy.setAlignment(Element.ALIGN_CENTER);
                     cell.addElement(olvasojegy);
-                    Paragraph adatok = new Paragraph(String.format("Név: %s\nCsomag: %s\nIndulás: %s\nÜlés:", myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 0), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 1), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 4), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 4)));
+                    Paragraph adatok = new Paragraph(String.format("Név: %s\nCsomag: %s\nIndulás: %s\nÜlés:", myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 0), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 1), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 4),myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 7) ));
                     adatok.setSpacingAfter(10f);
                     cell.addElement(adatok);
                     BarcodeEAN barcode = new BarcodeEAN();
@@ -225,8 +246,8 @@ public class MyTickets extends javax.swing.JFrame {
                     writePdf.add(table);
                     writePdf.close();
                     JOptionPane.showMessageDialog(rootPane, "Sikeres mentés!", "Info", JOptionPane.INFORMATION_MESSAGE);
-                    
-                    String sql = "Update Passenger Set flight_num = 0";
+
+         
 
                 }
             } catch (Exception e) {
@@ -240,13 +261,11 @@ public class MyTickets extends javax.swing.JFrame {
     public void loadMyTickets() {
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-            Statement smt = con.createStatement();
+
             String query = "Select FirstName, LastName,Luggage,SeatNum, flight_info.Origin_country, passenger.OriginAirportName, flight_info.Destination_country, passenger.DestinationAirportName, passenger.Departure_time, passenger.Arrival_time, Flight_num_id, price_info.price  From passenger Inner Join flight_info ON flight_info.Flight_num_id = passenger.Flight_num Inner Join price_info ON price_info.Passenger_id = passenger.passenger_id  where passenger.Customer_id=" + customerId;
-            ResultSet res = smt.executeQuery(query);
-            Statement s = con.createStatement();
-            ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM passenger where Customer_id LIKE '" + customerId + "'");
+            ResultSet res = lekerdezes(query);
+
+            ResultSet r = lekerdezes("SELECT COUNT(*) AS rowcount FROM passenger where Customer_id LIKE '" + customerId + "'");
             r.next();
             int count = r.getInt("rowcount");
             System.out.println(count);

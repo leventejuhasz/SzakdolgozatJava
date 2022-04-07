@@ -69,6 +69,31 @@ public class Pay extends javax.swing.JFrame {
         designPaymentInterface();
     }
 
+    private void sqlUpdate(String sql) throws ClassNotFoundException, SQLException {
+
+        connectToDatabase().executeUpdate(sql);
+
+    }
+
+    private ResultSet lekerdezes(String sql) throws ClassNotFoundException, SQLException {
+        Statement smt = connectToDatabase();
+
+        ResultSet res = smt.executeQuery(sql);
+
+        return res;
+
+    }
+
+    //csatlakozás az adatbázishoz
+    private Statement connectToDatabase() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+
+        Statement smt = con.createStatement();
+
+        return smt;
+    }
+
     private void designPaymentInterface() {
         amountToBePaidLabel.setText("€" + total);
         this.cancelPaymentsLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -412,32 +437,24 @@ public class Pay extends javax.swing.JFrame {
             totalPay.setText("To be paid in total: " + total + " EUR");
             numOfTicketsLabel.setText("Number of tickets: " + numberOfTickets);
 
-            Connection con;
             try {
-
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-                Statement smt = con.createStatement();
-                Statement smt2 = con.createStatement();
-                Statement smt3 = con.createStatement();
 
                 for (int i = 0; i < passengers.size(); i++) {
 
-                    ResultSet r = smt2.executeQuery("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
+                    ResultSet r = lekerdezes("Select Num_of_available_seats-1 from flight_info where Flight_num_id =" + flightNum);
                     r.next();
                     int seatnum = r.getInt(1);
-                    
-                    smt2.executeUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-1 where Flight_num_id = " + flightNum);
 
-                    smt.executeUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + passengers.get(i).getGender() + "' , '" + passengers.get(i).getFirstName() + "' , '" + passengers.get(i).getLastName() + "' , '" + passengers.get(i).getBirthdate() + "' , '" + passengers.get(i).getLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
+                    sqlUpdate("Update flight_info SET Num_of_available_seats = Num_of_available_seats-1 where Flight_num_id = " + flightNum);
+
+                    sqlUpdate("Insert INTO passenger (Gender,FirstName, LastName, BirthDate, Luggage,Origin_country,Destination_country, OriginAirportName, DestinationAirportName, Departure_time, Arrival_time,SeatNum,Flight_num , Customer_id) VALUES ('" + passengers.get(i).getGender() + "' , '" + passengers.get(i).getFirstName() + "' , '" + passengers.get(i).getLastName() + "' , '" + passengers.get(i).getBirthdate() + "' , '" + passengers.get(i).getLuggage() + "' , '" + Origin_country + "' , '" + Destination_country + "' , '" + OriginAirportName + "' , '" + DestinationAirportName + "' , '" + Departure_time + "' , '" + Arrival_time + "' , '" + seatnum + "' , '" + flightNum + "' , '" + customerId + "')");
                     int passenger_Id = 0;
-                    PreparedStatement ps = con.prepareStatement("Select passenger_id from passenger where Customer_id =" + customerId + " ORDER BY passenger_id DESC LIMIT 1");
-                    ResultSet result = ps.executeQuery();
+                    ResultSet result = lekerdezes("Select passenger_id from passenger where Customer_id =" + customerId + " ORDER BY passenger_id DESC LIMIT 1");
                     if (result.next()) {
                         passenger_Id = Integer.parseInt(result.getString("passenger_id"));
 
                     }
-                    smt3.executeUpdate("Insert INTO price_info (Passenger_name, Price, Flight_num, Customer_id, Passenger_id)  VALUES ('" + passengers.get(i).getFirstName() + " " + passengers.get(i).getLastName() + "' , '" + passengers.get(i).getPayable() + "' , '" + flightNum + "' , '" + customerId + "' , '" + passenger_Id + "')");
+                    sqlUpdate("Insert INTO price_info (Passenger_name, Price, Flight_num, Customer_id, Passenger_id)  VALUES ('" + passengers.get(i).getFirstName() + " " + passengers.get(i).getLastName() + "' , '" + passengers.get(i).getPayable() + "' , '" + flightNum + "' , '" + customerId + "' , '" + passenger_Id + "')");
                 }
 
                 this.dispose();
