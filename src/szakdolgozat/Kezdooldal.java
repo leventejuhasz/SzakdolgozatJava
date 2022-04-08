@@ -153,7 +153,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<String>();
+        destinationCountryComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -170,7 +170,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -589,7 +589,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -798,7 +798,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 buyTicketsLabelMouseClicked(evt);
             }
         });
-        UserPanel.add(buyTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+        UserPanel.add(buyTicketsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
 
         logOutLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         logOutLabel.setForeground(new java.awt.Color(102, 255, 255));
@@ -1076,7 +1076,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 SettingsMouseClicked(evt);
             }
         });
-        UserPanel.add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 70, -1));
+        UserPanel.add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 70, -1));
 
         myTickets.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         myTickets.setForeground(new java.awt.Color(102, 255, 255));
@@ -1923,6 +1923,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         cartTablePanel.hide();
         SettingsPanel.show();
         this.AboutUsPanel.hide();
+        
 
         try {
 
