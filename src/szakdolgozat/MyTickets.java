@@ -40,7 +40,7 @@ import javax.swing.JFileChooser;
  *
  * @author Juhasz Levente
  */
-public class MyTickets extends javax.swing.JFrame {
+public class MyTickets extends javax.swing.JFrame implements iDatabase {
 
     private static MyTickets obj = null;
     public static String base_price;
@@ -60,18 +60,6 @@ public class MyTickets extends javax.swing.JFrame {
         return obj;
     }
 
-    private void exitQuestion() {
-
-        int n = JOptionPane.showConfirmDialog(
-                this,
-                "Are you sure want to exit?",
-                "Exit guestion", JOptionPane.YES_NO_OPTION);
-
-        if (n == 0) {
-            this.dispose();
-        }
-    }
-
     private void sqlUpdate(String sql) throws ClassNotFoundException, SQLException {
 
         connectToDatabase().executeUpdate(sql);
@@ -89,8 +77,8 @@ public class MyTickets extends javax.swing.JFrame {
 
     //csatlakozás az adatbázishoz
     private Statement connectToDatabase() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+        Class.forName(CONNECTION);
+        Connection con = DriverManager.getConnection(CONNECT_TO_LOCALHOST, USER, PASSWORD);
 
         Statement smt = con.createStatement();
 
@@ -198,61 +186,69 @@ public class MyTickets extends javax.swing.JFrame {
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
         this.dispose();
     }//GEN-LAST:event_backButtonMouseClicked
+    public void errorPopUp(String text) {
+        JOptionPane.showMessageDialog(this,
+                text,
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
 
+    }
     private void saveToPDfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveToPDfMouseClicked
 
-        JFileChooser savePath = new JFileChooser();
-        savePath.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int retval = savePath.showSaveDialog(this);
-        if (retval == JFileChooser.APPROVE_OPTION) {
-            try {
+        if (!myTicketsTable.getSelectionModel().isSelectionEmpty()) {
 
-                SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+            JFileChooser savePath = new JFileChooser();
+            savePath.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int retval = savePath.showSaveDialog(this);
+            if (retval == JFileChooser.APPROVE_OPTION) {
+                try {
 
-                String query = "Select Passenger_id from price_info where Flight_num = " + myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 7);
+                    String query = "Select Passenger_id,Flight_num from price_info where Flight_num = " + myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 7);
 
-                ResultSet res = lekerdezes(query);
-                if (res.next()) {
-                    String id = res.getString("Passenger_id");
-                    Document writePdf = new Document();
-                    PdfWriter writer = PdfWriter.getInstance(writePdf, new FileOutputStream(savePath.getSelectedFile() + "/" + myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 0) + "_" + id + ".pdf"));
-                    writePdf.open();
-                    PdfPTable table = new PdfPTable(1);
-                    PdfPCell cell = new PdfPCell();
-                    Paragraph olvasojegy = new Paragraph("Jegy");
-                    olvasojegy.setFont(new Font(Font.FontFamily.UNDEFINED, 20));
-                    olvasojegy.setSpacingAfter(5f);
-                    olvasojegy.setAlignment(Element.ALIGN_CENTER);
-                    cell.addElement(olvasojegy);
-                    Paragraph adatok = new Paragraph(String.format("Név: %s\nCsomag: %s\nIndulás: %s\nÜlés:", myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 0), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 1), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 4),myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 7) ));
-                    adatok.setSpacingAfter(10f);
-                    cell.addElement(adatok);
-                    BarcodeEAN barcode = new BarcodeEAN();
-                    barcode.setCodeType(Barcode.EAN8);
-                    String code = id;
-                    for (int i = code.length(); i < 8; i++) {
-                        code = "0" + code;
+                    ResultSet res = lekerdezes(query);
+                    if (res.next()) {
+                        String id = res.getString("Passenger_id");
+                        String fn = res.getString("Flight_num");
+                        Document writePdf = new Document();
+                        PdfWriter writer = PdfWriter.getInstance(writePdf, new FileOutputStream(savePath.getSelectedFile() + "/" + myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 0) + "_" + id + ".pdf"));
+                        writePdf.open();
+                        PdfPTable table = new PdfPTable(1);
+                        PdfPCell cell = new PdfPCell();
+                        Paragraph olvasojegy = new Paragraph("Ticket");
+                        olvasojegy.setFont(new Font(Font.FontFamily.UNDEFINED, 20));
+                        olvasojegy.setSpacingAfter(6f);
+                        olvasojegy.setAlignment(Element.ALIGN_CENTER);
+                        cell.addElement(olvasojegy);
+                        Paragraph adatok = new Paragraph(String.format("Name: %s\nLuggage: %s\nDeparting: %s\nSeat: %s\nDestination: %s\nFlight Number: %s\n", myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 0), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 1), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 4), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 6), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 3), myTicketsTable.getValueAt(myTicketsTable.getSelectedRow(), 7)));
+                        adatok.setSpacingAfter(10f);
+                        cell.addElement(adatok);
+                        BarcodeEAN barcode = new BarcodeEAN();
+                        barcode.setCodeType(Barcode.EAN8);
+                        String code = id + fn;
+                        for (int i = code.length(); i < 8; i++) {
+                            code = "0" + code;
+                        }
+                        barcode.setCode(code);
+                        barcode.setGuardBars(false);
+                        barcode.setBarHeight(8f);
+                        barcode.setSize(5f);
+                        Image img = barcode.createImageWithBarcode(writer.getDirectContent(), BaseColor.BLACK, BaseColor.GRAY);
+                        img.setWidthPercentage(60f);
+                        img.setAlignment(Element.ALIGN_CENTER);
+                        cell.addElement(img);
+                        cell.setPadding(50);
+                        table.addCell(cell);
+                        writePdf.add(table);
+                        writePdf.close();
+                        JOptionPane.showMessageDialog(rootPane, "Successful saving!", "Info", JOptionPane.INFORMATION_MESSAGE);
+
                     }
-                    barcode.setCode(code);
-                    barcode.setGuardBars(false);
-                    barcode.setBarHeight(8f);
-                    barcode.setSize(5f);
-                    Image img = barcode.createImageWithBarcode(writer.getDirectContent(), BaseColor.BLACK, BaseColor.GRAY);
-                    img.setWidthPercentage(60f);
-                    img.setAlignment(Element.ALIGN_CENTER);
-                    cell.addElement(img);
-                    cell.setPadding(50);
-                    table.addCell(cell);
-                    writePdf.add(table);
-                    writePdf.close();
-                    JOptionPane.showMessageDialog(rootPane, "Sikeres mentés!", "Info", JOptionPane.INFORMATION_MESSAGE);
-
-         
-
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } else {
+            errorPopUp("No ticket selected!");
         }
 
     }//GEN-LAST:event_saveToPDfMouseClicked

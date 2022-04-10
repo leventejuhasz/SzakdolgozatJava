@@ -67,7 +67,7 @@ import static szakdolgozat.ManageFlight.closeManageFlighFrametLabel;
  *
  * @author Juhász Levente
  */
-public class Kezdooldal extends javax.swing.JFrame {
+public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
 
     private int jegyekszama;
 
@@ -118,7 +118,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         zipCodeTextfield = new javax.swing.JTextField();
         lastNameTextfield = new javax.swing.JTextField();
         firstNameTextfield = new javax.swing.JTextField();
-        countryTextfield = new javax.swing.JTextField();
         phoneNumberTextfield = new javax.swing.JTextField();
         lastNameLabel = new javax.swing.JLabel();
         streetLabel = new javax.swing.JLabel();
@@ -142,6 +141,7 @@ public class Kezdooldal extends javax.swing.JFrame {
         registrationPasswordErrorHandlingLabel = new javax.swing.JLabel();
         genderErrorLabel = new javax.swing.JLabel();
         closeProgramIconOnRegistration = new javax.swing.JLabel();
+        countryComboBox = new javax.swing.JComboBox();
         luggagePic = new javax.swing.JLabel();
         AdminPanel = new javax.swing.JPanel();
         departureTimeLabel = new javax.swing.JLabel();
@@ -278,7 +278,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         logginButton.setBackground(new java.awt.Color(0, 0, 0));
         logginButton.setForeground(new java.awt.Color(255, 255, 255));
-        logginButton.setText("Belépés");
+        logginButton.setText("Login");
         logginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logginButtonActionPerformed(evt);
@@ -302,7 +302,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         loginErrorLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         loginErrorLabel.setForeground(new java.awt.Color(255, 0, 51));
-        loginPanel.add(loginErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 430, -1, -1));
+        loginPanel.add(loginErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 430, -1, -1));
 
         forgotPasswordLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         forgotPasswordLabel.setForeground(new java.awt.Color(204, 204, 204));
@@ -365,13 +365,6 @@ public class Kezdooldal extends javax.swing.JFrame {
         firstNameTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         firstNameTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
         RegistrationPanel.add(firstNameTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 240, 30));
-
-        countryTextfield.setBackground(new java.awt.Color(51, 51, 51));
-        countryTextfield.setForeground(new java.awt.Color(255, 255, 255));
-        countryTextfield.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        countryTextfield.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        countryTextfield.setCaretColor(new java.awt.Color(255, 255, 255));
-        RegistrationPanel.add(countryTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 240, 30));
 
         phoneNumberTextfield.setBackground(new java.awt.Color(51, 51, 51));
         phoneNumberTextfield.setForeground(new java.awt.Color(255, 255, 255));
@@ -518,6 +511,11 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         });
         RegistrationPanel.add(closeProgramIconOnRegistration, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 0, -1, -1));
+
+        countryComboBox.setBackground(new java.awt.Color(51, 51, 51));
+        countryComboBox.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        countryComboBox.setForeground(new java.awt.Color(255, 255, 255));
+        RegistrationPanel.add(countryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 240, 30));
         RegistrationPanel.add(luggagePic, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 710));
 
         getContentPane().add(RegistrationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 700));
@@ -1134,7 +1132,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         aboutUsText.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         aboutUsText.setForeground(new java.awt.Color(102, 255, 255));
-        aboutUsText.setText("<html>London International Airport Our airport is here to help you get wherever you want to go. Start here, go anywhere\nOur Impact\n\nOur Airport provides a significant contribution to the Southern Ontario economy. The Airport is financially self-sustaining and does not rely on any subsidy or financial benefit from any level of government. In 2021 we will pay close to $950,000 in municipal taxes to the City of London. Below are some of the highlights of our economic contribution to our region.\n\nThe first airport in London was established in 1928 on a grass field located south of the city. In 1939, land was purchased at the present site and construction of a more advanced facility began.  \n\nDuring the second world war, London Airport was used extensively as a military training base. Work started on the RCAF Station Crumlin in November 1939, and it became a major centre for the British Commonwealth Air Training Plan. In 1945, Transport Canada assumed operations of the airport and embarked upon a major expansion program during the following three decades. From 1974 to 1998 construction programs costing more than $12 million were undertaken to upgrade and renovate airport facilities, runways, etc. \n\nIn 1994 the Government of Canada announced the implementation of a National Airports Policy. This policy supported the federal government’s withdrawal as operators of airports. The top twenty-six Canadian airports, including London, were eligible for a long-term lease to local Airport Authorities.  \n\n\n</html>");
+        aboutUsText.setText("<html>London International Airport Our airport is here to help you get wherever you want to go. Start here, go anywhere.\n\nOur Impact: \n\nOur Airport provides a significant contribution to the Southern Ontario economy. The Airport is financially self-sustaining and does not rely on any subsidy or financial benefit from any level of government. In 2021 we will pay close to $950,000 in municipal taxes to the City of London. Below are some of the highlights of our economic contribution to our region.\n\nThe first airport in London was established in 1928 on a grass field located south of the city. In 1939, land was purchased at the present site and construction of a more advanced facility began.  \n\nDuring the second world war, London Airport was used extensively as a military training base. Work started on the RCAF Station Crumlin in November 1939, and it became a major centre for the British Commonwealth Air Training Plan. In 1945, Transport Canada assumed operations of the airport and embarked upon a major expansion program during the following three decades. From 1974 to 1998 construction programs costing more than $12 million were undertaken to upgrade and renovate airport facilities, runways, etc. \n\nIn 1994 the Government of Canada announced the implementation of a National Airports Policy. This policy supported the federal government’s withdrawal as operators of airports. The top twenty-six Canadian airports, including London, were eligible for a long-term lease to local Airport Authorities.  \n\n\n</html>");
         AboutUsPanel.add(aboutUsText, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 780, 440));
 
         UserPanel.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1130, 540));
@@ -1179,8 +1177,8 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     //csatlakozás az adatbázishoz
     private Statement connectToDatabase() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+        Class.forName(CONNECTION);
+        Connection con = DriverManager.getConnection(CONNECT_TO_LOCALHOST, USER, PASSWORD);
 
         Statement smt = con.createStatement();
 
@@ -1216,7 +1214,7 @@ public class Kezdooldal extends javax.swing.JFrame {
             md5PasswordCode(password);
 
             try {
-                String sql = "INSERT INTO registration_info(FirstName,LastName,Address,zipCode,City,Country,phoneNumber,Gender,Email, CustomerPassword ) VALUES ('" + firstNameTextfield.getText() + "' , '" + lastNameTextfield.getText() + "' , '" + streetTextfield.getText() + "' , '" + Integer.parseInt(zipCodeTextfield.getText()) + "' , '" + cityTextfield.getText() + "' , '" + countryTextfield.getText() + "' , '" + phoneNumberTextfield.getText() + "' , '" + gender + "' , '" + emailTextfield.getText() + "', '" + md5password(registrationPasswordTextField.getText()) + "' );";
+                String sql = "INSERT INTO registration_info(FirstName,LastName,Address,zipCode,City,Country,phoneNumber,Gender,Email, CustomerPassword ) VALUES ('" + firstNameTextfield.getText() + "' , '" + lastNameTextfield.getText() + "' , '" + streetTextfield.getText() + "' , '" + Integer.parseInt(zipCodeTextfield.getText()) + "' , '" + cityTextfield.getText() + "' , '" + countryComboBox.getSelectedItem() + "' , '" + phoneNumberTextfield.getText() + "' , '" + gender + "' , '" + emailTextfield.getText() + "', '" + md5password(registrationPasswordTextField.getText()) + "' );";
                 sqlUpdate(sql);
 
             } catch (Exception e) {
@@ -1447,7 +1445,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             if (hibasAdat == true) {
 
-                loginErrorLabel.setText("Hibás felhasználónév vagy jelszó!");
+                loginErrorLabel.setText("Wrong Email or password!");
             }
 
         } catch (SQLException ex) {
@@ -1483,11 +1481,17 @@ public class Kezdooldal extends javax.swing.JFrame {
         this.passwordTextField.setText("");
 
     }//GEN-LAST:event_adminBackButtonActionPerformed
-
+    String[] countries = new String[]{"Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Congo, the Democratic Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and Mc Donald Islands", "Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic of", "Korea, Republic of", "Kuwait", "Kyrgyzstan", "Lao, People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia, The Former Yugoslav Republic of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of", "Moldova, Republic of", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia (Slovak Republic)", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan, Province of China", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe", "Palestine"};
     private void registrationLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationLabelMouseClicked
         dontShowLoginPanel();
         showRegistrationPanel();
         luggagePic();
+
+        for (int i = 0; i < countries.length; i++) {
+            countryComboBox.addItem(countries[i]);
+        }
+
+
     }//GEN-LAST:event_registrationLabelMouseClicked
 
 
@@ -1701,7 +1705,13 @@ public class Kezdooldal extends javax.swing.JFrame {
             maxnumofseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 6);
             availableseats = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 7);
             adminflightnum = (String) addFlightTable.getValueAt(addFlightTable.getSelectedRow(), 9);
-            promotion = promotionTextField.getText();
+            if (Integer.parseInt(promotionTextField.getText()) >= 0) {
+                promotion = promotionTextField.getText();
+            } else {
+
+                errorPopUp("Promotion can't be negative!");
+            }
+
             ManageFlight m = new ManageFlight();
             m.setLocationRelativeTo(null);
             m.setVisible(true);
@@ -1715,7 +1725,7 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             });
 
-        }else{
+        } else {
             errorPopUp("Please Select a flight!");
         }
 
@@ -1969,7 +1979,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     //kosár kezelése, ha törlünk egy jegyet
     private void deletePassengerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerMouseClicked
 
-        if (cartTableUserPanel.isRowSelected(cartTableUserPanel.getSelectedRow())) {
+        if (!cartTable.getSelectionModel().isSelectionEmpty()) {
 
             DefaultTableModel model = (DefaultTableModel) cartTableUserPanel.getModel();
 
@@ -1982,6 +1992,8 @@ public class Kezdooldal extends javax.swing.JFrame {
 
             totalPay.setText("To be pay in total: " + total + " EUR");
 
+        } else {
+            errorPopUp("Please select a passenger!");
         }
 
 
@@ -1989,10 +2001,17 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     private void buyTicketsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buyTicketsButtonMouseClicked
 
-        Pay p = new Pay();
+        if (cartTable.getRowCount() == 0) {
 
-        p.setVisible(true);
-        p.setLocationRelativeTo(null);
+            errorPopUp("No ticket in the cart!");
+        } else {
+            Pay p = new Pay();
+
+            p.setVisible(true);
+            p.setLocationRelativeTo(null);
+        }
+
+
     }//GEN-LAST:event_buyTicketsButtonMouseClicked
 
     //settings, beállításokban textfield megváltoztatására hívófüggyvény
@@ -2136,6 +2155,16 @@ public class Kezdooldal extends javax.swing.JFrame {
                 errorPopUp("Please select airports!");
                 return false;
             }
+
+            if (Integer.parseInt(promotionTextField.getText()) <= 0) {
+                errorPopUp("The discount cannot be negativ!");
+                return false;
+            }
+            if (Integer.parseInt(priceOfTheFlightTextField.getText()) < 0) {
+                errorPopUp("The price cannot be negativ!");
+                return false;
+            }
+
         } catch (ParseException ex) {
             System.out.println(ex);
         }
@@ -2158,16 +2187,6 @@ public class Kezdooldal extends javax.swing.JFrame {
 
     public boolean isRegistrationErrorHandling() {
 
-        if (stringErrorHandling(firstNameTextfield.getText(), firstNameLabel) != "") {
-            errorPopUp(stringErrorHandling(firstNameTextfield.getText(), firstNameLabel));
-            return false;
-        }
-
-        if (stringErrorHandling(lastNameTextfield.getText(), lastNameLabel) != "") {
-            errorPopUp(stringErrorHandling(lastNameTextfield.getText(), lastNameLabel));
-            return false;
-        }
-
         if (firstNameTextfield.getText().matches("")) {
             errorPopUp("Please write a first name!");
             return false;
@@ -2175,6 +2194,15 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         if (lastNameTextfield.getText().matches("")) {
             errorPopUp("Please write a last name!");
+            return false;
+        }
+        if (stringErrorHandling(firstNameTextfield.getText(), firstNameLabel) != "") {
+            errorPopUp(stringErrorHandling(firstNameTextfield.getText(), firstNameLabel));
+            return false;
+        }
+
+        if (stringErrorHandling(lastNameTextfield.getText(), lastNameLabel) != "") {
+            errorPopUp(stringErrorHandling(lastNameTextfield.getText(), lastNameLabel));
             return false;
         }
 
@@ -2206,12 +2234,12 @@ public class Kezdooldal extends javax.swing.JFrame {
             errorPopUp("Street is missing!");
             return false;
         }
-        if (countryTextfield.getText().matches("")) {
+        if (countryComboBox.getSelectedItem().equals("")) {
             errorPopUp("Country is missing!");
             return false;
         }
-        if (stringErrorHandling(countryTextfield.getText(), countryLabel) != "") {
-            errorPopUp(stringErrorHandling(countryTextfield.getText(), countryLabel));
+        if (stringErrorHandling((String) countryComboBox.getSelectedItem(), countryLabel) != "") {
+            errorPopUp(stringErrorHandling((String) countryComboBox.getSelectedItem(), countryLabel));
             return false;
         }
 
@@ -2219,6 +2247,11 @@ public class Kezdooldal extends javax.swing.JFrame {
             errorPopUp("Phone number is missing!");
             return false;
         }
+        if (!isPhoneNumberValid(phoneNumberTextfield.getText())) {
+            errorPopUp("Wrong phone number!");
+            return false;
+        }
+
         if (emailTextfield.getText().matches("")) {
             errorPopUp("Email is missing");
             return false;
@@ -2234,11 +2267,6 @@ public class Kezdooldal extends javax.swing.JFrame {
 
         }
 
-        if (!isPhoneNumberValid(phoneNumberTextfield.getText())) {
-            errorPopUp("Wrong phone number!");
-            return false;
-        }
-
         if (!registrationPasswordTextField.getText().matches(registrationPasswordAgainTextField.getText())) {
             errorPopUp("The two passwords do not match!");
 
@@ -2251,7 +2279,11 @@ public class Kezdooldal extends javax.swing.JFrame {
             return false;
         }
         if (isEmailAlreadyRegistered(emailTextfield.getText()) == true) {
-
+            errorPopUp("Have already registered with this email address");
+            return false;
+        }
+        if (isPhoneAlreadyRegistered(phoneNumberTextfield.getText()) == true) {
+            errorPopUp("Have already registered with this phone number!");
             return false;
         }
 
@@ -2327,7 +2359,7 @@ public class Kezdooldal extends javax.swing.JFrame {
                 return true;
 
             } else {
-                loginErrorLabel.setText("Hibás felhasználónév vagy jelszó!");
+                loginErrorLabel.setText("Wrong email or password!");
             }
 
         } catch (SQLException ex) {
@@ -2358,6 +2390,15 @@ public class Kezdooldal extends javax.swing.JFrame {
         return false;
     }
 
+    public boolean containsUpperCaseLetter(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isUpperCase(s.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String stringErrorHandling(String text, JLabel l) {
 
         if (text.length() > 20) {
@@ -2376,8 +2417,8 @@ public class Kezdooldal extends javax.swing.JFrame {
             }
         }
 
-        if (!Character.isUpperCase(text.codePointAt(0))) {
-            return labeltext + " needs to start uppercase!";
+        if (!containsUpperCaseLetter(text)) {
+            return labeltext + " needs to start with uppercase!";
         }
 
         return "";
@@ -2449,7 +2490,7 @@ public class Kezdooldal extends javax.swing.JFrame {
     public void showUserPanel() {
         cartLabel.setText(alahuzva("Cart"));
         logOutLabel.setText(alahuzva("Log out"));
-        buyTicketsLabel.setText(alahuzva("Settings"));
+        buyTicketsLabel.setText(alahuzva("Buy Tickets"));
         aboutUs.setText(alahuzva("About Us"));
         Settings.setText(alahuzva("Settings"));
         myTickets.setText(alahuzva("My Tickets"));
@@ -2552,8 +2593,8 @@ public class Kezdooldal extends javax.swing.JFrame {
     private javax.swing.JLabel closeProgramIconOnUserPanel;
     private javax.swing.JLabel contactAddressLabel;
     private javax.swing.JLabel contactNumberLabel;
+    private javax.swing.JComboBox countryComboBox;
     private javax.swing.JLabel countryLabel;
-    private javax.swing.JTextField countryTextfield;
     private javax.swing.JButton deleteButon;
     private javax.swing.JButton deletePassenger;
     private javax.swing.JLabel depHourLabel;

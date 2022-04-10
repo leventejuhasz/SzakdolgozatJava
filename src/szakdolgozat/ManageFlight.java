@@ -38,7 +38,7 @@ import static szakdolgozat.Kezdooldal.adminflightnum;
 import static szakdolgozat.Kezdooldal.availableseats;
 import static szakdolgozat.Kezdooldal.promotion;
 
-public class ManageFlight extends javax.swing.JFrame {
+public class ManageFlight extends javax.swing.JFrame implements iDatabase{
 
     public ManageFlight() {
         initComponents();
@@ -67,8 +67,8 @@ public class ManageFlight extends javax.swing.JFrame {
 
     //csatlakozás az adatbázishoz
     private Statement connectToDatabase() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+        Class.forName(CONNECTION);
+        Connection con = DriverManager.getConnection(CONNECT_TO_LOCALHOST, USER, PASSWORD);
 
         Statement smt = con.createStatement();
 
@@ -126,6 +126,8 @@ public class ManageFlight extends javax.swing.JFrame {
 
         ManageFlightPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        passengersTable.setAutoCreateRowSorter(true);
+        passengersTable.setForeground(new java.awt.Color(51, 51, 255));
         passengersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -339,7 +341,12 @@ public class ManageFlight extends javax.swing.JFrame {
 
 
     private void searchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseClicked
-        keresees();
+        if (SearchPassenger.getText() == "") {
+            errorPopUp("Please write something, that you want to search!");
+        } else {
+            keresees();
+        }
+
 
     }//GEN-LAST:event_searchButtonMouseClicked
 
