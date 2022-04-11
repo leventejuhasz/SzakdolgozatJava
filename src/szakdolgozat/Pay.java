@@ -61,7 +61,7 @@ import static szakdolgozat.PassengersInfo.passengers;
  *
  * @author User
  */
-public class Pay extends javax.swing.JFrame {
+public class Pay extends javax.swing.JFrame implements iDatabase{
 
     public Pay() {
         initComponents();
@@ -86,8 +86,8 @@ public class Pay extends javax.swing.JFrame {
 
     //csatlakozás az adatbázishoz
     private Statement connectToDatabase() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
+        Class.forName(CONNECTION);
+        Connection con = DriverManager.getConnection(CONNECT_TO_LOCALHOST, USER, PASSWORD);
 
         Statement smt = con.createStatement();
 
@@ -468,7 +468,9 @@ public class Pay extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_payButtonMouseClicked
+    
     }
+    
     int posX = 0, posY = 0;
 
     private void mozgato() {

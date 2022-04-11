@@ -17,18 +17,7 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-import static java.util.Calendar.DATE;
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.YEAR;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -303,6 +292,14 @@ public class Passenger extends javax.swing.JFrame {
 
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    public void errorPopUp(String text) {
+        JOptionPane.showMessageDialog(this,
+                text,
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+
+    }
+
     public static int objectToInt(Object obj) {
         int x = ((Number) obj).intValue();
         return x;
@@ -354,14 +351,18 @@ public class Passenger extends javax.swing.JFrame {
 
         }
         if (db > 1) {
-            JFrame jFrame = new JFrame();
-            JOptionPane.showMessageDialog(jFrame, "Please select only one luggage!");
+            errorPopUp("Please select only one luggage!");
             return true;
         }
 
+        if (firtsNamePassengerTextField.getText().matches("")) {
+
+        }
+
         if (!Character.isUpperCase(firtsNamePassengerTextField.getText().charAt(0))) {
-            JFrame jFrame = new JFrame();
-            JOptionPane.showMessageDialog(jFrame, "First Name needs to start with uppercase!");
+
+            errorPopUp("First Name needs to start with uppercase!");
+
             return true;
         }
 
@@ -369,8 +370,7 @@ public class Passenger extends javax.swing.JFrame {
 
         for (char c : chars2) {
             if (!Character.isLetter(c)) {
-                JFrame jFrame = new JFrame();
-                JOptionPane.showMessageDialog(jFrame, "First Name can contains only letters!");
+                errorPopUp("First Name can contains only letters!");
                 return true;
             }
         }
@@ -379,14 +379,13 @@ public class Passenger extends javax.swing.JFrame {
 
         for (char c : chars) {
             if (!Character.isLetter(c)) {
-                JFrame jFrame = new JFrame();
-                JOptionPane.showMessageDialog(jFrame, "Last Name can contains only letters!");
+                errorPopUp("Last Name can contains only letters!");
                 return true;
             }
         }
         if (!Character.isUpperCase(LastNamePassengerTextfield.getText().charAt(0))) {
-            JFrame jFrame = new JFrame();
-            JOptionPane.showMessageDialog(jFrame, "Last Name needs to start with uppercase!");
+
+            errorPopUp("Last Name needs to start with uppercase!");
             return true;
         }
 
