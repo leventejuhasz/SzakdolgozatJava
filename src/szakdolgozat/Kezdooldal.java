@@ -62,12 +62,13 @@ import javax.swing.text.StyledDocument;
 import sun.applet.AppletViewer;
 import static szakdolgozat.Passenger.numberOfTickets;
 import static szakdolgozat.ManageFlight.closeManageFlighFrametLabel;
+import static szakdolgozat.Pay.payButton;
 
 /**
  *
  * @author Juhász Levente
  */
-public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
+public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     private int jegyekszama;
 
@@ -153,7 +154,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<String>();
+        destinationCountryComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -170,7 +171,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -215,7 +216,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
         settingsEmailAddressTextfield = new javax.swing.JTextField();
         settingsPhoneNumberTextfield = new javax.swing.JTextField();
         saveSettingsNumberSettingsButton = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
+        namelab = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         cartLabel = new javax.swing.JLabel();
@@ -587,7 +588,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -1013,7 +1014,6 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
 
         settingsEmailAddressTextfield.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         settingsEmailAddressTextfield.setForeground(new java.awt.Color(102, 255, 255));
-        settingsEmailAddressTextfield.setText("Email address: ");
         settingsEmailAddressTextfield.setBorder(null);
         settingsEmailAddressTextfield.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         settingsEmailAddressTextfield.setInheritsPopupMenu(true);
@@ -1022,7 +1022,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
 
         settingsPhoneNumberTextfield.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         settingsPhoneNumberTextfield.setForeground(new java.awt.Color(102, 255, 255));
-        settingsPhoneNumberTextfield.setText("Phone Number: ");
+        settingsPhoneNumberTextfield.setText(" ");
         settingsPhoneNumberTextfield.setBorder(null);
         settingsPhoneNumberTextfield.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         settingsPhoneNumberTextfield.setOpaque(false);
@@ -1038,10 +1038,10 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
         });
         SettingsPanel.add(saveSettingsNumberSettingsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 140, 30));
 
-        jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(102, 255, 255));
-        jLabel15.setText("Email address: ");
-        SettingsPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 30));
+        namelab.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        namelab.setForeground(new java.awt.Color(102, 255, 255));
+        namelab.setText("Email address: ");
+        SettingsPanel.add(namelab, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 30));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -1185,7 +1185,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
         return smt;
     }
 
-    //md5 password codeja
+    //md5 password kódja
     private void md5PasswordCode(String password) {
 
         MessageDigest md = null;
@@ -1232,6 +1232,16 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
 
 
     }//GEN-LAST:event_registrationButtonActionPerformed
+
+    private void hallgat() {
+        payButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+           loadtoBuyTicketsTableData();
+            }
+
+        });
+    }
 
     private void limittexfieldnumbers(JTextField textfield, int limit) {
 
@@ -1826,8 +1836,9 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
 
 
     private void reservationButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservationButtonMouseClicked
-        if (notselectedFlight() != "") {
 
+        if (notselectedFlight() != "") {
+          
             JFrame jFrame = new JFrame();
             JOptionPane.showMessageDialog(jFrame, notselectedFlight());
         } else {
@@ -1850,7 +1861,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
                 }
 
                 loadtoBuyTicketsTableData();
-
+             
             }
 
         }
@@ -1950,7 +1961,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
 
             }
 
-            jLabel15.setText(kapcsolattarto);
+            namelab.setText(kapcsolattarto);
             settingsEmailAddressTextfield.setText(email);
             settingsPhoneNumberTextfield.setText(phonenumber);
             settingsEmailAddressTextfield.setEditable(false);
@@ -2005,10 +2016,10 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
 
             errorPopUp("No ticket in the cart!");
         } else {
-            Pay p = new Pay();
+            Pay.getObj().setVisible(true);
 
-            p.setVisible(true);
-            p.setLocationRelativeTo(null);
+            Pay.getObj().setLocationRelativeTo(null);
+
         }
 
 
@@ -2043,20 +2054,77 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
 
     }
 
+    public void sikerespopUp(String text) {
+        JOptionPane.showMessageDialog(this,
+                text);
+
+    }
+
 //telefonszama és email cím mentése
     private void saveSettingsNumberSettingsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveSettingsNumberSettingsButtonMouseClicked
 
-        saveTextField(settingsEmailAddressTextfield);
-        saveTextField(settingsPhoneNumberTextfield);
         String sql = null;
 
-        if (!isPhoneAlreadyRegistered(settingsPhoneNumberTextfield.getText()) && !isEmailValid(settingsPhoneNumberTextfield.getText())) {
-            sql = "Update registration_info SET phoneNumber = '" + settingsPhoneNumberTextfield.getText() + "' where Customer_id= " + customerId;
+        String teloesemail = "Select phoneNumber, Email from registration_info where Customer_id = " + customerId;
+        String telo = "", email = "";
+        try {
+            ResultSet r = lekerdezes(teloesemail);
+
+            while (r.next()) {
+                telo = r.getString("phoneNumber");
+                email = r.getString("Email");
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (!telo.equals(settingsPhoneNumberTextfield.getText())) {
+
+            if (!isPhoneAlreadyRegistered(settingsPhoneNumberTextfield.getText())) {
+
+                if (isPhoneNumberValid(settingsPhoneNumberTextfield.getText())) {
+                    if (settingsPhoneNumberTextfield.getText().matches("")) {
+                        errorPopUp("Phone number is missing!");
+
+                    } else {
+                        sql = "Update registration_info SET phoneNumber = '" + settingsPhoneNumberTextfield.getText() + "' where Customer_id= " + customerId;
+                        sikerespopUp("New phone number saved!");
+                        saveTextField(settingsPhoneNumberTextfield);
+                    }
+
+                } else {
+
+                    errorPopUp("Wrong phone number format!");
+                }
+
+            } else {
+                errorPopUp("This phone number is already registered!");
+            }
         }
         String sql2 = null;
-        if (!isEmailAlreadyRegistered(settingsEmailAddressTextfield.getText()) && !isPhoneNumberValid(settingsEmailAddressTextfield.getText())) {
-            sql2 = "Update registration_info SET email = '" + settingsEmailAddressTextfield.getText() + "' where Customer_id= " + customerId;
+        if (!email.matches(settingsEmailAddressTextfield.getText())) {
+
+            if (!isEmailAlreadyRegistered(settingsEmailAddressTextfield.getText())) {
+                if (isEmailValid(settingsEmailAddressTextfield.getText())) {
+                    if (settingsEmailAddressTextfield.getText().matches("")) {
+                        errorPopUp("Email is missing!");
+                    } else {
+                        sql2 = "Update registration_info SET email = '" + settingsEmailAddressTextfield.getText() + "' where Customer_id= " + customerId;
+                        sikerespopUp("New email saved!");
+                        saveTextField(settingsEmailAddressTextfield);
+                    }
+
+                } else {
+                    errorPopUp("Wrong email format!");
+                }
+
+            } else {
+                errorPopUp("This email is already registered!");
+            }
         }
+
         try {
             if (sql != null) {
                 sqlUpdate(sql);
@@ -2071,6 +2139,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
+
 
     }//GEN-LAST:event_saveSettingsNumberSettingsButtonMouseClicked
 
@@ -2091,14 +2160,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
     }//GEN-LAST:event_AboutUsMouseClicked
 
     private String maiDatum() {
-        LocalDateTime now = LocalDateTime.now();
-        int year = now.getYear();
-        int month = now.getMonthValue();
-        int day = now.getDayOfMonth();
-        int hour = now.getHour();
-        int min = now.getMinute();
 
-        int sec = now.getSecond();
         String mai = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
 
         return mai;
@@ -2430,14 +2492,16 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
                 .matches();
     }
 
-    public boolean isPhoneNumberValid(String phoneNumber) {
-        Pattern pattern = Pattern.compile("^(\\+?36)?[ -]?(\\d{1,2}|(\\(\\d{1,2}\\)))/?([ -]?\\d){6,7}$");
-        Matcher matcher = pattern.matcher(phoneNumber);
+    public static boolean patternMatches1(String phoneNum, String regexPattern) {
+        return Pattern.compile(regexPattern)
+                .matcher(phoneNum)
+                .matches();
+    }
 
-        if (matcher.matches()) {
-            return true;
-        }
-        return false;
+    public boolean isPhoneNumberValid(String phoneNumber) {
+        String regexpattern = "^(\\+?36)?[ -]?(\\d{1,2}|(\\(\\d{1,2}\\)))/?([ -]?\\d){6,7}$";
+
+        return patternMatches1(phoneNumber, regexpattern);
     }
 
     public boolean isEmailValid(String email) {
@@ -2621,7 +2685,6 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2642,6 +2705,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase{
     private javax.swing.JLabel luggagePic;
     private javax.swing.JRadioButton manRadioButton;
     private javax.swing.JLabel myTickets;
+    private javax.swing.JLabel namelab;
     public static javax.swing.JLabel numOfTicketsLabel;
     private javax.swing.JComboBox numOfticketstoBuyTextfield;
     private javax.swing.JLabel numberOfSeats;

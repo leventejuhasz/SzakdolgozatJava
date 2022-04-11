@@ -61,12 +61,21 @@ import static szakdolgozat.PassengersInfo.passengers;
  *
  * @author User
  */
-public class Pay extends javax.swing.JFrame implements iDatabase{
+public class Pay extends javax.swing.JFrame implements iDatabase {
 
-    public Pay() {
+    private static Pay obj = null;
+
+    Pay() {
         initComponents();
         mozgato();
         designPaymentInterface();
+    }
+
+    public static Pay getObj() {
+        if (obj == null) {
+            obj = new Pay();
+        }
+        return obj;
     }
 
     private void sqlUpdate(String sql) throws ClassNotFoundException, SQLException {
@@ -151,6 +160,16 @@ public class Pay extends javax.swing.JFrame implements iDatabase{
             checkCodeError = true;
         }
 
+        if (Integer.parseInt(monthTextfield.getText()) > 12) {
+            errorFramePopUp("Wrong month!");
+            checkCodeError = true;
+        }
+
+        if (Integer.parseInt(monthTextfield.getText()) <= 0) {
+            errorFramePopUp("Wrong month!");
+            checkCodeError = true;
+        }
+
         if (!onlyDigits(yearTextfield.getText(), 2) == true) {
             errorFramePopUp("Year can only a number!");
             checkCodeError = true;
@@ -160,16 +179,20 @@ public class Pay extends javax.swing.JFrame implements iDatabase{
             errorFramePopUp("Month can only a number!");
             checkCodeError = true;
         }
+        if (Integer.parseInt(yearTextfield.getText()) < Integer.parseInt(String.valueOf(year).substring(2, 3)) && Integer.parseInt(monthTextfield.getText()) < month) {
+            errorFramePopUp("Card expired!");
+            checkCodeError = true;
+        }
         if (!onlyDigits(cvcTextField.getText(), 3) == true) {
 
             errorFramePopUp("CVC code can only contains number!");
             checkCodeError = true;
         }
-        if (cvcTextField.getText().length() > 3) {
+        if (cvcTextField.getText().length() != 3) {
             errorFramePopUp("CVC code needs to be 3 number!");
             checkCodeError = true;
         }
-        return false;
+        return checkCodeError;
 
     }
 
@@ -468,9 +491,9 @@ public class Pay extends javax.swing.JFrame implements iDatabase{
 
 
     }//GEN-LAST:event_payButtonMouseClicked
-    
+
     }
-    
+
     int posX = 0, posY = 0;
 
     private void mozgato() {
@@ -509,7 +532,7 @@ public class Pay extends javax.swing.JFrame implements iDatabase{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField last4CardNumber;
     private javax.swing.JTextField monthTextfield;
-    private javax.swing.JButton payButton;
+    public static javax.swing.JButton payButton;
     private javax.swing.JLabel payments2Title;
     private javax.swing.JLabel paymentsTitle;
     private javax.swing.JTextField second4CardNumber;

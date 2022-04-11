@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -38,7 +39,7 @@ import static szakdolgozat.Kezdooldal.adminflightnum;
 import static szakdolgozat.Kezdooldal.availableseats;
 import static szakdolgozat.Kezdooldal.promotion;
 
-public class ManageFlight extends javax.swing.JFrame implements iDatabase{
+public class ManageFlight extends javax.swing.JFrame implements iDatabase {
 
     public ManageFlight() {
         initComponents();
@@ -46,7 +47,6 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase{
         fillTable();
         sorter();
         mozgato();
-        this.closeManageFlighFrametLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
     }
 
@@ -70,7 +70,7 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase{
         Class.forName(CONNECTION);
         Connection con = DriverManager.getConnection(CONNECT_TO_LOCALHOST, USER, PASSWORD);
 
-        Statement smt = con.createStatement();
+        PreparedStatement smt = (PreparedStatement) con.createStatement();
 
         return smt;
     }
@@ -420,7 +420,7 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase{
         numofavseatsLabel.setText("Number of available seats: " + availableseats);
         flightNumLabel.setText("Flight number: " + adminflightnum);
         promotionLabel.setText("Promotion: " + promotion + "%");
-
+        this.closeManageFlighFrametLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
 
