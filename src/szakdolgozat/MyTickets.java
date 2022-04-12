@@ -131,6 +131,7 @@ public class MyTickets extends javax.swing.JFrame implements iDatabase {
                 return canEdit [columnIndex];
             }
         });
+        myTicketsTable.setGridColor(new java.awt.Color(51, 51, 255));
         myTicketsTable.setSelectionBackground(new java.awt.Color(51, 153, 255));
         myTicketsTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
         myTickets.setViewportView(myTicketsTable);

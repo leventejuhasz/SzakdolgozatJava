@@ -355,8 +355,16 @@ public class Passenger extends javax.swing.JFrame {
             return true;
         }
 
+        if (db == 0) {
+            errorPopUp("Please choose a luggage option!");
+            return true;
+        }
         if (firtsNamePassengerTextField.getText().matches("")) {
-
+            errorPopUp("Please write a first name!");
+            return true;
+        }
+        if (LastNamePassengerTextfield.getText().matches("")) {
+            errorPopUp("Please write a last name!");
         }
 
         if (!Character.isUpperCase(firtsNamePassengerTextField.getText().charAt(0))) {

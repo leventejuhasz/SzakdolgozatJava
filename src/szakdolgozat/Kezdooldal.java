@@ -154,7 +154,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<>();
+        destinationCountryComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -171,7 +171,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -219,6 +219,9 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         namelab = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        AboutUsPanel = new javax.swing.JPanel();
+        pic = new javax.swing.JLabel();
+        aboutUsText = new javax.swing.JLabel();
         cartLabel = new javax.swing.JLabel();
         Settings = new javax.swing.JLabel();
         myTickets = new javax.swing.JLabel();
@@ -229,9 +232,6 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         jLabel7 = new javax.swing.JLabel();
         blackBackgroundLabel = new javax.swing.JLabel();
         aboutUs = new javax.swing.JLabel();
-        AboutUsPanel = new javax.swing.JPanel();
-        pic = new javax.swing.JLabel();
-        aboutUsText = new javax.swing.JLabel();
         userBackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -478,6 +478,11 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         registrationPasswordAgainTextField.setForeground(new java.awt.Color(255, 255, 255));
         registrationPasswordAgainTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         registrationPasswordAgainTextField.setCaretColor(new java.awt.Color(255, 255, 255));
+        registrationPasswordAgainTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrationPasswordAgainTextFieldActionPerformed(evt);
+            }
+        });
         RegistrationPanel.add(registrationPasswordAgainTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 460, 240, 30));
 
         emailLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -588,7 +593,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -1055,6 +1060,19 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
         UserPanel.add(SettingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1150, 530));
 
+        AboutUsPanel.setOpaque(false);
+        AboutUsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/airport-medical-aid_300.jpg"))); // NOI18N
+        AboutUsPanel.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 310, -1));
+
+        aboutUsText.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        aboutUsText.setForeground(new java.awt.Color(102, 255, 255));
+        aboutUsText.setText("<html>Budapest International Airport Our airport is here to help you get wherever you want to go. Start here, go anywhere.\n\nOur Impact: \n\nOur Airport provides a significant contribution to the Southern Ontario economy. The Airport is financially self-sustaining and does not rely on any subsidy or financial benefit from any level of government. In 2021 we will pay close to $950,000 in municipal taxes to the City of London. Below are some of the highlights of our economic contribution to our region.\n\nThe first airport in Budapest was established in 1928 on a grass field located south of the city. In 1939, land was purchased at the present site and construction of a more advanced facility began.  \n\nDuring the second world war, Budapest Airport was used extensively as a military training base. Work started on the RCAF Station Crumlin in November 1939, and it became a major centre for the Hungarian Commonwealth Air Training Plan. In 1945, Transport Germany assumed operations of the airport and embarked upon a major expansion program during the following three decades. From 1974 to 1998 construction programs costing more than $12 million were undertaken to upgrade and renovate airport facilities, runways, etc. \n\nIn 1994 the Government of Germany announced the implementation of a National Airports Policy. This policy supported the federal government’s withdrawal as operators of airports. The top twenty-six Hungarian airports, including Budapest, were eligible for a long-term lease to local Airport Authorities.  \n\n\n</html>");
+        AboutUsPanel.add(aboutUsText, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 780, 440));
+
+        UserPanel.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1130, 540));
+
         cartLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         cartLabel.setForeground(new java.awt.Color(102, 255, 255));
         cartLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/shopping-cart.png"))); // NOI18N
@@ -1123,19 +1141,6 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
             }
         });
         UserPanel.add(aboutUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 70));
-
-        AboutUsPanel.setOpaque(false);
-        AboutUsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/airport-medical-aid_300.jpg"))); // NOI18N
-        AboutUsPanel.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 310, -1));
-
-        aboutUsText.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        aboutUsText.setForeground(new java.awt.Color(102, 255, 255));
-        aboutUsText.setText("<html>London International Airport Our airport is here to help you get wherever you want to go. Start here, go anywhere.\n\nOur Impact: \n\nOur Airport provides a significant contribution to the Southern Ontario economy. The Airport is financially self-sustaining and does not rely on any subsidy or financial benefit from any level of government. In 2021 we will pay close to $950,000 in municipal taxes to the City of London. Below are some of the highlights of our economic contribution to our region.\n\nThe first airport in London was established in 1928 on a grass field located south of the city. In 1939, land was purchased at the present site and construction of a more advanced facility began.  \n\nDuring the second world war, London Airport was used extensively as a military training base. Work started on the RCAF Station Crumlin in November 1939, and it became a major centre for the British Commonwealth Air Training Plan. In 1945, Transport Canada assumed operations of the airport and embarked upon a major expansion program during the following three decades. From 1974 to 1998 construction programs costing more than $12 million were undertaken to upgrade and renovate airport facilities, runways, etc. \n\nIn 1994 the Government of Canada announced the implementation of a National Airports Policy. This policy supported the federal government’s withdrawal as operators of airports. The top twenty-six Canadian airports, including London, were eligible for a long-term lease to local Airport Authorities.  \n\n\n</html>");
-        AboutUsPanel.add(aboutUsText, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 780, 440));
-
-        UserPanel.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1130, 540));
 
         userBackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/szakdolgozat/80301f1d6a1b8c3219d7cb286d58a715.jpg"))); // NOI18N
         userBackgroundLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1221,28 +1226,14 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
                 System.out.println("Hiba: " + e);
             }
-            JFrame jFrame = new JFrame();
-            JOptionPane.showMessageDialog(jFrame, "Sikeres Regisztráció!");
-            jFrame.setLocationRelativeTo(RegistrationPanel);
+            sikerespopUp("Rgistration succesfull!");
 
-        } else {
-
-            errorPopUp("Sikertelen regisztráció!");
         }
 
 
     }//GEN-LAST:event_registrationButtonActionPerformed
 
-    private void hallgat() {
-        payButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-           loadtoBuyTicketsTableData();
-            }
-
-        });
-    }
-
+    //limmitálja a karakterek számát amit be lehet érni egy textfieldbe
     private void limittexfieldnumbers(JTextField textfield, int limit) {
 
         textfield.addKeyListener(new KeyAdapter() {
@@ -1256,6 +1247,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     }
 
+    //lekerdezest indit az adatbazisban és visszatér az eredményyel, ha van
     private ResultSet lekerdezes(String sql) throws ClassNotFoundException, SQLException {
         Statement smt = connectToDatabase();
 
@@ -1265,7 +1257,8 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     }
 
-    private DefaultTableModel model;
+    //a járat megadásakor
+    private DefaultTableModel FlightTablemodel;
 
     //járatok frissítése, megtartása az admin táblázatbans
     public void keepFlightsData() {
@@ -1329,8 +1322,8 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                 i++;
             }
 
-            model = new DefaultTableModel(data, columns);
-            addFlightTable.setModel(model);
+            FlightTablemodel = new DefaultTableModel(data, columns);
+            addFlightTable.setModel(FlightTablemodel);
             s.close();
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
@@ -1348,6 +1341,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         tr.setRowFilter(RowFilter.regexFilter(text));
 
     }
+    DefaultTableModel vasarloiTablaModel;
 
     private void loadtoBuyTicketsTableData() {
         try {
@@ -1368,7 +1362,6 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
             while (s.next()) {
 
                 String dep = s.getString("Departure_Time");
-
                 String ati = s.getString("Arrival_Time");
                 String orc = s.getString("Origin_country");
                 String ora = s.getString("OriginAirportName");
@@ -1399,8 +1392,8 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                 }
             }
 
-            model = new DefaultTableModel(data, columns);
-            BuyTicketsTable.setModel(model);
+            vasarloiTablaModel = new DefaultTableModel(data, columns);
+            BuyTicketsTable.setModel(vasarloiTablaModel);
             s.close();
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
@@ -1557,6 +1550,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
 
     }//GEN-LAST:event_adminRegisterFlightButtonActionPerformed
+
     String country;
 
     private void OriginAirportNames() {
@@ -1745,11 +1739,12 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     private void searchTextfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextfieldKeyReleased
 
-        Filter(searchTextfield.getText(), model);
+        Filter(searchTextfield.getText(), FlightTablemodel);
     }//GEN-LAST:event_searchTextfieldKeyReleased
 
 
     private void buyTicketsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buyTicketsLabelMouseClicked
+        loadtoBuyTicketsTableData();
         buyTicketsJscrollPane.setVisible(true);
 
         buyTicketsPanel.setVisible(true);
@@ -1769,7 +1764,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
     }//GEN-LAST:event_logOutLabelMouseClicked
 
     private void destinationTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_destinationTextFieldKeyReleased
-        Filter(destinationTextField.getText(), model);
+        Filter(destinationTextField.getText(), FlightTablemodel);
     }//GEN-LAST:event_destinationTextFieldKeyReleased
 
     private void getDataFromBuyTicketsTableToPassenger() {
@@ -1782,6 +1777,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         Arrival_time = (String) BuyTicketsTable.getValueAt(BuyTicketsTable.getSelectedRow(), 1);
     }
 
+    //megnézi, hogy van-e kiválasztott járat a vásárláskor
     private String notselectedFlight() {
 
         if (BuyTicketsTable.getSelectionModel().isSelectionEmpty()) {
@@ -1838,7 +1834,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
     private void reservationButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservationButtonMouseClicked
 
         if (notselectedFlight() != "") {
-          
+
             JFrame jFrame = new JFrame();
             JOptionPane.showMessageDialog(jFrame, notselectedFlight());
         } else {
@@ -1861,7 +1857,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                 }
 
                 loadtoBuyTicketsTableData();
-             
+
             }
 
         }
@@ -2054,6 +2050,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     }
 
+    //feldob egy ablakot egy információ ikonnal és megadhatunk neki egy szöveget is.
     public void sikerespopUp(String text) {
         JOptionPane.showMessageDialog(this,
                 text);
@@ -2143,6 +2140,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     }//GEN-LAST:event_saveSettingsNumberSettingsButtonMouseClicked
 
+
     private void changePhoneNumberButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changePhoneNumberButtonMouseClicked
         changeTextfield(settingsPhoneNumberTextfield);
     }//GEN-LAST:event_changePhoneNumberButtonMouseClicked
@@ -2157,10 +2155,21 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         this.buyTicketsPanel.hide();
         this.cartTablePanel.hide();
 
+        System.out.println(maiDatum());
     }//GEN-LAST:event_AboutUsMouseClicked
 
-    private String maiDatum() {
+    private void registrationPasswordAgainTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationPasswordAgainTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registrationPasswordAgainTextFieldActionPerformed
 
+    private String maiDatum() {
+        LocalDateTime now = LocalDateTime.now();
+        int year = now.getYear();
+        int month = now.getMonthValue();
+        int day = now.getDayOfMonth();
+        int hour = now.getHour();
+        int min = now.getMinute();
+        int sec = now.getSecond();
         String mai = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
 
         return mai;

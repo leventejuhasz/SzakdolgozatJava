@@ -32,6 +32,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import javax.imageio.ImageIO;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
@@ -142,6 +143,11 @@ public class Pay extends javax.swing.JFrame implements iDatabase {
             errorFramePopUp("Card numbers can contains only numbers!");
             checkCodeError = true;
         }
+        
+        if (first4CardNumber.getText().length()<4 || second4CardNumber.getText().length()<4 ||third4CardNumber.getText().length()<4 || last4CardNumber.getText().length()<4 ) {
+            errorFramePopUp("Wrong card number!");
+        }
+        
         if (!onlyDigits(second4CardNumber.getText(), 4) == true) {
             errorFramePopUp("Card numbers can contains only numbers!");
             checkCodeError = true;
@@ -179,9 +185,22 @@ public class Pay extends javax.swing.JFrame implements iDatabase {
             errorFramePopUp("Month can only a number!");
             checkCodeError = true;
         }
-        if (Integer.parseInt(yearTextfield.getText()) < Integer.parseInt(String.valueOf(year).substring(2, 3)) && Integer.parseInt(monthTextfield.getText()) < month) {
+        LocalDateTime now = LocalDateTime.now();
+        int year = now.getYear();
+        int month = now.getMonthValue();
+        int yearlevagott = Integer.parseInt(String.valueOf(year).substring(1, 4));
+        if (Integer.parseInt(yearTextfield.getText()) < yearlevagott) {
             errorFramePopUp("Card expired!");
             checkCodeError = true;
+        }
+
+        if (Integer.parseInt(yearTextfield.getText()) == yearlevagott) {
+
+            if (Integer.parseInt(monthTextfield.getText()) <= month) {
+                errorFramePopUp("Card expired!");
+                checkCodeError = true;
+            }
+
         }
         if (!onlyDigits(cvcTextField.getText(), 3) == true) {
 
@@ -478,6 +497,7 @@ public class Pay extends javax.swing.JFrame implements iDatabase {
 
                     }
                     sqlUpdate("Insert INTO price_info (Passenger_name, Price, Flight_num, Customer_id, Passenger_id)  VALUES ('" + passengers.get(i).getFirstName() + " " + passengers.get(i).getLastName() + "' , '" + passengers.get(i).getPayable() + "' , '" + flightNum + "' , '" + customerId + "' , '" + passenger_Id + "')");
+                    Thread.sleep(20);
                 }
 
                 this.dispose();
@@ -487,6 +507,8 @@ public class Pay extends javax.swing.JFrame implements iDatabase {
                 Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Pay.class.getName()).log(Level.SEVERE, null, ex);
             }
 
 

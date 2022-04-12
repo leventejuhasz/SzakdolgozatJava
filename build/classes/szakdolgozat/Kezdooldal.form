@@ -717,6 +717,9 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registrationPasswordAgainTextFieldActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="500" y="460" width="240" height="30"/>
@@ -2363,6 +2366,50 @@
             </Component>
           </SubComponents>
         </Container>
+        <Container class="javax.swing.JPanel" name="AboutUsPanel">
+          <Properties>
+            <Property name="opaque" type="boolean" value="false"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="50" width="1130" height="540"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="false"/>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="pic">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/szakdolgozat/airport-medical-aid_300.jpg"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="20" y="100" width="310" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="aboutUsText">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="18" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="66" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;Budapest International Airport Our airport is here to help you get wherever you want to go. Start here, go anywhere.&#xa;&#xa;Our Impact: &#xa;&#xa;Our Airport provides a significant contribution to the Southern Ontario economy. The Airport is financially self-sustaining and does not rely on any subsidy or financial benefit from any level of government. In 2021 we will pay close to $950,000 in municipal taxes to the City of London. Below are some of the highlights of our economic contribution to our region.&#xa;&#xa;The first airport in Budapest was established in 1928 on a grass field located south of the city. In 1939, land was purchased at the present site and construction of a more advanced facility began.  &#xa;&#xa;During the second world war, Budapest Airport was used extensively as a military training base. Work started on the RCAF Station Crumlin in November 1939, and it became a major centre for the Hungarian Commonwealth Air Training Plan. In 1945, Transport Germany assumed operations of the airport and embarked upon a major expansion program during the following three decades. From 1974 to 1998 construction programs costing more than $12 million were undertaken to upgrade and renovate airport facilities, runways, etc. &#xa;&#xa;In 1994 the Government of Germany announced the implementation of a National Airports Policy. This policy supported the federal government&#x2019;s withdrawal as operators of airports. The top twenty-six Hungarian airports, including Budapest, were eligible for a long-term lease to local Airport Authorities.  &#xa;&#xa;&#xa;&lt;/html&gt;"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="340" y="70" width="780" height="440"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+          </SubComponents>
+        </Container>
         <Component class="javax.swing.JLabel" name="cartLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -2536,50 +2583,6 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="javax.swing.JPanel" name="AboutUsPanel">
-          <Properties>
-            <Property name="opaque" type="boolean" value="false"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="50" width="1130" height="540"/>
-            </Constraint>
-          </Constraints>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-            <Property name="useNullLayout" type="boolean" value="false"/>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="pic">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/szakdolgozat/airport-medical-aid_300.jpg"/>
-                </Property>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="20" y="100" width="310" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JLabel" name="aboutUsText">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="18" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="66" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;London International Airport Our airport is here to help you get wherever you want to go. Start here, go anywhere.&#xa;&#xa;Our Impact: &#xa;&#xa;Our Airport provides a significant contribution to the Southern Ontario economy. The Airport is financially self-sustaining and does not rely on any subsidy or financial benefit from any level of government. In 2021 we will pay close to $950,000 in municipal taxes to the City of London. Below are some of the highlights of our economic contribution to our region.&#xa;&#xa;The first airport in London was established in 1928 on a grass field located south of the city. In 1939, land was purchased at the present site and construction of a more advanced facility began.  &#xa;&#xa;During the second world war, London Airport was used extensively as a military training base. Work started on the RCAF Station Crumlin in November 1939, and it became a major centre for the British Commonwealth Air Training Plan. In 1945, Transport Canada assumed operations of the airport and embarked upon a major expansion program during the following three decades. From 1974 to 1998 construction programs costing more than $12 million were undertaken to upgrade and renovate airport facilities, runways, etc. &#xa;&#xa;In 1994 the Government of Canada announced the implementation of a National Airports Policy. This policy supported the federal government&#x2019;s withdrawal as operators of airports. The top twenty-six Canadian airports, including London, were eligible for a long-term lease to local Airport Authorities.  &#xa;&#xa;&#xa;&lt;/html&gt;"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="340" y="70" width="780" height="440"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-          </SubComponents>
-        </Container>
         <Component class="javax.swing.JLabel" name="userBackgroundLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">

@@ -70,7 +70,7 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
         Class.forName(CONNECTION);
         Connection con = DriverManager.getConnection(CONNECT_TO_LOCALHOST, USER, PASSWORD);
 
-        PreparedStatement smt = (PreparedStatement) con.createStatement();
+        Statement smt = con.createStatement();
 
         return smt;
     }
@@ -279,17 +279,24 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
 
     }
 
-    public void errorPopUp(String text) {
+    private void errorPopUp(String text) {
         JOptionPane.showMessageDialog(this,
                 text,
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
 
     }
+    
+    
+    
+    
+    
+    
+    
     private void deletePassengerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerButtonMouseClicked
 
         try {
-            if (passengersTable.getSelectionModel().isSelectionEmpty()) {
+            if (!passengersTable.getSelectionModel().isSelectionEmpty()) {
                 JFrame jFrame = new JFrame();
                 int result = JOptionPane.showConfirmDialog(jFrame, "Are you sure want to delete this passenger?");
 
@@ -351,15 +358,9 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
     }//GEN-LAST:event_searchButtonMouseClicked
 
     private void closeManageFlighFrametLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeManageFlighFrametLabelMouseClicked
-        int n = JOptionPane.showConfirmDialog(
-                this,
-                "Are you sure want to exit?",
-                "Exit guestion", JOptionPane.YES_NO_OPTION);
 
-        if (n == 0) {
+        this.dispose();
 
-            this.dispose();
-        }
     }//GEN-LAST:event_closeManageFlighFrametLabelMouseClicked
     DefaultTableModel model;
 
