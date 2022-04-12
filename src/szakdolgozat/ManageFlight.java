@@ -286,13 +286,7 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
                 JOptionPane.ERROR_MESSAGE);
 
     }
-    
-    
-    
-    
-    
-    
-    
+      
     private void deletePassengerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerButtonMouseClicked
 
         try {
