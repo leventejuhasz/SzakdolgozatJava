@@ -286,7 +286,12 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
                 JOptionPane.ERROR_MESSAGE);
 
     }
+<<<<<<< HEAD
       
+=======
+
+
+>>>>>>> 64c20499c1c5630ebc8f7dfdf5a443a011f03786
     private void deletePassengerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerButtonMouseClicked
 
         try {
@@ -390,8 +395,15 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
                 data[i][6] = fid;
                 i++;
             }
+            model = new DefaultTableModel(data, columns) {
 
-            model = new DefaultTableModel(data, columns);
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    //all cells false
+                    return false;
+                }
+            };
+
             passengersTable.setModel(model);
 
             res.close();

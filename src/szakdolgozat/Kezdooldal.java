@@ -95,6 +95,10 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         cartTable = cartTableUserPanel;
     }
 
+    public void hallgato() {
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -154,7 +158,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<String>();
+        destinationCountryComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -171,7 +175,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -593,7 +597,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -602,7 +606,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         AdminPanel.add(destinationCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 530, 290, 30));
 
         addFlightTable.setBackground(new java.awt.Color(255, 255, 255));
-        addFlightTable.setForeground(new java.awt.Color(51, 51, 51));
+        addFlightTable.setForeground(new java.awt.Color(0, 0, 255));
         addFlightTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
@@ -853,6 +857,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                 return canEdit [columnIndex];
             }
         });
+        BuyTicketsTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BuyTicketsTable.setGridColor(new java.awt.Color(51, 51, 255));
         BuyTicketsTable.setSelectionBackground(new java.awt.Color(51, 153, 255));
         BuyTicketsTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
@@ -1226,7 +1231,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
                 System.out.println("Hiba: " + e);
             }
-            sikerespopUp("Rgistration succesfull!");
+            sikerespopUp("Registration succesfull!");
 
         }
 
@@ -1321,8 +1326,15 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                 }
                 i++;
             }
+ FlightTablemodel = new DefaultTableModel(data, columns) {
 
-            FlightTablemodel = new DefaultTableModel(data, columns);
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    //all cells false
+                    return false;
+                }
+            };
+
             addFlightTable.setModel(FlightTablemodel);
             s.close();
         } catch (ClassNotFoundException ex) {
@@ -1345,7 +1357,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     private void loadtoBuyTicketsTableData() {
         try {
-
+            
             String query = "Select Departure_time,Arrival_time,Origin_country, OriginAirportName, Destination_country, DestinationAirportName, Num_of_available_seats, Base_Price, Flight_num_id from flight_info";
             ResultSet s = lekerdezes(query);
 
@@ -1357,7 +1369,9 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
             String columns[] = {BuyTicketsTable.getColumnName(0), BuyTicketsTable.getColumnName(1), BuyTicketsTable.getColumnName(2), BuyTicketsTable.getColumnName(3), BuyTicketsTable.getColumnName(4), BuyTicketsTable.getColumnName(5), BuyTicketsTable.getColumnName(6), BuyTicketsTable.getColumnName(7), BuyTicketsTable.getColumnName(8)};
             String data[][] = new String[count][BuyTicketsTable.getColumnCount()];
-
+            
+             
+            
             int i = 0;
             while (s.next()) {
 
@@ -1391,8 +1405,15 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                     }
                 }
             }
+            vasarloiTablaModel = new DefaultTableModel(data, columns) {
 
-            vasarloiTablaModel = new DefaultTableModel(data, columns);
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    //all cells false
+                    return false;
+                }
+            };
+
             BuyTicketsTable.setModel(vasarloiTablaModel);
             s.close();
         } catch (ClassNotFoundException ex) {
@@ -1764,7 +1785,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
     }//GEN-LAST:event_logOutLabelMouseClicked
 
     private void destinationTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_destinationTextFieldKeyReleased
-        Filter(destinationTextField.getText(), FlightTablemodel);
+        Filter(destinationTextField.getText(), vasarloiTablaModel);
     }//GEN-LAST:event_destinationTextFieldKeyReleased
 
     private void getDataFromBuyTicketsTableToPassenger() {
@@ -1942,16 +1963,22 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         this.AboutUsPanel.hide();
 
         try {
+            String sql2 = "Select Email from registration_info where Customer_id = " + customerId;
+            ResultSet r = lekerdezes(sql2);
+            String email = "";
+            while (r.next()) {
+                email = r.getString("Email");
+            }
 
-            String sql = "Select FirstName, LastName, Email, phoneNumber,  Gender From registration_info where Email LIKE '" + loginEmailTextField.getText() + "' AND CustomerPassword Like '" + md5password(passwordTextField.getText()) + "'";
+            String sql = "Select FirstName, LastName, Email, phoneNumber,  Gender From registration_info where Email LIKE '" + email + "' AND CustomerPassword Like '" + md5password(passwordTextField.getText()) + "'";
 
             ResultSet result = lekerdezes(sql);
             String kapcsolattarto = "";
-            String email = null, phonenumber = null, gender = null;
+            String email2 = null, phonenumber = null, gender = null;
             if (result.next()) {
                 kapcsolattarto = result.getString("FirstName");
                 kapcsolattarto += " " + result.getString("LastName");
-                email = result.getString("Email");
+                email2 = result.getString("Email");
                 phonenumber = result.getString("phoneNumber");
                 gender = result.getString("Gender");
 
