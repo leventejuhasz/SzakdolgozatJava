@@ -154,7 +154,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<String>();
+        destinationCountryComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -171,7 +171,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -593,7 +593,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -1187,6 +1187,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
         Statement smt = con.createStatement();
 
+
         return smt;
     }
 
@@ -1339,6 +1340,9 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         BuyTicketsTable.setRowSorter(tr);
 
         tr.setRowFilter(RowFilter.regexFilter(text));
+        
+        
+        
 
     }
     DefaultTableModel vasarloiTablaModel;
@@ -1764,7 +1768,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
     }//GEN-LAST:event_logOutLabelMouseClicked
 
     private void destinationTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_destinationTextFieldKeyReleased
-        Filter(destinationTextField.getText(), FlightTablemodel);
+        Filter(destinationTextField.getText(), vasarloiTablaModel);
     }//GEN-LAST:event_destinationTextFieldKeyReleased
 
     private void getDataFromBuyTicketsTableToPassenger() {

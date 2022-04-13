@@ -101,6 +101,8 @@ public class Pay extends javax.swing.JFrame implements iDatabase {
 
         Statement smt = con.createStatement();
 
+        
+        con.close();
         return smt;
     }
 

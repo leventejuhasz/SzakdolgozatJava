@@ -81,7 +81,7 @@ public class MyTickets extends javax.swing.JFrame implements iDatabase {
         Connection con = DriverManager.getConnection(CONNECT_TO_LOCALHOST, USER, PASSWORD);
 
         Statement smt = con.createStatement();
-
+   
         return smt;
     }
 
