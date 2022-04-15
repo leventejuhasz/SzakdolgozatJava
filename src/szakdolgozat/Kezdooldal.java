@@ -25,7 +25,6 @@ import javax.swing.*;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -36,7 +35,6 @@ import java.util.logging.Logger;
 
 import javax.swing.table.TableRowSorter;
 import javax.xml.bind.DatatypeConverter;
-
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -695,6 +693,11 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         destinationPlaceLabel1.setText("Destination Country: ");
         AdminPanel.add(destinationPlaceLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, -1, 30));
 
+        destinationAirportNameComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                destinationAirportNameComboBoxItemStateChanged(evt);
+            }
+        });
         AdminPanel.add(destinationAirportNameComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 570, 290, 30));
 
         ManageFlightButton.setBackground(new java.awt.Color(0, 0, 0));
@@ -1456,10 +1459,10 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
-     
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
-              
+
         }
 
     }
@@ -1589,11 +1592,9 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         ArrayList<String> AirportNames = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/c31g202121?ServerTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "root", "");
-            Statement smt = con.createStatement();
+            
 
-            ResultSet rs = smt.executeQuery("SELECT distinct AirportName FROM airport_info where Country LIKE '" + country + "' order by AirportName ASC");
+            ResultSet rs = lekerdezes("SELECT distinct AirportName FROM airport_info where Country LIKE '" + country + "' order by AirportName ASC");
 
             while (rs.next()) {
                 String orszag = "AirportName";
@@ -1976,11 +1977,11 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
             if (gender.matches("Woman")) {
 
-                ImageIcon imgThisImg = new ImageIcon("image/woman.png");
+                ImageIcon imgThisImg = new ImageIcon("/szakdolgozat/woman.png");
                 genderIcon.setIcon(imgThisImg);
             } else {
 
-                ImageIcon imgThisImg = new ImageIcon("image/man.png");
+                ImageIcon imgThisImg = new ImageIcon("/szakdolgozat/man.png");
                 genderIcon.setIcon(imgThisImg);
 
             }
@@ -2172,6 +2173,12 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
     private void registrationPasswordAgainTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationPasswordAgainTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_registrationPasswordAgainTextFieldActionPerformed
+
+    private void destinationAirportNameComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_destinationAirportNameComboBoxItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            String airportName = destinationAirportNameComboBox.getSelectedItem().toString();
+        }
+    }//GEN-LAST:event_destinationAirportNameComboBoxItemStateChanged
 
     private String maiDatum() {
         LocalDateTime now = LocalDateTime.now();
@@ -2446,10 +2453,12 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+
         } catch (ClassNotFoundException ex) {
+
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return false;
     }
 
@@ -2535,10 +2544,11 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     //Regisztráció kép betöltése
     public void luggagePic() {
+        this.getClass().getResource("/szakdolgozat/person_at_airport_holding_coffee_and_luggage.jpg");
 
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("person_at_airport_holding_coffee_and_luggage.jpg"));
+            img = ImageIO.read(new File("/szakdolgozat/person_at_airport_holding_coffee_and_luggage.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
