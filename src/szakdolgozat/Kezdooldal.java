@@ -38,6 +38,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 
 import java.time.LocalDateTime;
 
@@ -1592,7 +1593,6 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         ArrayList<String> AirportNames = new ArrayList<>();
 
         try {
-            
 
             ResultSet rs = lekerdezes("SELECT distinct AirportName FROM airport_info where Country LIKE '" + country + "' order by AirportName ASC");
 
@@ -1976,12 +1976,12 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
             settingsPhoneNumberTextfield.setEditable(false);
 
             if (gender.matches("Woman")) {
-
-                ImageIcon imgThisImg = new ImageIcon("/szakdolgozat/woman.png");
+                URL img2 = this.getClass().getResource("/szakdolgozat/woman.png");
+                ImageIcon imgThisImg = new ImageIcon(img2);
                 genderIcon.setIcon(imgThisImg);
             } else {
-
-                ImageIcon imgThisImg = new ImageIcon("/szakdolgozat/man.png");
+                URL img2 = this.getClass().getResource("/szakdolgozat/man.png");
+                ImageIcon imgThisImg = new ImageIcon(img2);
                 genderIcon.setIcon(imgThisImg);
 
             }
@@ -2544,11 +2544,12 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     //Regisztráció kép betöltése
     public void luggagePic() {
-        this.getClass().getResource("/szakdolgozat/person_at_airport_holding_coffee_and_luggage.jpg");
+        URL img2 = this.getClass().getResource("/szakdolgozat/person_at_airport_holding_coffee_and_luggage.jpg");
 
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("/szakdolgozat/person_at_airport_holding_coffee_and_luggage.jpg"));
+
+            img = ImageIO.read(img2);
         } catch (IOException e) {
             e.printStackTrace();
         }
