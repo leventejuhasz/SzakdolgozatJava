@@ -2,9 +2,9 @@ package szakdolgozat;
 
 import java.sql.Connection;
 import java.awt.Cursor;
-import java.awt.Dimension;
+
 import java.awt.Image;
-import java.awt.Toolkit;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
@@ -15,54 +15,38 @@ import java.sql.DriverManager;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.List;
+
 import java.awt.event.ItemEvent;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.LinkedHashSet;
-import java.util.Locale;
-import java.util.Set;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
+
 import javax.swing.table.TableRowSorter;
 import javax.xml.bind.DatatypeConverter;
-import java.awt.BorderLayout;
-import java.awt.Button;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import javafx.scene.layout.Border;
-import javax.swing.*;
+
 import javax.swing.border.LineBorder;
-import javax.swing.event.*;
-import javax.swing.table.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.StyledDocument;
-import sun.applet.AppletViewer;
+
 import static szakdolgozat.Passenger.numberOfTickets;
 import static szakdolgozat.ManageFlight.closeManageFlighFrametLabel;
-import static szakdolgozat.Pay.payButton;
 
 /**
  *
@@ -158,7 +142,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         adminRegisterFlightButton = new javax.swing.JButton();
         adminBackButton = new javax.swing.JButton();
         deleteButon = new javax.swing.JButton();
-        destinationCountryComboBox = new javax.swing.JComboBox<>();
+        destinationCountryComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         addFlightTable = new javax.swing.JTable();
         originAirportNameComboBox = new javax.swing.JComboBox();
@@ -175,7 +159,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         depminLabel = new javax.swing.JLabel();
         originPlaceLabel1 = new javax.swing.JLabel();
         destinationPlaceLabel1 = new javax.swing.JLabel();
-        destinationAirportNameComboBox = new javax.swing.JComboBox<>();
+        destinationAirportNameComboBox = new javax.swing.JComboBox<String>();
         ManageFlightButton = new javax.swing.JButton();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
@@ -597,7 +581,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         });
         AdminPanel.add(deleteButon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 140, 50));
 
-        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCountryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         destinationCountryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 destinationCountryComboBoxItemStateChanged(evt);
@@ -606,7 +590,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         AdminPanel.add(destinationCountryComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 530, 290, 30));
 
         addFlightTable.setBackground(new java.awt.Color(255, 255, 255));
-        addFlightTable.setForeground(new java.awt.Color(0, 0, 255));
+        addFlightTable.setForeground(new java.awt.Color(0, 0, 0));
         addFlightTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
@@ -1326,7 +1310,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                 }
                 i++;
             }
- FlightTablemodel = new DefaultTableModel(data, columns) {
+            FlightTablemodel = new DefaultTableModel(data, columns) {
 
                 @Override
                 public boolean isCellEditable(int row, int column) {
@@ -1334,7 +1318,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                     return false;
                 }
             };
-
+            addFlightTable.setSelectionModel(new ForcedListSelectionModel());
             addFlightTable.setModel(FlightTablemodel);
             s.close();
         } catch (ClassNotFoundException ex) {
@@ -1357,7 +1341,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
     private void loadtoBuyTicketsTableData() {
         try {
-            
+
             String query = "Select Departure_time,Arrival_time,Origin_country, OriginAirportName, Destination_country, DestinationAirportName, Num_of_available_seats, Base_Price, Flight_num_id from flight_info";
             ResultSet s = lekerdezes(query);
 
@@ -1369,9 +1353,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
             String columns[] = {BuyTicketsTable.getColumnName(0), BuyTicketsTable.getColumnName(1), BuyTicketsTable.getColumnName(2), BuyTicketsTable.getColumnName(3), BuyTicketsTable.getColumnName(4), BuyTicketsTable.getColumnName(5), BuyTicketsTable.getColumnName(6), BuyTicketsTable.getColumnName(7), BuyTicketsTable.getColumnName(8)};
             String data[][] = new String[count][BuyTicketsTable.getColumnCount()];
-            
-             
-            
+
             int i = 0;
             while (s.next()) {
 
@@ -1413,7 +1395,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                     return false;
                 }
             };
-
+            BuyTicketsTable.setSelectionModel(new ForcedListSelectionModel());
             BuyTicketsTable.setModel(vasarloiTablaModel);
             s.close();
         } catch (ClassNotFoundException ex) {
@@ -1474,8 +1456,10 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
 
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+     
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
+              
         }
 
     }
@@ -2000,7 +1984,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
                 genderIcon.setIcon(imgThisImg);
 
             }
-
+            cartTableUserPanel.setSelectionModel(new ForcedListSelectionModel());
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -2465,6 +2449,7 @@ public class Kezdooldal extends javax.swing.JFrame implements iDatabase {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return false;
     }
 

@@ -6,7 +6,7 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
-import java.awt.Cursor;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -16,18 +16,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
+
 import javax.swing.table.DefaultTableModel;
 
 import static szakdolgozat.Kezdooldal.customerId;
-import static szakdolgozat.Passenger.PassengerAge;
+
 
 import com.itextpdf.text.pdf.*;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Map;
+
 import javax.swing.JFileChooser;
 
 
@@ -81,7 +80,7 @@ public class MyTickets extends javax.swing.JFrame implements iDatabase {
         Connection con = DriverManager.getConnection(CONNECT_TO_LOCALHOST, USER, PASSWORD);
 
         Statement smt = con.createStatement();
-   
+
         return smt;
     }
 
@@ -297,9 +296,16 @@ public class MyTickets extends javax.swing.JFrame implements iDatabase {
 
             }
 
-            model2 = new DefaultTableModel(data, columns);
-            myTicketsTable.setModel(model2);
+            model2 = new DefaultTableModel(data, columns) {
 
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    //all cells false
+                    return false;
+                }
+            };
+            myTicketsTable.setModel(model2);
+            myTicketsTable.setSelectionModel(new ForcedListSelectionModel());
         } catch (SQLException ex) {
             Logger.getLogger(Kezdooldal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

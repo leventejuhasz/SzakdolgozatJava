@@ -1,27 +1,18 @@
 package szakdolgozat;
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.MonthDV;
-import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import static java.text.DateFormat.Field.MONTH;
+
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Period;
+
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
+
 import java.util.Calendar;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+
 import javax.swing.table.DefaultTableModel;
-import static szakdolgozat.Kezdooldal.customerId;
+
 import static szakdolgozat.Kezdooldal.Origin_country;
 import static szakdolgozat.Kezdooldal.Destination_country;
 import static szakdolgozat.Kezdooldal.OriginAirportName;

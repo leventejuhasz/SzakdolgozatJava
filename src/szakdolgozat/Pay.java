@@ -5,36 +5,31 @@
  */
 package szakdolgozat;
 
-import java.awt.Component;
+
 import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Insets;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
-import javax.swing.JFormattedTextField;
+
 import javax.swing.JTextField;
-import javax.swing.border.Border;
+
 import javax.swing.*;
-import java.awt.*;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import javax.imageio.ImageIO;
-import javax.swing.border.Border;
+
 import javax.swing.table.DefaultTableModel;
 import static szakdolgozat.Kezdooldal.Arrival_time;
 import static szakdolgozat.Kezdooldal.Departure_time;
@@ -45,13 +40,7 @@ import static szakdolgozat.Kezdooldal.Origin_country;
 import static szakdolgozat.Kezdooldal.cartTable;
 import static szakdolgozat.Kezdooldal.customerId;
 import static szakdolgozat.Kezdooldal.flightNum;
-import static szakdolgozat.Passenger.PassengerAge;
-import static szakdolgozat.Passenger.birthdate;
-import static szakdolgozat.Passenger.firstName;
-import static szakdolgozat.Passenger.lastName;
-import static szakdolgozat.Passenger.gender;
-import static szakdolgozat.Passenger.luggage;
-import static szakdolgozat.Passenger.price;
+
 import static szakdolgozat.Kezdooldal.total;
 import static szakdolgozat.Passenger.numberOfTickets;
 import static szakdolgozat.Kezdooldal.totalPay;

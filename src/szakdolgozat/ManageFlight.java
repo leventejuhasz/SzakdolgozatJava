@@ -8,18 +8,13 @@ package szakdolgozat;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -127,7 +122,7 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
         ManageFlightPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         passengersTable.setAutoCreateRowSorter(true);
-        passengersTable.setForeground(new java.awt.Color(51, 51, 255));
+        passengersTable.setForeground(new java.awt.Color(0, 0, 0));
         passengersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -170,6 +165,9 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
                 return types [columnIndex];
             }
         });
+        passengersTable.setGridColor(new java.awt.Color(0, 102, 255));
+        passengersTable.setSelectionBackground(new java.awt.Color(0, 102, 255));
+        passengersTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(passengersTable);
 
         ManageFlightPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1490, 440));
@@ -286,12 +284,7 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
                 JOptionPane.ERROR_MESSAGE);
 
     }
-<<<<<<< HEAD
-      
-=======
 
-
->>>>>>> 64c20499c1c5630ebc8f7dfdf5a443a011f03786
     private void deletePassengerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePassengerButtonMouseClicked
 
         try {
@@ -405,7 +398,7 @@ public class ManageFlight extends javax.swing.JFrame implements iDatabase {
             };
 
             passengersTable.setModel(model);
-
+            passengersTable.setSelectionModel(new ForcedListSelectionModel());
             res.close();
             r.close();
         } catch (ClassNotFoundException ex) {
